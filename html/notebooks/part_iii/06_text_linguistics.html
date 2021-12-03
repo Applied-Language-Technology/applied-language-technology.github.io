@@ -1,0 +1,1490 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QDXYHY09XJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QDXYHY09XJ');
+</script>
+    
+    
+    <title>Working with discourse-level annotations</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Citation" href="../../citation.html" />
+    <link rel="prev" title="Word embeddings in spaCy" href="05_embeddings_continued.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../about.html">
+   About this Website
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../getting_started.html">
+   Getting Started
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../notebook_login.html">
+     Log in to CSC Notebooks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../launch_server.html">
+     Launch JupyterLab on your personal server
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../jupyter.html">
+     Interact with the server in JupyterLab
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../github_pull.html">
+     Retrieve learning materials and exercises from GitHub
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../github_push.html">
+     Return completed exercises to GitHub for grading
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../python_intro.html">
+   Part I: A Minimal Introduction to Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_i/01_working_with_jupyter_notebooks.html">
+     The elements of a Jupyter Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_i/02_getting_started_with_python.html">
+     Getting started with Python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../working_with_text.html">
+   Part II: Working with Text in Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_ii/01_basic_text_processing.html">
+     Manipulating text using Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_ii/02_basic_text_processing_continued.html">
+     Manipulating text at scale
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_ii/03_basic_nlp.html">
+     Processing texts using spaCy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_ii/04_basic_nlp_continued.html">
+     Customising the spaCy pipeline
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_ii/05_evaluating_nlp.html">
+     Evaluating language models
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_ii/06_managing_data.html">
+     Managing textual data using pandas
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../../nlp_for_linguists.html">
+   Part III: Natural Language Processing for Linguists
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="01_multilingual_nlp.html">
+     Processing diverse languages
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02_universal_dependencies.html">
+     Universal Dependencies
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03_pattern_matching.html">
+     Finding linguistic patterns using spaCy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04_embeddings.html">
+     Introducing word embeddings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="05_embeddings_continued.html">
+     Word embeddings in spaCy
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Working with discourse-level annotations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../citation.html">
+   Citation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../resources.html">
+   Resources
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/part_iii/06_text_linguistics.ipynb.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/Applied-Language-Technology/website"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/Applied-Language-Technology/website/binder?urlpath=lab/tree/notebooks/part_iii/06_text_linguistics.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introducing-the-conll-u-annotation-schema">
+   Introducing the CoNLL-U annotation schema
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-components-of-the-conll-u-annotation-schema">
+     The components of the CoNLL-U annotation schema
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#interacting-with-conll-u-annotations-in-python">
+     Interacting with CoNLL-U annotations in Python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#adding-discourse-level-annotations-to-doc-objects">
+   Adding discourse-level annotations to
+   <em>
+    Doc
+   </em>
+   objects
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adding-information-on-sentence-mood">
+     Adding information on sentence mood
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#adding-information-on-discourse-relations">
+     Adding information on discourse relations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#converting-conll-u-annotations-into-doc-objects">
+   Converting CoNLL-U annotations into
+   <em>
+    Doc
+   </em>
+   objects
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="working-with-discourse-level-annotations">
+<h1>Working with discourse-level annotations<a class="headerlink" href="#working-with-discourse-level-annotations" title="Permalink to this headline">¶</a></h1>
+<p>In the previous sections, we have created linguistic annotations for plain text using various natural language processing techniques.</p>
+<p>In this section, we learn how to use pre-existing linguistic annotations, focusing especially on annotations that target phenomena above the level of a clause.</p>
+<p>After reading through this section, you should:</p>
+<ul class="simple">
+<li><p>know the basics of the CoNLL-U annotation schema</p></li>
+<li><p>know how to create a spaCy <em>Doc</em> object manually</p></li>
+<li><p>know how to annotate <em>Spans</em> in a <em>Doc</em> object using <em>SpanGroups</em></p></li>
+<li><p>know how to load CoNLL-U annotated corpora into spaCy</p></li>
+</ul>
+<div class="section" id="introducing-the-conll-u-annotation-schema">
+<h2>Introducing the CoNLL-U annotation schema<a class="headerlink" href="#introducing-the-conll-u-annotation-schema" title="Permalink to this headline">¶</a></h2>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+<iframe
+    width="600"
+    height="350"
+    src="https://www.youtube.com/embed/YU7MtTDu1g8"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</div></div>
+</div>
+<p>CoNLL-X is an annotation schema for describing linguistic features across diverse languages (Buchholz and Marsi <a class="reference external" href="https://www.aclweb.org/anthology/W06-2920">2006</a>), which was originally developed to facilitate collaboration on so-called shared tasks in research on natural language processing (see e.g. Nissim et al. <a class="reference external" href="https://doi.org/10.1162/COLI_a_00304">2017</a>).</p>
+<p><a class="reference external" href="https://universaldependencies.org/format.html">CoNLL-U</a> is a further development of this annotation schema for the Universal Dependencies formalism, which was introduced in <a class="reference internal" href="02_universal_dependencies.html"><span class="doc std std-doc">Part III</span></a>. This annotation schema is commonly used for distributing linguistic corpora in projects that build on this formalism, but it is not uncommon to see other projects use CoNLL-U as well.</p>
+<p>In addition to <a class="reference external" href="https://universaldependencies.org/">numerous modern languages</a>, one can find, for example, CoNLL-U annotated corpora for ancient languages such Akkadian (Luukko et al. <a class="reference external" href="https://www.aclweb.org/anthology/2020.tlt-1.11">2020</a>) and Coptic (Zeldes and Abrams <a class="reference external" href="https://www.aclweb.org/anthology/W18-6022">2018</a>).</p>
+<div class="section" id="the-components-of-the-conll-u-annotation-schema">
+<h3>The components of the CoNLL-U annotation schema<a class="headerlink" href="#the-components-of-the-conll-u-annotation-schema" title="Permalink to this headline">¶</a></h3>
+<p>CoNLL-U annotations are distributed as plain text files (see <a class="reference external" href="http://localhost:8888/notebooks/part_ii/01_basic_text_processing.ipynb#Computers-and-text">Part II</a>).</p>
+<p>The annotation files contain three types of lines: <strong>comment lines</strong>, <strong>word lines</strong> and <strong>blank lines</strong>.</p>
+<p><strong>Comment lines</strong> precede word lines and start with a hash character (#). These lines can be used to provide metadata about the word lines that follow.</p>
+<p>Each <strong>word line</strong> contains annotations for a single word or token. Larger linguistic units are represented by subsequent word lines.</p>
+<p>The annotations for a word line are provided using the following fields, each separated by a tabulator character:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">ID	FORM	LEMMA	UPOS	XPOS	FEATS	HEAD	DEPREL	DEPS	MISC</span>
+</pre></div>
+</div>
+<ol class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ID</span></code>: Index of the word in sequence</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FORM</span></code>: The form of a word or punctuation symbol</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LEMMA</span></code>: Lemma or the base form of a word</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">UPOS</span></code>: <a class="reference external" href="https://universaldependencies.org/u/pos/">Universal part-of-speech tag</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">XPOS</span></code>: Language-specific part-of-speech tag</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FEATS</span></code>: <a class="reference external" href="https://universaldependencies.org/u/feat/index.html">Morphological features</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">HEAD</span></code>: Syntactic head of the current word</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DEPREL</span></code>: Universal dependency relation to the <code class="docutils literal notranslate"><span class="pre">HEAD</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DEPS</span></code>: <a class="reference external" href="https://universaldependencies.org/u/overview/enhanced-syntax.html">Enhanced dependency relations</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MISC</span></code>: Any additional annotations</p></li>
+</ol>
+<p>Finally, a <strong>blank line</strong> after word lines is used to separate sentences.</p>
+</div>
+<div class="section" id="interacting-with-conll-u-annotations-in-python">
+<h3>Interacting with CoNLL-U annotations in Python<a class="headerlink" href="#interacting-with-conll-u-annotations-in-python" title="Permalink to this headline">¶</a></h3>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+<iframe
+    width="600"
+    height="350"
+    src="https://www.youtube.com/embed/lvJRFMvWtFI"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</div></div>
+</div>
+<p>To explore CoNLL-U annotations using Python, let’s start by importing <a class="reference external" href="https://github.com/EmilStenstrom/conllu/">conllu</a>, a small library for parsing CoNLL-U annotations into various data structures native to Python.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the conllu library</span>
+<span class="kn">import</span> <span class="nn">conllu</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We then open a plain text file with annotations in the CoNLL-U format from the <a class="reference external" href="https://corpling.uis.georgetown.edu/gum/">Georgetown University Multilayer Corpus</a> (GUM; see Zeldes <a class="reference external" href="http://dx.doi.org/10.1007/s10579-016-9343-x">2017</a>), read its contents using the <code class="docutils literal notranslate"><span class="pre">read()</span></code> method and store the result under the variable <code class="docutils literal notranslate"><span class="pre">annotations</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Open the plain text file for reading; assign under &#39;data&#39;</span>
+<span class="n">data</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;data/GUM_whow_parachute.conllu&quot;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+
+<span class="c1"># Read the file contents and assign under &#39;annotations&#39;</span>
+<span class="n">annotations</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="c1"># Check the type of the resulting object</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">annotations</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>str
+</pre></div>
+</div>
+</div>
+</div>
+<p>This gives us a Python string object. Let’s print out the first 1000 characters of this string.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print the first 1000 characters of the string under &#39;annotations&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">annotations</span><span class="p">[:</span><span class="mi">1000</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span># newdoc id = GUM_whow_parachute
+# sent_id = GUM_whow_parachute-1
+# text = How to Cope With a Double Parachute Failure
+# s_type = inf
+1	How	how	SCONJ	WRB	PronType=Int	3	mark	_	Discourse=preparation:1-&gt;11
+2	to	to	PART	TO	_	3	mark	_	_
+3	Cope	Cope	VERB	VB	VerbForm=Inf	0	root	_	_
+4	With	with	ADP	IN	_	8	case	_	_
+5	a	a	DET	DT	Definite=Ind|PronType=Art	8	det	_	Entity=(event-1
+6	Double	double	ADJ	JJ	Degree=Pos	8	amod	_	_
+7	Parachute	parachute	NOUN	NN	Number=Sing	8	compound	_	Entity=(object-2)
+8	Failure	failure	NOUN	NN	Number=Sing	3	obl	_	Entity=event-1)
+
+# sent_id = GUM_whow_parachute-2
+# text = While skydiving, it is possible (yet extremely unlikely) that both your primary and reserve parachutes will malfunction, leaving you with no method of reducing your velocity.
+# s_type = decl
+1	While	while	SCONJ	IN	_	2	mark	_	Discourse=circumstance:2-&gt;3
+2	skydiving	skydiving	NOUN	NN	Number=Sing	6	advcl	_	Entity=(event-3)|SpaceAfter=No
+3	,	,	PUNCT	,	_	2	punct	_	_
+4	it	it	PRON	PRP	Case=Nom|Gender=Neut|Num
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, the string object contains comment lines (prefixed with a hash), followed by word lines that contain the annotations for the fields introduced above.</p>
+<p>An underscore <code class="docutils literal notranslate"><span class="pre">_</span></code> is used to indicate fields with empty or missing values on the word lines.</p>
+<p>In the GUM corpus, the final field <code class="docutils literal notranslate"><span class="pre">MISC</span></code> contains values such as <code class="docutils literal notranslate"><span class="pre">Discourse</span></code> and <code class="docutils literal notranslate"><span class="pre">Entity</span></code> that provide annotations for discourse relations and entities such as events and objects.</p>
+<p>Here the question is: how to extract all this information programmatically from a Python <em>string</em> object, which we cannot access like a list or a dictionary?</p>
+<p>This is where the <code class="docutils literal notranslate"><span class="pre">conllu</span></code> module steps in, because its <code class="docutils literal notranslate"><span class="pre">parse()</span></code> function is capable of extracting information from CoNLL-U formatted strings.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use the parse() function to parse the annotations; store under &#39;sentences&#39;</span>
+<span class="n">sentences</span> <span class="o">=</span> <span class="n">conllu</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">annotations</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">parse()</span></code> function returns a Python list populated by <em>TokenList</em> objects. This object type is native to the conllu library.</p>
+<p>Let’s examine the first item in the list <code class="docutils literal notranslate"><span class="pre">sentences</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sentences</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TokenList&lt;How, to, Cope, With, a, Double, Parachute, Failure&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>This gives us a <em>TokenList</em> object.</p>
+<p>To start with, the information contained in the hash-prefixed comment lines in the CoNLL-U schema is provided under the <code class="docutils literal notranslate"><span class="pre">metadata</span></code> attribute.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the metadata for the first item in the list</span>
+<span class="n">sentences</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">metadata</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;newdoc id&#39;: &#39;GUM_whow_parachute&#39;,
+ &#39;sent_id&#39;: &#39;GUM_whow_parachute-1&#39;,
+ &#39;text&#39;: &#39;How to Cope With a Double Parachute Failure&#39;,
+ &#39;s_type&#39;: &#39;inf&#39;}
+</pre></div>
+</div>
+</div>
+</div>
+<p>This shows how the GUM corpus uses the comment lines to provide four types of metadata for each sentence: <code class="docutils literal notranslate"><span class="pre">newdoc_id</span></code> for document identifier, <code class="docutils literal notranslate"><span class="pre">sent_id</span></code> for sentence identifier, <code class="docutils literal notranslate"><span class="pre">text</span></code> for plain text and <code class="docutils literal notranslate"><span class="pre">s_type</span></code> for the grammatical mood of the sentence (Zeldes &amp; Simonson <a class="reference external" href="https://www.aclweb.org/anthology/W16-1709">2017</a>: 69).</p>
+<p>Superficially, the object stored under the <code class="docutils literal notranslate"><span class="pre">metadata</span></code> attribute looks like a Python dictionary, but the object is actually a conllu <em>Metadata</em> object.</p>
+<p>This object, however, behaves just like a Python dictionary in the sense that it consists of key and value pairs, which are accessed just like those in a dictionary.</p>
+<p>To exemplify, to retrieve the sentence type (or its grammatical mood), simply use the key <code class="docutils literal notranslate"><span class="pre">s_type</span></code> to access the <em>Metadata</em> object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the sentence type under &#39;s_type&#39;</span>
+<span class="n">sentences</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;s_type&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;inf&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>This returns the string <code class="docutils literal notranslate"><span class="pre">inf</span></code>, which corresponds to infinitive.</p>
+<p>Coming back to the <em>TokenList</em> object, as the name suggest, the items in a <em>TokenList</em> consist of individual <em>Token</em> objects.</p>
+<p>Let’s access the first <em>Token</em> object <code class="docutils literal notranslate"><span class="pre">[0]</span></code> in the first <em>TokenList</em> object <code class="docutils literal notranslate"><span class="pre">[0]</span></code> under <code class="docutils literal notranslate"><span class="pre">sentences</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the first token in the first sentence</span>
+<span class="n">sentences</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;id&#39;: 1,
+ &#39;form&#39;: &#39;How&#39;,
+ &#39;lemma&#39;: &#39;how&#39;,
+ &#39;upos&#39;: &#39;SCONJ&#39;,
+ &#39;xpos&#39;: &#39;WRB&#39;,
+ &#39;feats&#39;: {&#39;PronType&#39;: &#39;Int&#39;},
+ &#39;head&#39;: 3,
+ &#39;deprel&#39;: &#39;mark&#39;,
+ &#39;deps&#39;: None,
+ &#39;misc&#39;: {&#39;Discourse&#39;: &#39;preparation:1-&gt;11&#39;}}
+</pre></div>
+</div>
+</div>
+</div>
+<p>Just like the <em>TokenList</em> above, the <em>Token</em> is a dictionary-like object with keys and values.</p>
+<p>The dictionary under the key <code class="docutils literal notranslate"><span class="pre">misc</span></code> holds information about discourse relations, which describe how parts of a text relate to each other using a formalism named <a class="reference external" href="https://www.sfu.ca/rst">Rhetorical Structure Theory</a> (Mann &amp; Thompson <a class="reference external" href="https://doi.org/10.1515/text.1.1988.8.3.243">1988</a>).</p>
+<p>In this case, the annotation states that a discourse relation named <strong>preparation</strong> holds between units 1 and 11.</p>
+<p>These units and their identifiers do not correspond words or sentences in the document, but to <em>elementary discourse units</em>.</p>
+<p>These elementary discourse units define an additional level of <em>segmentation</em>, which seeks to define units of discourse that are placed in various relations to one another.</p>
+<p>In classical Rhetorical Structure Theory, these elementary discourse units (abbreviated EDU) often correspond to clauses, but this is not a requirement set by the theory.</p>
+</div>
+</div>
+<div class="section" id="adding-discourse-level-annotations-to-doc-objects">
+<h2>Adding discourse-level annotations to <em>Doc</em> objects<a class="headerlink" href="#adding-discourse-level-annotations-to-doc-objects" title="Permalink to this headline">¶</a></h2>
+<p>As pointed out above, the GUM corpus uses the key <code class="docutils literal notranslate"><span class="pre">Discourse</span></code> in the <code class="docutils literal notranslate"><span class="pre">misc</span></code> field to indicate the <strong>beginning</strong> of an elementary discourse unit.</p>
+<p>By tracking <em>Token</em> objects with these properties, we can identify the boundaries of elementary discourse units, which are not necessarily aligned with sentences in the <em>TokenList</em> object.</p>
+<p>We can keep track of these boundaries by counting <em>Tokens</em> and noting down the indices of <em>Tokens</em> that contain the <code class="docutils literal notranslate"><span class="pre">Discourse</span></code> key under <code class="docutils literal notranslate"><span class="pre">misc</span></code>.</p>
+<p>Let’s set up a variable for counting the <em>Tokens</em> and several lists for holding the information that we will collect from the <em>TokenList</em> objects.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up a variable with value 0 that we will use for counting</span>
+<span class="c1"># the Tokens that we process</span>
+<span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># We use these lists to keep track of sentences, discourse units</span>
+<span class="c1"># and the relations that hold between them.</span>
+<span class="n">discourse_units</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">sent_types</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">relations</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Set up placeholder lists for the information that we will extract</span>
+<span class="c1"># from the CoNLL-U annotations. These lists will be used to create </span>
+<span class="c1"># a spaCy Doc object below.</span>
+<span class="n">words</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">spaces</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">sent_starts</span> <span class="o">=</span> <span class="p">[]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We use the value stored under the variable <code class="docutils literal notranslate"><span class="pre">counter</span></code> to keep track of the boundaries for elementary discourse units as we loop over the <em>TokenList</em> objects stored in the list <code class="docutils literal notranslate"><span class="pre">sentences</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loop over each TokenList object</span>
+<span class="k">for</span> <span class="n">sentence</span> <span class="ow">in</span> <span class="n">sentences</span><span class="p">:</span>
+    
+    <span class="c1"># When we begin looping over a new sentence, set the value of</span>
+    <span class="c1"># the variable &#39;is_start&#39; to True. This marks the beginning of</span>
+    <span class="c1"># a sentence.</span>
+    <span class="n">is_start</span> <span class="o">=</span> <span class="kc">True</span>
+    
+    <span class="c1"># Add the current sentence type to the list &#39;sent_types&#39;</span>
+    <span class="n">sent_types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sentence</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;s_type&#39;</span><span class="p">])</span>
+        
+    <span class="c1"># Proceed to loop over the Tokens in the current TokenList object</span>
+    <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">sentence</span><span class="p">:</span>
+        
+        <span class="c1"># Use the key &#39;form&#39; to retrieve the word form for the </span>
+        <span class="c1"># Token and append it to the placeholder list &#39;words&#39;.</span>
+        <span class="n">words</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">token</span><span class="p">[</span><span class="s1">&#39;form&#39;</span><span class="p">])</span>
+        
+        <span class="c1"># Check if this Token begins a sentence by evaluating whether</span>
+        <span class="c1"># the variable &#39;is_start&#39; is True. </span>
+        <span class="k">if</span> <span class="n">is_start</span><span class="p">:</span>
+            
+            <span class="c1"># If the Token starts a sentence, add value True to the list</span>
+            <span class="c1"># &#39;sent_starts&#39;. Note the missing quotation marks: this is a </span>
+            <span class="c1"># Boolean value (True / False).</span>
+            <span class="n">sent_starts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+            
+            <span class="c1"># Set the variable &#39;is_start&#39; to False until the next sentence</span>
+            <span class="c1"># starts and the variable is set to True again.</span>
+            <span class="n">is_start</span> <span class="o">=</span> <span class="kc">False</span>
+        
+        <span class="c1"># If the variable &#39;is_start&#39; is False, execute the code block below</span>
+        <span class="k">else</span><span class="p">:</span>
+            
+            <span class="c1"># Append value &#39;False&#39; to the list &#39;sent_starts&#39;</span>
+            <span class="n">sent_starts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        
+        <span class="c1"># Check if the key &#39;misc&#39; contains anything, and if the key</span>
+        <span class="c1"># holds the value &#39;Discourse&#39;, proceed to the code block below.</span>
+        <span class="k">if</span> <span class="n">token</span><span class="p">[</span><span class="s1">&#39;misc&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="s1">&#39;Discourse&#39;</span> <span class="ow">in</span> <span class="n">token</span><span class="p">[</span><span class="s1">&#39;misc&#39;</span><span class="p">]:</span>
+            
+            <span class="c1"># The presence of the key &#39;Discourse&#39; indicates the beginning</span>
+            <span class="c1"># of a new elementary discourse unit; add its index to the list</span>
+            <span class="c1"># &#39;discourse_units&#39;.</span>
+            <span class="n">discourse_units</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">counter</span><span class="p">)</span>
+            
+            <span class="c1"># Unpack the relationship definition; start by splitting the</span>
+            <span class="c1"># relation name from the elementary discourse units. Assign</span>
+            <span class="c1"># the resulting objects under &#39;relation&#39; and &#39;edus&#39;.</span>
+            <span class="n">relation</span><span class="p">,</span> <span class="n">edus</span> <span class="o">=</span> <span class="n">token</span><span class="p">[</span><span class="s1">&#39;misc&#39;</span><span class="p">][</span><span class="s1">&#39;Discourse&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+            
+            <span class="c1"># Try to split the relation annotation into two parts</span>
+            <span class="k">try</span><span class="p">:</span>
+                
+                <span class="c1"># Split at the &#39;-&gt;&#39; string and assign to &#39;source&#39;</span>
+                <span class="c1"># and &#39;target&#39;, respectively.</span>
+                <span class="n">source</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="n">edus</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;-&gt;&#39;</span><span class="p">)</span>
+                
+                <span class="c1"># Deduct -1 from both &#39;source&#39; and &#39;target&#39;, because </span>
+                <span class="c1"># the identifiers used in the GUM corpus are not </span>
+                <span class="c1"># zero-indexed, but our spaCy Spans that correspond to</span>
+                <span class="c1"># elementary discourse units will be. Also cast the</span>
+                <span class="c1"># numbers into integers (these are originally strings!).</span>
+                <span class="n">source</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">source</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">target</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+            
+            <span class="c1"># The root node of the RST tree will not have a target,</span>
+            <span class="c1"># which raises a ValueError since there is only one item.</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                
+                <span class="c1"># Assign the first item in &#39;edus&#39; to &#39;source&#39; and set</span>
+                <span class="c1"># target to None. </span>
+                <span class="n">source</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="n">edus</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="kc">None</span>
+                
+                <span class="c1"># Deduct -1 from &#39;source&#39; as explained above.</span>
+                <span class="n">source</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">source</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span> 
+                
+            <span class="c1"># Compile the relation definition into a three tuple and</span>
+            <span class="c1"># append to the list &#39;relations&#39;.</span>
+            <span class="n">relations</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">relation</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">target</span><span class="p">))</span>
+            
+        <span class="c1"># Check if the current Token is followed by a whitespace. If this is</span>
+        <span class="c1"># not the case, e.g. for the Token at the end of a TokenList, this</span>
+        <span class="c1"># information is available under the &#39;misc&#39; key.</span>
+        <span class="k">if</span> <span class="n">token</span><span class="p">[</span><span class="s1">&#39;misc&#39;</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="s1">&#39;SpaceAfter&#39;</span> <span class="ow">in</span> <span class="n">token</span><span class="p">[</span><span class="s1">&#39;misc&#39;</span><span class="p">]:</span>
+            
+            <span class="c1"># If the &#39;misc&#39; key holds a dictionary with the key &#39;SpaceAfter&#39;</span>
+            <span class="c1"># with a value &#39;No&#39;, proceed below</span>
+            <span class="k">if</span> <span class="n">token</span><span class="p">[</span><span class="s1">&#39;misc&#39;</span><span class="p">][</span><span class="s1">&#39;SpaceAfter&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;No&#39;</span><span class="p">:</span>
+                
+                <span class="c1"># Append the Boolean value &#39;False&#39; to the list &#39;spaces&#39;.</span>
+                <span class="n">spaces</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+            
+        <span class="c1"># If the &#39;SpaceAfter&#39; key is not found under &#39;misc&#39;, the token is followed</span>
+        <span class="c1"># by a space.</span>
+        <span class="k">else</span><span class="p">:</span>
+
+            <span class="c1"># Append True to the list of spaces</span>
+            <span class="n">spaces</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        
+        <span class="c1"># Update the counter as we finish looping over a Token object</span>
+        <span class="c1"># by adding +1 to its value.</span>
+        <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This collects the information needed for creating a spaCy <em>Doc</em> object, together with the discourse-level annotations that we will add to the <em>Doc</em> object afterwards.</p>
+<p>As the example above shows, collecting this kind of information from annotations requires one to be familiar with the annotation schema, particularly in terms of how additional information stored under the field <code class="docutils literal notranslate"><span class="pre">misc</span></code> for <em>Tokens</em> or in the metadata for <em>TokenLists</em>, in order to catch any potential errors.</p>
+<p>Moving ahead, we typically create spaCy <em>Doc</em> objects by passing some text to a <em>Language</em> object, as shown in <a class="reference internal" href="../part_ii/03_basic_nlp.html"><span class="doc std std-doc">Part II</span></a>, which takes care of operations such as tokenization.</p>
+<p>In this case, however, we need to preserve the tokens defined in the CoNLL-U annotations, because this information is needed to align the discourse-level annotations correctly for both sentences and elementary discourse units.</p>
+<p>In other words, we cannot take the risk that spaCy tokenises the text differently, because this would result in misaligned annotations for sentences and elementary discourse units.</p>
+<p>Thus we create a spaCy <em>Doc</em> object manually by importing the <em>Doc</em> class from spaCy’s <code class="docutils literal notranslate"><span class="pre">tokens</span></code> submodule. We also load a small language model for English and store it under the variable <code class="docutils literal notranslate"><span class="pre">nlp</span></code>.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+<iframe
+    width="600"
+    height="350"
+    src="https://www.youtube.com/embed/zYXYK4KbgeI"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the Doc class and the spaCy library</span>
+<span class="kn">from</span> <span class="nn">spacy.tokens</span> <span class="kn">import</span> <span class="n">Doc</span>
+<span class="kn">import</span> <span class="nn">spacy</span>
+
+<span class="c1"># Load a small language model for English; store under &#39;nlp&#39;</span>
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;en_core_web_sm&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can now use the <em>Doc</em> class to create <em>Doc</em> objects manually by providing the information collected in the lists <code class="docutils literal notranslate"><span class="pre">words</span></code>, <code class="docutils literal notranslate"><span class="pre">spaces</span></code> and <code class="docutils literal notranslate"><span class="pre">sent_starts</span></code> as input to the newly-created <em>Doc</em> object.</p>
+<p>Let’s take a quick look at the information we collected into the lists.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loop over the first 15 items in lists &#39;words&#39;, &#39;spaces&#39; and &#39;sent_starts&#39;.</span>
+<span class="c1"># Use the zip() function to fetch items from these lists simultaneously.</span>
+<span class="k">for</span> <span class="n">word</span><span class="p">,</span> <span class="n">space</span><span class="p">,</span> <span class="n">sent_start</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">words</span><span class="p">[:</span><span class="mi">15</span><span class="p">],</span> <span class="n">spaces</span><span class="p">[:</span><span class="mi">15</span><span class="p">],</span> <span class="n">sent_starts</span><span class="p">[:</span><span class="mi">15</span><span class="p">]):</span>
+    
+    <span class="c1"># Print out the current item in each list</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">space</span><span class="p">,</span> <span class="n">sent_start</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>How True True
+to True False
+Cope True False
+With True False
+a True False
+Double True False
+Parachute True False
+Failure True False
+While True True
+skydiving False False
+, True False
+it True False
+is True False
+possible True False
+( False False
+</pre></div>
+</div>
+</div>
+</div>
+<p>In addition, we must pass a <em>Vocabulary</em> object to the <code class="docutils literal notranslate"><span class="pre">vocab</span></code> argument to associate the <em>Doc</em> with a given language, as normally this information is assigned by the <em>Language</em> object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a spaCy Doc object &quot;manually&quot;; assign under the variable &#39;doc&#39;</span>
+<span class="n">doc</span> <span class="o">=</span> <span class="n">Doc</span><span class="p">(</span><span class="n">vocab</span><span class="o">=</span><span class="n">nlp</span><span class="o">.</span><span class="n">vocab</span><span class="p">,</span> 
+          <span class="n">words</span><span class="o">=</span><span class="n">words</span><span class="p">,</span> 
+          <span class="n">spaces</span><span class="o">=</span><span class="n">spaces</span><span class="p">,</span>
+          <span class="n">sent_starts</span><span class="o">=</span><span class="n">sent_starts</span>
+          <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This gives us a <em>Doc</em> object with pre-defined <em>Tokens</em> and sentence boundaries.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Retrieve Tokens up to index 15 from the Doc object</span>
+<span class="n">doc</span><span class="p">[:</span><span class="mi">15</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>How to Cope With a Double Parachute Failure While skydiving, it is possible (
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, spaCy has successfully assigned the words in <code class="docutils literal notranslate"><span class="pre">words</span></code> to <em>Token</em> objects, while the Boolean values in <code class="docutils literal notranslate"><span class="pre">spaces</span></code> determine whether a <em>Token</em> is followed by a space or not.</p>
+<p>The sentence boundaries in <code class="docutils literal notranslate"><span class="pre">sent_starts</span></code>, in turn, are used to define the sentences under the attribute <code class="docutils literal notranslate"><span class="pre">sents</span></code> of a <em>Doc</em> object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Retrieve the first five sentences in the Doc object</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">sents</span><span class="p">)[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[How to Cope With a Double Parachute Failure,
+ While skydiving, it is possible (yet extremely unlikely) that both your primary and reserve parachutes will malfunction, leaving you with no method of reducing your velocity.,
+ In the vast majority of cases, this will not occur;,
+ nevertheless, in this event these coping strategies may assist.,
+ Steps]
+</pre></div>
+</div>
+</div>
+</div>
+<p>However, because we discarded the linguistic information contained in the CoNLL-U annotations, the attributes of the <em>Token</em> objects in our <em>Doc</em> object are empty.</p>
+<p>Let’s fetch the fine-grained part-of-speech tag for the first <em>Token</em> in the <em>Doc</em> object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the fine-grained part-of-speech tag for Token at index 0</span>
+<span class="n">doc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tag_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>As this shows, the <code class="docutils literal notranslate"><span class="pre">tag_</span></code> attribute of the <em>Token</em> does not exist.</p>
+<p>We cannot pass our <em>Doc</em> object <code class="docutils literal notranslate"><span class="pre">doc</span></code> directly to the language model under <code class="docutils literal notranslate"><span class="pre">nlp</span></code> for additional annotations, but we need to create these manually by providing the <em>Doc</em> separately to various components of the natural language processing pipeline in the <em>Language</em> object.</p>
+<p>These components are accessible under the attribute <code class="docutils literal notranslate"><span class="pre">pipeline</span></code>, as we learned in <a class="reference internal" href="../part_ii/04_basic_nlp_continued.html"><span class="doc std std-doc">Part II</span></a>.</p>
+<p>Let’s loop over the components of the <code class="docutils literal notranslate"><span class="pre">pipeline</span></code> and apply them to the <em>Doc</em> object under <code class="docutils literal notranslate"><span class="pre">doc</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loop over the name / component pairs under the &#39;pipeline&#39; attribute</span>
+<span class="c1"># of the Language object &#39;nlp&#39;.</span>
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">component</span> <span class="ow">in</span> <span class="n">nlp</span><span class="o">.</span><span class="n">pipeline</span><span class="p">:</span>
+    
+    <span class="c1"># Use a formatted string to print out the &#39;name&#39; of the component</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Now applying component </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> ...&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Feed the existing Doc object to the component and store the updated</span>
+    <span class="c1"># annotations under the variable of the same name (&#39;doc&#39;).</span>
+    <span class="n">doc</span> <span class="o">=</span> <span class="n">component</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Now applying component tok2vec ...
+Now applying component tagger ...
+Now applying component parser ...
+Now applying component attribute_ruler ...
+Now applying component lemmatizer ...
+Now applying component ner ...
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we now examine the attribute <code class="docutils literal notranslate"><span class="pre">tag_</span></code> of the first <em>Token</em> object, the fine-grained part-of-speech tag has been added to the <em>Token</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the fine-grained part-of-speech tag for Token at index 0</span>
+<span class="n">doc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">tag_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;WRB&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Furthermore, we now have access to additional linguistic annotations produced by spaCy, such as noun phrases under the attribute <code class="docutils literal notranslate"><span class="pre">noun_chunk</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the first five noun phrases in the Doc object</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">noun_chunks</span><span class="p">)[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[a Double Parachute Failure,
+ it,
+ both your primary and reserve parachutes,
+ you,
+ no method]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Our manually-defined sentence boundaries, however, remain the same, although normally spaCy uses the syntactic dependencies to segment text into sentences!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the first five sentences in the Doc object</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">sents</span><span class="p">)[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[How to Cope With a Double Parachute Failure,
+ While skydiving, it is possible (yet extremely unlikely) that both your primary and reserve parachutes will malfunction, leaving you with no method of reducing your velocity.,
+ In the vast majority of cases, this will not occur;,
+ nevertheless, in this event these coping strategies may assist.,
+ Steps]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now that we have a fully-annotated <em>Doc</em> object, we can proceed to enhance this object with discourse-level annotations collected from the CoNLL-U annotations, which are stored in the lists <code class="docutils literal notranslate"><span class="pre">discourse_units</span></code>, <code class="docutils literal notranslate"><span class="pre">sent_types</span></code> and <code class="docutils literal notranslate"><span class="pre">relations</span></code>.</p>
+<div class="section" id="adding-information-on-sentence-mood">
+<h3>Adding information on sentence mood<a class="headerlink" href="#adding-information-on-sentence-mood" title="Permalink to this headline">¶</a></h3>
+<p>Let’s start by adding information on sentence type to the <em>Doc</em> object, which we collected into the list <code class="docutils literal notranslate"><span class="pre">sent_types</span></code>.</p>
+<p>These annotations provide information on grammatical mood of the sentence, as exemplified by categories such as <em>infinitive</em>, <em>declarative</em> and <em>imperative</em>.</p>
+<p>Let’s check out the first ten items in the list <code class="docutils literal notranslate"><span class="pre">sent_types</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print out the </span>
+<span class="n">sent_types</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;inf&#39;, &#39;decl&#39;, &#39;decl&#39;, &#39;decl&#39;, &#39;frag&#39;, &#39;imp&#39;, &#39;decl&#39;, &#39;imp&#39;, &#39;imp&#39;, &#39;imp&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>These are the categories that we want to associate with each sentence in the <em>Doc</em> object.</p>
+<p>Before proceeding, let’s make sure that the lengths for the <code class="docutils literal notranslate"><span class="pre">sent_types</span></code> list and the sentences in the <em>Doc</em> object match each other.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the length of sentence type information and </span>
+<span class="c1"># the number of sentences in the Doc object.</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">sent_types</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">sents</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>In spaCy, information on grammatical mood of a sentence is best represented using a custom attribute for a <em>Span</em> object, as these objects consist of sequences of <em>Token</em> objects within a <em>Doc</em>.</p>
+<p>Actually, the sentences available under the attribute <code class="docutils literal notranslate"><span class="pre">sents</span></code> of a <em>Doc</em> object, whose mood we want to describe, are <em>Span</em> objects.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+<iframe
+    width="600"
+    height="350"
+    src="https://www.youtube.com/embed/9S0MT4xISW0"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print out the first sentence in the Doc and its type()</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">sents</span><span class="p">)[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">type</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">sents</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(How to Cope With a Double Parachute Failure, spacy.tokens.span.Span)
+</pre></div>
+</div>
+</div>
+</div>
+<p>To assign information on grammatical mood to these <em>Spans</em>, let’s continue by importing two classes: <em>SpanGroup</em> and <em>Span</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the SpanGroup and Span classes from spaCy</span>
+<span class="kn">from</span> <span class="nn">spacy.tokens.span_group</span> <span class="kn">import</span> <span class="n">SpanGroup</span>
+<span class="kn">from</span> <span class="nn">spacy.tokens</span> <span class="kn">import</span> <span class="n">Span</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>As instructed in <a class="reference internal" href="../part_ii/04_basic_nlp_continued.html"><span class="doc std std-doc">Part II</span></a>, the <em>Span</em> class is needed to register a custom attribute for storing information on grammatical mood for <em>Span</em> objects.</p>
+<p>The <em>SpanGroup</em>, in turn, is a class that allows defining groups of <em>Span</em> objects, which can be stored under the <code class="docutils literal notranslate"><span class="pre">spans</span></code> attribute of a <em>Doc</em> object.</p>
+<p>Let’s create a <em>SpanGroup</em> object that contains <em>Spans</em> that correspond to the sentences under the <code class="docutils literal notranslate"><span class="pre">sents</span></code> attribute in the <em>Doc</em> object.</p>
+<p>This requires three arguments: <code class="docutils literal notranslate"><span class="pre">doc</span></code>, which takes the <em>Doc</em> object that contains the <em>Spans</em> to be grouped, a <code class="docutils literal notranslate"><span class="pre">name</span></code> for the <em>SpanGroup</em> and <code class="docutils literal notranslate"><span class="pre">spans</span></code>, a list of <em>Span</em> objects in the <em>Doc</em> object referred to in <code class="docutils literal notranslate"><span class="pre">doc</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a SpanGroup from Spans contained in the Doc object &#39;doc&#39;, which</span>
+<span class="c1"># was created from the CoNLL-U annotations. These Spans correspond to</span>
+<span class="c1"># sentences, whose boundaries we defined manually. Assign to variable</span>
+<span class="c1"># &#39;sent_group&#39;.</span>
+<span class="n">sent_group</span> <span class="o">=</span> <span class="n">SpanGroup</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">doc</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;sentences&quot;</span><span class="p">,</span> <span class="n">spans</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">sents</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This creates a <em>SpanGroup</em> object, which we can then assign to the <code class="docutils literal notranslate"><span class="pre">spans</span></code> attribute of the <em>Doc</em> object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Assign the SpanGroup to the &#39;spans&#39; attribute of the Doc object under the</span>
+<span class="c1"># key &#39;sentences&#39;.</span>
+<span class="n">doc</span><span class="o">.</span><span class="n">spans</span><span class="p">[</span><span class="s1">&#39;sentences&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">sent_group</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we register the custom attribute <code class="docutils literal notranslate"><span class="pre">mood</span></code> with the <em>Span</em> class, and assign it with the default value <code class="docutils literal notranslate"><span class="pre">None</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Register the custom attribute &#39;mood&#39; with the Span class</span>
+<span class="n">Span</span><span class="o">.</span><span class="n">set_extension</span><span class="p">(</span><span class="s1">&#39;mood&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We then use Python’s <code class="docutils literal notranslate"><span class="pre">zip()</span></code> function to iterate over pairs of items in the list <code class="docutils literal notranslate"><span class="pre">sent_types</span></code> and the <em>SpanGroup</em> object stored under the key <code class="docutils literal notranslate"><span class="pre">sentences</span></code> in the <code class="docutils literal notranslate"><span class="pre">spans</span></code> attribute of the <em>Doc</em> object.</p>
+<p>During each loop, we refer to the sentence type information from the <code class="docutils literal notranslate"><span class="pre">sent_types</span></code> list as <code class="docutils literal notranslate"><span class="pre">mood</span></code> and to the <em>Span</em> object as <code class="docutils literal notranslate"><span class="pre">span</span></code>.</p>
+<p>We then assign the value stored under the variable <code class="docutils literal notranslate"><span class="pre">mood</span></code> to the custom attribute <code class="docutils literal notranslate"><span class="pre">mood</span></code> of the <em>Span</em> object under <code class="docutils literal notranslate"><span class="pre">span</span></code>.</p>
+<p>Remember that spaCy uses an underscore <code class="docutils literal notranslate"><span class="pre">_</span></code> as a dummy attribute for user-defined attributes, as explained in <a class="reference internal" href="../part_ii/04_basic_nlp_continued.html"><span class="doc std std-doc">Part II</span></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loop over pairs of items from the list and the SpanGroup</span>
+<span class="k">for</span> <span class="n">mood</span><span class="p">,</span> <span class="n">span</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">sent_types</span><span class="p">,</span> <span class="n">doc</span><span class="o">.</span><span class="n">spans</span><span class="p">[</span><span class="s1">&#39;sentences&#39;</span><span class="p">]):</span>
+    
+    <span class="c1"># Assign the value of &#39;mood&#39; under the custom attribute</span>
+    <span class="c1"># with the same name, which belongs to the Span object.</span>
+    <span class="n">span</span><span class="o">.</span><span class="n">_</span><span class="o">.</span><span class="n">mood</span> <span class="o">=</span> <span class="n">mood</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This adds information on grammatical mood under the custom attribute <code class="docutils literal notranslate"><span class="pre">mood</span></code> of each <em>Span</em> object.</p>
+<p>Let’s retrieve the sentence stored under index 8 and information on its mood.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Retrieve information on grammatical mood for sentence at index 8</span>
+<span class="n">doc</span><span class="o">.</span><span class="n">spans</span><span class="p">[</span><span class="s1">&#39;sentences&#39;</span><span class="p">][</span><span class="mi">8</span><span class="p">],</span> <span class="n">doc</span><span class="o">.</span><span class="n">spans</span><span class="p">[</span><span class="s1">&#39;sentences&#39;</span><span class="p">][</span><span class="mi">8</span><span class="p">]</span><span class="o">.</span><span class="n">_</span><span class="o">.</span><span class="n">mood</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(If both your primary and reserve chutes have malfunctioned, signal immediately to a fellow jumper who has not yet deployed their chute, waving your arms and signalling that your own is not functional.,
+ &#39;imp&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, this returns a sentence with imperative mood, which suggests that this information has been successfully added to the <em>Doc</em> object.</p>
+</div>
+<div class="section" id="adding-information-on-discourse-relations">
+<h3>Adding information on discourse relations<a class="headerlink" href="#adding-information-on-discourse-relations" title="Permalink to this headline">¶</a></h3>
+<p>For defining the boundaries of elementary discourse units, we need to use the information contained in the list <code class="docutils literal notranslate"><span class="pre">discourse_units</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the first 10 items in the list &#39;discourse_units&#39;</span>
+<span class="n">discourse_units</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0, 8, 11, 14, 19, 29, 34, 39, 51, 62]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We created this list above by noting down the index of each <em>Token</em> that marked the beginning of an elementary discourse unit.</p>
+<p>What we need to do next is to use these indices to get slices of the <em>Doc</em> object, that is, <em>Span</em> objects that correspond to the discourse units.</p>
+<p>We can do this by looping over the numbers stored in the <code class="docutils literal notranslate"><span class="pre">discourse_units</span></code> list and use them for determining the beginning and end of a <em>Span</em> as shown below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a placeholder list to hold slices of the Doc object that correspond</span>
+<span class="c1"># to discourse units.</span>
+<span class="n">edu_spans</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Proceed to loop over discourse unit boundaries using Python&#39;s range() function.</span>
+<span class="c1"># This will give us numbers, which we use to index the &#39;discourse_units&#39; list that</span>
+<span class="c1"># contains the indices that mark the beginning of a discourse unit.</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">discourse_units</span><span class="p">)):</span>
+    
+    <span class="c1"># Try to execute the following code block</span>
+    <span class="k">try</span><span class="p">:</span>
+        
+        <span class="c1"># Get the current item in the list &#39;discourse_units&#39; and the next item; assign</span>
+        <span class="c1"># under variables &#39;start&#39; and &#39;end&#39;.</span>
+        <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">discourse_units</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">discourse_units</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span>
+    
+    <span class="c1"># If the next item is not available, because we&#39;ve reached the final item in the list,</span>
+    <span class="c1"># this will raise an IndexError, which we catch here.</span>
+    <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+        
+        <span class="c1"># Assign the start of the discourse unit as usual, set the length of the Doc </span>
+        <span class="c1"># object as the value for &#39;end&#39; to mark the end point of the discourse unit. </span>
+        <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">discourse_units</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="nb">len</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+
+    <span class="c1"># Use the &#39;start&#39; and &#39;end&#39; variables to slice the Doc object; append the</span>
+    <span class="c1"># resulting Span object to the list &#39;edu_spans&#39;.</span>
+    <span class="n">edu_spans</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">doc</span><span class="p">[</span><span class="n">start</span><span class="p">:</span><span class="n">end</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This gives us a list of <em>Span</em> objects that correspond to the elementary discourse units.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the first seven Spans in the list &#39;edu_spans&#39;</span>
+<span class="n">edu_spans</span><span class="p">[:</span><span class="mi">7</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[How to Cope With a Double Parachute Failure,
+ While skydiving,,
+ it is possible,
+ (yet extremely unlikely),
+ that both your primary and reserve parachutes will malfunction,,
+ leaving you with no method,
+ of reducing your velocity.]
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, the elementary discourse units are not necessary aligned with sentences.</p>
+<p>Next, we must register additional custom attributes for the <em>Span</em> object that will hold the annotations for discourse relations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Register three custom attributes for Span objects, which correspond to</span>
+<span class="c1"># elementary discourse unit id, the id of the element acting as the target,</span>
+<span class="c1"># and the name of the relation.</span>
+<span class="n">Span</span><span class="o">.</span><span class="n">set_extension</span><span class="p">(</span><span class="s1">&#39;edu_id&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">Span</span><span class="o">.</span><span class="n">set_extension</span><span class="p">(</span><span class="s1">&#39;target_id&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">Span</span><span class="o">.</span><span class="n">set_extension</span><span class="p">(</span><span class="s1">&#39;relation&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The attribute <code class="docutils literal notranslate"><span class="pre">edu_id</span></code> will hold the unique identifier for each elementary discourse unit, whereas the <code class="docutils literal notranslate"><span class="pre">target_id</span></code> attribute contains the identifier of the discourse unit that the current discourse unit is related to.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">relation</span></code> attribute, in turn, contains the name of the discourse relation that holds between the participating units.</p>
+<p>Just as above, we use the <em>SpanGroup</em> object to store these <em>Spans</em> under the key <code class="docutils literal notranslate"><span class="pre">edus</span></code> of the <code class="docutils literal notranslate"><span class="pre">spans</span></code> attribute.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a SpanGroup object from the Spans in the &#39;edu_spans&#39; list</span>
+<span class="n">edu_group</span> <span class="o">=</span> <span class="n">SpanGroup</span><span class="p">(</span><span class="n">doc</span><span class="o">=</span><span class="n">doc</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;edus&quot;</span><span class="p">,</span> <span class="n">spans</span><span class="o">=</span><span class="n">edu_spans</span><span class="p">)</span>
+
+<span class="c1"># Assign the SpanGroup under the key &#39;edus&#39;</span>
+<span class="n">doc</span><span class="o">.</span><span class="n">spans</span><span class="p">[</span><span class="s1">&#39;edus&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">edu_group</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we populate the custom attributes of these <em>Span</em> objects with information stored in the list <code class="docutils literal notranslate"><span class="pre">relations</span></code>.</p>
+<p>When extracting information from the CoNLL-U annotations, we collected information on discourse relations into three-tuples in which the first item gives the relation, whereas the remaining two items give the identifiers for elementary discourse units participating in the relation. The first identifier determines the “source” of the relation whereas the second is the “target”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print out the first five relation definitions in the list &#39;relations&#39;</span>
+<span class="n">relations</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;preparation&#39;, 0, 10),
+ (&#39;circumstance&#39;, 1, 2),
+ (&#39;background&#39;, 2, 8),
+ (&#39;concession&#39;, 3, 2),
+ (&#39;same-unit&#39;, 4, 2)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We now proceed to loop over the list <code class="docutils literal notranslate"><span class="pre">relations</span></code> and assign this information into the <em>Spans</em> in the <em>SpanGroup</em> under the key <code class="docutils literal notranslate"><span class="pre">edus</span></code> of the <code class="docutils literal notranslate"><span class="pre">spans</span></code> attribute.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loop over each three-tuple in the list &#39;relations&#39;</span>
+<span class="k">for</span> <span class="n">relation</span> <span class="ow">in</span> <span class="n">relations</span><span class="p">:</span>
+    
+    <span class="c1"># Split the three-tuple into three variables</span>
+    <span class="n">rel_name</span><span class="p">,</span> <span class="n">source</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="n">relation</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">relation</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">relation</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    
+    <span class="c1"># Use the identifier under &#39;source&#39; to index the Span objects under</span>
+    <span class="c1"># the key &#39;edus&#39;. Then access the custom attributes and set the values</span>
+    <span class="c1"># for &#39;edu_id&#39;, &#39;target_id&#39; and &#39;relation&#39;.</span>
+    <span class="n">doc</span><span class="o">.</span><span class="n">spans</span><span class="p">[</span><span class="s1">&#39;edus&#39;</span><span class="p">][</span><span class="n">source</span><span class="p">]</span><span class="o">.</span><span class="n">_</span><span class="o">.</span><span class="n">edu_id</span> <span class="o">=</span> <span class="n">source</span>
+    <span class="n">doc</span><span class="o">.</span><span class="n">spans</span><span class="p">[</span><span class="s1">&#39;edus&#39;</span><span class="p">][</span><span class="n">source</span><span class="p">]</span><span class="o">.</span><span class="n">_</span><span class="o">.</span><span class="n">target_id</span> <span class="o">=</span> <span class="n">target</span>
+    <span class="n">doc</span><span class="o">.</span><span class="n">spans</span><span class="p">[</span><span class="s1">&#39;edus&#39;</span><span class="p">][</span><span class="n">source</span><span class="p">]</span><span class="o">.</span><span class="n">_</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">rel_name</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This stores the information on the discourse relations under the custom attributes.</p>
+<p>We can examine the result by retrieving the custom attribute <code class="docutils literal notranslate"><span class="pre">relation</span></code> for the <em>Span</em> under index 1 in the <em>Doc</em> object <code class="docutils literal notranslate"><span class="pre">doc</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Retrieve the custom attribute &#39;relation&#39; for the Span at index 1</span>
+<span class="n">doc</span><span class="o">.</span><span class="n">spans</span><span class="p">[</span><span class="s1">&#39;edus&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">_</span><span class="o">.</span><span class="n">relation</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;circumstance&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>This indicates that this <em>Span</em> participates in a circumstantial relation with another unit, whose identifier is stored under the custom attribute <code class="docutils literal notranslate"><span class="pre">target_id</span></code>.</p>
+<p>Because the attribute <code class="docutils literal notranslate"><span class="pre">target_id</span></code> contains an integer that identifies another discourse unit, we can use this value to index the <em>SpanGroup</em> object under <code class="docutils literal notranslate"><span class="pre">doc.spans['edus']</span></code> to retrieve the target.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the Span at index 1 and the Span referred to by its &#39;target_id&#39; attribute</span>
+<span class="n">doc</span><span class="o">.</span><span class="n">spans</span><span class="p">[</span><span class="s1">&#39;edus&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">doc</span><span class="o">.</span><span class="n">spans</span><span class="p">[</span><span class="s1">&#39;edus&#39;</span><span class="p">][</span><span class="n">doc</span><span class="o">.</span><span class="n">spans</span><span class="p">[</span><span class="s1">&#39;edus&#39;</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">_</span><span class="o">.</span><span class="n">target_id</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(While skydiving,, it is possible)
+</pre></div>
+</div>
+</div>
+</div>
+<p>This gives us the two elementary discourse units participating in the “circumstance” relation.</p>
+</div>
+</div>
+<div class="section" id="converting-conll-u-annotations-into-doc-objects">
+<h2>Converting CoNLL-U annotations into <em>Doc</em> objects<a class="headerlink" href="#converting-conll-u-annotations-into-doc-objects" title="Permalink to this headline">¶</a></h2>
+<p>If you do not need to enrich spaCy objects with additional information, but simply wish to convert CoNLL-U annotations into <em>Doc</em> objects, spaCy provides a convenience function, <code class="docutils literal notranslate"><span class="pre">conllu_to_docs()</span></code>, for converting CoNLL-U annotated data into spacy <em>Doc</em> objects.</p>
+<p>Let’s start by importing the function from the <code class="docutils literal notranslate"><span class="pre">training</span></code> submodule, as this function is mainly used for loading CoNLL-U annotated data for training language models. We also import the class for the <em>Doc</em> object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the &#39;conllu_to_docs&#39; function and the Doc class</span>
+<span class="kn">from</span> <span class="nn">spacy.training.converters</span> <span class="kn">import</span> <span class="n">conllu_to_docs</span>
+<span class="kn">from</span> <span class="nn">spacy.tokens</span> <span class="kn">import</span> <span class="n">Doc</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">conllu_to_docs()</span></code> function takes a Python string object as input.</p>
+<p>We pass the string object <code class="docutils literal notranslate"><span class="pre">annotations</span></code> that contains CoNLL-U annotations to the function, and set the argument <code class="docutils literal notranslate"><span class="pre">no_print</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> to prevent the <code class="docutils literal notranslate"><span class="pre">conllu_to_docs()</span></code> function from printing status messages.</p>
+<p>The function returns a Python generator object, which we must cast into a list to examine its contents.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Provide the string object under &#39;annotations&#39; to the &#39;conllu_to_docs&#39; function. </span>
+<span class="c1"># Set &#39;no_print&#39; to True and cast the result into a Python list; store under &#39;docs&#39;.</span>
+<span class="n">docs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">conllu_to_docs</span><span class="p">(</span><span class="n">annotations</span><span class="p">,</span> <span class="n">no_print</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+
+<span class="c1"># Get the first two items in the resulting list</span>
+<span class="n">docs</span><span class="p">[:</span><span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[How to Cope With a Double Parachute Failure While skydiving, it is possible (yet extremely unlikely) that both your primary and reserve parachutes will malfunction, leaving you with no method of reducing your velocity. In the vast majority of cases, this will not occur; nevertheless, in this event these coping strategies may assist. Steps Remain calm. This may seem obvious, but deep, even breathing (despite the rushing slipstream) and controlling your heart-rate are essential to your continued survival. Entreat assistance. If both your primary and reserve chutes have malfunctioned, signal immediately to a fellow jumper who has not yet deployed their chute, waving your arms and signalling that your own is not functional. If this is a solo jump, then skip to step 6. ,
+ Prepare for deployment. After linking arms with your fellow jumper, you will need to hook your arms through their chest strap, or through both sides of the front of their harness, as far as you can, then grab onto your own strap. Deploy. The shock of the chute deployment will be intense. The G-forces will multiply your body weight, making it impossible to hold on; this is why hooking your arms through the harness is essential. It is likely that the shock will dislocate or break both your arms; nevertheless this is a small price to pay for your life. Prepare for impact. If your companion&#39;s canopy has successfully opened, then both your chances of survival have dramatically increased. ]
+</pre></div>
+</div>
+</div>
+</div>
+<p>This gives us a list with <em>Doc</em> objects. By default, the <code class="docutils literal notranslate"><span class="pre">conllu_to_docs()</span></code> function groups every ten sentences in the CoNLL-u files into a single spaCy object.</p>
+<p>This, however, is not an optimal solution, as having every document its own <em>Doc</em> object would make more sense rather than an arbitrary grouping.</p>
+<p>To do so, we can use the <code class="docutils literal notranslate"><span class="pre">from_docs()</span></code> method of the <em>Doc</em> object to combine the <em>Doc</em> objects in the list <code class="docutils literal notranslate"><span class="pre">docs</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Combine Doc objects in the list &#39;docs&#39; into a single Doc; assign under &#39;doc&#39;</span>
+<span class="n">doc</span> <span class="o">=</span> <span class="n">Doc</span><span class="o">.</span><span class="n">from_docs</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span>
+
+<span class="c1"># Check variable type and length</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">doc</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(spacy.tokens.doc.Doc, 890)
+</pre></div>
+</div>
+</div>
+</div>
+<p>This gives us a single spaCy <em>Doc</em> object with 890 <em>Tokens</em>.</p>
+<p>If we loop over the first eight <em>Tokens</em> in the <em>Doc</em> object <code class="docutils literal notranslate"><span class="pre">doc</span></code> and print out their linguistic annotations, the results shows that the information from the CoNLL-U annotations have been carried over to the <em>Doc</em> object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loop over the first 8 Tokens using the range() function</span>
+<span class="k">for</span> <span class="n">token_ix</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">):</span>
+    
+    <span class="c1"># Use the current number under &#39;token_ix&#39; to fetch a Token from the Doc.</span>
+    <span class="c1"># Assign the Token object under the variable &#39;token&#39;. </span>
+    <span class="n">token</span> <span class="o">=</span> <span class="n">doc</span><span class="p">[</span><span class="n">token_ix</span><span class="p">]</span>
+    
+    <span class="c1"># Print the Token and its linguistic annotations</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">tag_</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">pos_</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">morph</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">dep_</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">head</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>How WRB SCONJ PronType=Int mark Cope
+to TO PART  mark Cope
+Cope VB VERB VerbForm=Inf ROOT Cope
+With IN ADP  case Failure
+a DT DET Definite=Ind|PronType=Art det Failure
+Double JJ ADJ Degree=Pos amod Failure
+Parachute NN NOUN Number=Sing compound Failure
+Failure NN NOUN Number=Sing obl Cope
+</pre></div>
+</div>
+</div>
+</div>
+<p>However, if we attempt to retrieve the noun phrases in the <em>Doc</em> objects available under the attribute <code class="docutils literal notranslate"><span class="pre">noun_chunks</span></code>, spaCy will return an error.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the noun chunks in the Doc</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">noun_chunks</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NotImplementedError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="n">qw</span><span class="o">/</span><span class="mi">3</span><span class="n">f1xq85n6vl73ksgmtslw2_mzhdr7p</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_13198</span><span class="o">/</span><span class="mf">122750926.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Get the noun chunks in the Doc</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="nb">list</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">noun_chunks</span><span class="p">)</span>
+
+<span class="nn">~/alt_build/lib/python3.9/site-packages/spacy/tokens/doc.pyx</span> in <span class="ni">noun_chunks</span><span class="nt">()</span>
+
+<span class="ne">NotImplementedError</span>: [E894] The &#39;noun_chunks&#39; syntax iterator is not implemented for language &#39;&#39;.
+</pre></div>
+</div>
+</div>
+</div>
+<p>This raises an error, because the <em>Doc</em> that we created using the <code class="docutils literal notranslate"><span class="pre">conllu_to_docs()</span></code> function does not have a <em>Language</em> and a <em>Vocabulary</em> associated with it.</p>
+<p>The noun phrases are created using language-specific rules from syntactic parses, but spaCy does not know which language it is working with.</p>
+<p>Because the language of a <em>Doc</em> cannot be defined manually, we must use a trick involving the <em>DocBin</em> object that we learned about in <a class="reference external" href="../part_ii/04_basic_nlp_continued.ipynb#Writing-processed-texts-to-disk">Part II</a>.</p>
+<p>The <em>DocBin</em> is a special object type for writing spaCy annotations to disk.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the DocBin object from the &#39;tokens&#39; submodule</span>
+<span class="kn">from</span> <span class="nn">spacy.tokens</span> <span class="kn">import</span> <span class="n">DocBin</span>
+
+<span class="c1"># Create an empty DocBin object</span>
+<span class="n">doc_bin</span> <span class="o">=</span> <span class="n">DocBin</span><span class="p">()</span>
+
+<span class="c1"># Add the current Doc to the DocBin</span>
+<span class="n">doc_bin</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Instead of writing the <em>DocBin</em> object to disk, we simply retrieve the <em>Doc</em> objects from the <em>DocBin</em> using the <code class="docutils literal notranslate"><span class="pre">get_docs()</span></code> method, which requires a <em>Vocabulary</em> object as input to the <code class="docutils literal notranslate"><span class="pre">vocab</span></code> argument.</p>
+<p>The <em>Vocabulary</em> is used to associate the <em>Doc</em> objects with a given language.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">get_docs()</span></code> method returns a generator, which we must cast into a list.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use the &#39;get_docs&#39; method to retrieve the Docs from the DocBin</span>
+<span class="n">docs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">doc_bin</span><span class="o">.</span><span class="n">get_docs</span><span class="p">(</span><span class="n">vocab</span><span class="o">=</span><span class="n">nlp</span><span class="o">.</span><span class="n">vocab</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we now examine the <em>Doc</em> object, which is naturally the first and only item in the list, and retrieve its attribute <code class="docutils literal notranslate"><span class="pre">noun_chunks</span></code>, we can also get the noun phrases.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">list</span><span class="p">(</span><span class="n">docs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">noun_chunks</span><span class="p">)[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[it,
+ and reserve parachutes,
+ this,
+ these coping strategies,
+ Steps,
+ This,
+ both your primary and reserve chutes,
+ who,
+ this,
+ you]
+</pre></div>
+</div>
+</div>
+</div>
+<p>This section should have given you a basic understanding of the CoNLL-U annotation schema and how corpora annotated using this schema can be added to spaCy objects.</p>
+</div>
+</div>
+
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="05_embeddings_continued.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Word embeddings in spaCy</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../../citation.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Citation</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+   <div class="footer"><a href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0;padding:10px" src="https://mirrors.creativecommons.org/presskit/buttons/88x31/svg/by-nc.svg"/></a> © 2020– <a href="http://www.helsinki.fi/~thiippal">Tuomo Hiippala</a></div>
+    
+
+  </body>
+</html>

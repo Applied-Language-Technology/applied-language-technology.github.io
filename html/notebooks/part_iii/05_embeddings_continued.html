@@ -1,0 +1,1326 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QDXYHY09XJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QDXYHY09XJ');
+</script>
+    
+    
+    <title>Word embeddings in spaCy</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Working with discourse-level annotations" href="06_text_linguistics.html" />
+    <link rel="prev" title="Introducing word embeddings" href="04_embeddings.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../about.html">
+   About this Website
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../getting_started.html">
+   Getting Started
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../notebook_login.html">
+     Log in to CSC Notebooks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../launch_server.html">
+     Launch JupyterLab on your personal server
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../jupyter.html">
+     Interact with the server in JupyterLab
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../github_pull.html">
+     Retrieve learning materials and exercises from GitHub
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../github_push.html">
+     Return completed exercises to GitHub for grading
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../python_intro.html">
+   Part I: A Minimal Introduction to Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_i/01_working_with_jupyter_notebooks.html">
+     The elements of a Jupyter Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_i/02_getting_started_with_python.html">
+     Getting started with Python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../working_with_text.html">
+   Part II: Working with Text in Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_ii/01_basic_text_processing.html">
+     Manipulating text using Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_ii/02_basic_text_processing_continued.html">
+     Manipulating text at scale
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_ii/03_basic_nlp.html">
+     Processing texts using spaCy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_ii/04_basic_nlp_continued.html">
+     Customising the spaCy pipeline
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_ii/05_evaluating_nlp.html">
+     Evaluating language models
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_ii/06_managing_data.html">
+     Managing textual data using pandas
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../../nlp_for_linguists.html">
+   Part III: Natural Language Processing for Linguists
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="01_multilingual_nlp.html">
+     Processing diverse languages
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02_universal_dependencies.html">
+     Universal Dependencies
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03_pattern_matching.html">
+     Finding linguistic patterns using spaCy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04_embeddings.html">
+     Introducing word embeddings
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Word embeddings in spaCy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="06_text_linguistics.html">
+     Working with discourse-level annotations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../citation.html">
+   Citation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../resources.html">
+   Resources
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/part_iii/05_embeddings_continued.ipynb.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/Applied-Language-Technology/website"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/Applied-Language-Technology/website/binder?urlpath=lab/tree/notebooks/part_iii/05_embeddings_continued.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#using-word-embeddings-in-spacy">
+   Using word embeddings in spaCy
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visualising-word-embeddings">
+   Visualising word embeddings
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#contextual-word-embeddings-from-transformers">
+   Contextual word embeddings from Transformers
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="word-embeddings-in-spacy">
+<h1>Word embeddings in spaCy<a class="headerlink" href="#word-embeddings-in-spacy" title="Permalink to this headline">¶</a></h1>
+<p>The previous <a class="reference internal" href="04_embeddings.html"><span class="doc std std-doc">section</span></a> introduced the distributional hypothesis, which underlies modern approaches to <em>distributional semantics</em> (Boleda <a class="reference external" href="https://doi.org/10.1146/annurev-linguistics-011619-030303">2020</a>) and the technique of word embeddings, that is, learning numerical representations for words that approximate their meaning.</p>
+<p>We started by exploring the distributional hypothesis by quantifying word occurrences, essentially using word counts as an abstraction mechanism that enabled us to represent linguistic information numerically.</p>
+<p>We then moved to explore the use of a neural network as the abstraction mechanism, learning numerical representations from the data through a proxy task that involved predicting the neighbouring words.</p>
+<p>In this section, we proceed to word embeddings learned from massive volumes of texts, and their use in the spaCy library.</p>
+<p>After reading this section, you should:</p>
+<ul class="simple">
+<li><p>understand what word embeddings can be used for</p></li>
+<li><p>know how to use word embeddings in spaCy</p></li>
+<li><p>know how to visualise words in their embedding space</p></li>
+<li><p>know how to use contextual word embeddings in spaCy</p></li>
+<li><p>know how to add a custom component to the spaCy pipeline</p></li>
+</ul>
+<div class="section" id="using-word-embeddings-in-spacy">
+<h2>Using word embeddings in spaCy<a class="headerlink" href="#using-word-embeddings-in-spacy" title="Permalink to this headline">¶</a></h2>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+<iframe
+    width="600"
+    height="350"
+    src="https://www.youtube.com/embed/CHRzdvZX_mw"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</div></div>
+</div>
+<p>spaCy provides 300-dimensional word embeddings for several languages, which have been learned from large corpora.</p>
+<p>In other words, each word in the model’s vocabulary is represented by a list of 300 floating point numbers – a vector – and these vectors are embedded into a 300-dimensional space.</p>
+<p>To explore the use of word vectors in spaCy, let’s start by loading a large language model for English, which contains word vectors for 685 000 <em>Token</em> objects.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import spacy</span>
+<span class="kn">import</span> <span class="nn">spacy</span>
+
+<span class="c1"># Load a large language model and assign it to the variable &#39;nlp_lg&#39;</span>
+<span class="n">nlp_lg</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;en_core_web_lg&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s define an example sentence and feed it to the language model under <code class="docutils literal notranslate"><span class="pre">nlp_lg</span></code> for processing.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define example sentence</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;The Shiba Inu is a dog that is more like a cat.&quot;</span>
+
+<span class="c1"># Feed example sentence to the language model under &#39;nlp_lg&#39;</span>
+<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp_lg</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+<span class="c1"># Call the variable to examine the output</span>
+<span class="n">doc</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Shiba Inu is a dog that is more like a cat.
+</pre></div>
+</div>
+</div>
+</div>
+<p>This gives us a spaCy <em>Doc</em> object.</p>
+<p>Let’s examine the word vector for the second <em>Token</em> in the <em>Doc</em> object (“Shiba”), which can be accessed through its attribute <code class="docutils literal notranslate"><span class="pre">vector</span></code>.</p>
+<p>Instead of printing the 300 floating point numbers that constitute the vector, let’s limit the output to the first thirty dimensions using <code class="docutils literal notranslate"><span class="pre">[:30]</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Retrieve the second Token in the Doc object at index 1, and </span>
+<span class="c1"># the first 30 dimensions of its vector representation</span>
+<span class="n">doc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">vector</span><span class="p">[:</span><span class="mi">30</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 0.17141 ,  0.23299 ,  0.40017 , -0.58668 ,  0.051284, -0.047777,
+       -0.10999 , -0.081705, -0.12037 , -1.1385  ,  0.075536, -0.32489 ,
+       -0.97602 , -0.24535 , -0.15917 ,  0.95671 ,  0.44824 , -0.72333 ,
+        0.038381, -0.2252  , -0.25301 ,  0.12206 ,  0.14714 , -0.50761 ,
+       -0.1471  ,  0.4988  , -0.21991 , -0.51972 , -0.030737, -0.041938],
+      dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+<p>These floating point numbers encode information about this <em>Token</em>, which the model has learned by observing the word in its context of occurrences.</p>
+<p>Just as explained in the <a class="reference internal" href="04_embeddings.html"><span class="doc std std-doc">previous section</span></a>, we can use <a class="reference external" href="https://en.wikipedia.org/wiki/Cosine_similarity">cosine similarity</a> to measure the similarity of two vectors.</p>
+<p>spaCy implements the measure of cosine similarity in the <code class="docutils literal notranslate"><span class="pre">similarity()</span></code> method, which is available for <em>Token</em>, <em>Span</em> and <em>Doc</em> objects.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">similarity()</span></code> method can take any of these objects as input and calculate cosine similarity between their vector representations stored under the <code class="docutils literal notranslate"><span class="pre">vector</span></code> attribute.</p>
+<p>For convenience, let’s assign the <em>Tokens</em> “dog” and “cat” in our example <em>Doc</em> object into the variables <code class="docutils literal notranslate"><span class="pre">dog</span></code> and <code class="docutils literal notranslate"><span class="pre">cat</span></code> and compare their similarity.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Assing the fifth and eleventh items in the Doc into their own variables</span>
+<span class="n">dog</span> <span class="o">=</span> <span class="n">doc</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+<span class="n">cat</span> <span class="o">=</span> <span class="n">doc</span><span class="p">[</span><span class="mi">11</span><span class="p">]</span>
+
+<span class="c1"># Compare the similarity between Tokens &#39;dog&#39; and &#39;cat&#39;</span>
+<span class="n">dog</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="n">cat</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.80168545
+</pre></div>
+</div>
+</div>
+</div>
+<p>Not surprisingly, the vectors for cats and dogs are very similar (and thus close to each other in the 300-dimensional embedding space), because these words are likely to appear in similar linguistic contexts, as both cats and dogs are common household pets.</p>
+<p>For comparison, let’s retrieve the vector representation for “snake”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Feed the string &quot;snake&quot; to the language model; store result under &#39;snake&#39;</span>
+<span class="n">snake</span> <span class="o">=</span> <span class="n">nlp_lg</span><span class="p">(</span><span class="s2">&quot;snake&quot;</span><span class="p">)</span>
+
+<span class="c1"># Compare the similarity of &#39;snake&#39; and &#39;dog&#39;</span>
+<span class="n">snake</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="n">dog</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.3942871574504599
+</pre></div>
+</div>
+</div>
+</div>
+<p>Turns out the vector for “snake” is not that similar to the vector for “dog”, although both are animals. Presumably, these words occur in different contexts.</p>
+<p>Finally, let’s compare the similarity of the vectors for “car” and “snake”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Feed the string &quot;car&quot; to the language model and calculate similarity to Token &#39;snake&#39;</span>
+<span class="n">snake</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="n">nlp_lg</span><span class="p">(</span><span class="s2">&quot;car&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.19543902497718393
+</pre></div>
+</div>
+</div>
+</div>
+<p>Not surprisingly, the vectors for “car” and “snake” are not very similar at all, as these words are not likely to occur in similar linguistic contexts.</p>
+<p>As pointed out above, spaCy also provides word vectors for entire <em>Doc</em> objects or <em>Span</em> objects within them.</p>
+<p>To move beyond <em>Tokens</em>, let’s start by examining the <em>Doc</em> object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Call the variable to examine the output</span>
+<span class="n">doc</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Shiba Inu is a dog that is more like a cat.
+</pre></div>
+</div>
+</div>
+</div>
+<p>The vector for this <em>Doc</em> object is also available under the attribute <code class="docutils literal notranslate"><span class="pre">vector</span></code>.</p>
+<p>Instead of examining the actual vector stored under <code class="docutils literal notranslate"><span class="pre">vector</span></code>, let’s retrieve the value stored under its <code class="docutils literal notranslate"><span class="pre">shape</span></code> attribute.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Retrieve the &#39;shape&#39; attribute for the vector</span>
+<span class="n">doc</span><span class="o">.</span><span class="n">vector</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(300,)
+</pre></div>
+</div>
+</div>
+</div>
+<p>This gives the length of the vector, which shows that just like the <em>Token</em> objects above, the <em>Doc</em> object has a 300-dimensional vector that encodes information about its meaning.</p>
+<p>In spaCy, the vector representation for the entire <em>Doc</em> is calculated by <strong>averaging the vectors</strong> for each <em>Token</em> in the <em>Doc</em>.</p>
+<p>The same applies to <em>Spans</em>, which can be examined by retrieving the noun phrases in <code class="docutils literal notranslate"><span class="pre">doc</span></code>, which are available under the <code class="docutils literal notranslate"><span class="pre">noun_chunks</span></code> attribute.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the noun chunks under the attribute &#39;noun_chunks&#39;. This returns</span>
+<span class="c1"># a generator, so we cast the output into a list named &#39;n_chunks&#39;.</span>
+<span class="n">n_chunks</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">noun_chunks</span><span class="p">)</span>
+
+<span class="c1"># Call the variable to examine the output</span>
+<span class="n">n_chunks</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[The Shiba Inu, a dog, that, a cat]
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, the example sentence has several noun phrases.</p>
+<p>Let’s examine the shape of the vector for the first noun phrase, “The Shiba Inu”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the shape of the vector for the first noun chunk in the list</span>
+<span class="n">n_chunks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">vector</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(300,)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Just as the <em>Doc</em> object, the <em>Span</em> object has a 300-dimensional vector. This vector is also calculated by averaging the vectors for each <em>Token</em> in the <em>Span</em>.</p>
+<p>We can also use the <code class="docutils literal notranslate"><span class="pre">similarity()</span></code> method to measure cosine similarity between <em>Span</em> objects.</p>
+<p>Let’s compare the similarity of noun phrases “The Shiba Inu” <code class="docutils literal notranslate"><span class="pre">[0]</span></code> and “a dog” <code class="docutils literal notranslate"><span class="pre">[1]</span></code>.</p>
+<p>Based on our world knowledge, we know that these noun phrases belong to the same semantic field: as a dog breed, the Shiba Inu is a hyponym of dog.</p>
+<p>For this reason, they should presumably occur in similar contexts and thus their vectors should be close to each other in the embedding space.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compare the similarity of the two noun chunks</span>
+<span class="n">n_chunks</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="n">n_chunks</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.39694768
+</pre></div>
+</div>
+</div>
+</div>
+<p>Turns out that the embeddings for the noun phrases “The Shiba Inu” and “a dog” are about as similar as those of “dog” and “snake” above!</p>
+<p>To understand why the vectors for these noun phrases are dissimilar, we must dive deeper into the word embeddings and the effects of averaging vectors for linguistic units beyond a single <em>Token</em>.</p>
+<p>This effort can be supported using visualisations.</p>
+</div>
+<div class="section" id="visualising-word-embeddings">
+<h2>Visualising word embeddings<a class="headerlink" href="#visualising-word-embeddings" title="Permalink to this headline">¶</a></h2>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+<iframe
+    width="600"
+    height="350"
+    src="https://www.youtube.com/embed/l66QaVT68W8"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</div></div>
+</div>
+<p>whatlies is an open source library for visualising “what lies” in word embeddings, that is, what kinds of information they encode (Warmerdam et al. <a class="reference external" href="https://www.aclweb.org/anthology/2020.nlposs-1.8.pdf">2020</a>).</p>
+<p>The whatlies library is intended to support the interpretation of high-dimensional word embeddings. In this context, high-dimensional refers to the number of dimensions in the embedding space.</p>
+<p>High-dimensional spaces are notoriously difficult to comprehend, as our experience as embodied beings is strongly grounded into a three-dimensional space.</p>
+<p>Visualisations such as those provided by whatlies may help to alleviate this challenge.</p>
+<p>The whatlies library provides wrappers for language models from various popular natural language processing libraries, including spaCy.</p>
+<p>These wrappers are essentially Python classes that know what to do when provided with an object that contains a language model from a given library.</p>
+<p>We therefore import the <code class="docutils literal notranslate"><span class="pre">SpacyLanguage</span></code> object from whatlies and <em>wrap</em> the spaCy <em>Language</em> object stored under the variable <code class="docutils literal notranslate"><span class="pre">nlp_lg</span></code> into this object.</p>
+<p>We then assign the result to the variable <code class="docutils literal notranslate"><span class="pre">language_model</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the wrapper class for spaCy language models</span>
+<span class="kn">from</span> <span class="nn">whatlies.language</span> <span class="kn">import</span> <span class="n">SpacyLanguage</span>
+
+<span class="c1"># Wrap the spaCy language model under &#39;nlp_lg&#39; into the</span>
+<span class="c1"># whatlies SpacyLanguage class and assign the result </span>
+<span class="c1"># under the variable &#39;language_model&#39;</span>
+<span class="n">language_model</span> <span class="o">=</span> <span class="n">SpacyLanguage</span><span class="p">(</span><span class="n">nlp_lg</span><span class="p">)</span>
+
+<span class="c1"># Call the variable to examine the output</span>
+<span class="n">language_model</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SpacyLanguage(nlp=&lt;spacy.lang.en.English object at 0x16a9b3310&gt;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The result is a <em>SpacyLanguage</em> object that wraps a spaCy <em>Language</em> object.</p>
+<p>Before we proceed any further, let’s take a closer look at the list of noun phrases stored under <code class="docutils literal notranslate"><span class="pre">n_chunks</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loop over each noun phrase</span>
+<span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">n_chunks</span><span class="p">:</span>
+    
+    <span class="c1"># Loop over each Token in noun phrase</span>
+    <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">chunk</span><span class="p">:</span>
+        
+        <span class="c1"># Print Token attributes &#39;text&#39;, &#39;oov&#39;, &#39;vector&#39; and separate</span>
+        <span class="c1"># each attribute by a string object containing a tabulator \t</span>
+        <span class="c1"># sequence for pretty output</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">token</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">is_oov</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">vector</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The 	 False 	 [ 0.27204 -0.06203 -0.1884 ]
+Shiba 	 False 	 [0.17141 0.23299 0.40017]
+Inu 	 False 	 [-0.00083872 -0.12982     0.29831   ]
+a 	 False 	 [ 0.043798  0.024779 -0.20937 ]
+dog 	 False 	 [-0.40176   0.37057   0.021281]
+that 	 False 	 [ 0.09852  0.25001 -0.27018]
+a 	 False 	 [ 0.043798  0.024779 -0.20937 ]
+cat 	 False 	 [-0.15067  -0.024468 -0.23368 ]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">is_oov</span></code> attribute of a <em>Token</em> corresponds to <strong>out of vocabulary</strong> and returns <code class="docutils literal notranslate"><span class="pre">True</span></code> or <code class="docutils literal notranslate"><span class="pre">False</span></code> depending on whether the <em>Token</em> is included in the vocabulary of the language model or not.</p>
+<p>In this case, all <em>Tokens</em> are present in the vocabulary, hence their value is <code class="docutils literal notranslate"><span class="pre">False</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">vector[:3]</span></code> returns the first three dimensions in the 300-dimensional word vector.</p>
+<p>Note that just as one might expect, the vector for the indefinite article “a” is the same for “a” in both “a dog” and a “a cat”. This suggests that the word vectors are <em>static</em>, which is an issue to which we will return below.</p>
+<p>However, if a <em>Token</em> were out of vocabulary, the values of each dimension would be set to zero.</p>
+<p>Let’s examine this by mistyping “Shiba Inu” as “shibainu”, feed this string to the language model under <code class="docutils literal notranslate"><span class="pre">nlp</span></code> and retrieve the values for the first three dimensions of its vector.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Feed the string &#39;shibainu&#39; to the language model and assign</span>
+<span class="c1"># the result under the variable &#39;shibainu&#39;</span>
+<span class="n">shibainu</span> <span class="o">=</span> <span class="n">nlp_lg</span><span class="p">(</span><span class="s2">&quot;shibainu&quot;</span><span class="p">)</span>
+
+<span class="c1"># Retrieve the first three dimensions of its word vector</span>
+<span class="n">shibainu</span><span class="o">.</span><span class="n">vector</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0., 0., 0.], dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The first three dimensions are set to zero, suggesting that the word is out of vocabulary.</p>
+<p>We can easily double-check this using the <code class="docutils literal notranslate"><span class="pre">is_oov</span></code> attribute.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check if the first item [0] in the Doc object &#39;shibainu&#39;</span>
+<span class="c1"># is out of vocabulary</span>
+<span class="n">shibainu</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">is_oov</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>The values of a vector determine its <em>direction</em> and <em>magnitude</em> in the embedding space, and zero values do not provide information about either.</p>
+<p>This information is crucial, because word embeddings are based on the idea that semantically similar words are close to each other in the embedding space.</p>
+<p>We can use the visualisations in the whatlies library to explore this idea further.</p>
+<p>To examine the embeddings for noun phrases in the <code class="docutils literal notranslate"><span class="pre">n_chunks</span></code> list using whatlies, we must populate the list with string objects rather than <em>Spans</em>.</p>
+<p>We therefore define a list comprehension that retrieves the plain text stored under the attribute <code class="docutils literal notranslate"><span class="pre">text</span></code> of a <em>Span</em> object and stores this string into a list of the same name, that is, <code class="docutils literal notranslate"><span class="pre">n_chunks</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loop over noun chunks, retrieve plain text and store</span>
+<span class="c1"># the result under the variable &#39;n_chunks&#39;</span>
+<span class="n">n_chunks</span> <span class="o">=</span> <span class="p">[</span><span class="n">n_chunk</span><span class="o">.</span><span class="n">text</span> <span class="k">for</span> <span class="n">n_chunk</span> <span class="ow">in</span> <span class="n">n_chunks</span><span class="p">]</span>
+
+<span class="c1"># Call the variable to examine the output</span>
+<span class="n">n_chunks</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;The Shiba Inu&#39;, &#39;a dog&#39;, &#39;that&#39;, &#39;a cat&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now that we have the noun chunks as Python string objects in a list, we can feed them to the whatlies <em>SpacyLanguage</em> object stored under <code class="docutils literal notranslate"><span class="pre">language_model</span></code>.</p>
+<p>The input must be placed in brackets <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">]</span></code> right after the variable name.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Retrieve embeddings for items in list &#39;n_chunks&#39;</span>
+<span class="c1"># and store the result under &#39;embeddings&#39;</span>
+<span class="n">embeddings</span> <span class="o">=</span> <span class="n">language_model</span><span class="p">[</span><span class="n">n_chunks</span><span class="p">]</span>
+
+<span class="c1"># Call the variable to examine the output</span>
+<span class="n">embeddings</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>EmbSet
+</pre></div>
+</div>
+</div>
+</div>
+<p>This returns a whatlies <em>EmbSet</em> object which stores the embeddings for our noun phrases.</p>
+<p>To visualize the embeddings, we can use the <code class="docutils literal notranslate"><span class="pre">plot()</span></code> method of the <em>EmbSet</em> object.</p>
+<p>The arguments <code class="docutils literal notranslate"><span class="pre">kind</span></code>, <code class="docutils literal notranslate"><span class="pre">color</span></code>, <code class="docutils literal notranslate"><span class="pre">x_axis</span></code> and <code class="docutils literal notranslate"><span class="pre">y_axis</span></code> instruct whatlies to draw red arrows that plot the direction and magnitude of each vector along dimensions <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(1\)</span> of the 300-dimensional vector space.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">embeddings</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;arrow&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">x_axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y_axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>EmbSet
+</pre></div>
+</div>
+<img alt="../../_images/05_embeddings_continued_46_1.png" src="../../_images/05_embeddings_continued_46_1.png" />
+</div>
+</div>
+<p>Each vector originates at the point <span class="math notranslate nohighlight">\((0, 0)\)</span>. We can see that along dimensions <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(1\)</span>, the directions and magnitudes (or: length) of the vectors differ considerably.</p>
+<p>Note, however, that the plot above visualises just two dimensions of the 300-dimensional embedding space. Along some other dimensions, the vectors for “dog” and “cat” may be much closer to each other.</p>
+<p>This allows word vectors to encode representations in a flexible manner: two words may be close to each other along  certain dimensions, while differing along others.</p>
+<p>We can also use whatlies to explore the effect of averaging vectors for constructing vector representations for units beyond a single <em>Token</em>.</p>
+<p>To do so, let’s retrieve embeddings for the indefinite article “a”, the noun “dog” and the noun phrase “a dog” and plot the result along the same dimensions as above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Feed a list of string objects to the whatlies language object to get an EmbSet object</span>
+<span class="n">dog_embeddings</span> <span class="o">=</span> <span class="n">language_model</span><span class="p">[[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;dog&#39;</span><span class="p">,</span> <span class="s1">&#39;a dog&#39;</span><span class="p">]]</span>
+
+<span class="c1"># Plot the EmbSet</span>
+<span class="n">dog_embeddings</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;arrow&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">,</span> <span class="n">x_axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y_axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>EmbSet
+</pre></div>
+</div>
+<img alt="../../_images/05_embeddings_continued_48_1.png" src="../../_images/05_embeddings_continued_48_1.png" />
+</div>
+</div>
+<p>Along dimensions <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(1\)</span>, the vector for “a dog” is positioned right in the middle between the vectors for “a” and “dog”, because the vector for “a dog” is an average of the vectors for “a” and “dog”.</p>
+<p>We can easily verify this by getting the values for dimension <span class="math notranslate nohighlight">\(0\)</span> from the 300-dimensional vectors for the tokens “a” and “dog”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the embedding for &#39;a&#39; from the EmbSet object &#39;dog_embeddings&#39;; use the vector attribute</span>
+<span class="c1"># and bracket to retrieve the value at index 0. Do the same for &#39;dog&#39;. Assign under variables</span>
+<span class="c1"># of the same name.</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">dog_embeddings</span><span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">dog</span> <span class="o">=</span> <span class="n">dog_embeddings</span><span class="p">[</span><span class="s1">&#39;dog&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Calculate average value and assign under &#39;dog_avg&#39;</span>
+<span class="n">dog_avg</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">dog</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+
+<span class="c1"># Call the variable to examine the result</span>
+<span class="n">dog_avg</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.1789810061454773
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you look at the plot above, you see that this value falls right where the arrow for “a dog” points along dimension <span class="math notranslate nohighlight">\(0\)</span> on the horizontal axis.</p>
+<p>We can verify this by getting the value for the first dimension in the vector for “a dog” from the <em>EmbSet</em> object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the value for the first dimension of the vector for &#39;a dog&#39;</span>
+<span class="n">dog_embeddings</span><span class="p">[</span><span class="s1">&#39;a dog&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.178981
+</pre></div>
+</div>
+</div>
+</div>
+<p>This raises the question whether averaging vectors for individual <em>Tokens</em> is a suitable strategy for representing larger linguistic units, because the direction and magnitude of a vector are supposed to capture the “meaning” of a word in relation to other words in the model’s vocabulary (Boleda <a class="reference external" href="https://doi.org/10.1146/annurev-linguistics-011619-030303">2020</a>).</p>
+<p>To put it simply, averaging <em>Token</em> vectors to represent entire clauses and sentences may dilute the information encoded in the vectors, which also raises the question whether the indefinite article “a” and the noun “dog” are equally informative in the noun phrase “a dog”.</p>
+<p>One should also note that the vector representations are <strong>static</strong>. As we saw above, the vector representation for the indefinite article “a” remains the same regardless of the context in which this article occurs. In other words, the particular words in a model’s vocabulary, such as “a”, are always mapped to the same vector representation. The unique words in a model’s vocabulary are often described as <strong>lexical types</strong>, whereas their instances in the data are known as <strong>tokens</strong>.</p>
+<p>We know, however, that the same word (or lexical type) may have different meanings, which may be inferred from the context in which they occur, but this cannot be captured by word embeddings which model lexical types, not tokens. In other words, although the vector representations are learned by making predictions about co-occurring words, information about the context in which the tokens occur are not encoded into the vector representation.</p>
+<p><img alt="" src="../../_images/type_token.svg" /></p>
+<p>This limitation has been addressed by <strong>contextual word embeddings</strong>, which often use a neural network architecture named a <a class="reference external" href="https://en.wikipedia.org/wiki/Transformer_(machine_learning_model)">Transformer</a>. This architecture can encode information about the context in which a given token occurs into the vector representation.</p>
+<p>Some models that build on this architecture include BERT (Devlin et al. <a class="reference external" href="https://www.aclweb.org/anthology/N19-1423/">2019</a>) and GPT-3 (Brown et al. <a class="reference external" href="https://papers.nips.cc/paper/2020/hash/1457c0d6bfcb4967418bfb8ac142f64a-Abstract.html">2020</a>). Both models are massive, featuring billions of parameters, and thus slow and expensive to train.</p>
+</div>
+<div class="section" id="contextual-word-embeddings-from-transformers">
+<h2>Contextual word embeddings from Transformers<a class="headerlink" href="#contextual-word-embeddings-from-transformers" title="Permalink to this headline">¶</a></h2>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+<iframe
+    width="600"
+    height="350"
+    src="https://www.youtube.com/embed/fAeW1D37h90"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</div></div>
+</div>
+<p>Given the time and resources needed to train a language model using the Transformer architecture from scratch, they are often trained once and then fine-tuned to specific tasks. In this context, fine-tuning refers to training only a part of the network, adapting what the model has already learned to more specific tasks.</p>
+<p>These tasks include, for example, part-of-speech tagging, dependency parsing and the other tasks introduced in <a class="reference internal" href="../part_ii/03_basic_nlp.html"><span class="doc std std-doc">Part II</span></a>.</p>
+<p>spaCy provides Transformer-based language models for English and several other languages, which outperform the “traditional” pipelines in terms of accuracy, but are slower to apply.</p>
+<p>Let’s start by loading a Transformer-based for the English language and assign this model under the variable <code class="docutils literal notranslate"><span class="pre">nlp_trf</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load a Transformer-based language model; assing to variable &#39;nlp&#39;</span>
+<span class="n">nlp_trf</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;en_core_web_trf&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>On the surface, a <em>Language</em> object that contains a Transformer-based model looks and works just like any other language model in spaCy.</p>
+<p>However, if we look under the hood of the <em>Language</em> object under <code class="docutils literal notranslate"><span class="pre">nlp_trf</span></code> using the <code class="docutils literal notranslate"><span class="pre">pipeline</span></code> attribute (see <a class="reference external" href="../part_ii/04_basic_nlp_continued.ipynb#Modifying-spaCy-pipelines">Part II</a>), we will see that the first component in the processing pipeline is a <em>Transformer</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Call the &#39;pipeline&#39; attribute to examine the processing pipeline</span>
+<span class="n">nlp_trf</span><span class="o">.</span><span class="n">pipeline</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;transformer&#39;,
+  &lt;spacy_transformers.pipeline_component.Transformer at 0x1b235a400&gt;),
+ (&#39;tagger&#39;, &lt;spacy.pipeline.tagger.Tagger at 0x1b2380100&gt;),
+ (&#39;parser&#39;, &lt;spacy.pipeline.dep_parser.DependencyParser at 0x1b249a430&gt;),
+ (&#39;attribute_ruler&#39;,
+  &lt;spacy.pipeline.attributeruler.AttributeRuler at 0x1b2480b40&gt;),
+ (&#39;lemmatizer&#39;, &lt;spacy.lang.en.lemmatizer.EnglishLemmatizer at 0x1b24aa440&gt;),
+ (&#39;ner&#39;, &lt;spacy.pipeline.ner.EntityRecognizer at 0x1b249a350&gt;)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The Transformer component generates vector representations that are then used for making predictions about the <em>Doc</em> objects and the <em>Tokens</em> contained within.</p>
+<p>These include, among others, the standard linguistic annotations in the form of part-of-speech tags, syntactic dependencies, morphological features, named entities and lemmas.</p>
+<p>Let’s define an example sentence and feed it to the Transformer-based language model under <code class="docutils literal notranslate"><span class="pre">nlp_trf</span></code> and store the resulting <em>Doc</em> object under <code class="docutils literal notranslate"><span class="pre">example_doc</span></code>.</p>
+<p>Note that Python may raise a warning, because it is not generally recommended to use a Transformer model without a graphics processing unit (GPU). This naturally applies to processing large volumes of text – for current purposes, we can safely use the model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Feed an example sentence to the model; store output under &#39;example_doc&#39;</span>
+<span class="n">example_doc</span> <span class="o">=</span> <span class="n">nlp_trf</span><span class="p">(</span><span class="s2">&quot;Helsinki is the capital of Finland.&quot;</span><span class="p">)</span>
+
+<span class="c1"># Check the length of the Doc object</span>
+<span class="n">example_doc</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/thiippal/alt_build/lib/python3.9/site-packages/torch/autocast_mode.py:141: UserWarning: User provided device_type of &#39;cuda&#39;, but CUDA is not available. Disabling
+  warnings.warn(&#39;User provided device_type of \&#39;cuda\&#39;, but CUDA is not available. Disabling&#39;)
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>7
+</pre></div>
+</div>
+</div>
+</div>
+<p>spaCy stores the vector representations generated by the Transformer into a <em>TransformerData</em> object, which can be accessed under the custom attribute <code class="docutils literal notranslate"><span class="pre">trf_data</span></code> of a <em>Doc</em> object.</p>
+<p>Remember that spaCy stores custom attributes under a dummy attribute marked by an underscore <code class="docutils literal notranslate"><span class="pre">_</span></code>, which is reserved for user-defined attributes, as explained in <a class="reference internal" href="../part_ii/04_basic_nlp_continued.html"><span class="doc std std-doc">Part II</span></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the type of the &#39;trf_data&#39; object using the type() function</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">example_doc</span><span class="o">.</span><span class="n">_</span><span class="o">.</span><span class="n">trf_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>spacy_transformers.data_classes.TransformerData
+</pre></div>
+</div>
+</div>
+</div>
+<p>The output of from the Transformer is contained in the <em><a class="reference external" href="https://spacy.io/api/transformer#transformerdata">TransformerData</a></em> object, which we will now explore in greater detail.</p>
+<p>To begin with, the <code class="docutils literal notranslate"><span class="pre">tensors</span></code> attribute of a <em>TransformerData</em> object contains a Python list with vector representations generated by the Transformer for individual <em>Tokens</em> and the entire <em>Doc</em> object.</p>
+<p>The first item in the <code class="docutils literal notranslate"><span class="pre">tensors</span></code> list under index 0 contains the output for individual <em>Tokens</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the shape of the first item in the list</span>
+<span class="n">example_doc</span><span class="o">.</span><span class="n">_</span><span class="o">.</span><span class="n">trf_data</span><span class="o">.</span><span class="n">tensors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1, 11, 768)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The second item under index 1 holds the output for the entire <em>Doc</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the shape of the first item in the list</span>
+<span class="n">example_doc</span><span class="o">.</span><span class="n">_</span><span class="o">.</span><span class="n">trf_data</span><span class="o">.</span><span class="n">tensors</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1, 768)
+</pre></div>
+</div>
+</div>
+</div>
+<p>In both cases, the Transformer output is stored in a <em>tensor</em>, which is a mathematical term for describing a “bundle” of numerical objects (e.g. vectors) and their shape.</p>
+<p>In the case of <em>Tokens</em>, we have a batch of 1 that consists of 11 vectors with 768 dimensions each.</p>
+<p>We can access the first ten dimensions of each vector using the expression <code class="docutils literal notranslate"><span class="pre">[:10]</span></code>.</p>
+<p>Note that we need the preceding <code class="docutils literal notranslate"><span class="pre">[0]</span></code> to enter the first “batch” of vectors in the tensor.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the first ten dimensions of the tensor</span>
+<span class="n">example_doc</span><span class="o">.</span><span class="n">_</span><span class="o">.</span><span class="n">trf_data</span><span class="o">.</span><span class="n">tensors</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">][:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.06317595, -0.45016322, -1.9720955 , ...,  0.9009348 ,
+         0.9433715 ,  0.50246936],
+       [-1.3124545 , -0.32761547,  0.25198457, ...,  0.37672296,
+        -0.94906336, -0.77757967],
+       [-1.0791602 , -0.35033298,  0.18751651, ...,  0.15352832,
+        -0.96492046, -0.8286147 ],
+       ...,
+       [ 0.2070587 , -0.0727585 ,  0.15218212, ...,  2.182534  ,
+         0.6778069 , -0.6606095 ],
+       [-0.13149412, -0.70871484, -0.4170686 , ...,  0.99535394,
+         0.7209947 , -0.24264467],
+       [ 0.04118425, -0.4245168 , -1.9951186 , ...,  0.86954635,
+         0.9296634 ,  0.51898813]], dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Unlike word embeddings, which leverage information about co-occurring words to <em>learn</em> representations for tokens but discard this information afterwards, these embeddings also encode information about the context in which the word occurs!</p>
+<p>But why is a spaCy <em>Doc</em> object with 7 <em>Token</em> objects represented by 11 vectors?</p>
+<p>In the <a class="reference internal" href="04_embeddings.html"><span class="doc std std-doc">previous section</span></a> we learned that vocabulary size is a frequent challenge in language modelling. Learning representations for every unique word would blow up the size of the model!</p>
+<p>Because Transformers are trained on massive volumes of text, the model’s vocabulary must be limited somehow.</p>
+<p>To address this issue, Transformers use more complex tokenizers that identify frequently occurring character sequences in the data and learn embeddings for these sequences instead. These sequences, which are often referred as <em>subwords</em>, make up the vocabulary of the Transformer.</p>
+<p>Let’s examine how the example <em>Doc</em> under <code class="docutils literal notranslate"><span class="pre">example_doc</span></code> was tokenized for input to the Transformer.</p>
+<p>This information is stored under the attribute <code class="docutils literal notranslate"><span class="pre">tokens</span></code> of the <em>TransformerData</em> object, which contains a dictionary. We can find the subwords under the key <code class="docutils literal notranslate"><span class="pre">input_texts</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Access the Transformer tokens under the key &#39;input_texts&#39;</span>
+<span class="n">example_doc</span><span class="o">.</span><span class="n">_</span><span class="o">.</span><span class="n">trf_data</span><span class="o">.</span><span class="n">tokens</span><span class="p">[</span><span class="s1">&#39;input_texts&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[&#39;&lt;s&gt;&#39;,
+  &#39;H&#39;,
+  &#39;els&#39;,
+  &#39;inki&#39;,
+  &#39;Ġis&#39;,
+  &#39;Ġthe&#39;,
+  &#39;Ġcapital&#39;,
+  &#39;Ġof&#39;,
+  &#39;ĠFinland&#39;,
+  &#39;.&#39;,
+  &#39;&lt;/s&gt;&#39;]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>This provides the tokens provided to the Transformer <em>by its own tokenizer</em>. In other words, the Transformer does not use the same tokens as spaCy.</p>
+<p>The input begins and terminates with tokens <code class="docutils literal notranslate"><span class="pre">&lt;s&gt;</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;/s&gt;</span></code>, which mark the beginning and the end of the input sequence. The Transformer tokenizer also uses the character <code class="docutils literal notranslate"><span class="pre">Ġ</span></code> as a prefix to indicate that the token is preceded by a whitespace character.</p>
+<p>For the most part, the Transformer tokens correspond roughly to those produced by spaCy, except for “Helsinki”.</p>
+<p>Because the token “Helsinki” is not present in the Transformer’s vocabulary, the token is broken down into three subwords that exist in the vocabulary: <code class="docutils literal notranslate"><span class="pre">H</span></code>, <code class="docutils literal notranslate"><span class="pre">els</span></code> and <code class="docutils literal notranslate"><span class="pre">inki</span></code>. Their vectors are used to construct a representation for the token “Helsinki”.</p>
+<p><img alt="" src="../../_images/alignment.svg" /></p>
+<p>To map these vectors to <em>Tokens</em> in the spaCy <em>Doc</em> object, we must retrieve alignment information from the <code class="docutils literal notranslate"><span class="pre">align</span></code> attribute of the <em>TransformerData</em> object.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">align</span></code> attribute can be indexed using the indices of <em>Token</em> objects in the <em>Doc</em> object.</p>
+<p>To exemplify, we can retrieve the first <em>Token</em> “Helsinki” in the <em>Doc</em> object <code class="docutils literal notranslate"><span class="pre">doc</span></code> using the expression <code class="docutils literal notranslate"><span class="pre">example_doc[0]</span></code>.</p>
+<p>We then use the index of this <em>Token</em> in the <em>Doc</em> object to retrieve alignment data, which is stored under the <code class="docutils literal notranslate"><span class="pre">align</span></code> attribute.</p>
+<p>More specifically, we need the information stored under the attribute <code class="docutils literal notranslate"><span class="pre">data</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the first spaCy Token, &quot;Helsinki&quot;, and its alignment data</span>
+<span class="n">example_doc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">example_doc</span><span class="o">.</span><span class="n">_</span><span class="o">.</span><span class="n">trf_data</span><span class="o">.</span><span class="n">align</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(Helsinki,
+ array([[1],
+        [2],
+        [3]], dtype=int32))
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">data</span></code> attribute contains a NumPy array that identifies which vectors in the list stored under the <code class="docutils literal notranslate"><span class="pre">tensors</span></code> attribute of a <em>TransformerData</em> object contain representations for this <em>Token</em>.</p>
+<p>In this case, vectors at indices 1, 2 and 3 in the batch of 11 vectors contain the representation for “Helsinki”.</p>
+<p>To use the contextual embeddings from the Transformer efficiently, we can define a component that retrieves contextual word embeddings for <em>Docs</em>, <em>Spans</em> and <em>Tokens</em> and add this component to the spaCy pipeline.</p>
+<p>This can be achieved by creating a new Python <em>Class</em> – a user-defined object with attributes and methods.</p>
+<p>Because the new <em>Class</em> will become a component of the spaCy pipeline, we must first import the <em>Language</em> object and let spaCy know that we are now defining a new pipeline component.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the Language object under the &#39;language&#39; module in spaCy,</span>
+<span class="c1"># and NumPy for calculating cosine similarity.</span>
+<span class="kn">from</span> <span class="nn">spacy.language</span> <span class="kn">import</span> <span class="n">Language</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># We use the @ character to register the following Class definition</span>
+<span class="c1"># with spaCy under the name &#39;tensor2attr&#39;.</span>
+<span class="nd">@Language</span><span class="o">.</span><span class="n">factory</span><span class="p">(</span><span class="s1">&#39;tensor2attr&#39;</span><span class="p">)</span>
+
+<span class="c1"># We begin by declaring the class name: Tensor2Attr. The name is </span>
+<span class="c1"># declared using &#39;class&#39;, followed by the name and a colon.</span>
+<span class="k">class</span> <span class="nc">Tensor2Attr</span><span class="p">:</span>
+    
+    <span class="c1"># We continue by defining the first method of the class, </span>
+    <span class="c1"># __init__(), which is called when this class is used for </span>
+    <span class="c1"># creating a Python object. Custom components in spaCy </span>
+    <span class="c1"># require passing two variables to the __init__() method:</span>
+    <span class="c1"># &#39;name&#39; and &#39;nlp&#39;. The variable &#39;self&#39; refers to any</span>
+    <span class="c1"># object created using this class!</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">nlp</span><span class="p">):</span>
+        
+        <span class="c1"># We do not really do anything with this class, so we</span>
+        <span class="c1"># simply move on using &#39;pass&#39; when the object is created.</span>
+        <span class="k">pass</span>
+
+    <span class="c1"># The __call__() method is called whenever some other object</span>
+    <span class="c1"># is passed to an object representing this class. Since we know</span>
+    <span class="c1"># that the class is a part of the spaCy pipeline, we already know</span>
+    <span class="c1"># that it will receive Doc objects from the preceding layers.</span>
+    <span class="c1"># We use the variable &#39;doc&#39; to refer to any object received.</span>
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">doc</span><span class="p">):</span>
+        
+        <span class="c1"># When an object is received, the class will instantly pass</span>
+        <span class="c1"># the object forward to the &#39;add_attributes&#39; method. The</span>
+        <span class="c1"># reference to self informs Python that the method belongs</span>
+        <span class="c1"># to this class.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_attributes</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+        
+        <span class="c1"># After the &#39;add_attributes&#39; method finishes, the __call__</span>
+        <span class="c1"># method returns the object.</span>
+        <span class="k">return</span> <span class="n">doc</span>
+    
+    <span class="c1"># Next, we define the &#39;add_attributes&#39; method that will modify</span>
+    <span class="c1"># the incoming Doc object by calling a series of methods.</span>
+    <span class="k">def</span> <span class="nf">add_attributes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">doc</span><span class="p">):</span>
+        
+        <span class="c1"># spaCy Doc objects have an attribute named &#39;user_hooks&#39;,</span>
+        <span class="c1"># which allows customising the default attributes of a </span>
+        <span class="c1"># Doc object, such as &#39;vector&#39;. We use the &#39;user_hooks&#39;</span>
+        <span class="c1"># attribute to replace the attribute &#39;vector&#39; with the </span>
+        <span class="c1"># Transformer output, which is retrieved using the </span>
+        <span class="c1"># &#39;doc_tensor&#39; method defined below.</span>
+        <span class="n">doc</span><span class="o">.</span><span class="n">user_hooks</span><span class="p">[</span><span class="s1">&#39;vector&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">doc_tensor</span>
+        
+        <span class="c1"># We then perform the same for both Spans and Tokens that</span>
+        <span class="c1"># are contained within the Doc object.</span>
+        <span class="n">doc</span><span class="o">.</span><span class="n">user_span_hooks</span><span class="p">[</span><span class="s1">&#39;vector&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">span_tensor</span>
+        <span class="n">doc</span><span class="o">.</span><span class="n">user_token_hooks</span><span class="p">[</span><span class="s1">&#39;vector&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_tensor</span>
+        
+        <span class="c1"># We also replace the &#39;similarity&#39; method, because the </span>
+        <span class="c1"># default &#39;similarity&#39; method looks at the default &#39;vector&#39;</span>
+        <span class="c1"># attribute, which is empty! We must first replace the</span>
+        <span class="c1"># vectors using the &#39;user_hooks&#39; attribute.</span>
+        <span class="n">doc</span><span class="o">.</span><span class="n">user_hooks</span><span class="p">[</span><span class="s1">&#39;similarity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_similarity</span>
+        <span class="n">doc</span><span class="o">.</span><span class="n">user_span_hooks</span><span class="p">[</span><span class="s1">&#39;similarity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_similarity</span>
+        <span class="n">doc</span><span class="o">.</span><span class="n">user_token_hooks</span><span class="p">[</span><span class="s1">&#39;similarity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_similarity</span>
+    
+    <span class="c1"># Define a method that takes a Doc object as input and returns </span>
+    <span class="c1"># Transformer output for the entire Doc.</span>
+    <span class="k">def</span> <span class="nf">doc_tensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">doc</span><span class="p">):</span>
+        
+        <span class="c1"># Return Transformer output for the entire Doc. As noted</span>
+        <span class="c1"># above, this is the last item under the attribute &#39;tensor&#39;.</span>
+        <span class="c1"># Average the output along axis 0 to handle batched outputs.</span>
+        <span class="k">return</span> <span class="n">doc</span><span class="o">.</span><span class="n">_</span><span class="o">.</span><span class="n">trf_data</span><span class="o">.</span><span class="n">tensors</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    
+    <span class="c1"># Define a method that takes a Span as input and returns the Transformer </span>
+    <span class="c1"># output.</span>
+    <span class="k">def</span> <span class="nf">span_tensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">span</span><span class="p">):</span>
+        
+        <span class="c1"># Get alignment information for Span. This is achieved by using</span>
+        <span class="c1"># the &#39;doc&#39; attribute of Span that refers to the Doc that contains</span>
+        <span class="c1"># this Span. We then use the &#39;start&#39; and &#39;end&#39; attributes of a Span</span>
+        <span class="c1"># to retrieve the alignment information. Finally, we flatten the</span>
+        <span class="c1"># resulting array to use it for indexing.</span>
+        <span class="n">tensor_ix</span> <span class="o">=</span> <span class="n">span</span><span class="o">.</span><span class="n">doc</span><span class="o">.</span><span class="n">_</span><span class="o">.</span><span class="n">trf_data</span><span class="o">.</span><span class="n">align</span><span class="p">[</span><span class="n">span</span><span class="o">.</span><span class="n">start</span><span class="p">:</span> <span class="n">span</span><span class="o">.</span><span class="n">end</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+        
+        <span class="c1"># Fetch Transformer output shape from the final dimension of the output.</span>
+        <span class="c1"># We do this here to maintain compatibility with different Transformers,</span>
+        <span class="c1"># which may output tensors of different shape.</span>
+        <span class="n">out_dim</span> <span class="o">=</span> <span class="n">span</span><span class="o">.</span><span class="n">doc</span><span class="o">.</span><span class="n">_</span><span class="o">.</span><span class="n">trf_data</span><span class="o">.</span><span class="n">tensors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        
+        <span class="c1"># Get Token tensors under tensors[0]. Reshape batched outputs so that</span>
+        <span class="c1"># each &quot;row&quot; in the matrix corresponds to a single token. This is needed</span>
+        <span class="c1"># for matching alignment information under &#39;tensor_ix&#39; to the Transformer</span>
+        <span class="c1"># output.</span>
+        <span class="n">tensor</span> <span class="o">=</span> <span class="n">span</span><span class="o">.</span><span class="n">doc</span><span class="o">.</span><span class="n">_</span><span class="o">.</span><span class="n">trf_data</span><span class="o">.</span><span class="n">tensors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">out_dim</span><span class="p">)[</span><span class="n">tensor_ix</span><span class="p">]</span>
+        
+        <span class="c1"># Average vectors along axis 0 (&quot;columns&quot;). This yields a 768-dimensional</span>
+        <span class="c1"># vector for each spaCy Span.</span>
+        <span class="k">return</span> <span class="n">tensor</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    
+    <span class="c1"># Define a function that takes a Token as input and returns the Transformer</span>
+    <span class="c1"># output.</span>
+    <span class="k">def</span> <span class="nf">token_tensor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">):</span>
+        
+        <span class="c1"># Get alignment information for Token; flatten array for indexing.</span>
+        <span class="c1"># Again, we use the &#39;doc&#39; attribute of a Token to get the parent Doc,</span>
+        <span class="c1"># which contains the Transformer output.</span>
+        <span class="n">tensor_ix</span> <span class="o">=</span> <span class="n">token</span><span class="o">.</span><span class="n">doc</span><span class="o">.</span><span class="n">_</span><span class="o">.</span><span class="n">trf_data</span><span class="o">.</span><span class="n">align</span><span class="p">[</span><span class="n">token</span><span class="o">.</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+        
+        <span class="c1"># Fetch Transformer output shape from the final dimension of the output.</span>
+        <span class="c1"># We do this here to maintain compatibility with different Transformers,</span>
+        <span class="c1"># which may output tensors of different shape.</span>
+        <span class="n">out_dim</span> <span class="o">=</span> <span class="n">token</span><span class="o">.</span><span class="n">doc</span><span class="o">.</span><span class="n">_</span><span class="o">.</span><span class="n">trf_data</span><span class="o">.</span><span class="n">tensors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        
+        <span class="c1"># Get Token tensors under tensors[0]. Reshape batched outputs so that</span>
+        <span class="c1"># each &quot;row&quot; in the matrix corresponds to a single token. This is needed</span>
+        <span class="c1"># for matching alignment information under &#39;tensor_ix&#39; to the Transformer</span>
+        <span class="c1"># output.</span>
+        <span class="n">tensor</span> <span class="o">=</span> <span class="n">token</span><span class="o">.</span><span class="n">doc</span><span class="o">.</span><span class="n">_</span><span class="o">.</span><span class="n">trf_data</span><span class="o">.</span><span class="n">tensors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">out_dim</span><span class="p">)[</span><span class="n">tensor_ix</span><span class="p">]</span>
+
+        <span class="c1"># Average vectors along axis 0 (columns). This yields a 768-dimensional</span>
+        <span class="c1"># vector for each spaCy Token.</span>
+        <span class="k">return</span> <span class="n">tensor</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    
+    <span class="c1"># Define a function for calculating cosine similarity between vectors</span>
+    <span class="k">def</span> <span class="nf">get_similarity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">doc1</span><span class="p">,</span> <span class="n">doc2</span><span class="p">):</span>
+        
+        <span class="c1"># Calculate and return cosine similarity</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">doc1</span><span class="o">.</span><span class="n">vector</span><span class="p">,</span> <span class="n">doc2</span><span class="o">.</span><span class="n">vector</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">doc1</span><span class="o">.</span><span class="n">vector_norm</span> <span class="o">*</span> <span class="n">doc2</span><span class="o">.</span><span class="n">vector_norm</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Although the previous cell is relatively long, note that the comments explaining the actions taken took up most of the space!</p>
+<p>With the <em>Class</em> <code class="docutils literal notranslate"><span class="pre">Tensor2Attr</span></code> defined, we can now add it to the pipeline by referring to the name we registered with spaCy using <code class="docutils literal notranslate"><span class="pre">&#64;Language.factory()</span></code>, that is, <code class="docutils literal notranslate"><span class="pre">tensor2attr</span></code>, as instructed in <a class="reference external" href="../part_ii/04_basic_nlp_continued.ipynb#Simplifying-output-for-noun-phrases-and-named-entities">Part II</a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add the component named &#39;tensor2attr&#39;, which we registered using the</span>
+<span class="c1"># @Language decorator and its &#39;factory&#39; method to the pipeline.</span>
+<span class="n">nlp_trf</span><span class="o">.</span><span class="n">add_pipe</span><span class="p">(</span><span class="s1">&#39;tensor2attr&#39;</span><span class="p">)</span>
+
+<span class="c1"># Call the &#39;pipeline&#39; attribute to examine the pipeline</span>
+<span class="n">nlp_trf</span><span class="o">.</span><span class="n">pipeline</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;transformer&#39;,
+  &lt;spacy_transformers.pipeline_component.Transformer at 0x1b235a400&gt;),
+ (&#39;tagger&#39;, &lt;spacy.pipeline.tagger.Tagger at 0x1b2380100&gt;),
+ (&#39;parser&#39;, &lt;spacy.pipeline.dep_parser.DependencyParser at 0x1b249a430&gt;),
+ (&#39;attribute_ruler&#39;,
+  &lt;spacy.pipeline.attributeruler.AttributeRuler at 0x1b2480b40&gt;),
+ (&#39;lemmatizer&#39;, &lt;spacy.lang.en.lemmatizer.EnglishLemmatizer at 0x1b24aa440&gt;),
+ (&#39;ner&#39;, &lt;spacy.pipeline.ner.EntityRecognizer at 0x1b249a350&gt;),
+ (&#39;tensor2attr&#39;, &lt;__main__.Tensor2Attr at 0x2380c3820&gt;)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The output shows that the component named <code class="docutils literal notranslate"><span class="pre">tensor2attr</span></code> was added to the spaCy pipeline.</p>
+<p>This component stores the Transformer-based contextual embeddings for <em>Docs</em>, <em>Spans</em> and <em>Tokens</em> under the <code class="docutils literal notranslate"><span class="pre">vector</span></code> attribute.</p>
+<p>Let’s explore contextual embeddings by defining two <em>Doc</em> objects and feeding them to the Transformer-based language model under <code class="docutils literal notranslate"><span class="pre">nlp_trf</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define two example sentences and process them using the Transformer-based</span>
+<span class="c1"># language model under &#39;nlp_trf&#39;.</span>
+<span class="n">doc_city_trf</span> <span class="o">=</span> <span class="n">nlp_trf</span><span class="p">(</span><span class="s2">&quot;Helsinki is the capital of Finland.&quot;</span><span class="p">)</span>
+<span class="n">doc_money_trf</span> <span class="o">=</span> <span class="n">nlp_trf</span><span class="p">(</span><span class="s2">&quot;The company is close to bankruptcy because its capital is gone.&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The noun “capital” has two different meanings in these sentences: in <code class="docutils literal notranslate"><span class="pre">doc_city_trf</span></code>, “capital” refers to a city, whereas in <code class="docutils literal notranslate"><span class="pre">doc_money_trf</span></code> the word refers to money.</p>
+<p>The Transformer should encode this difference into the resulting vector based on the context in which the word occurs.</p>
+<p>Let’s fetch the <em>Token</em> corresponding to “capital” in each example and retrieve their vector representations under the <code class="docutils literal notranslate"><span class="pre">vector</span></code> attribute.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Retrieve vectors for the two Tokens corresponding to &quot;capital&quot;;</span>
+<span class="c1"># assign to variables &#39;city_trf&#39; and &#39;money_trf&#39;.</span>
+<span class="n">city_trf</span> <span class="o">=</span> <span class="n">doc_city_trf</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">money_trf</span> <span class="o">=</span> <span class="n">doc_money_trf</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>
+
+<span class="c1"># Compare the similarity of the two meanings of &#39;capital&#39;</span>
+<span class="n">city_trf</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="n">money_trf</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.60846937
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, the vectors for the word “capital” are only somewhat similar, because the Transformer also encodes information about their context of occurrence into the vectors, which has allowed it to learn that the same linguistic form may have different meanings in different contexts.</p>
+<p>This stands in stark contrast to the <em>static</em> word embeddings available in the large language model for English stored under the variable <code class="docutils literal notranslate"><span class="pre">nlp_lg</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define two example sentences and process them using the large language model</span>
+<span class="c1"># under &#39;nlp_lg&#39;</span>
+<span class="n">doc_city_lg</span> <span class="o">=</span> <span class="n">nlp_lg</span><span class="p">(</span><span class="s2">&quot;Helsinki is the capital of Finland.&quot;</span><span class="p">)</span>
+<span class="n">doc_money_lg</span> <span class="o">=</span> <span class="n">nlp_lg</span><span class="p">(</span><span class="s2">&quot;The company is close to bankruptcy because its capital is gone.&quot;</span><span class="p">)</span>
+
+<span class="c1"># Retrieve vectors for the two Tokens corresponding to &quot;capital&quot;;</span>
+<span class="c1"># assign to variables &#39;city_lg&#39; and &#39;money_lg&#39;.</span>
+<span class="n">city_lg</span> <span class="o">=</span> <span class="n">doc_city_lg</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">money_lg</span> <span class="o">=</span> <span class="n">doc_money_lg</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>
+
+<span class="c1"># Compare the similarity of the two meanings of &#39;capital&#39;</span>
+<span class="n">city_lg</span><span class="o">.</span><span class="n">similarity</span><span class="p">(</span><span class="n">money_lg</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, the vectors for the word “capital” are identical, because the word embeddings do not encode information about the context in which the word occurs.</p>
+<p>This section should have given you a basic understanding of word embeddings and their use in spaCy, and introduced you to the difference between word embeddings and contextual word embeddings.</p>
+<p>In the next <a class="reference internal" href="06_text_linguistics.html"><span class="doc std std-doc">section</span></a>, we proceed to examine the processing of discourse-level annotations.</p>
+</div>
+</div>
+
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="04_embeddings.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Introducing word embeddings</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="06_text_linguistics.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Working with discourse-level annotations</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+   <div class="footer"><a href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0;padding:10px" src="https://mirrors.creativecommons.org/presskit/buttons/88x31/svg/by-nc.svg"/></a> © 2020– <a href="http://www.helsinki.fi/~thiippal">Tuomo Hiippala</a></div>
+    
+
+  </body>
+</html>

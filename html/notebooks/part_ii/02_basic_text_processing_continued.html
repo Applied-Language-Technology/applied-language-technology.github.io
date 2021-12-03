@@ -1,0 +1,783 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QDXYHY09XJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QDXYHY09XJ');
+</script>
+    
+    
+    <title>Manipulating text at scale</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Processing texts using spaCy" href="03_basic_nlp.html" />
+    <link rel="prev" title="Manipulating text using Python" href="01_basic_text_processing.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../about.html">
+   About this Website
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../getting_started.html">
+   Getting Started
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../notebook_login.html">
+     Log in to CSC Notebooks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../launch_server.html">
+     Launch JupyterLab on your personal server
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../jupyter.html">
+     Interact with the server in JupyterLab
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../github_pull.html">
+     Retrieve learning materials and exercises from GitHub
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../github_push.html">
+     Return completed exercises to GitHub for grading
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../python_intro.html">
+   Part I: A Minimal Introduction to Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_i/01_working_with_jupyter_notebooks.html">
+     The elements of a Jupyter Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_i/02_getting_started_with_python.html">
+     Getting started with Python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../../working_with_text.html">
+   Part II: Working with Text in Python
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="01_basic_text_processing.html">
+     Manipulating text using Python
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Manipulating text at scale
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03_basic_nlp.html">
+     Processing texts using spaCy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04_basic_nlp_continued.html">
+     Customising the spaCy pipeline
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="05_evaluating_nlp.html">
+     Evaluating language models
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="06_managing_data.html">
+     Managing textual data using pandas
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../nlp_for_linguists.html">
+   Part III: Natural Language Processing for Linguists
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_iii/01_multilingual_nlp.html">
+     Processing diverse languages
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_iii/02_universal_dependencies.html">
+     Universal Dependencies
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_iii/03_pattern_matching.html">
+     Finding linguistic patterns using spaCy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_iii/04_embeddings.html">
+     Introducing word embeddings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_iii/05_embeddings_continued.html">
+     Word embeddings in spaCy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_iii/06_text_linguistics.html">
+     Working with discourse-level annotations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../citation.html">
+   Citation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../resources.html">
+   Resources
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/part_ii/02_basic_text_processing_continued.ipynb.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/Applied-Language-Technology/website"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/Applied-Language-Technology/website/binder?urlpath=lab/tree/notebooks/part_ii/02_basic_text_processing_continued.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#scaling-up">
+   Scaling up
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#regular-expressions">
+   Regular expressions
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#processing-multiple-files">
+   Processing multiple files
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="manipulating-text-at-scale">
+<h1>Manipulating text at scale<a class="headerlink" href="#manipulating-text-at-scale" title="Permalink to this headline">¶</a></h1>
+<p>This section introduces you to regular expressions for manipulating text and how to apply the same procedure to several files.</p>
+<p>After reading this section, you should know:</p>
+<ul class="simple">
+<li><p>how to manipulate multiple text files using Python</p></li>
+<li><p>how to define simple patterns using <em>regular expressions</em></p></li>
+<li><p>how to save the results</p></li>
+</ul>
+<div class="section" id="scaling-up">
+<h2>Scaling up<a class="headerlink" href="#scaling-up" title="Permalink to this headline">¶</a></h2>
+<p>Ideally, Python should enable you to manipulate text at scale, that is, to apply the same procedure to ten, hundred or thousand text files <em>with the same effort</em>.</p>
+<p>To do so, we must be able to define more flexible patterns than the fixed strings that we used previously with the <code class="docutils literal notranslate"><span class="pre">replace()</span></code> method, while opening and closing files automatically.</p>
+<p>This capability is provided by Python modules for <em>regular expressions</em> and <em>file handling</em>.</p>
+</div>
+<div class="section" id="regular-expressions">
+<h2>Regular expressions<a class="headerlink" href="#regular-expressions" title="Permalink to this headline">¶</a></h2>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+<iframe
+    width="600"
+    height="350"
+    src="https://www.youtube.com/embed/seCpHdTA-vs"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</div></div>
+</div>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Regular_expression">Regular expressions</a> are a “language” that allows defining <em>search patterns</em>.</p>
+<p>These patterns can be used to find or to find and replace patterns in Python string objects.</p>
+<p>As opposed to fixed strings, regular expressions allow defining <em>wildcard characters</em> that stand in for any character, <em>quantifiers</em> that match sequences of repeated characters, and much more.</p>
+<p>Python allows using regular expressions through its <code class="docutils literal notranslate"><span class="pre">re</span></code> module.</p>
+<p>We can activate this module using the <code class="docutils literal notranslate"><span class="pre">import</span></code> command.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s begin by loading the text file, reading its contents, assigning the last 2000 characters to the variable <code class="docutils literal notranslate"><span class="pre">extract</span></code> and printing out the result.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a path to the file, open the file for (r)eading using utf-8 encoding</span>
+<span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="s1">&#39;data/WP_1990-08-10-25A.txt&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+
+<span class="c1"># Read the file contents using the .read() method</span>
+<span class="n">text</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="c1"># Get the *last* 2000 characters – note the minus sign before the number</span>
+<span class="n">extract</span> <span class="o">=</span> <span class="n">text</span><span class="p">[</span><span class="o">-</span><span class="mi">2000</span><span class="p">:]</span>
+
+<span class="c1"># Print the result</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">extract</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> guardian of democracy .., also works as a deterrent to ter;;, rorists.
+   If the United States and all its; might wasn&#39;t viewed as looking- out for smaller countries’ inter- ; ests, Rogers said, &quot;things could get completely out of hand.;- Anybody could do anything/; Terrorism would spread like a cancer.”	,
+   Poor people may be the first&#39;-&#39;* to feel repercussions from Iraq&#39;s invasion of Kuwait. Al-&gt;.&quot; ready, the price of a tankful of gasoline has increased a dollar— or two at many pumps in the region.
+   &quot;This is going to hurt the. poor man and the U.S. car tor.... dustry,” Rogers predicted.
+   “Even if they ration gas, ;lt won’t matter to rich people*”...;, said Belk, from the VA nursing-,:.’ home. “They will buy it on the black market. But if you don&#39;t,7 have much money to begin with;-’; it’s going to make a difference/*—.
+   Gerald Dunn, a federal gov*” - eminent employee from Alex-* 1 andria, said that he believed&#39;&quot;&quot; that most middle- and upper-in-&quot;“ come families wouldn’t even no-.; — tice the increase in gas prices.-&#39;; Besides, he said, it was a small -price for them to pay while the nation defended a &quot;country un-&#39; der attack.”	’’
+   Saddam Hussein, alternatively described as a madman, bully-”&quot; and dictator, drew passionate&#39;&quot;&#39;&#39;. repudiation.
+   &quot;No way can we let him get&#39; away with this,” said Robert Stout, a vice president at Smithy Braedon, referring to . the Iraqi president’s decision to.... annex Kuwait.	,
+   “Saddam Hussein really,,,,.* scares me,&quot; said Falls Church,,,, music instructor Joseph Moq-, ton. &quot;I fear we have a madmaq,,,„; out there and he is not going to;;,* stop at Kuwait. These days, it takes is a nuclear weapon; small enough to fit in a suit-.;.; case.”	—
+   ”1 just hope they stop him — quick,” said Viola Anderson, a&quot;-&quot;
+retired hotel employee in tlie	
+District. &quot;I really feel things could turn terrible, if we donfr stop him soon.”	&gt;•&#39;«■«
+Reproduced with permission of the copyright owner. Further reproduction prohibited without permission.
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, the text has a lot of errors from optical character recognition, mainly in the form of sequences such as <code class="docutils literal notranslate"><span class="pre">....</span></code> and <code class="docutils literal notranslate"><span class="pre">,,,,</span></code>.</p>
+<p>Let’s compile our first regular expression that searches for sequences of <em>two or more</em> full stops.</p>
+<p>This is done using the <code class="docutils literal notranslate"><span class="pre">compile()</span></code> function from the <code class="docutils literal notranslate"><span class="pre">re</span></code> module.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">compile()</span></code> function takes a string as an input.</p>
+<p>Note that we attach the prefix <code class="docutils literal notranslate"><span class="pre">r</span></code> to the string. This tells Python to store the string in ‘raw’ format. This means that the string is stored as it appears.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compile a regular expression and assign it to the variable &#39;stops&#39;</span>
+<span class="n">stops</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\.{2,}&#39;</span><span class="p">)</span>
+
+<span class="c1"># Let&#39;s check the type of the regular expression!</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">stops</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>re.Pattern
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s unpack this regular expression a bit.</p>
+<ol class="simple">
+<li><p>The regular expression is defined using a Python string, as indicated by the single quotation marks <code class="docutils literal notranslate"><span class="pre">'</span>&#160; <span class="pre">'</span></code>.</p></li>
+<li><p>We need a backslash <code class="docutils literal notranslate"><span class="pre">\</span></code> in front of our full stop <code class="docutils literal notranslate"><span class="pre">.</span></code>. The backslash tells Python that we are really referring to a full stop, because regular expressions use a full stop as a <em>wildcard</em> character that can stand in for <em>any character</em>.</p></li>
+<li><p>The curly brackets <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">}</span></code> instruct the regular expression to search for instances of the previous item <code class="docutils literal notranslate"><span class="pre">\.</span></code> (our actual full stop) that occur two or more times (<code class="docutils literal notranslate"><span class="pre">2,</span></code>). This (hopefully) preserves true uses of a full stop!</p></li>
+</ol>
+<p>In plain language, we tell the regular expression to search for <em>occurrences of two or more full stops</em>.</p>
+<p>To apply this regular expression to some text, we will use the <code class="docutils literal notranslate"><span class="pre">sub()</span></code> method of our newly-defined regular expression object <code class="docutils literal notranslate"><span class="pre">stops</span></code>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">sub()</span></code> method takes two arguments:</p>
+<ol class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">repl</span></code>: A string containing a string that is used to <em>replace</em> possible matches.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">string</span></code>: A string object to be searched for matches.</p></li>
+</ol>
+<p>The method returns the modified string object.</p>
+<p>Let’s apply our regular expression to the string stored under the variable <code class="docutils literal notranslate"><span class="pre">extract</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Apply the regular expression to the text under &#39;extract&#39; and save the output</span>
+<span class="c1"># to the same variable, essentially overwriting the old text.</span>
+<span class="n">extract</span> <span class="o">=</span> <span class="n">stops</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">repl</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">string</span><span class="o">=</span><span class="n">extract</span><span class="p">)</span>
+
+<span class="c1"># Print the text to examine the result</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">extract</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> guardian of democracy , also works as a deterrent to ter;;, rorists.
+   If the United States and all its; might wasn&#39;t viewed as looking- out for smaller countries’ inter- ; ests, Rogers said, &quot;things could get completely out of hand.;- Anybody could do anything/; Terrorism would spread like a cancer.”	,
+   Poor people may be the first&#39;-&#39;* to feel repercussions from Iraq&#39;s invasion of Kuwait. Al-&gt;.&quot; ready, the price of a tankful of gasoline has increased a dollar— or two at many pumps in the region.
+   &quot;This is going to hurt the. poor man and the U.S. car tor dustry,” Rogers predicted.
+   “Even if they ration gas, ;lt won’t matter to rich people*”;, said Belk, from the VA nursing-,:.’ home. “They will buy it on the black market. But if you don&#39;t,7 have much money to begin with;-’; it’s going to make a difference/*—.
+   Gerald Dunn, a federal gov*” - eminent employee from Alex-* 1 andria, said that he believed&#39;&quot;&quot; that most middle- and upper-in-&quot;“ come families wouldn’t even no-.; — tice the increase in gas prices.-&#39;; Besides, he said, it was a small -price for them to pay while the nation defended a &quot;country un-&#39; der attack.”	’’
+   Saddam Hussein, alternatively described as a madman, bully-”&quot; and dictator, drew passionate&#39;&quot;&#39;&#39;. repudiation.
+   &quot;No way can we let him get&#39; away with this,” said Robert Stout, a vice president at Smithy Braedon, referring to . the Iraqi president’s decision to annex Kuwait.	,
+   “Saddam Hussein really,,,,.* scares me,&quot; said Falls Church,,,, music instructor Joseph Moq-, ton. &quot;I fear we have a madmaq,,,„; out there and he is not going to;;,* stop at Kuwait. These days, it takes is a nuclear weapon; small enough to fit in a suit-.;.; case.”	—
+   ”1 just hope they stop him — quick,” said Viola Anderson, a&quot;-&quot;
+retired hotel employee in tlie	
+District. &quot;I really feel things could turn terrible, if we donfr stop him soon.”	&gt;•&#39;«■«
+Reproduced with permission of the copyright owner. Further reproduction prohibited without permission.
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, the sequences of full stops are gone.</p>
+<p>We can make our regular expression even more powerful by adding alternatives.</p>
+<p>Let’s compile another regular expression and store it under the variable <code class="docutils literal notranslate"><span class="pre">punct</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compile a regular expression and assign it to the variable &#39;punct&#39;</span>
+<span class="n">punct</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;(\.|,){2,}&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>What’s new here are the parentheses <code class="docutils literal notranslate"><span class="pre">(</span> <span class="pre">)</span></code> and the vertical bar <code class="docutils literal notranslate"><span class="pre">|</span></code> between them, which separates our actual full stop <code class="docutils literal notranslate"><span class="pre">\.</span></code> and the comma <code class="docutils literal notranslate"><span class="pre">,</span></code>.</p>
+<p>The characters surrounded by parentheses and separated by a vertical bar mark <em>alternatives</em>.</p>
+<p>In plain English, we tell the regular expression to search for <em>occurrences of two or more full stops or commas</em>.</p>
+<p>Let’s apply our new pattern to the text under <code class="docutils literal notranslate"><span class="pre">extract</span></code>.</p>
+<p>To ensure the pattern works as intended, let’s retrieve the original text from the <code class="docutils literal notranslate"><span class="pre">text</span></code> variable and assign it to the variable <code class="docutils literal notranslate"><span class="pre">extract</span></code> to overwrite our previous edits.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># &quot;Reset&quot; the extract variable by taking the last 2000 characters of the original string</span>
+<span class="n">extract</span> <span class="o">=</span> <span class="n">text</span><span class="p">[</span><span class="o">-</span><span class="mi">2000</span><span class="p">:]</span>
+
+<span class="c1"># Apply the regular expression</span>
+<span class="n">extract</span> <span class="o">=</span> <span class="n">punct</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">repl</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">string</span><span class="o">=</span><span class="n">extract</span><span class="p">)</span>
+
+<span class="c1"># Print out the result</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">extract</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> guardian of democracy  also works as a deterrent to ter;;, rorists.
+   If the United States and all its; might wasn&#39;t viewed as looking- out for smaller countries’ inter- ; ests, Rogers said, &quot;things could get completely out of hand.;- Anybody could do anything/; Terrorism would spread like a cancer.”	,
+   Poor people may be the first&#39;-&#39;* to feel repercussions from Iraq&#39;s invasion of Kuwait. Al-&gt;.&quot; ready, the price of a tankful of gasoline has increased a dollar— or two at many pumps in the region.
+   &quot;This is going to hurt the. poor man and the U.S. car tor dustry,” Rogers predicted.
+   “Even if they ration gas, ;lt won’t matter to rich people*”;, said Belk, from the VA nursing-,:.’ home. “They will buy it on the black market. But if you don&#39;t,7 have much money to begin with;-’; it’s going to make a difference/*—.
+   Gerald Dunn, a federal gov*” - eminent employee from Alex-* 1 andria, said that he believed&#39;&quot;&quot; that most middle- and upper-in-&quot;“ come families wouldn’t even no-.; — tice the increase in gas prices.-&#39;; Besides, he said, it was a small -price for them to pay while the nation defended a &quot;country un-&#39; der attack.”	’’
+   Saddam Hussein, alternatively described as a madman, bully-”&quot; and dictator, drew passionate&#39;&quot;&#39;&#39;. repudiation.
+   &quot;No way can we let him get&#39; away with this,” said Robert Stout, a vice president at Smithy Braedon, referring to . the Iraqi president’s decision to annex Kuwait.	,
+   “Saddam Hussein really* scares me,&quot; said Falls Church music instructor Joseph Moq-, ton. &quot;I fear we have a madmaq„; out there and he is not going to;;,* stop at Kuwait. These days, it takes is a nuclear weapon; small enough to fit in a suit-.;.; case.”	—
+   ”1 just hope they stop him — quick,” said Viola Anderson, a&quot;-&quot;
+retired hotel employee in tlie	
+District. &quot;I really feel things could turn terrible, if we donfr stop him soon.”	&gt;•&#39;«■«
+Reproduced with permission of the copyright owner. Further reproduction prohibited without permission.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Success! The sequences of full stops and commas can be removed using a single regular expression.</p>
+<p>The more irregular sequences resulting from optical character recognition errors in <code class="docutils literal notranslate"><span class="pre">extract</span></code>, such as <code class="docutils literal notranslate"><span class="pre">'-'*</span></code>, <code class="docutils literal notranslate"><span class="pre">-&gt;.&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">/*—.</span></code>, <code class="docutils literal notranslate"><span class="pre">-&quot;“</span></code> and <code class="docutils literal notranslate"><span class="pre">'&quot;''.</span></code> are much harder to capture.</p>
+<p>Capturing these patterns would require defining more complex regular expressions, which are harder to write. Their complexity is, however, what makes regular expressions so powerful, but at the same time, learning how to use them takes time and patience.</p>
+<p>It is therefore a good idea to use a service such as <a class="reference external" href="https://www.regex101.com">regex101.com</a> to learn the basics of regular expressions.</p>
+<p>In practice, coming up with regular expressions that cover as many matches as possible is particularly hard.</p>
+<p>Capturing most of the errors – and perhaps distributing the manipulations over a series of steps in a pipeline – can already help prepare the text for further processing or analysis.</p>
+<p>However, keep in mind that in order to identify patterns for manipulating text programmatically, you should always look at more than one text in your corpus.</p>
+</div>
+<div class="section" id="processing-multiple-files">
+<h2>Processing multiple files<a class="headerlink" href="#processing-multiple-files" title="Permalink to this headline">¶</a></h2>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+<iframe
+    width="600"
+    height="350"
+    src="https://www.youtube.com/embed/UYyqQD3w59c"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</div></div>
+</div>
+<p>Many corpora contain texts in multiple files.</p>
+<p>To make manipulating the text as efficient as possible, we must open the files, read their contents, perform the requested operations and close them <em>programmatically</em>.</p>
+<p>This procedure is fairly simple using the <code class="docutils literal notranslate"><span class="pre">Path</span></code> class from Python’s <code class="docutils literal notranslate"><span class="pre">pathlib</span></code> module.</p>
+<p>Let’s import the class first. Using the command <code class="docutils literal notranslate"><span class="pre">from</span></code> with <code class="docutils literal notranslate"><span class="pre">import</span></code> allows us to import only a part of the <code class="docutils literal notranslate"><span class="pre">pathlib</span></code> module, namely the <code class="docutils literal notranslate"><span class="pre">Path</span></code> class. This is useful if you only need some feature contained in a Python module or library.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Path</span></code> class encodes information about <em>paths</em> in a <em>directory structure</em>.</p>
+<p>What’s particularly great about the Path class is that it can automatically infer what kinds of paths your operating system uses.</p>
+<p>Here the problem is that operating systems such as Windows, Linux and Mac OS X have different file system paths.</p>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">Path</span></code> class allows us to avoid a lot of trouble, particularly if we want to code to run on different operating systems.</p>
+<p>Our repository contains a directory named <code class="docutils literal notranslate"><span class="pre">data</span></code>, which contains the text files that we have been working with recently.</p>
+<p>Let’s initialise a Path <em>object</em> that points towards this directory by providing a string with the directory name to the Path <em>class</em>. We assign the object to the variable <code class="docutils literal notranslate"><span class="pre">corpus_dir</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a Path object that points towards the directory &#39;data&#39; and assign</span>
+<span class="c1"># the object to the variable &#39;corpus_dir&#39;</span>
+<span class="n">corpus_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The Path object stored under <code class="docutils literal notranslate"><span class="pre">corpus_dir</span></code> has various useful methods and attributes.</p>
+<p>We can, for instance, easily check if the path is valid using the <code class="docutils literal notranslate"><span class="pre">exists()</span></code> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use the exists() method to check if the path is valid</span>
+<span class="n">corpus_dir</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also check if the path is a directory using the <code class="docutils literal notranslate"><span class="pre">is_dir()</span></code> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use the exists() method to check if the path points to a directory</span>
+<span class="n">corpus_dir</span><span class="o">.</span><span class="n">is_dir</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s make sure the path does not point towards a file using the <code class="docutils literal notranslate"><span class="pre">is_file()</span></code> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use the exists() method to check if the path points to a file</span>
+<span class="n">corpus_dir</span><span class="o">.</span><span class="n">is_file</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now that we know that the path referred to is indeed a directory, we can use the <code class="docutils literal notranslate"><span class="pre">glob()</span></code> method to collect all text files in the directory.</p>
+<p><code class="docutils literal notranslate"><span class="pre">glob</span></code> stands for <a class="reference external" href="https://en.wikipedia.org/wiki/Glob_(programming)"><em>global</em></a>, and was first implemented as a program for matching filenames and paths using wildcards.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">glob()</span></code> method requires one argument, <code class="docutils literal notranslate"><span class="pre">pattern</span></code>, which takes a string as input. This string defines the kinds of files to be collected. The asterisk symbol <code class="docutils literal notranslate"><span class="pre">*</span></code> acts as a wildcard, which can refer to <em>any sequence of characters</em> preceding the sequence <code class="docutils literal notranslate"><span class="pre">.txt</span></code>.</p>
+<p>The file identifier <code class="docutils literal notranslate"><span class="pre">.txt</span></code> is a commonly-used suffix for plain text files.</p>
+<p>We also instruct Python to <em>cast</em> the result into a list using the <code class="docutils literal notranslate"><span class="pre">list()</span></code> function, so we can easily loop over the files in the list.</p>
+<p>Finally, we store the result under the variable <code class="docutils literal notranslate"><span class="pre">files</span></code> and call the result.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get all files with the suffix .txt in the directory &#39;corpus_dir&#39; and cast the result into a list</span>
+<span class="n">files</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">corpus_dir</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="s1">&#39;*.txt&#39;</span><span class="p">))</span>
+
+<span class="c1"># Call the result</span>
+<span class="n">files</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[PosixPath(&#39;data/WP_1990-08-10-25A.txt&#39;),
+ PosixPath(&#39;data/NYT_1991-01-16-A15.txt&#39;),
+ PosixPath(&#39;data/WP_1991-01-17-A1B.txt&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We now have a list of three Path objects that point towards three text files!</p>
+<p>This allows us to loop over the files using a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop and manipulate text in each file.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Begin the loop</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+    
+    <span class="c1"># Open the file at the path stored under the variable &#39;f&#39; and declare encoding (&#39;utf-8&#39;)</span>
+    <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># The Path object contains the filename under the attribute name. Let&#39;s assign the filename to a variable.</span>
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">name</span>
+    
+    <span class="c1"># Read the file contents</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    
+    <span class="c1"># Print the filename and the first 100 characters in the file</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">text</span><span class="p">[:</span><span class="mi">100</span><span class="p">])</span>
+    
+    <span class="c1"># Define a new filename for our modified file, which has the prefix &#39;mod_&#39;</span>
+    <span class="n">new_filename</span> <span class="o">=</span> <span class="s1">&#39;mod_&#39;</span> <span class="o">+</span> <span class="n">filename</span>
+    
+    <span class="c1"># Define a new path. Path will automatically join the directory and filenames for us.</span>
+    <span class="n">new_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">new_filename</span><span class="p">)</span>
+    
+    <span class="c1"># We then create a file with the new filename. Note the mode for *writing*</span>
+    <span class="n">new_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">new_path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w+&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+    
+    <span class="c1"># Apply our regular expression for removing excessive punctuation to the text</span>
+    <span class="n">modified_text</span> <span class="o">=</span> <span class="n">punct</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    
+    <span class="c1"># Write the modified text to the new file</span>
+    <span class="n">new_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">modified_text</span><span class="p">)</span>
+    
+    <span class="c1"># Let&#39;s close the files</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">new_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WP_1990-08-10-25A.txt ﻿*We Don’t Stand for Bullies&#39;: Diverse Voices in Area Back Action Against Iraq
+Mary Jordan Washingto
+NYT_1991-01-16-A15.txt ﻿U.S. TAKING STEPS TO CURB TERRORISM: F.B.I. Is Ordered to Find Iraqis Whose Visas Have Expired
+By J
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WP_1991-01-17-A1B.txt ﻿U.S., Allies Launch Massive Air War Against Targets in Iraq and ...
+Atkinson, Rick;David S Broder W
+</pre></div>
+</div>
+</div>
+</div>
+<p>This should have given you an idea of the some more powerful methods for manipulating text available in Python, such as regular expressions, and how to apply them to multiple files at the same time.</p>
+<p>The <a class="reference internal" href="03_basic_nlp.html"><span class="doc std std-doc">following section</span></a> will teach you how to apply basic natural language processing techniques to texts.</p>
+</div>
+</div>
+
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="01_basic_text_processing.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Manipulating text using Python</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="03_basic_nlp.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Processing texts using spaCy</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+   <div class="footer"><a href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0;padding:10px" src="https://mirrors.creativecommons.org/presskit/buttons/88x31/svg/by-nc.svg"/></a> © 2020– <a href="http://www.helsinki.fi/~thiippal">Tuomo Hiippala</a></div>
+    
+
+  </body>
+</html>

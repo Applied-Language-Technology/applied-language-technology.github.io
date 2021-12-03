@@ -1,0 +1,3077 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QDXYHY09XJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QDXYHY09XJ');
+</script>
+    
+    
+    <title>Introducing word embeddings</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Word embeddings in spaCy" href="05_embeddings_continued.html" />
+    <link rel="prev" title="Finding linguistic patterns using spaCy" href="03_pattern_matching.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../about.html">
+   About this Website
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../getting_started.html">
+   Getting Started
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../notebook_login.html">
+     Log in to CSC Notebooks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../launch_server.html">
+     Launch JupyterLab on your personal server
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../jupyter.html">
+     Interact with the server in JupyterLab
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../github_pull.html">
+     Retrieve learning materials and exercises from GitHub
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../github_push.html">
+     Return completed exercises to GitHub for grading
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../python_intro.html">
+   Part I: A Minimal Introduction to Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_i/01_working_with_jupyter_notebooks.html">
+     The elements of a Jupyter Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_i/02_getting_started_with_python.html">
+     Getting started with Python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../working_with_text.html">
+   Part II: Working with Text in Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_ii/01_basic_text_processing.html">
+     Manipulating text using Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_ii/02_basic_text_processing_continued.html">
+     Manipulating text at scale
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_ii/03_basic_nlp.html">
+     Processing texts using spaCy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_ii/04_basic_nlp_continued.html">
+     Customising the spaCy pipeline
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_ii/05_evaluating_nlp.html">
+     Evaluating language models
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_ii/06_managing_data.html">
+     Managing textual data using pandas
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../../nlp_for_linguists.html">
+   Part III: Natural Language Processing for Linguists
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="01_multilingual_nlp.html">
+     Processing diverse languages
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02_universal_dependencies.html">
+     Universal Dependencies
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03_pattern_matching.html">
+     Finding linguistic patterns using spaCy
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Introducing word embeddings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="05_embeddings_continued.html">
+     Word embeddings in spaCy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="06_text_linguistics.html">
+     Working with discourse-level annotations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../citation.html">
+   Citation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../resources.html">
+   Resources
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/part_iii/04_embeddings.ipynb.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/Applied-Language-Technology/website"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/Applied-Language-Technology/website/binder?urlpath=lab/tree/notebooks/part_iii/04_embeddings.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#background-the-distributional-hypothesis-and-word-embeddings">
+   Background: the distributional hypothesis and word embeddings
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exploring-the-distributional-hypothesis">
+   Exploring the distributional hypothesis
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-syntagmatic-perspective">
+     A syntagmatic perspective
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#a-paradigmatic-perspective">
+     A paradigmatic perspective
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#learning-word-embeddings">
+   Learning word embeddings
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#one-hot-encoding">
+     One-hot encoding
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#creating-a-neural-network">
+     Creating a neural network
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#training-a-neural-network">
+     Training a neural network
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="introducing-word-embeddings">
+<h1>Introducing word embeddings<a class="headerlink" href="#introducing-word-embeddings" title="Permalink to this headline">¶</a></h1>
+<p>This section introduces you to <em>word embeddings</em>, a technique for learning numerical representations that approximate the lexical meaning of words, and the underlying <em>distributional hypothesis</em>.</p>
+<p>After reading this section, you should:</p>
+<ul class="simple">
+<li><p>understand the distributional hypothesis</p></li>
+<li><p>how different aspects of linguistic structure can be represented numerically</p></li>
+<li><p>understand how word embeddings are learned</p></li>
+</ul>
+<div class="section" id="background-the-distributional-hypothesis-and-word-embeddings">
+<h2>Background: the distributional hypothesis and word embeddings<a class="headerlink" href="#background-the-distributional-hypothesis-and-word-embeddings" title="Permalink to this headline">¶</a></h2>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+<iframe
+    width="600"
+    height="350"
+    src="https://www.youtube.com/embed/ZB28symH8Mg"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</div></div>
+</div>
+<p>The inspiration for word embeddings is often attributed to the following observation by the English linguist <a class="reference external" href="https://en.wikipedia.org/wiki/John_Rupert_Firth">J.R. Firth</a>:</p>
+<blockquote>
+<div><p>“You shall know a word by the company it keeps.”</p>
+</div></blockquote>
+<p>What Firth means is that the meaning of a word can be inferred by examining the word in its context of occurrence.</p>
+<p>This observation reflects Firth’s broader interest in studying words in their context of occurrence:</p>
+<blockquote>
+<div><p>“The complete meaning of a word is always contextual, and no study of meaning apart from context can be taken seriously.” (Firth <a class="reference external" href="https://doi.org/10.1111/j.1467-968X.1935.tb01254.x">1935</a>: 37)</p>
+</div></blockquote>
+<blockquote>
+<div><p>“Meaning, that is to say, is to be regarded as a complex of contextual relations, and phonetics, grammar,
+lexicography, and semantics each handles its own components of the complex in its appropriate context.” (Firth <a class="reference external" href="https://doi.org/10.1111/j.1467-968X.1935.tb01254.x">1935</a>: 54)</p>
+</div></blockquote>
+<p>Firth’s observation about the role of context can also be related to the so-called <strong>distributional hypothesis</strong> proposed by Harris (<a class="reference external" href="https://doi.org/10.1080/00437956.1954.11659520">1954</a>), which assumes that linguistic elements such as words may be characterised by their distribution in the linguistic system.</p>
+<blockquote>
+<div><p>“The distribution of an element will be understood as the sum of all its environments. An environment of an element A is an existing array of its co-occurrents, i.e. the other elements, each in a particular position, with which A occurs to yield an utterance. A’s co-occurrents in a particular position are called its selection for that position.” (Harris <a class="reference external" href="https://doi.org/10.1080/00437956.1954.11659520">1954</a>: 146)</p>
+</div></blockquote>
+<p>The term distribution refers to the way words co-occur with each other: the distribution of words is <em>not random</em>, but can be characterised using probabilities, and some words are more likely to co-occur with each other than others.</p>
+<p>Put differently, Boleda (<a class="reference external" href="https://doi.org/10.1146/annurev-linguistics-011619-030303">2020</a>: 214) summarises the distributional hypothesis as follows:</p>
+<blockquote>
+<div><p>Similarity in meaning results in similarity of linguistic distribution.</p>
+</div></blockquote>
+<p>To exemplify, given the verb “enjoy”, you could probably come up with words that <em>could</em> be more or less likely to precede or follow this word. Given some context, you could probably also come up with a way of replacing the verb “enjoy” without changing the meaning too much (e.g. “like”)! According to the distributional hypothesis, these verbs can be used interchangeably, because they occur in similar linguistic contexts.</p>
+<p>Sahlgren (<a class="reference external" href="http://linguistica.sns.it/RdL/20.1/Sahlgren.pdf">2008</a>: 34) argues that the distributional hypothesis has its roots in “structuralist soil”, that is, <a class="reference external" href="https://en.wikipedia.org/wiki/Ferdinand_de_Saussure">Ferdinand de Saussure</a>’s ideas about the structure of language.</p>
+<p>Saussure described the structure of language from two perspectives: <em>langue</em>, the abstract system constituted by language, and <em>parole</em>, particular instances of language produced by the underlying system of <em>langue</em>.</p>
+<p>Saussure characterised <em>langue</em> as having <em>paradigmatic</em> and <em>syntagmatic</em> axes of organisation, which allow making choices between alternatives and combining these selections into larger structures. The paradigmatic alternatives emerge through oppositions: alternatives can only be identified by what they are and what they are not.</p>
+<p><img alt="" src="../../_images/parasyn.svg" /></p>
+<p>Saussure’s and Firth’s ideas were taken further by <a class="reference external" href="https://en.wikipedia.org/wiki/Michael_Halliday">M.A.K. Halliday</a> (<a class="reference external" href="https://doi.org/10.1080/00437956.1961.11659756">1961</a>), who incorporated them into the foundations of a theory of language known as <a class="reference external" href="https://en.wikipedia.org/wiki/Systemic_functional_linguistics">systemic functional linguistics</a> (for a recent overview of the field, see Martin <a class="reference external" href="https://doi.org/10.1080/00437956.2016.1141939">2016</a>).</p>
+<p>In contrast to Saussure’s view of language as a static system of oppositions, Halliday emphasises the role of <em>choice</em> for language.</p>
+<p>Halliday argues that language is defined by <em>meaning potential</em>, which is realised <em>dynamically</em> by making choices within intersecting linguistic systems. These systems are provided by the <em>lexicogrammar</em>, which Halliday describes as a cline: the choices made within language become increasingly delicate when moving from grammar to lexis (see e.g. Fontaine <a class="reference external" href="https://doi.org/10.1186/s40554-017-0051-7">2017</a>).</p>
+<p>Against this backdrop, the following sections explore the distributional hypothesis from both syntagmatic and paradigmatic perspectives, as proposed in Sahlgren (<a class="reference external" href="http://linguistica.sns.it/RdL/20.1/Sahlgren.pdf">2008</a>).</p>
+</div>
+<div class="section" id="exploring-the-distributional-hypothesis">
+<h2>Exploring the distributional hypothesis<a class="headerlink" href="#exploring-the-distributional-hypothesis" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="a-syntagmatic-perspective">
+<h3>A syntagmatic perspective<a class="headerlink" href="#a-syntagmatic-perspective" title="Permalink to this headline">¶</a></h3>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+<iframe
+    width="600"
+    height="350"
+    src="https://www.youtube.com/embed/zwtvIomLJSw"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</div></div>
+</div>
+<p>In this section we explore the distributional hypothesis from a syntagmatic perspective, that is, we seek to describe syntagmatic structures that result from combining paradigmatic choices into larger units.</p>
+<p>To do so, we must first determine the scope of an analytical unit for examining syntagmatic structures.</p>
+<p>The scope of analytical units may be motivated linguistically, as exemplified by observing co-occurring words within a clause or a sentence, or may simply involve observing words that occur within an arbitrary distance of one another.</p>
+<p>To find co-occurring words, we must retrieve unique words and count their occurrences across units of analysis.</p>
+<p>To get started, let’s import the spaCy library and load a medium-sized language model for English.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the spaCy library</span>
+<span class="kn">import</span> <span class="nn">spacy</span>
+
+<span class="c1"># Load a medium-sized language model for English; assign to variable &#39;nlp&#39;</span>
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;en_core_web_md&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We then define a toy example that consists of some clauses in a Python list, which we assign to the variable <code class="docutils literal notranslate"><span class="pre">examples</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create list</span>
+<span class="n">examples</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Helsinki is the capital of Finland&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Tallinn is the capital of Estonia&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;The two capitals are joined by a ferry connection&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Travelling between Helsinki and Tallinn takes about two hours&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Ferries depart from downtown Helsinki and Tallinn&quot;</span><span class="p">]</span>
+
+<span class="c1"># Print list contents</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">examples</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Helsinki is the capital of Finland&#39;, &#39;Tallinn is the capital of Estonia&#39;, &#39;The two capitals are joined by a ferry connection&#39;, &#39;Travelling between Helsinki and Tallinn takes about two hours&#39;, &#39;Ferries depart from downtown Helsinki and Tallinn&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can then feed this list to the English language model under <code class="docutils literal notranslate"><span class="pre">nlp</span></code> and store the resulting <em>Doc</em> objects into a list under the variable <code class="docutils literal notranslate"><span class="pre">docs</span></code>.</p>
+<p>To process the example clauses effectively, we can use the <code class="docutils literal notranslate"><span class="pre">pipe()</span></code> method introduced in <a class="reference external" href="../notebooks/part_ii/04_basic_nlp_continued.ipynb#Processing-texts-efficiently">Part II</a>, which takes a list as input.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">pipe()</span></code> method returns a generator object, which we have to cast into a list using Python’s <code class="docutils literal notranslate"><span class="pre">list()</span></code> function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Feed the list of example sentences &#39;examples&#39; to the pipe() method.</span>
+<span class="c1"># Cast the result into a list and store under the variable &#39;docs&#39;.</span>
+<span class="n">docs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">nlp</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">examples</span><span class="p">))</span>
+
+<span class="c1"># Call the variable to check the output</span>
+<span class="n">docs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Helsinki is the capital of Finland,
+ Tallinn is the capital of Estonia,
+ The two capitals are joined by a ferry connection,
+ Travelling between Helsinki and Tallinn takes about two hours,
+ Ferries depart from downtown Helsinki and Tallinn]
+</pre></div>
+</div>
+</div>
+</div>
+<p>For convenience and simplicity, we examine the co-occurrences of lemmas rather than the inflected forms of words.</p>
+<p>To count the lemmas in each clause, we must import the <code class="docutils literal notranslate"><span class="pre">LEMMA</span></code> object from spaCy’s <code class="docutils literal notranslate"><span class="pre">attrs</span></code> module.</p>
+<p><code class="docutils literal notranslate"><span class="pre">LEMMA</span></code> is a spaCy object that refers to this particular linguistic feature, which we can pass to the <code class="docutils literal notranslate"><span class="pre">count_by()</span></code> method of a <em>Doc</em> object to instruct <em>spaCy</em> to count these linguistic features.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the LEMMA object from the &#39;attrs&#39; module of spaCy</span>
+<span class="kn">from</span> <span class="nn">spacy.attrs</span> <span class="kn">import</span> <span class="n">LEMMA</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We then define a Python <em>dictionary comprehension</em> to count the lemmas in each <em>Doc</em> object in the list <code class="docutils literal notranslate"><span class="pre">docs</span></code>.</p>
+<p>A dictionary comprehension is declared using curly braces <code class="docutils literal notranslate"><span class="pre">{</span> <span class="pre">}</span></code>, which are also used to designate a dictionary in Python.</p>
+<p>Because Python dictionaries consist of <em>keys</em> and <em>values</em>, we need <strong>two</strong> items to populate the new <code class="docutils literal notranslate"><span class="pre">lemma_counts</span></code> dictionary using a dictionary comprehension:</p>
+<ol class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">i</span></code> refers to the number returned by the <code class="docutils literal notranslate"><span class="pre">enumerate</span></code> function that keeps count of items in the list <code class="docutils literal notranslate"><span class="pre">docs</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">doc</span></code> refers to the current document in <code class="docutils literal notranslate"><span class="pre">docs</span></code>, our <em>list</em> of <em>Doc</em> objects</p></li>
+</ol>
+<p>Note that on the right-hand side of the <code class="docutils literal notranslate"><span class="pre">for</span></code> statement, these two variables are separated by a comma.</p>
+<p>The left-hand side of the <code class="docutils literal notranslate"><span class="pre">for</span></code> statement defines what is actually stored in the <code class="docutils literal notranslate"><span class="pre">lemma_counts</span></code> dictionary.</p>
+<p>In this case, we store the count <code class="docutils literal notranslate"><span class="pre">i</span></code> as the <em>key</em> and assign the output of the <code class="docutils literal notranslate"><span class="pre">count_by</span></code> method as the <em>value</em>.</p>
+<p>On the left-hand side, these variables are separated by a colon.</p>
+<div class="cell tag_output_scroll docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use a dictionary comprehension to populate the &#39;lemma_counts&#39; dictionary</span>
+<span class="n">lemma_counts</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="n">doc</span><span class="o">.</span><span class="n">count_by</span><span class="p">(</span><span class="n">LEMMA</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">doc</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">docs</span><span class="p">)}</span>
+
+<span class="c1"># Call the variable to check the output</span>
+<span class="n">lemma_counts</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{0: {332692160570289739: 1,
+  10382539506755952630: 1,
+  7425985699627899538: 1,
+  15481038060779608540: 1,
+  886050111519832510: 1,
+  12176099360009088175: 1},
+ 1: {7392857733388117912: 1,
+  10382539506755952630: 1,
+  7425985699627899538: 1,
+  15481038060779608540: 1,
+  886050111519832510: 1,
+  15428882767191480669: 1},
+ 2: {7425985699627899538: 1,
+  11711838292424000352: 1,
+  15481038060779608540: 1,
+  10382539506755952630: 1,
+  16238441731120403936: 1,
+  16764210730586636600: 1,
+  11901859001352538922: 1,
+  16008623592554433546: 1,
+  14753437861310164020: 1},
+ 3: {9016120516514741834: 1,
+  7508752285157982505: 1,
+  332692160570289739: 1,
+  2283656566040971221: 1,
+  7392857733388117912: 1,
+  6789454535283781228: 1,
+  942632335873952620: 1,
+  11711838292424000352: 1,
+  9748623380567160636: 1},
+ 4: {17565022049216261574: 1,
+  11568774473013387390: 1,
+  7831658034963690409: 1,
+  18137549281339502438: 1,
+  332692160570289739: 1,
+  2283656566040971221: 1,
+  7392857733388117912: 1}}
+</pre></div>
+</div>
+</div>
+</div>
+<p>The keys of the <code class="docutils literal notranslate"><span class="pre">lemma_counts</span></code> dictionary correspond to indices of <em>Doc</em> objects in the list <code class="docutils literal notranslate"><span class="pre">docs</span></code>, whereas the <em>values</em> consist of dictionaries!</p>
+<p>These dictionaries clearly appear to report some counts, but the sequences of numbers used as the keys may appear strange.</p>
+<p>As you may recall from the <a class="reference internal" href="03_pattern_matching.html"><span class="doc std std-doc">previous section</span></a>, spaCy uses sequences of numbers as identifiers for <em>Lexeme</em> objects in the <em>Language</em> object’s <em>Vocabulary</em>.</p>
+<p>We can verify this by retrieving the <em>Lexeme</em> object with the identifier <code class="docutils literal notranslate"><span class="pre">332692160570289739</span></code> from the <em>Vocabulary</em>, which can be accessed using the <code class="docutils literal notranslate"><span class="pre">vocab</span></code> attribute of the language model stored under <code class="docutils literal notranslate"><span class="pre">nlp</span></code>.</p>
+<p>We then use the <code class="docutils literal notranslate"><span class="pre">text</span></code> attribute of the <em>Lexeme</em> object to get the human-readable form.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fetch a Lexeme from the model Vocabulary under &#39;vocab&#39;; get attribute &#39;text&#39;</span>
+<span class="n">nlp</span><span class="o">.</span><span class="n">vocab</span><span class="p">[</span><span class="mi">332692160570289739</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Helsinki&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, this sequence of numbers identifies the <em>Lexeme</em> with the text “Helsinki”.</p>
+<p>We can map the <em>Lexeme</em> objects to their human-readable forms by performing a slightly more complicated dictionary comprehension.</p>
+<p>Below we update the <code class="docutils literal notranslate"><span class="pre">lemma_counts</span></code> dictionary in two steps.</p>
+<p>First, we loop over <em>key</em> (<code class="docutils literal notranslate"><span class="pre">i</span></code>) and <em>value</em> (<code class="docutils literal notranslate"><span class="pre">counter</span></code>) pairs, which are accessible through the <code class="docutils literal notranslate"><span class="pre">items()</span></code> method of the <code class="docutils literal notranslate"><span class="pre">lemma_counts</span></code> dictionary that we just created.</p>
+<p>This is done by the part on the <strong>right</strong> hand side of the <strong>second</strong> <code class="docutils literal notranslate"><span class="pre">for</span></code> statement:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="o">...</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">counter</span> <span class="ow">in</span> <span class="n">lemma_counts</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+</pre></div>
+</div>
+<p>This gives us two things during each loop: 1. a number under <code class="docutils literal notranslate"><span class="pre">i</span></code>, which can be used to index the list <code class="docutils literal notranslate"><span class="pre">docs</span></code> for spaCy <em>Doc</em> objects and 2. a Python dictionary with <em>Lexeme</em> identifiers as keys and counts as values.</p>
+<p>Second, we update the <em>keys</em> and <em>values</em> of the <code class="docutils literal notranslate"><span class="pre">lemma_counts</span></code> dictionary by preserving the original key <code class="docutils literal notranslate"><span class="pre">i</span></code> that allows identifying the <em>Doc</em> objects in the list <code class="docutils literal notranslate"><span class="pre">docs</span></code>.</p>
+<p>Because the dictionary <em>value</em> stored under <code class="docutils literal notranslate"><span class="pre">counter</span></code> is another dictionary, we must define yet another dictionary comprehension!</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="p">{</span><span class="n">docs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">vocab</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">counter</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span> <span class="k">for</span> <span class="o">...</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>This dictionary comprehension is just like the one above, but this time we update the <em>keys</em> of the <code class="docutils literal notranslate"><span class="pre">counter</span></code> dictionary to replace the numerical identifiers for <em>Lexemes</em> with human-readable text:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="n">docs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">vocab</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="o">...</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>On the left-hand side of the colon <code class="docutils literal notranslate"><span class="pre">:</span></code> that separates keys and values in the dictionary that we are creating, we access the <em>Doc</em> objects in the list <code class="docutils literal notranslate"><span class="pre">docs</span></code> using brackets and by referring to the current number under <code class="docutils literal notranslate"><span class="pre">i</span></code>.</p>
+<p>We then provide the <em>Lexeme</em> object under <code class="docutils literal notranslate"><span class="pre">k</span></code> to the <code class="docutils literal notranslate"><span class="pre">vocab</span></code> attribute to fetch the contents of the attribute <code class="docutils literal notranslate"><span class="pre">text</span></code>.</p>
+<p>Note that we do not do anything with the counts stored under the variable <code class="docutils literal notranslate"><span class="pre">v</span></code> on the right-hand side of the colon <code class="docutils literal notranslate"><span class="pre">:</span></code>, but simply carry them over to the newly-created dictionary!</p>
+<p>This illustrates just how much a single line of Python can achieve using dictionary comprehensions nested within one another.</p>
+<div class="cell tag_output_scroll docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use a dictionary comprehension to replace the keys of the &#39;lemma_counts&#39; dictionary</span>
+<span class="n">lemma_counts</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="p">{</span><span class="n">docs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">vocab</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">counter</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">counter</span> <span class="ow">in</span> <span class="n">lemma_counts</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+<span class="c1"># Call the variable to check the output</span>
+<span class="n">lemma_counts</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{0: {&#39;Helsinki&#39;: 1, &#39;be&#39;: 1, &#39;the&#39;: 1, &#39;capital&#39;: 1, &#39;of&#39;: 1, &#39;finland&#39;: 1},
+ 1: {&#39;Tallinn&#39;: 1, &#39;be&#39;: 1, &#39;the&#39;: 1, &#39;capital&#39;: 1, &#39;of&#39;: 1, &#39;Estonia&#39;: 1},
+ 2: {&#39;the&#39;: 1,
+  &#39;two&#39;: 1,
+  &#39;capital&#39;: 1,
+  &#39;be&#39;: 1,
+  &#39;join&#39;: 1,
+  &#39;by&#39;: 1,
+  &#39;a&#39;: 1,
+  &#39;ferry&#39;: 1,
+  &#39;connection&#39;: 1},
+ 3: {&#39;travel&#39;: 1,
+  &#39;between&#39;: 1,
+  &#39;Helsinki&#39;: 1,
+  &#39;and&#39;: 1,
+  &#39;Tallinn&#39;: 1,
+  &#39;take&#39;: 1,
+  &#39;about&#39;: 1,
+  &#39;two&#39;: 1,
+  &#39;hour&#39;: 1},
+ 4: {&#39;ferries&#39;: 1,
+  &#39;depart&#39;: 1,
+  &#39;from&#39;: 1,
+  &#39;downtown&#39;: 1,
+  &#39;Helsinki&#39;: 1,
+  &#39;and&#39;: 1,
+  &#39;Tallinn&#39;: 1}}
+</pre></div>
+</div>
+</div>
+</div>
+<p>This gives us a dictionary with <em>Doc</em> numbers as <em>keys</em> and dictionaries with lemma counts as <em>values</em>.</p>
+<p>To better understand these counts, we can organise them into tabular form using pandas, a library that was introduced in <a class="reference internal" href="../part_ii/06_managing_data.html"><span class="doc std std-doc">Part II</span></a>.</p>
+<p>To do so, we create a new <em>DataFrame</em> object by calling the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> class from the pandas (<code class="docutils literal notranslate"><span class="pre">pd</span></code>) library.</p>
+<p>We can easily populate the DataFrame by feeding the <code class="docutils literal notranslate"><span class="pre">lemma_count</span></code> dictionary to the <code class="docutils literal notranslate"><span class="pre">from_dict()</span></code> method of a <em>DataFrame</em>, which allows creating a <em>DataFrame</em> from a Python dictionary.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the pandas library</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># We then create a pandas DataFrame using the .from_dict() method,</span>
+<span class="c1"># to which we pass the dictionary under &#39;lemma_counts&#39;. We then</span>
+<span class="c1"># sort the index in an ascending order using the sort_index() method.</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">lemma_counts</span><span class="p">)</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Replace NaN values with zeros using the fillna() method.</span>
+<span class="c1"># Finally, we use .T attribute to transpose the DataFrame.</span>
+<span class="c1"># This switches the place of columns and rows to improve legibility.</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+
+<span class="c1"># Print out the DataFrame</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Estonia</th>
+      <th>Helsinki</th>
+      <th>Tallinn</th>
+      <th>a</th>
+      <th>about</th>
+      <th>and</th>
+      <th>be</th>
+      <th>between</th>
+      <th>by</th>
+      <th>capital</th>
+      <th>...</th>
+      <th>ferry</th>
+      <th>finland</th>
+      <th>from</th>
+      <th>hour</th>
+      <th>join</th>
+      <th>of</th>
+      <th>take</th>
+      <th>the</th>
+      <th>travel</th>
+      <th>two</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>...</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 24 columns</p>
+</div></div></div>
+</div>
+<p>This gives us a pandas <em>DataFrame</em> with <em>unique lemmas</em> in all <em>Docs</em>, spread out over 23 columns, whereas the individual <em>Docs</em> occupy five rows with indices 0–4.</p>
+<p>Each cell in the <em>DataFrame</em> gives the number of times a given lemma occurs in a <em>Doc</em>.</p>
+<p>By examining individual rows of the <em>DataFrame</em>, we can use these counts to examine the co-occurrence of lemmas within each <em>Doc</em>.</p>
+<p>We can think of each column as a paradigmatic choice: by examining the rows, we find out which paradigmatic choices occur in the same syntagmatic structure.</p>
+<p>Let’s examine the values for the first sentence by using the <code class="docutils literal notranslate"><span class="pre">iloc</span></code> accessor, which allows accessing the indices (rows) in a pandas <em>DataFrame</em>.</p>
+<p>We access the first <em>Doc</em> at index <code class="docutils literal notranslate"><span class="pre">0</span></code> and retrieve the values using the <code class="docutils literal notranslate"><span class="pre">values</span></code> attribute.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0., 1., 0., 0., 0., 0., 1., 0., 0., 1., 0., 0., 0., 0., 0., 1., 0.,
+       0., 0., 1., 0., 1., 0., 0.])
+</pre></div>
+</div>
+</div>
+</div>
+<p>This returns an <em>array</em>, or a list of numbers that correspond to the occurrences of unique lemmas in the <em>Doc</em> object.</p>
+<p>In mathematics, such lists of numbers are called <strong>vectors</strong>.</p>
+<p>The length of this vector – 23 – is defined by the number of unique lemmas in <em>all</em> <em>Doc</em> objects.</p>
+<p>The number corresponding to length defines the <em>dimensionality</em> of the vector.</p>
+<p>We can get the vectors for each <em>Doc</em> object through the <code class="docutils literal notranslate"><span class="pre">values</span></code> attribute of the <em>DataFrame</em>  <code class="docutils literal notranslate"><span class="pre">df</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get vectors for each Doc object</span>
+<span class="n">df</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0., 1., 0., 0., 0., 0., 1., 0., 0., 1., 0., 0., 0., 0., 0., 1.,
+        0., 0., 0., 1., 0., 1., 0., 0.],
+       [1., 0., 1., 0., 0., 0., 1., 0., 0., 1., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 1., 0., 1., 0., 0.],
+       [0., 0., 0., 1., 0., 0., 1., 0., 1., 1., 1., 0., 0., 0., 1., 0.,
+        0., 0., 1., 0., 0., 1., 0., 1.],
+       [0., 1., 1., 0., 1., 1., 0., 1., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 1., 0., 0., 1., 0., 1., 1.],
+       [0., 1., 1., 0., 0., 1., 0., 0., 0., 0., 0., 1., 1., 1., 0., 0.,
+        1., 0., 0., 0., 0., 0., 0., 0.]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Because each <em>Doc</em> is now represented by a vector, we can easily perform mathematical operations, such as calculate the distance between the vectors to evaluate their similarity.</p>
+<p>To do so, we import the <code class="docutils literal notranslate"><span class="pre">cosine_similarity()</span></code> function from the <em>scikit-learn</em> library, which allows measuring <a class="reference external" href="https://en.wikipedia.org/wiki/Cosine_similarity">cosine similarity</a> between vectors.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the function for measuring cosine similarity</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics.pairwise</span> <span class="kn">import</span> <span class="n">cosine_similarity</span>
+
+<span class="c1"># Evaluate cosine similarity between vectors</span>
+<span class="n">sim</span> <span class="o">=</span> <span class="n">cosine_similarity</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+
+<span class="c1"># Call the variable to examine the output</span>
+<span class="n">sim</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1.        , 0.66666667, 0.40824829, 0.13608276, 0.15430335],
+       [0.66666667, 1.        , 0.40824829, 0.13608276, 0.15430335],
+       [0.40824829, 0.40824829, 1.        , 0.11111111, 0.        ],
+       [0.13608276, 0.13608276, 0.11111111, 1.        , 0.37796447],
+       [0.15430335, 0.15430335, 0.        , 0.37796447, 1.        ]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>This returns a 5 by 5 matrix – a “table” of five vectors, each with five dimensions – with cosine similarities between each pair of <em>Doc</em> objects.</p>
+<p>To help us interpret this table, let’s import the <code class="docutils literal notranslate"><span class="pre">heatmap()</span></code> function from the seaborn library to visualise the cosine similarity matrix.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the heatmap function from the seaborn library</span>
+<span class="kn">from</span> <span class="nn">seaborn</span> <span class="kn">import</span> <span class="n">heatmap</span>
+
+<span class="c1"># Provide the cosine similarity matrix under &#39;sim&#39; to the heatmap() function</span>
+<span class="n">heatmap</span><span class="p">(</span><span class="n">sim</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
+</pre></div>
+</div>
+<img alt="../../_images/04_embeddings_31_1.png" src="../../_images/04_embeddings_31_1.png" />
+</div>
+</div>
+<p>Each row and column in the heatmap represent a single <em>Doc</em>, whose numbers are given on the labels for vertical and horizontal axes. The bar on the right-hand side maps the colours to values for cosine similarity.</p>
+<p>The heatmap shows a diagonal line across the table with values of 1.0, because each <em>Doc</em> is also compared to itself!</p>
+<p>These <em>Docs</em> are naturally perfectly similar, which results in a value of 1.0.</p>
+<p>Note also the high cosine similarity between <em>Docs</em> 0 and 1, which we can fetch from the list <code class="docutils literal notranslate"><span class="pre">docs</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get Docs at indices [0] and [1] from the list &#39;docs&#39;</span>
+<span class="n">docs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">docs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(Helsinki is the capital of Finland, Tallinn is the capital of Estonia)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Their cosine similarity is high, which means that the two <em>Docs</em> are close to each other in the 23-dimensional vector space, because they feature a similar combination of paradigmatic choices that form a syntagmatic structure (“is the capital of”).</p>
+<p>This illustrates how we can use vectors to describe <em>syntagmatic structures</em> by capturing paradigmatic choices that co-occur within some fixed unit or window of a given length (in our case, a clause).</p>
+<p>The downside to this approach, however, is that when the size of the vocabulary increases, so does the length of the vector. For each new word, we must add another dimension for keeping track of its occurrences. As the vocabulary expands, the number of dimensions with a value of zero will also increase.</p>
+<p>Furthermore, the vector does not contain information about the <em>order</em> in which the words appear. For this reason, such representations are often characterised using the term “<a class="reference external" href="https://en.wikipedia.org/wiki/Bag-of-words_model">bag of words</a>”.</p>
+</div>
+<div class="section" id="a-paradigmatic-perspective">
+<h3>A paradigmatic perspective<a class="headerlink" href="#a-paradigmatic-perspective" title="Permalink to this headline">¶</a></h3>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+<iframe
+    width="600"
+    height="350"
+    src="https://www.youtube.com/embed/Zh600gBfn4o"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</div></div>
+</div>
+<p>To explore the distributional hypothesis from a paradigmatic perspective, we must shift the target of description from co-occurrences of multiple words to individual words.</p>
+<p>Just as we used vectors to represent syntagmatic structures above, we can do the same for individual words.</p>
+<p>Let’s start by taking the unique lemmas in our corpus of <em>Docs</em> stored in the list <code class="docutils literal notranslate"><span class="pre">docs</span></code>.</p>
+<p>These can be easily retrieved from the <em>DataFrame</em> <code class="docutils literal notranslate"><span class="pre">df</span></code> by accessing the <code class="docutils literal notranslate"><span class="pre">columns</span></code> attribute, because the columns of the <em>DataFrame</em> correspond to the unique lemmas.</p>
+<p>We then use the <code class="docutils literal notranslate"><span class="pre">tolist()</span></code> method to convert the output into a Python list.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Retrieve the unique lemmas from the DataFrame and convert to list</span>
+<span class="n">unique_lemmas</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+
+<span class="c1"># Call the variable to examine the output</span>
+<span class="n">unique_lemmas</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Estonia&#39;,
+ &#39;Helsinki&#39;,
+ &#39;Tallinn&#39;,
+ &#39;a&#39;,
+ &#39;about&#39;,
+ &#39;and&#39;,
+ &#39;be&#39;,
+ &#39;between&#39;,
+ &#39;by&#39;,
+ &#39;capital&#39;,
+ &#39;connection&#39;,
+ &#39;depart&#39;,
+ &#39;downtown&#39;,
+ &#39;ferries&#39;,
+ &#39;ferry&#39;,
+ &#39;finland&#39;,
+ &#39;from&#39;,
+ &#39;hour&#39;,
+ &#39;join&#39;,
+ &#39;of&#39;,
+ &#39;take&#39;,
+ &#39;the&#39;,
+ &#39;travel&#39;,
+ &#39;two&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>This gives us a list of unique lemmas in the <em>Doc</em> objects.</p>
+<p>To examine which words co-occur within a given distance of one another, we can create a new pandas <em>DataFrame</em> that uses the lemmas under <code class="docutils literal notranslate"><span class="pre">unique_lemmas</span></code> for defining both rows and columns.</p>
+<p>To do so, we create a new <em>DataFrame</em> named <code class="docutils literal notranslate"><span class="pre">lemma_df</span></code> and provide the <code class="docutils literal notranslate"><span class="pre">unique_lemmas</span></code> list to the arguments <code class="docutils literal notranslate"><span class="pre">index</span></code> and <code class="docutils literal notranslate"><span class="pre">columns</span></code>.</p>
+<p>Finally, we use the <code class="docutils literal notranslate"><span class="pre">fillna()</span></code> method of the <em>DataFrame</em> to replace NaN values with zeros.</p>
+<div class="cell tag_output_scroll docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a new DataFrame with unique lemmas as row and columns, filled with zero values</span>
+<span class="n">lemma_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">unique_lemmas</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">unique_lemmas</span><span class="p">)</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Call the variable to examine the DataFrame</span>
+<span class="n">lemma_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Estonia</th>
+      <th>Helsinki</th>
+      <th>Tallinn</th>
+      <th>a</th>
+      <th>about</th>
+      <th>and</th>
+      <th>be</th>
+      <th>between</th>
+      <th>by</th>
+      <th>capital</th>
+      <th>...</th>
+      <th>ferry</th>
+      <th>finland</th>
+      <th>from</th>
+      <th>hour</th>
+      <th>join</th>
+      <th>of</th>
+      <th>take</th>
+      <th>the</th>
+      <th>travel</th>
+      <th>two</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Estonia</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Helsinki</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Tallinn</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>a</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>about</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>and</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>be</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>between</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>by</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>capital</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>connection</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>depart</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>downtown</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>ferries</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>ferry</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>finland</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>from</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>hour</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>join</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>of</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>take</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>the</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>travel</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>24 rows × 24 columns</p>
+</div></div></div>
+</div>
+<p>This gives us an empty pandas <em>DataFrame</em> with 23 rows and 23 columns.</p>
+<p>This <em>DataFrame</em> can be described as a <em>co-occurrence matrix</em>, which tracks how many times a lemma occurs within a given distance of another lemma (Sahlgren <a class="reference external" href="http://linguistica.sns.it/RdL/20.1/Sahlgren.pdf">2008</a>: 46).</p>
+<p>The first step in exploring paradigmatic relations between words is to populate this <em>DataFrame</em> with co-occurrence counts, that is, how often the lemmas occur close to one another in the <em>Doc</em> objects stored under <code class="docutils literal notranslate"><span class="pre">docs</span></code>.</p>
+<p>To make this effort easier, let’s start by merging all the <em>Doc</em> objects in the list <code class="docutils literal notranslate"><span class="pre">docs</span></code> into a single <em>Doc</em> object.</p>
+<p>To do so, we can use the <code class="docutils literal notranslate"><span class="pre">from_docs()</span></code> method of a spaCy <em>Doc</em> object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the Doc class from spacy.tokens</span>
+<span class="kn">from</span> <span class="nn">spacy.tokens</span> <span class="kn">import</span> <span class="n">Doc</span>
+
+<span class="c1"># Create a new Doc object and use the &#39;from_docs()&#39; method to combine the Docs</span>
+<span class="c1"># in the existing list &#39;docs&#39;. Assign result under &#39;combined_docs&#39;.</span>
+<span class="n">combined_docs</span> <span class="o">=</span> <span class="n">Doc</span><span class="o">.</span><span class="n">from_docs</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>For current purposes, let’s assume that two words on either side of a word constitute its neighbours.</p>
+<p>We can use the <code class="docutils literal notranslate"><span class="pre">nbor()</span></code> method of a spaCy <em>Token</em> to fetch its neighbours.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">nbor()</span></code> method takes an integer as input, which determines the position of the neighbour relative to the current <em>Token</em>.</p>
+<p>Negative integers refer to the indices of <em>Tokens</em> that come before the current <em>Token</em>, while positive integers refer to those that come after.</p>
+<p>However, not all words have neighbours on both sides: the words that start or finish a sentence or some other sequence will not have preceding or following words.</p>
+<p>To deal with this problem, we use the <code class="docutils literal notranslate"><span class="pre">try</span></code> and <code class="docutils literal notranslate"><span class="pre">except</span></code> statements in Python to catch the errors arising from missing neighbours, whose indices are not available.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loop over each Token in the Doc object</span>
+<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">combined_docs</span><span class="p">:</span>
+        
+    <span class="c1"># Loop over a range of positions. These represent indices</span>
+    <span class="c1"># relative from the current index of the Token object.</span>
+    <span class="k">for</span> <span class="n">position</span> <span class="ow">in</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]:</span>
+        
+        <span class="c1"># Try to execute following code block</span>
+        <span class="k">try</span><span class="p">:</span> 
+            
+            <span class="c1"># Use the nbor() method to get the neighbour of the</span>
+            <span class="c1"># Token at the index determined by &#39;position&#39;. Fetch</span>
+            <span class="c1"># the lemma of the neighbouring Token.</span>
+            <span class="n">nbor_lemma</span> <span class="o">=</span> <span class="n">token</span><span class="o">.</span><span class="n">nbor</span><span class="p">(</span><span class="n">position</span><span class="p">)</span><span class="o">.</span><span class="n">lemma_</span>
+            
+            <span class="c1"># Use the &#39;at&#39; accessor to access rows and columns of the</span>
+            <span class="c1"># DataFrame under &#39;lemma_df&#39;. Increment (+=) existing value</span>
+            <span class="c1"># by 1 to update the count!</span>
+            <span class="n">lemma_df</span><span class="o">.</span><span class="n">at</span><span class="p">[</span><span class="n">token</span><span class="o">.</span><span class="n">lemma_</span><span class="p">,</span> <span class="n">nbor_lemma</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+        <span class="c1"># If the code block raises an IndexError, execute</span>
+        <span class="c1"># the code below</span>
+        <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+            
+            <span class="c1"># Move on to the next Token</span>
+            <span class="k">continue</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This collects the co-occurrence counts into the <em>DataFrame</em>.</p>
+<p>Let’s examine the result by calling the variable <code class="docutils literal notranslate"><span class="pre">lemma_df</span></code>.</p>
+<div class="cell tag_output_scroll docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Call the variable to examine the DataFrame</span>
+<span class="n">lemma_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Estonia</th>
+      <th>Helsinki</th>
+      <th>Tallinn</th>
+      <th>a</th>
+      <th>about</th>
+      <th>and</th>
+      <th>be</th>
+      <th>between</th>
+      <th>by</th>
+      <th>capital</th>
+      <th>...</th>
+      <th>ferry</th>
+      <th>finland</th>
+      <th>from</th>
+      <th>hour</th>
+      <th>join</th>
+      <th>of</th>
+      <th>take</th>
+      <th>the</th>
+      <th>travel</th>
+      <th>two</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Estonia</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>Helsinki</th>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Tallinn</th>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>a</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>...</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>about</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>and</th>
+      <td>0</td>
+      <td>2</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>be</th>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>3</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>between</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>by</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>capital</th>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>3</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>connection</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>depart</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>downtown</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>ferries</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>ferry</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>finland</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>from</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>hour</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>join</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>of</th>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>...</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>take</th>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>the</th>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>2</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>travel</th>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>...</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>...</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+<p>24 rows × 24 columns</p>
+</div></div></div>
+</div>
+<p>As you can see, the <em>DataFrame</em> has now been populated with co-occurrence counts for each lemma.</p>
+<p>Note that the values across rows and columns are identical, because the same categories (lemmas) are used for both.</p>
+<p>The values on the rows/columns provide a vector for each lemma, which encode information about their collocated words.</p>
+<p>In other words, each lemma is characterised by a vector that describes its neighbours!</p>
+<p>According to the distributional hypothesis, we would expect paradigmatic alternatives to have similar distributions.</p>
+<p>To explore this idea, we can measure cosine similarity between these vectors using the <code class="docutils literal notranslate"><span class="pre">cosine_similarity</span></code> function that we imported from scikit-learn above.</p>
+<p>Let’s calculate cosine similarity between the vectors for “Tallinn” and “Helsinki”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the vectors for &#39;Tallinn&#39; and &#39;Helsinki&#39; from the DataFrame.</span>
+<span class="c1"># Use the &#39;values&#39; attribute to access the data as a NumPy array.</span>
+<span class="n">tallinn_lemma_vector</span> <span class="o">=</span> <span class="n">lemma_df</span><span class="p">[</span><span class="s1">&#39;Tallinn&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">helsinki_lemma_vector</span> <span class="o">=</span> <span class="n">lemma_df</span><span class="p">[</span><span class="s1">&#39;Helsinki&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1"># Measure cosine similarity between the two vectors. Note that the</span>
+<span class="c1"># vectors must be wrapped into square brackets for input to this</span>
+<span class="c1"># function. This gets the array into the right &#39;shape&#39;.</span>
+<span class="n">cosine_similarity</span><span class="p">([</span><span class="n">tallinn_lemma_vector</span><span class="p">],</span> <span class="p">[</span><span class="n">helsinki_lemma_vector</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.42857143]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>The result shows that the vectors for “Helsinki” and “Tallinn” are somewhat similar.</p>
+<p>We could refine these representations by observing more data to get a better idea of how words are distributed, leading to better vector representations.</p>
+<p>However, just as we observed for the syntagmatic structures, the dimensionality of the vector space grows every time we add a new word to the vocabulary.</p>
+</div>
+</div>
+<div class="section" id="learning-word-embeddings">
+<h2>Learning word embeddings<a class="headerlink" href="#learning-word-embeddings" title="Permalink to this headline">¶</a></h2>
+<p>So far, we have explored the distributional hypothesis from both syntagmatic and paradigmatic perspectives.</p>
+<p>We used vectors to represent both paradigmatic and syntagmatic structures, and applied different approaches to encode information about words and their distribution into these vectors.</p>
+<p>For describing syntagmatic structures, we counted which words in the vocabulary occurred within the same clause, whereas for paradigmatic structures, we counted which words occurred close to one another.</p>
+<p>We can think of both approaches as <em>abstraction mechanisms</em> that quantify linguistic information for representations using vectors.</p>
+<p>We now continue this journey and focus on <strong>word embeddings</strong>, a technique for learning vector representations for linguistic units – such as words or sentences – directly from text. These representations are studied within the field of <strong>distributional semantics</strong>, which developed from the distributional hypothesis.</p>
+<p>Boleda (<a class="reference external" href="https://doi.org/10.1146/annurev-linguistics-011619-030303">2020</a>: 214) defines distributional semantics succinctly:</p>
+<blockquote>
+<div><p>Distributional semantics represents word meaning by taking large amounts of text as input and, through an abstraction mechanism, producing a distributional model, akin to a lexicon, with semantic representations in the form of vectors – essentially, lists of numbers that determine points in a multidimensional space.</p>
+</div></blockquote>
+<p>Compared to our previous efforts that involved counting co-occurrences and encoding this information into vectors, contemporary approaches to distributional semantics use algorithms as the abstraction mechanism (Baroni, Dinu &amp; Kruszewski <a class="reference external" href="https://www.aclweb.org/anthology/P14-1023.pdf">2014</a>).</p>
+<p>Thus, in this section we explore the use of algorithms as the abstraction mechanism for learning vector representations for linguistic units.</p>
+<div class="section" id="one-hot-encoding">
+<h3>One-hot encoding<a class="headerlink" href="#one-hot-encoding" title="Permalink to this headline">¶</a></h3>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+<iframe
+    width="600"
+    height="350"
+    src="https://www.youtube.com/embed/vQryFrk0xes"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</div></div>
+</div>
+<p>To get started, we continue working with the data stored in the list <code class="docutils literal notranslate"><span class="pre">unique_lemmas</span></code>, and use a technique called <em>one-hot encoding</em> to represent each lemma using a vector.</p>
+<p>One-hot encoding maps each lemma to a vector, which consists of zeros except at one dimension, where the value is 1. This dimension encodes the identity of a given word in the vocabulary.</p>
+<p>You can think of this as one dimension being “hot” by having a value of 1, whereas all others are “cold” because their value is zero.</p>
+<p>Let’s examine this in practice by mapping each lemma in the list <code class="docutils literal notranslate"><span class="pre">unique_lemmas</span></code> to a corresponding one-hot vector.</p>
+<p>To do so, we import <em>NumPy</em>, a Python library for working with arrays (Harris et al. <a class="reference external" href="https://doi.org/10.1038/s41586-020-2649-2">2020</a>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import NumPy, assign name &#39;np&#39;</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Define an empty placeholder dictionary for lemmas and their vectors</span>
+<span class="n">lemma_vectors</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1"># Loop over the list of unique lemmas; count items using enumerate()</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">lemma</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">unique_lemmas</span><span class="p">):</span>
+    
+    <span class="c1"># Create a vector with a length that corresponds to that of the</span>
+    <span class="c1"># &#39;unique_lemmas&#39; list. This matches the size of our vocabulary.</span>
+    <span class="c1"># The np.zeros() function fills this vector with zeros.</span>
+    <span class="n">vector</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">unique_lemmas</span><span class="p">))</span>
+    
+    <span class="c1"># Use the brackets to access the vector at the current index &#39;i&#39;,</span>
+    <span class="c1"># which we retrieve during the loop over the list &#39;unique_lemmas&#39;.</span>
+    <span class="c1"># Set the value to one instead of zero at this position in the vector.</span>
+    <span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    
+    <span class="c1"># Store the lemma and vector into the dictionary</span>
+    <span class="n">lemma_vectors</span><span class="p">[</span><span class="n">lemma</span><span class="p">]</span> <span class="o">=</span> <span class="n">vector</span>
+    
+    <span class="c1"># Print out the vector and the lemma it corresponds to</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">vector</span><span class="p">,</span> <span class="n">lemma</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.] Estonia
+[0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.] Helsinki
+[0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.] Tallinn
+[0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.] a
+[0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.] about
+[0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.] and
+[0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.] be
+[0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.] between
+[0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.] by
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.] capital
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.] connection
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.] depart
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.] downtown
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.] ferries
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0.] ferry
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0.] finland
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0.] from
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0.] hour
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0.] join
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0.] of
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0.] take
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0.] the
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0.] travel
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1.] two
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, dimensions that have a value of 1.0 form a diagonal line across the vectors.</p>
+<p>This diagonal line emerges because each dimension of the vector encodes the identity of a unique lemma in the vocabulary.</p>
+<p>To exemplify, the vector of the lemma “Estonia” must have a value of 1.0 in the first dimension, because this dimension encodes the identity of this lemma, whereas the values of all other dimensions must be zero, because they are reserved for the lemmas that come after.</p>
+<p>Put differently, if the lemma is “Estonia”, it must have a value of 1.0 in the first dimension. If the word is “Helsinki”, the first dimension must have the value zero, but the third dimension must be 1.0, because this dimension is reserved for “Helsinki”.</p>
+<p>We can use one-hot vectors to encode sequences of words into numerical representations.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loop over Tokens in the first Doc in the list</span>
+<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">docs</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+    
+    <span class="c1"># Get the lemma of each token under the attribute &#39;lemma_&#39;</span>
+    <span class="c1"># and use this as a key for the &#39;lemma_vectors&#39; dictionary</span>
+    <span class="c1"># to retrieve the associated vector. Then print the lemma</span>
+    <span class="c1"># itself.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">lemma_vectors</span><span class="p">[</span><span class="n">token</span><span class="o">.</span><span class="n">lemma_</span><span class="p">],</span> <span class="n">token</span><span class="o">.</span><span class="n">lemma_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.] Helsinki
+[0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.] be
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0.] the
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0.] capital
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0.] of
+[0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 0.] finland
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can join these vector representations of individual words into a <em>matrix</em>, which is like a “table” of vectors.</p>
+<p>We can use NumPy’s <code class="docutils literal notranslate"><span class="pre">vstack()</span></code> method to stack the vectors vertically, that is, place the vectors on top of each other to form a matrix that represents the entire <em>Doc</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use a list comprehension to collect the vectors for each lemma in the first Doc</span>
+<span class="n">sentence_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">lemma_vectors</span><span class="p">[</span><span class="n">token</span><span class="o">.</span><span class="n">lemma_</span><span class="p">]</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">docs</span><span class="p">[</span><span class="mi">0</span><span class="p">]])</span>
+
+<span class="c1"># Call the variable to examine the output</span>
+<span class="n">sentence_matrix</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0., 1., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0.],
+       [0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0.],
+       [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 1., 0., 0.],
+       [0., 0., 0., 0., 0., 0., 0., 0., 0., 1., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 0., 0., 0., 0., 0.],
+       [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+        0., 0., 0., 1., 0., 0., 0., 0.],
+       [0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 1.,
+        0., 0., 0., 0., 0., 0., 0., 0.]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can examine the shape of the resulting matrix using the attribute <code class="docutils literal notranslate"><span class="pre">shape</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the attribute &quot;shape&quot; of the matrix under &#39;sentence_matrix&#39;</span>
+<span class="n">sentence_matrix</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(6, 24)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">shape</span></code> attribute contains the shape of the matrix: six rows, one for each lemma, which each have 23 dimensions that encode the identity of individual lemmas in the vocabulary.</p>
+<p>A matrix such as this allows representing any sequence of <em>Tokens</em> numerically.</p>
+<p>However, once again, as the size of the vocabulary grows, so does the number of dimensions needed to represent each unique word in the vocabulary.</p>
+<p>These vectors are also often characterised as <em>sparse</em>, because most dimensions of the vector do not encode any information, but consist of zeros.</p>
+<p>To make the vector representation more efficient, <em>each dimension</em> of a vector should encode some information about the word and the context in which it occurs.</p>
+<p>This can be achieved using by learning the word embeddings directly from the data using an algorithm as the abstraction mechanism.</p>
+<p>In order to train an algorithm to predict neighbouring words, we must first collect the neighbours. For current purposes, let’s continue to treat the two preceding and two following lemmas as neighbours.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a list to hold Tokens and their neighbouring Tokens</span>
+<span class="n">pairs</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Loop over each Doc in the list of Docs under the variable &#39;docs&#39;</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">docs</span><span class="p">:</span>
+    
+    <span class="c1"># Loop over each Token in a Doc</span>
+    <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">:</span>
+        
+        <span class="c1"># Loop over the indices of neighbouring Tokens that are of </span>
+        <span class="c1"># interest to us.</span>
+        <span class="k">for</span> <span class="n">neighbour_i</span> <span class="ow">in</span> <span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]:</span>
+        
+            <span class="c1"># Try to retrieve neighbour at position &#39;neighbour_i&#39;</span>
+            <span class="k">try</span><span class="p">:</span>
+
+                <span class="c1"># Assign the preceding Token into the variable &#39;context&#39;</span>
+                <span class="n">context</span> <span class="o">=</span> <span class="n">token</span><span class="o">.</span><span class="n">nbor</span><span class="p">(</span><span class="n">neighbour_i</span><span class="p">)</span>
+            
+                <span class="c1"># Append a tuple consisting of the current Token</span>
+                <span class="c1"># and the neighbouring Token to the list &#39;pairs&#39;</span>
+                <span class="n">pairs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">token</span><span class="o">.</span><span class="n">lemma_</span><span class="p">,</span> <span class="n">context</span><span class="o">.</span><span class="n">lemma_</span><span class="p">))</span>
+        
+            <span class="c1"># Use the except command to catch the error arising if </span>
+            <span class="c1"># there is no preceding Token (&#39;IndexError&#39;)</span>
+            <span class="k">except</span> <span class="ne">IndexError</span><span class="p">:</span>
+
+                <span class="c1"># Move to the next Token in the list of neighbours</span>
+                <span class="k">continue</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This produces a list of tuples that contain word pairs that occur within two words of each other.</p>
+<p>Let’s print out the first 10 pairs to examine the result.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print out the first 10 tuples in the list &#39;pairs&#39;</span>
+<span class="n">pairs</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;Helsinki&#39;, &#39;be&#39;),
+ (&#39;Helsinki&#39;, &#39;the&#39;),
+ (&#39;be&#39;, &#39;Helsinki&#39;),
+ (&#39;be&#39;, &#39;the&#39;),
+ (&#39;be&#39;, &#39;capital&#39;),
+ (&#39;the&#39;, &#39;Helsinki&#39;),
+ (&#39;the&#39;, &#39;be&#39;),
+ (&#39;the&#39;, &#39;capital&#39;),
+ (&#39;the&#39;, &#39;of&#39;),
+ (&#39;capital&#39;, &#39;be&#39;)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>The first word in each tuple can be described as the <strong>target</strong> lemma, whereas the second word constitutes the <strong>context</strong> lemma.</p>
+<p>To set the stage for making predictions, we must collect all target words in the list and their matching context words, and convert them into their one-hot encoded numerical representations.</p>
+<p>This can be achieved by a list comprehension, which loops over the tuples in the list <code class="docutils literal notranslate"><span class="pre">pairs</span></code>.</p>
+<p>We can then fetch the one-hot encoded vector from the dictionary <code class="docutils literal notranslate"><span class="pre">lemma_vectors</span></code> by using the target lemma as the key.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a list comprehension that collects target lemmas and stores</span>
+<span class="c1"># the one-hot encoded vectors into a list named &#39;targets&#39;</span>
+<span class="n">targets</span> <span class="o">=</span> <span class="p">[</span><span class="n">lemma_vectors</span><span class="p">[</span><span class="n">target</span><span class="p">]</span> <span class="k">for</span> <span class="n">target</span><span class="p">,</span> <span class="n">context</span> <span class="ow">in</span> <span class="n">pairs</span><span class="p">]</span>
+
+<span class="c1"># Stack all the target lemmas into a matrix</span>
+<span class="n">targets</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">targets</span><span class="p">)</span>
+
+<span class="c1"># Call the variable to check the size of the matrix</span>
+<span class="n">targets</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(118, 24)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Examining the <code class="docutils literal notranslate"><span class="pre">shape</span></code> attribute of the NumPy array under <code class="docutils literal notranslate"><span class="pre">targets</span></code> reveals that our data contains a total of 118 target lemmas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the first row in the array</span>
+<span class="n">targets</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0., 1., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0., 0., 0., 0.])
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, the <code class="docutils literal notranslate"><span class="pre">targets</span></code> array contains one-hot vectors that encode the identity of lemmas, which were fetched from the <code class="docutils literal notranslate"><span class="pre">lemma_vectors</span></code> dictionary.</p>
+<p>Next, we repeat the same operation for their context lemmas.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a list comprehension that collects context lemmas and stores</span>
+<span class="c1"># the one-hot encoded vectors into a list named &#39;context&#39;</span>
+<span class="n">context</span> <span class="o">=</span> <span class="p">[</span><span class="n">lemma_vectors</span><span class="p">[</span><span class="n">context</span><span class="p">]</span> <span class="k">for</span> <span class="n">target</span><span class="p">,</span> <span class="n">context</span> <span class="ow">in</span> <span class="n">pairs</span><span class="p">]</span>
+
+<span class="c1"># Stack all the context lemmas into a matrix</span>
+<span class="n">context</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+
+<span class="c1"># Call the variable to check the size of the matrix</span>
+<span class="n">context</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(118, 24)
+</pre></div>
+</div>
+</div>
+</div>
+<p>Perfect! Each target lemma in <code class="docutils literal notranslate"><span class="pre">targets</span></code> now has a matching context lemma under <code class="docutils literal notranslate"><span class="pre">context</span></code>.</p>
+</div>
+<div class="section" id="creating-a-neural-network">
+<h3>Creating a neural network<a class="headerlink" href="#creating-a-neural-network" title="Permalink to this headline">¶</a></h3>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+<iframe
+    width="600"
+    height="350"
+    src="https://www.youtube.com/embed/oiV75FgkhUU"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</div></div>
+</div>
+<p>Next, we will define a small neural network, which attempts to learn a mapping between the vectors for target and context lemmas.</p>
+<p>In other words, given a vector for the target word, the neural network attempts to predict the vector for the corresponding context lemma.</p>
+<p>To do so, we define a small neural network using a library named <a class="reference external" href="https://keras.io/">Keras</a>.</p>
+<p>More specifically, we implement a variant of an algorithm for learning word embeddings called <em>Word2vec</em> (for <em>word to vector</em>), proposed by Tomas Mikolov et al. (<a class="reference external" href="https://arxiv.org/abs/1301.3781v3">2013</a>).</p>
+<p>Keras is a part of the TensorFlow deep learning library. We import both Keras and <em>Dense</em>, a specific type of neural network layer, from this library.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the Keras module and the Dense class</span>
+<span class="kn">from</span> <span class="nn">tensorflow</span> <span class="kn">import</span> <span class="n">keras</span>
+<span class="kn">from</span> <span class="nn">tensorflow.keras.layers</span> <span class="kn">import</span> <span class="n">Dense</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We start by defining an <em>Input</em> layer, which receives the one-hot encoded vectors stored under the variable <code class="docutils literal notranslate"><span class="pre">targets</span></code>.</p>
+<p>We fetch the size of the second dimension (at index <code class="docutils literal notranslate"><span class="pre">[1]</span></code>) of the <code class="docutils literal notranslate"><span class="pre">targets</span></code> matrix available under the <code class="docutils literal notranslate"><span class="pre">shape</span></code> attribute.</p>
+<p>We then provide this information to the <code class="docutils literal notranslate"><span class="pre">shape</span></code> <em>argument</em> of the <em>Input</em> layer, because the neural network must know how many dimensions the inputs have. In our case, the number is 23.</p>
+<p>We also use the <code class="docutils literal notranslate"><span class="pre">name</span></code> argument to name the layer as <code class="docutils literal notranslate"><span class="pre">input_layer</span></code>.</p>
+<p>We store the resulting <em>Input</em> object under the variable <code class="docutils literal notranslate"><span class="pre">network_input</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an input layer for the network; store under &#39;network_input&#39;</span>
+<span class="n">network_input</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="n">targets</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;input_layer&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we define a <em>Dense</em> layer with two neurons, as defined by the <code class="docutils literal notranslate"><span class="pre">units</span></code> argument.</p>
+<p>Any layer between the input and output layers is referred to as a hidden layer.</p>
+<p>We connect the <em>Input</em> layer to the hidden layer by placing the variable <code class="docutils literal notranslate"><span class="pre">network_input</span></code> in parentheses after the <em>Dense</em> layer:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Dense</span><span class="p">(</span><span class="o">...</span><span class="p">)(</span><span class="n">network_input</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We assign the output from the <em>Dense</em> layer under variable <code class="docutils literal notranslate"><span class="pre">hidden_layer</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a hidden layer for the network; store under &#39;hidden_layer&#39;</span>
+<span class="n">hidden_layer</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">activation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;hidden_layer&#39;</span><span class="p">)(</span><span class="n">network_input</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-12-03 10:51:30.843646: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+</pre></div>
+</div>
+</div>
+</div>
+<p>To make predictions about which context lemmas occur close to the target lemmas, we define another <em>Dense</em> layer, whose <code class="docutils literal notranslate"><span class="pre">units</span></code> argument matches the size of our vocabulary.</p>
+<p>This layer acts as the output layer of our network.</p>
+<p>By setting the <code class="docutils literal notranslate"><span class="pre">activation</span></code> argument to <code class="docutils literal notranslate"><span class="pre">softmax</span></code>, the network will return probabilities for all lemmas in the vocabulary.</p>
+<p>Put differently, when we provide an input word, we get back a probability distribution over the 23 lemmas in our vocabulary that sums up to approximately 1.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an output layer for the network; store under &#39;output_layer&#39;</span>
+<span class="n">output_layer</span> <span class="o">=</span> <span class="n">Dense</span><span class="p">(</span><span class="n">units</span><span class="o">=</span><span class="n">context</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">activation</span><span class="o">=</span><span class="s1">&#39;softmax&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;output_layer&#39;</span><span class="p">)(</span><span class="n">hidden_layer</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We then combine the layers defined above into a network and assign the result under the variable <code class="docutils literal notranslate"><span class="pre">embedding_model</span></code>.</p>
+<p>This is achieved using the <em>Model</em> object in Keras and its two arguments: <code class="docutils literal notranslate"><span class="pre">inputs</span></code> and <code class="docutils literal notranslate"><span class="pre">outputs</span></code>, to which we must provide the input and output layers of our network, that is, <code class="docutils literal notranslate"><span class="pre">input_layer</span></code> and <code class="docutils literal notranslate"><span class="pre">output_layer</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a Keras Model; store under &#39;embedding_model&#39;</span>
+<span class="n">embedding_model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">network_input</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="n">output_layer</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, we use the <code class="docutils literal notranslate"><span class="pre">compile()</span></code> method to compile the model and define a loss function using the <code class="docutils literal notranslate"><span class="pre">loss</span></code> argument.</p>
+<p>The loss function approximates the error between predicted and actual context lemmas.</p>
+<p>This error is used to adjust the “weights” of the neural network in a way that should potentially improve the predictions next time.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Compile the model for training; define loss function</span>
+<span class="n">embedding_model</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;categorical_crossentropy&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To examine the resulting model, we call the <code class="docutils literal notranslate"><span class="pre">summary()</span></code> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print out a summary of the model</span>
+<span class="n">embedding_model</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Model: &quot;model&quot;
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ input_layer (InputLayer)    [(None, 24)]              0         
+                                                                 
+ hidden_layer (Dense)        (None, 2)                 50        
+                                                                 
+ output_layer (Dense)        (None, 24)                72        
+                                                                 
+=================================================================
+Total params: 122
+Trainable params: 122
+Non-trainable params: 0
+_________________________________________________________________
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="training-a-neural-network">
+<h3>Training a neural network<a class="headerlink" href="#training-a-neural-network" title="Permalink to this headline">¶</a></h3>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+<iframe
+    width="600"
+    height="350"
+    src="https://www.youtube.com/embed/79dE6dKTriU"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</div></div>
+</div>
+<p>We have now compiled a simple neural network. The network has a single hidden layer with two neurons, which acts as a bottleneck for information.</p>
+<p>In other words, to learn how to predict the context lemmas based on the target lemmas, the model must learn to condense information contained in the sparse, 23-dimensional input vectors.</p>
+<p>The next step is to train the model. This is done using the model’s <code class="docutils literal notranslate"><span class="pre">fit()</span></code> function.</p>
+<p>This function requires defining several arguments. The arguments <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code> correspond to the inputs and outputs. These consist of the target and context lemmas, which are stored in the matrices under <code class="docutils literal notranslate"><span class="pre">targets</span></code> and <code class="docutils literal notranslate"><span class="pre">context</span></code>, respectively.</p>
+<p>We examine 64 pairs of target and context lemmas at the same time, as defined by the keyword <code class="docutils literal notranslate"><span class="pre">batch</span></code>, and loop over all pairs of lemmas 1500 times, as defined by the keyword <code class="docutils literal notranslate"><span class="pre">epochs</span></code>.</p>
+<p>We also provide the <code class="docutils literal notranslate"><span class="pre">verbose</span></code> argument with a value of 0 to avoid flooding the notebook with status messages about the training procedure.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Fit a model to the data</span>
+<span class="n">embedding_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">targets</span><span class="p">,</span>   <span class="c1"># inputs</span>
+                    <span class="n">y</span><span class="o">=</span><span class="n">context</span><span class="p">,</span>   <span class="c1"># outputs</span>
+                    <span class="n">batch_size</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span>  <span class="c1"># how many pairs of words processed simultaneously</span>
+                    <span class="n">epochs</span><span class="o">=</span><span class="mi">1500</span><span class="p">,</span>   <span class="c1"># how many times we loop through the whole data</span>
+                    <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span>   <span class="c1"># do not print training status</span>
+                   <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;keras.callbacks.History at 0x188627040&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now that the neural network has been trained, we can use the model to predict which context lemmas are likely to occur close to the target lemma.</p>
+<p>Let’s examine these predictions by retrieving the one-hot encoded vector for the lemma “be” and input this to the model.</p>
+<p>To do so, we must use the <code class="docutils literal notranslate"><span class="pre">expand_dims()</span></code> function from NumPy to add a dummy axis in front of the vector, because our network expects to receive vectors in batches. This tells the network that the input consists of a single vector.</p>
+<p>We store the input under the variable <code class="docutils literal notranslate"><span class="pre">input_array</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add a dummy axis to the input vector</span>
+<span class="n">input_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">expand_dims</span><span class="p">(</span><span class="n">lemma_vectors</span><span class="p">[</span><span class="s1">&#39;be&#39;</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Check the shape of the input array</span>
+<span class="n">input_array</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1, 24)
+</pre></div>
+</div>
+</div>
+</div>
+<p>We then input the vector to the model using its <code class="docutils literal notranslate"><span class="pre">predict()</span></code> method, which returns an array of probabilities.</p>
+<p>We store these probabilities under the variable <code class="docutils literal notranslate"><span class="pre">prediction</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Feed the input to the neural network; store predictions under &#39;prediction&#39;</span>
+<span class="n">prediction</span> <span class="o">=</span> <span class="n">embedding_model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">input_array</span><span class="p">)</span>
+
+<span class="c1"># Call the variable to examine the output</span>
+<span class="n">prediction</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.0356696 , 0.02839754, 0.06700808, 0.00485445, 0.04912225,
+        0.01824016, 0.16346563, 0.00596055, 0.02424343, 0.16296965,
+        0.00255664, 0.00170638, 0.00393215, 0.00191289, 0.0023439 ,
+        0.03440388, 0.0046377 , 0.02882783, 0.04360899, 0.06357937,
+        0.03529973, 0.11800092, 0.00250591, 0.09675241]], dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+<p>These probabilities correspond to the unique lemmas in our vocabulary.</p>
+<p>To examine which lemma is the most likely to occur in the neighbourhood of the lemma “be”, we can use NumPy’s <code class="docutils literal notranslate"><span class="pre">argmax()</span></code> function to find which dimension in the <code class="docutils literal notranslate"><span class="pre">prediction</span></code> vector has the highest value.</p>
+<p>This gives us an integer, which we can use as an index for the list of lemmas under <code class="docutils literal notranslate"><span class="pre">unique_lemmas</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Index the list of unique lemmas using the integer returned by np.argmax()</span>
+<span class="n">unique_lemmas</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">prediction</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;be&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>And now comes the interesting part: predicting the most likely neighbour(s) of a given lemma <strong>is not the actual goal</strong> of the training procedure, but this task is <strong>a proxy for the true objective</strong>: to learn numerical representations for individual words.</p>
+<p>To predict context lemmas, the network must learn useful representations for target lemmas. One may think of these numerical representations as the identity of the word, which was initially encoded using a one-hot vector.</p>
+<p>These representations can be acquired from the <strong>hidden layer</strong> of the neural network, which contains two neurons.</p>
+<p>The neurons of the hidden layer have <em>parameters</em>, commonly referred to as <em>weights</em>, which are adjusted as the network learns to improve its predictions based on the error estimated by the loss function.</p>
+<p>The weights of a model can be retrieved using the <code class="docutils literal notranslate"><span class="pre">get_weights()</span></code> method of a Keras <em>Model</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Retrieve model weights; assign the resulting list to &#39;model_weights&#39;</span>
+<span class="n">model_weights</span> <span class="o">=</span> <span class="n">embedding_model</span><span class="o">.</span><span class="n">get_weights</span><span class="p">()</span>
+
+<span class="c1"># The weights of the hidden layer are the first item in the list</span>
+<span class="n">hidden_layer_weights</span> <span class="o">=</span> <span class="n">model_weights</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Call the variable and use the &#39;shape&#39; attribute to examine size</span>
+<span class="n">hidden_layer_weights</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(24, 2)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The weights of the hidden layer consist of 23 two-dimensional vectors, one two-dimensional vector for each unique lemma in the vocabulary.</p>
+<p>Let’s print out the first five vectors to examine their values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check out the first five items in the weight matrix</span>
+<span class="n">hidden_layer_weights</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-2.8087554 ,  1.4572932 ],
+       [ 0.6357047 , -1.0779173 ],
+       [-0.01358526, -1.4456273 ],
+       [ 0.85393643,  2.188937  ],
+       [-0.10003632, -0.3535639 ]], dtype=float32)
+</pre></div>
+</div>
+</div>
+</div>
+<p>In contrast to the sparse one-hot encoded vectors, the representations learned by the hidden layer may be characterised as <strong>dense</strong>, as each dimension of the vector encodes some information.</p>
+<p>We can think of these two-dimensional values as coordinates and plot these dimensions against each other to examine position of each lemma in the two-dimensional space.</p>
+<p>This represents the <em>embedding space</em> for the vectors.</p>
+<p>To visualise the embedding space and the vectors within this space, we use a dictionary comprehension to map each unique lemma to its two-dimensional representation in the hidden layer.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Collect hidden layer weights into a dictionary using a dictionary comprehension</span>
+<span class="n">lemma_embeddings</span> <span class="o">=</span> <span class="p">{</span><span class="n">lemma</span><span class="p">:</span> <span class="n">hidden_layer_weights</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">lemma</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">unique_lemmas</span><span class="p">)}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We then import the <em>matplotlib</em> library and create a figure. The <code class="docutils literal notranslate"><span class="pre">dpi</span></code> argument sets the resolution of the figure to 150 dots per inch.</p>
+<p>We then loop over the lemmas and their vector representations in the <code class="docutils literal notranslate"><span class="pre">lemma_embeddings</span></code> dictionary.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">items()</span></code> method of a dictionary returns both keys and values, which we then add to the <em>matplotlib</em> figure.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This tells Jupyter to render the matplotlib plot in the Notebook</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="c1"># Import the pyplot component from matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Create a figure with a resolution of 150 DPI</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+
+<span class="c1"># Loop over the key/value pairs in the dictionary</span>
+<span class="k">for</span> <span class="n">lemma</span><span class="p">,</span> <span class="n">coordinates</span> <span class="ow">in</span> <span class="n">lemma_embeddings</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+
+    <span class="c1"># Unpack the coordinates variable into two variables</span>
+    <span class="c1"># These stand for the horizontal/vertical coordinates</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">coordinates</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">coordinates</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    
+    <span class="c1"># Use the scatter() method to add the x and y coordinates</span>
+    <span class="c1"># to the figure</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    
+    <span class="c1"># Use the annotate() method to add the lemmas as labels </span>
+    <span class="c1"># to the coordinate pairs, which must be wrapped into a tuple</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">lemma</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/04_embeddings_105_0.png" src="../../_images/04_embeddings_105_0.png" />
+</div>
+</div>
+<p>We can now visualise each lemma as a point in the two-dimensional embedding space by plotting the dimensions against each other.</p>
+<p>This allows examining the outcome from the perspective of the distributional hypothesis, which suggests that the vectors of lemmas that occur in similar linguistic contexts should be close to each other in the embedding space.</p>
+<p>Having access to more data (and a larger vocabulary) would allow the model to learn more about word co-occurrences, which would enable learning better representations for lemmas in the embedding space.</p>
+<p>The embedding space could also be extended by increasing the number of neurons in the hidden layer of the neural network. This kind of added “capacity” would allow the model to learn more complex representations for individual words. It is common for word vectors to have several hundred dimensions, which all capture some information about the word and its distribution.</p>
+<p>This section should have given you a basic understanding of the distributional hypothesis, which underlies the notion of word embeddings and research on distributional semantics.</p>
+<p>You should also understand how word embeddings are learned directly from the data using a proxy task, such as predicting the neighbouring word.</p>
+<p>However, note that the toy example presented above merely scratches the surface of how word embeddings are learned.</p>
+<p>Contemporary approaches to learning word embeddings use neural networks with complex architectures and billions of parameters, which also attempt to encode more information about the neighbouring words, in order to distinguish between homonymic forms such as “bank” as a financial institution and “bank” as an area close to the river.</p>
+<p>In the following <a class="reference internal" href="05_embeddings_continued.html"><span class="doc std std-doc">section</span></a>, we dive deeper into word embeddings and how they can be used in spaCy.</p>
+</div>
+</div>
+</div>
+
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="03_pattern_matching.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Finding linguistic patterns using spaCy</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="05_embeddings_continued.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Word embeddings in spaCy</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+   <div class="footer"><a href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0;padding:10px" src="https://mirrors.creativecommons.org/presskit/buttons/88x31/svg/by-nc.svg"/></a> © 2020– <a href="http://www.helsinki.fi/~thiippal">Tuomo Hiippala</a></div>
+    
+
+  </body>
+</html>

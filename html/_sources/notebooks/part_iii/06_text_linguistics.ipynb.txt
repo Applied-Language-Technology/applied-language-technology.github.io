@@ -1,0 +1,1319 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Working with discourse-level annotations\n",
+    "\n",
+    "In the previous sections, we have created linguistic annotations for plain text using various natural language processing techniques.\n",
+    "\n",
+    "In this section, we learn how to use pre-existing linguistic annotations, focusing especially on annotations that target phenomena above the level of a clause.\n",
+    "\n",
+    "After reading through this section, you should:\n",
+    "\n",
+    " - know the basics of the CoNLL-U annotation schema\n",
+    " - know how to create a spaCy *Doc* object manually\n",
+    " - know how to annotate *Spans* in a *Doc* object using *SpanGroups*\n",
+    " - know how to load CoNLL-U annotated corpora into spaCy"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Introducing the CoNLL-U annotation schema"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "tags": [
+     "remove-input"
+    ]
+   },
+   "outputs": [],
+   "source": [
+    "# Run this cell to view a YouTube video related to this topic\n",
+    "from IPython.display import YouTubeVideo\n",
+    "YouTubeVideo('YU7MtTDu1g8', height=350, width=600)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "CoNLL-X is an annotation schema for describing linguistic features across diverse languages (Buchholz and Marsi [2006](https://www.aclweb.org/anthology/W06-2920)), which was originally developed to facilitate collaboration on so-called shared tasks in research on natural language processing (see e.g. Nissim et al. [2017](https://doi.org/10.1162/COLI_a_00304)).\n",
+    "\n",
+    "[CoNLL-U](https://universaldependencies.org/format.html) is a further development of this annotation schema for the Universal Dependencies formalism, which was introduced in [Part III](02_universal_dependencies.ipynb). This annotation schema is commonly used for distributing linguistic corpora in projects that build on this formalism, but it is not uncommon to see other projects use CoNLL-U as well.\n",
+    "\n",
+    "In addition to [numerous modern languages](https://universaldependencies.org/), one can find, for example, CoNLL-U annotated corpora for ancient languages such Akkadian (Luukko et al. [2020](https://www.aclweb.org/anthology/2020.tlt-1.11)) and Coptic (Zeldes and Abrams [2018](https://www.aclweb.org/anthology/W18-6022))."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### The components of the CoNLL-U annotation schema\n",
+    "\n",
+    "CoNLL-U annotations are distributed as plain text files (see [Part II](http://localhost:8888/notebooks/part_ii/01_basic_text_processing.ipynb#Computers-and-text)).\n",
+    "\n",
+    "The annotation files contain three types of lines: **comment lines**, **word lines** and **blank lines**.\n",
+    "\n",
+    "**Comment lines** precede word lines and start with a hash character (#). These lines can be used to provide metadata about the word lines that follow.\n",
+    "\n",
+    "Each **word line** contains annotations for a single word or token. Larger linguistic units are represented by subsequent word lines.\n",
+    "\n",
+    "The annotations for a word line are provided using the following fields, each separated by a tabulator character:\n",
+    "\n",
+    "```console\n",
+    "ID\tFORM\tLEMMA\tUPOS\tXPOS\tFEATS\tHEAD\tDEPREL\tDEPS\tMISC\n",
+    "```\n",
+    "\n",
+    " 1. `ID`: Index of the word in sequence\n",
+    " 2. `FORM`: The form of a word or punctuation symbol\n",
+    " 3. `LEMMA`: Lemma or the base form of a word\n",
+    " 4. `UPOS`: [Universal part-of-speech tag](https://universaldependencies.org/u/pos/)\n",
+    " 5. `XPOS`: Language-specific part-of-speech tag\n",
+    " 6. `FEATS`: [Morphological features](https://universaldependencies.org/u/feat/index.html)\n",
+    " 7. `HEAD`: Syntactic head of the current word\n",
+    " 8. `DEPREL`: Universal dependency relation to the `HEAD`\n",
+    " 9. `DEPS`: [Enhanced dependency relations](https://universaldependencies.org/u/overview/enhanced-syntax.html)\n",
+    " 10. `MISC`: Any additional annotations\n",
+    " \n",
+    "Finally, a **blank line** after word lines is used to separate sentences."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Interacting with CoNLL-U annotations in Python"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "tags": [
+     "remove-input"
+    ]
+   },
+   "outputs": [],
+   "source": [
+    "# Run this cell to view a YouTube video related to this topic\n",
+    "from IPython.display import YouTubeVideo\n",
+    "YouTubeVideo('lvJRFMvWtFI', height=350, width=600)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "To explore CoNLL-U annotations using Python, let's start by importing [conllu](https://github.com/EmilStenstrom/conllu/), a small library for parsing CoNLL-U annotations into various data structures native to Python."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Import the conllu library\n",
+    "import conllu"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "We then open a plain text file with annotations in the CoNLL-U format from the [Georgetown University Multilayer Corpus](https://corpling.uis.georgetown.edu/gum/) (GUM; see Zeldes [2017](http://dx.doi.org/10.1007/s10579-016-9343-x)), read its contents using the `read()` method and store the result under the variable `annotations`."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Open the plain text file for reading; assign under 'data'\n",
+    "data = open(\"data/GUM_whow_parachute.conllu\", mode=\"r\", encoding=\"utf-8\")\n",
+    "\n",
+    "# Read the file contents and assign under 'annotations'\n",
+    "annotations = data.read()\n",
+    "\n",
+    "# Check the type of the resulting object\n",
+    "type(annotations)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "This gives us a Python string object. Let's print out the first 1000 characters of this string."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Print the first 1000 characters of the string under 'annotations'\n",
+    "print(annotations[:1000])"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "As you can see, the string object contains comment lines (prefixed with a hash), followed by word lines that contain the annotations for the fields introduced above. \n",
+    "\n",
+    "An underscore `_` is used to indicate fields with empty or missing values on the word lines. \n",
+    "\n",
+    "In the GUM corpus, the final field `MISC` contains values such as `Discourse` and `Entity` that provide annotations for discourse relations and entities such as events and objects.\n",
+    "\n",
+    "Here the question is: how to extract all this information programmatically from a Python *string* object, which we cannot access like a list or a dictionary?\n",
+    "\n",
+    "This is where the `conllu` module steps in, because its `parse()` function is capable of extracting information from CoNLL-U formatted strings."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Use the parse() function to parse the annotations; store under 'sentences'\n",
+    "sentences = conllu.parse(annotations)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The `parse()` function returns a Python list populated by *TokenList* objects. This object type is native to the conllu library.\n",
+    "\n",
+    "Let's examine the first item in the list `sentences`."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "sentences[0]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "This gives us a *TokenList* object.\n",
+    "\n",
+    "To start with, the information contained in the hash-prefixed comment lines in the CoNLL-U schema is provided under the `metadata` attribute."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Get the metadata for the first item in the list\n",
+    "sentences[0].metadata"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "This shows how the GUM corpus uses the comment lines to provide four types of metadata for each sentence: `newdoc_id` for document identifier, `sent_id` for sentence identifier, `text` for plain text and `s_type` for the grammatical mood of the sentence (Zeldes & Simonson [2017](https://www.aclweb.org/anthology/W16-1709): 69).\n",
+    "\n",
+    "Superficially, the object stored under the `metadata` attribute looks like a Python dictionary, but the object is actually a conllu *Metadata* object.\n",
+    "\n",
+    "This object, however, behaves just like a Python dictionary in the sense that it consists of key and value pairs, which are accessed just like those in a dictionary.\n",
+    "\n",
+    "To exemplify, to retrieve the sentence type (or its grammatical mood), simply use the key `s_type` to access the *Metadata* object."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Get the sentence type under 's_type'\n",
+    "sentences[0].metadata['s_type']"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "This returns the string `inf`, which corresponds to infinitive.\n",
+    "\n",
+    "Coming back to the *TokenList* object, as the name suggest, the items in a *TokenList* consist of individual *Token* objects.\n",
+    "\n",
+    "Let's access the first *Token* object `[0]` in the first *TokenList* object `[0]` under `sentences`. "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Get the first token in the first sentence\n",
+    "sentences[0][0]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Just like the *TokenList* above, the *Token* is a dictionary-like object with keys and values.\n",
+    "\n",
+    "The dictionary under the key `misc` holds information about discourse relations, which describe how parts of a text relate to each other using a formalism named [Rhetorical Structure Theory](https://www.sfu.ca/rst) (Mann & Thompson [1988](https://doi.org/10.1515/text.1.1988.8.3.243)).\n",
+    "\n",
+    "In this case, the annotation states that a discourse relation named **preparation** holds between units 1 and 11.\n",
+    "\n",
+    "These units and their identifiers do not correspond words or sentences in the document, but to *elementary discourse units*. \n",
+    "\n",
+    "These elementary discourse units define an additional level of *segmentation*, which seeks to define units of discourse that are placed in various relations to one another.\n",
+    "\n",
+    "In classical Rhetorical Structure Theory, these elementary discourse units (abbreviated EDU) often correspond to clauses, but this is not a requirement set by the theory."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Adding discourse-level annotations to *Doc* objects\n",
+    "\n",
+    "As pointed out above, the GUM corpus uses the key `Discourse` in the `misc` field to indicate the **beginning** of an elementary discourse unit.\n",
+    "\n",
+    "By tracking *Token* objects with these properties, we can identify the boundaries of elementary discourse units, which are not necessarily aligned with sentences in the *TokenList* object.\n",
+    "\n",
+    "We can keep track of these boundaries by counting *Tokens* and noting down the indices of *Tokens* that contain the `Discourse` key under `misc`.\n",
+    "\n",
+    "Let's set up a variable for counting the *Tokens* and several lists for holding the information that we will collect from the *TokenList* objects."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Set up a variable with value 0 that we will use for counting\n",
+    "# the Tokens that we process\n",
+    "counter = 0\n",
+    "\n",
+    "# We use these lists to keep track of sentences, discourse units\n",
+    "# and the relations that hold between them.\n",
+    "discourse_units = []\n",
+    "sent_types = []\n",
+    "relations = []\n",
+    "\n",
+    "# Set up placeholder lists for the information that we will extract\n",
+    "# from the CoNLL-U annotations. These lists will be used to create \n",
+    "# a spaCy Doc object below.\n",
+    "words = []\n",
+    "spaces = []\n",
+    "sent_starts = []"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "We use the value stored under the variable `counter` to keep track of the boundaries for elementary discourse units as we loop over the *TokenList* objects stored in the list `sentences`."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Loop over each TokenList object\n",
+    "for sentence in sentences:\n",
+    "    \n",
+    "    # When we begin looping over a new sentence, set the value of\n",
+    "    # the variable 'is_start' to True. This marks the beginning of\n",
+    "    # a sentence.\n",
+    "    is_start = True\n",
+    "    \n",
+    "    # Add the current sentence type to the list 'sent_types'\n",
+    "    sent_types.append(sentence.metadata['s_type'])\n",
+    "        \n",
+    "    # Proceed to loop over the Tokens in the current TokenList object\n",
+    "    for token in sentence:\n",
+    "        \n",
+    "        # Use the key 'form' to retrieve the word form for the \n",
+    "        # Token and append it to the placeholder list 'words'.\n",
+    "        words.append(token['form'])\n",
+    "        \n",
+    "        # Check if this Token begins a sentence by evaluating whether\n",
+    "        # the variable 'is_start' is True. \n",
+    "        if is_start:\n",
+    "            \n",
+    "            # If the Token starts a sentence, add value True to the list\n",
+    "            # 'sent_starts'. Note the missing quotation marks: this is a \n",
+    "            # Boolean value (True / False).\n",
+    "            sent_starts.append(True)\n",
+    "            \n",
+    "            # Set the variable 'is_start' to False until the next sentence\n",
+    "            # starts and the variable is set to True again.\n",
+    "            is_start = False\n",
+    "        \n",
+    "        # If the variable 'is_start' is False, execute the code block below\n",
+    "        else:\n",
+    "            \n",
+    "            # Append value 'False' to the list 'sent_starts'\n",
+    "            sent_starts.append(False)\n",
+    "        \n",
+    "        # Check if the key 'misc' contains anything, and if the key\n",
+    "        # holds the value 'Discourse', proceed to the code block below.\n",
+    "        if token['misc'] is not None and 'Discourse' in token['misc']:\n",
+    "            \n",
+    "            # The presence of the key 'Discourse' indicates the beginning\n",
+    "            # of a new elementary discourse unit; add its index to the list\n",
+    "            # 'discourse_units'.\n",
+    "            discourse_units.append(counter)\n",
+    "            \n",
+    "            # Unpack the relationship definition; start by splitting the\n",
+    "            # relation name from the elementary discourse units. Assign\n",
+    "            # the resulting objects under 'relation' and 'edus'.\n",
+    "            relation, edus = token['misc']['Discourse'].split(':')\n",
+    "            \n",
+    "            # Try to split the relation annotation into two parts\n",
+    "            try:\n",
+    "                \n",
+    "                # Split at the '->' string and assign to 'source'\n",
+    "                # and 'target', respectively.\n",
+    "                source, target = edus.split('->')\n",
+    "                \n",
+    "                # Deduct -1 from both 'source' and 'target', because \n",
+    "                # the identifiers used in the GUM corpus are not \n",
+    "                # zero-indexed, but our spaCy Spans that correspond to\n",
+    "                # elementary discourse units will be. Also cast the\n",
+    "                # numbers into integers (these are originally strings!).\n",
+    "                source, target = int(source) - 1, int(target) - 1\n",
+    "            \n",
+    "            # The root node of the RST tree will not have a target,\n",
+    "            # which raises a ValueError since there is only one item.\n",
+    "            except ValueError:\n",
+    "                \n",
+    "                # Assign the first item in 'edus' to 'source' and set\n",
+    "                # target to None. \n",
+    "                source, target = edus[0], None\n",
+    "                \n",
+    "                # Deduct -1 from 'source' as explained above.\n",
+    "                source = int(source) - 1 \n",
+    "                \n",
+    "            # Compile the relation definition into a three tuple and\n",
+    "            # append to the list 'relations'.\n",
+    "            relations.append((relation, source, target))\n",
+    "            \n",
+    "        # Check if the current Token is followed by a whitespace. If this is\n",
+    "        # not the case, e.g. for the Token at the end of a TokenList, this\n",
+    "        # information is available under the 'misc' key.\n",
+    "        if token['misc'] is not None and 'SpaceAfter' in token['misc']:\n",
+    "            \n",
+    "            # If the 'misc' key holds a dictionary with the key 'SpaceAfter'\n",
+    "            # with a value 'No', proceed below\n",
+    "            if token['misc']['SpaceAfter'] == 'No':\n",
+    "                \n",
+    "                # Append the Boolean value 'False' to the list 'spaces'.\n",
+    "                spaces.append(False)\n",
+    "            \n",
+    "        # If the 'SpaceAfter' key is not found under 'misc', the token is followed\n",
+    "        # by a space.\n",
+    "        else:\n",
+    "\n",
+    "            # Append True to the list of spaces\n",
+    "            spaces.append(True)\n",
+    "        \n",
+    "        # Update the counter as we finish looping over a Token object\n",
+    "        # by adding +1 to its value.\n",
+    "        counter += 1"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "This collects the information needed for creating a spaCy *Doc* object, together with the discourse-level annotations that we will add to the *Doc* object afterwards.\n",
+    "\n",
+    "As the example above shows, collecting this kind of information from annotations requires one to be familiar with the annotation schema, particularly in terms of how additional information stored under the field `misc` for *Tokens* or in the metadata for *TokenLists*, in order to catch any potential errors.\n",
+    "\n",
+    "Moving ahead, we typically create spaCy *Doc* objects by passing some text to a *Language* object, as shown in [Part II](../part_ii/03_basic_nlp.ipynb), which takes care of operations such as tokenization.\n",
+    "\n",
+    "In this case, however, we need to preserve the tokens defined in the CoNLL-U annotations, because this information is needed to align the discourse-level annotations correctly for both sentences and elementary discourse units.\n",
+    "\n",
+    "In other words, we cannot take the risk that spaCy tokenises the text differently, because this would result in misaligned annotations for sentences and elementary discourse units.\n",
+    "\n",
+    "Thus we create a spaCy *Doc* object manually by importing the *Doc* class from spaCy's `tokens` submodule. We also load a small language model for English and store it under the variable `nlp`."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "tags": [
+     "remove-input"
+    ]
+   },
+   "outputs": [],
+   "source": [
+    "# Run this cell to view a YouTube video related to this topic\n",
+    "from IPython.display import YouTubeVideo\n",
+    "YouTubeVideo('zYXYK4KbgeI', height=350, width=600)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Import the Doc class and the spaCy library\n",
+    "from spacy.tokens import Doc\n",
+    "import spacy\n",
+    "\n",
+    "# Load a small language model for English; store under 'nlp'\n",
+    "nlp = spacy.load('en_core_web_sm')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "We can now use the *Doc* class to create *Doc* objects manually by providing the information collected in the lists `words`, `spaces` and `sent_starts` as input to the newly-created *Doc* object.\n",
+    "\n",
+    "Let's take a quick look at the information we collected into the lists."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Loop over the first 15 items in lists 'words', 'spaces' and 'sent_starts'.\n",
+    "# Use the zip() function to fetch items from these lists simultaneously.\n",
+    "for word, space, sent_start in zip(words[:15], spaces[:15], sent_starts[:15]):\n",
+    "    \n",
+    "    # Print out the current item in each list\n",
+    "    print(word, space, sent_start)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "In addition, we must pass a *Vocabulary* object to the `vocab` argument to associate the *Doc* with a given language, as normally this information is assigned by the *Language* object."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Create a spaCy Doc object \"manually\"; assign under the variable 'doc'\n",
+    "doc = Doc(vocab=nlp.vocab, \n",
+    "          words=words, \n",
+    "          spaces=spaces,\n",
+    "          sent_starts=sent_starts\n",
+    "          )"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "This gives us a *Doc* object with pre-defined *Tokens* and sentence boundaries."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Retrieve Tokens up to index 15 from the Doc object\n",
+    "doc[:15]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "As you can see, spaCy has successfully assigned the words in `words` to *Token* objects, while the Boolean values in `spaces` determine whether a *Token* is followed by a space or not.\n",
+    "\n",
+    "The sentence boundaries in `sent_starts`, in turn, are used to define the sentences under the attribute `sents` of a *Doc* object."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Retrieve the first five sentences in the Doc object\n",
+    "list(doc.sents)[:5]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "However, because we discarded the linguistic information contained in the CoNLL-U annotations, the attributes of the *Token* objects in our *Doc* object are empty.\n",
+    "\n",
+    "Let's fetch the fine-grained part-of-speech tag for the first *Token* in the *Doc* object."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Get the fine-grained part-of-speech tag for Token at index 0\n",
+    "doc[0].tag_"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "As this shows, the `tag_` attribute of the *Token* does not exist.\n",
+    "\n",
+    "We cannot pass our *Doc* object `doc` directly to the language model under `nlp` for additional annotations, but we need to create these manually by providing the *Doc* separately to various components of the natural language processing pipeline in the *Language* object.\n",
+    "\n",
+    "These components are accessible under the attribute `pipeline`, as we learned in [Part II](../part_ii/04_basic_nlp_continued.ipynb).\n",
+    "\n",
+    "Let's loop over the components of the `pipeline` and apply them to the *Doc* object under `doc`."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Loop over the name / component pairs under the 'pipeline' attribute\n",
+    "# of the Language object 'nlp'.\n",
+    "for name, component in nlp.pipeline:\n",
+    "    \n",
+    "    # Use a formatted string to print out the 'name' of the component\n",
+    "    print(f\"Now applying component {name} ...\")\n",
+    "    \n",
+    "    # Feed the existing Doc object to the component and store the updated\n",
+    "    # annotations under the variable of the same name ('doc').\n",
+    "    doc = component(doc)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "If we now examine the attribute `tag_` of the first *Token* object, the fine-grained part-of-speech tag has been added to the *Token*."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Get the fine-grained part-of-speech tag for Token at index 0\n",
+    "doc[0].tag_"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Furthermore, we now have access to additional linguistic annotations produced by spaCy, such as noun phrases under the attribute `noun_chunk`."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Get the first five noun phrases in the Doc object\n",
+    "list(doc.noun_chunks)[:5]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Our manually-defined sentence boundaries, however, remain the same, although normally spaCy uses the syntactic dependencies to segment text into sentences!"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Get the first five sentences in the Doc object\n",
+    "list(doc.sents)[:5]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Now that we have a fully-annotated *Doc* object, we can proceed to enhance this object with discourse-level annotations collected from the CoNLL-U annotations, which are stored in the lists `discourse_units`, `sent_types` and `relations`."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Adding information on sentence mood\n",
+    "\n",
+    "Let's start by adding information on sentence type to the *Doc* object, which we collected into the list `sent_types`.\n",
+    "\n",
+    "These annotations provide information on grammatical mood of the sentence, as exemplified by categories such as *infinitive*, *declarative* and *imperative*.\n",
+    "\n",
+    "Let's check out the first ten items in the list `sent_types`."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Print out the \n",
+    "sent_types[:10]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "These are the categories that we want to associate with each sentence in the *Doc* object.\n",
+    "\n",
+    "Before proceeding, let's make sure that the lengths for the `sent_types` list and the sentences in the *Doc* object match each other."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Check the length of sentence type information and \n",
+    "# the number of sentences in the Doc object.\n",
+    "len(sent_types) == len(list(doc.sents))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "In spaCy, information on grammatical mood of a sentence is best represented using a custom attribute for a *Span* object, as these objects consist of sequences of *Token* objects within a *Doc*.\n",
+    "\n",
+    "Actually, the sentences available under the attribute `sents` of a *Doc* object, whose mood we want to describe, are *Span* objects."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "tags": [
+     "remove-input"
+    ]
+   },
+   "outputs": [],
+   "source": [
+    "# Run this cell to view a YouTube video related to this topic\n",
+    "from IPython.display import YouTubeVideo\n",
+    "YouTubeVideo('9S0MT4xISW0', height=350, width=600)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Print out the first sentence in the Doc and its type()\n",
+    "list(doc.sents)[0], type(list(doc.sents)[0])"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "To assign information on grammatical mood to these *Spans*, let's continue by importing two classes: *SpanGroup* and *Span*."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Import the SpanGroup and Span classes from spaCy\n",
+    "from spacy.tokens.span_group import SpanGroup\n",
+    "from spacy.tokens import Span"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "As instructed in [Part II](../part_ii/04_basic_nlp_continued.ipynb), the *Span* class is needed to register a custom attribute for storing information on grammatical mood for *Span* objects.\n",
+    "\n",
+    "The *SpanGroup*, in turn, is a class that allows defining groups of *Span* objects, which can be stored under the `spans` attribute of a *Doc* object.\n",
+    "\n",
+    "Let's create a *SpanGroup* object that contains *Spans* that correspond to the sentences under the `sents` attribute in the *Doc* object.\n",
+    "\n",
+    "This requires three arguments: `doc`, which takes the *Doc* object that contains the *Spans* to be grouped, a `name` for the *SpanGroup* and `spans`, a list of *Span* objects in the *Doc* object referred to in `doc`."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Create a SpanGroup from Spans contained in the Doc object 'doc', which\n",
+    "# was created from the CoNLL-U annotations. These Spans correspond to\n",
+    "# sentences, whose boundaries we defined manually. Assign to variable\n",
+    "# 'sent_group'.\n",
+    "sent_group = SpanGroup(doc=doc, name=\"sentences\", spans=list(doc.sents))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "This creates a *SpanGroup* object, which we can then assign to the `spans` attribute of the *Doc* object."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Assign the SpanGroup to the 'spans' attribute of the Doc object under the\n",
+    "# key 'sentences'.\n",
+    "doc.spans['sentences'] = sent_group"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Next, we register the custom attribute `mood` with the *Span* class, and assign it with the default value `None`."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Register the custom attribute 'mood' with the Span class\n",
+    "Span.set_extension('mood', default=None)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "We then use Python's `zip()` function to iterate over pairs of items in the list `sent_types` and the *SpanGroup* object stored under the key `sentences` in the `spans` attribute of the *Doc* object.\n",
+    "\n",
+    "During each loop, we refer to the sentence type information from the `sent_types` list as `mood` and to the *Span* object as `span`.\n",
+    "\n",
+    "We then assign the value stored under the variable `mood` to the custom attribute `mood` of the *Span* object under `span`.\n",
+    "\n",
+    "Remember that spaCy uses an underscore `_` as a dummy attribute for user-defined attributes, as explained in [Part II](../part_ii/04_basic_nlp_continued.ipynb). "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Loop over pairs of items from the list and the SpanGroup\n",
+    "for mood, span in zip(sent_types, doc.spans['sentences']):\n",
+    "    \n",
+    "    # Assign the value of 'mood' under the custom attribute\n",
+    "    # with the same name, which belongs to the Span object.\n",
+    "    span._.mood = mood"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "This adds information on grammatical mood under the custom attribute `mood` of each *Span* object.\n",
+    "\n",
+    "Let's retrieve the sentence stored under index 8 and information on its mood."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Retrieve information on grammatical mood for sentence at index 8\n",
+    "doc.spans['sentences'][8], doc.spans['sentences'][8]._.mood"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "As you can see, this returns a sentence with imperative mood, which suggests that this information has been successfully added to the *Doc* object."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Adding information on discourse relations\n",
+    "\n",
+    "For defining the boundaries of elementary discourse units, we need to use the information contained in the list `discourse_units`."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Check the first 10 items in the list 'discourse_units'\n",
+    "discourse_units[:10]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "We created this list above by noting down the index of each *Token* that marked the beginning of an elementary discourse unit.\n",
+    "\n",
+    "What we need to do next is to use these indices to get slices of the *Doc* object, that is, *Span* objects that correspond to the discourse units.\n",
+    "\n",
+    "We can do this by looping over the numbers stored in the `discourse_units` list and use them for determining the beginning and end of a *Span* as shown below."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Create a placeholder list to hold slices of the Doc object that correspond\n",
+    "# to discourse units.\n",
+    "edu_spans = []\n",
+    "\n",
+    "# Proceed to loop over discourse unit boundaries using Python's range() function.\n",
+    "# This will give us numbers, which we use to index the 'discourse_units' list that\n",
+    "# contains the indices that mark the beginning of a discourse unit.\n",
+    "for i in range(len(discourse_units)):\n",
+    "    \n",
+    "    # Try to execute the following code block\n",
+    "    try:\n",
+    "        \n",
+    "        # Get the current item in the list 'discourse_units' and the next item; assign\n",
+    "        # under variables 'start' and 'end'.\n",
+    "        start, end = discourse_units[i], discourse_units[i + 1]\n",
+    "    \n",
+    "    # If the next item is not available, because we've reached the final item in the list,\n",
+    "    # this will raise an IndexError, which we catch here.\n",
+    "    except IndexError:\n",
+    "        \n",
+    "        # Assign the start of the discourse unit as usual, set the length of the Doc \n",
+    "        # object as the value for 'end' to mark the end point of the discourse unit. \n",
+    "        start, end = discourse_units[i], len(doc)\n",
+    "\n",
+    "    # Use the 'start' and 'end' variables to slice the Doc object; append the\n",
+    "    # resulting Span object to the list 'edu_spans'.\n",
+    "    edu_spans.append(doc[start:end])"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "This gives us a list of *Span* objects that correspond to the elementary discourse units. "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Get the first seven Spans in the list 'edu_spans'\n",
+    "edu_spans[:7]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "As you can see, the elementary discourse units are not necessary aligned with sentences.\n",
+    "\n",
+    "Next, we must register additional custom attributes for the *Span* object that will hold the annotations for discourse relations."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Register three custom attributes for Span objects, which correspond to\n",
+    "# elementary discourse unit id, the id of the element acting as the target,\n",
+    "# and the name of the relation.\n",
+    "Span.set_extension('edu_id', default=None)\n",
+    "Span.set_extension('target_id', default=None)\n",
+    "Span.set_extension('relation', default=None)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The attribute `edu_id` will hold the unique identifier for each elementary discourse unit, whereas the `target_id` attribute contains the identifier of the discourse unit that the current discourse unit is related to.\n",
+    "\n",
+    "The `relation` attribute, in turn, contains the name of the discourse relation that holds between the participating units.\n",
+    "\n",
+    "Just as above, we use the *SpanGroup* object to store these *Spans* under the key `edus` of the `spans` attribute."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Create a SpanGroup object from the Spans in the 'edu_spans' list\n",
+    "edu_group = SpanGroup(doc=doc, name=\"edus\", spans=edu_spans)\n",
+    "\n",
+    "# Assign the SpanGroup under the key 'edus'\n",
+    "doc.spans['edus'] = edu_group"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Next, we populate the custom attributes of these *Span* objects with information stored in the list `relations`.\n",
+    "\n",
+    "When extracting information from the CoNLL-U annotations, we collected information on discourse relations into three-tuples in which the first item gives the relation, whereas the remaining two items give the identifiers for elementary discourse units participating in the relation. The first identifier determines the \"source\" of the relation whereas the second is the \"target\". "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Print out the first five relation definitions in the list 'relations'\n",
+    "relations[:5]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "We now proceed to loop over the list `relations` and assign this information into the *Spans* in the *SpanGroup* under the key `edus` of the `spans` attribute."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Loop over each three-tuple in the list 'relations'\n",
+    "for relation in relations:\n",
+    "    \n",
+    "    # Split the three-tuple into three variables\n",
+    "    rel_name, source, target = relation[0], relation[1], relation[2]\n",
+    "    \n",
+    "    # Use the identifier under 'source' to index the Span objects under\n",
+    "    # the key 'edus'. Then access the custom attributes and set the values\n",
+    "    # for 'edu_id', 'target_id' and 'relation'.\n",
+    "    doc.spans['edus'][source]._.edu_id = source\n",
+    "    doc.spans['edus'][source]._.target_id = target\n",
+    "    doc.spans['edus'][source]._.relation = rel_name"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "This stores the information on the discourse relations under the custom attributes.\n",
+    "\n",
+    "We can examine the result by retrieving the custom attribute `relation` for the *Span* under index 1 in the *Doc* object `doc`."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Retrieve the custom attribute 'relation' for the Span at index 1\n",
+    "doc.spans['edus'][1]._.relation"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "This indicates that this *Span* participates in a circumstantial relation with another unit, whose identifier is stored under the custom attribute `target_id`.\n",
+    "\n",
+    "Because the attribute `target_id` contains an integer that identifies another discourse unit, we can use this value to index the *SpanGroup* object under `doc.spans['edus']` to retrieve the target."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Get the Span at index 1 and the Span referred to by its 'target_id' attribute\n",
+    "doc.spans['edus'][1], doc.spans['edus'][doc.spans['edus'][1]._.target_id]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "This gives us the two elementary discourse units participating in the \"circumstance\" relation."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Converting CoNLL-U annotations into *Doc* objects\n",
+    "\n",
+    "If you do not need to enrich spaCy objects with additional information, but simply wish to convert CoNLL-U annotations into *Doc* objects, spaCy provides a convenience function, `conllu_to_docs()`, for converting CoNLL-U annotated data into spacy *Doc* objects.\n",
+    "\n",
+    "Let's start by importing the function from the `training` submodule, as this function is mainly used for loading CoNLL-U annotated data for training language models. We also import the class for the *Doc* object."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Import the 'conllu_to_docs' function and the Doc class\n",
+    "from spacy.training.converters import conllu_to_docs\n",
+    "from spacy.tokens import Doc"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The `conllu_to_docs()` function takes a Python string object as input.\n",
+    "\n",
+    "We pass the string object `annotations` that contains CoNLL-U annotations to the function, and set the argument `no_print` to `True` to prevent the `conllu_to_docs()` function from printing status messages.\n",
+    "\n",
+    "The function returns a Python generator object, which we must cast into a list to examine its contents."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Provide the string object under 'annotations' to the 'conllu_to_docs' function. \n",
+    "# Set 'no_print' to True and cast the result into a Python list; store under 'docs'.\n",
+    "docs = list(conllu_to_docs(annotations, no_print=True))\n",
+    "\n",
+    "# Get the first two items in the resulting list\n",
+    "docs[:2]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "This gives us a list with *Doc* objects. By default, the `conllu_to_docs()` function groups every ten sentences in the CoNLL-u files into a single spaCy object. \n",
+    "\n",
+    "This, however, is not an optimal solution, as having every document its own *Doc* object would make more sense rather than an arbitrary grouping.\n",
+    "\n",
+    "To do so, we can use the `from_docs()` method of the *Doc* object to combine the *Doc* objects in the list `docs`. "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Combine Doc objects in the list 'docs' into a single Doc; assign under 'doc'\n",
+    "doc = Doc.from_docs(docs)\n",
+    "\n",
+    "# Check variable type and length\n",
+    "type(doc), len(doc)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "This gives us a single spaCy *Doc* object with 890 *Tokens*.\n",
+    "\n",
+    "If we loop over the first eight *Tokens* in the *Doc* object `doc` and print out their linguistic annotations, the results shows that the information from the CoNLL-U annotations have been carried over to the *Doc* object."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Loop over the first 8 Tokens using the range() function\n",
+    "for token_ix in range(0, 8):\n",
+    "    \n",
+    "    # Use the current number under 'token_ix' to fetch a Token from the Doc.\n",
+    "    # Assign the Token object under the variable 'token'. \n",
+    "    token = doc[token_ix]\n",
+    "    \n",
+    "    # Print the Token and its linguistic annotations\n",
+    "    print(token, token.tag_, token.pos_, token.morph, token.dep_, token.head)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "However, if we attempt to retrieve the noun phrases in the *Doc* objects available under the attribute `noun_chunks`, spaCy will return an error."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Get the noun chunks in the Doc\n",
+    "list(doc.noun_chunks)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "This raises an error, because the *Doc* that we created using the `conllu_to_docs()` function does not have a *Language* and a *Vocabulary* associated with it.\n",
+    "\n",
+    "The noun phrases are created using language-specific rules from syntactic parses, but spaCy does not know which language it is working with.\n",
+    "\n",
+    "Because the language of a *Doc* cannot be defined manually, we must use a trick involving the *DocBin* object that we learned about in [Part II](../part_ii/04_basic_nlp_continued.ipynb#Writing-processed-texts-to-disk).\n",
+    "\n",
+    "The *DocBin* is a special object type for writing spaCy annotations to disk."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Import the DocBin object from the 'tokens' submodule\n",
+    "from spacy.tokens import DocBin\n",
+    "\n",
+    "# Create an empty DocBin object\n",
+    "doc_bin = DocBin()\n",
+    "\n",
+    "# Add the current Doc to the DocBin\n",
+    "doc_bin.add(doc)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Instead of writing the *DocBin* object to disk, we simply retrieve the *Doc* objects from the *DocBin* using the `get_docs()` method, which requires a *Vocabulary* object as input to the `vocab` argument.\n",
+    "\n",
+    "The *Vocabulary* is used to associate the *Doc* objects with a given language.\n",
+    "\n",
+    "The `get_docs()` method returns a generator, which we must cast into a list."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Use the 'get_docs' method to retrieve the Docs from the DocBin\n",
+    "docs = list(doc_bin.get_docs(vocab=nlp.vocab))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "If we now examine the *Doc* object, which is naturally the first and only item in the list, and retrieve its attribute `noun_chunks`, we can also get the noun phrases."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "list(docs[0].noun_chunks)[:10]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "This section should have given you a basic understanding of the CoNLL-U annotation schema and how corpora annotated using this schema can be added to spaCy objects."
+   ]
+  }
+ ],
+ "metadata": {
+  "celltoolbar": "Edit Metadata",
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.9.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}

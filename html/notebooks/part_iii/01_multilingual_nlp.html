@@ -1,0 +1,2125 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QDXYHY09XJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QDXYHY09XJ');
+</script>
+    
+    
+    <title>Processing diverse languages</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Universal Dependencies" href="02_universal_dependencies.html" />
+    <link rel="prev" title="Part III: Natural Language Processing for Linguists" href="../../nlp_for_linguists.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../about.html">
+   About this Website
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../getting_started.html">
+   Getting Started
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../notebook_login.html">
+     Log in to CSC Notebooks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../launch_server.html">
+     Launch JupyterLab on your personal server
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../jupyter.html">
+     Interact with the server in JupyterLab
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../github_pull.html">
+     Retrieve learning materials and exercises from GitHub
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../github_push.html">
+     Return completed exercises to GitHub for grading
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../python_intro.html">
+   Part I: A Minimal Introduction to Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_i/01_working_with_jupyter_notebooks.html">
+     The elements of a Jupyter Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_i/02_getting_started_with_python.html">
+     Getting started with Python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../working_with_text.html">
+   Part II: Working with Text in Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_ii/01_basic_text_processing.html">
+     Manipulating text using Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_ii/02_basic_text_processing_continued.html">
+     Manipulating text at scale
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_ii/03_basic_nlp.html">
+     Processing texts using spaCy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_ii/04_basic_nlp_continued.html">
+     Customising the spaCy pipeline
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_ii/05_evaluating_nlp.html">
+     Evaluating language models
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_ii/06_managing_data.html">
+     Managing textual data using pandas
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../../nlp_for_linguists.html">
+   Part III: Natural Language Processing for Linguists
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Processing diverse languages
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02_universal_dependencies.html">
+     Universal Dependencies
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03_pattern_matching.html">
+     Finding linguistic patterns using spaCy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04_embeddings.html">
+     Introducing word embeddings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="05_embeddings_continued.html">
+     Word embeddings in spaCy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="06_text_linguistics.html">
+     Working with discourse-level annotations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../citation.html">
+   Citation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../resources.html">
+   Resources
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/part_iii/01_multilingual_nlp.ipynb.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/Applied-Language-Technology/website"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/Applied-Language-Technology/website/binder?urlpath=lab/tree/notebooks/part_iii/01_multilingual_nlp.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#introduction">
+   Introduction
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stanza-a-python-library-for-processing-many-languages">
+   Stanza – a Python library for processing many languages
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#loading-a-language-model-into-stanza">
+     Loading a language model into Stanza
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#processing-text-using-stanza">
+     Processing text using Stanza
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#processing-multiple-texts-using-stanza">
+     Processing multiple texts using Stanza
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#interfacing-stanza-with-spacy">
+   Interfacing Stanza with spaCy
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="processing-diverse-languages">
+<h1>Processing diverse languages<a class="headerlink" href="#processing-diverse-languages" title="Permalink to this headline">¶</a></h1>
+<p>After reading this section, you should:</p>
+<ul class="simple">
+<li><p>know how to download and use language models in Stanza, a Python library for processing many languages</p></li>
+<li><p>how to interface Stanza with the spaCy natural language processing library</p></li>
+<li><p>know how to access linguistic annotations produced by Stanza language models via spaCy</p></li>
+</ul>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>Part II introduced basic natural language processing tasks using examples written in the English language.</p>
+<p>As a global <em>lingua franca</em>, English is a highly-resourced language in terms of natural language processing. Compared to many other languages, the amount of data – especially human-annotated data – available for English is greater and covers a wider range of domains (Del Gratta et al. <a class="reference external" href="https://doi.org/10.1007/s10579-020-09520-6">2021</a>).</p>
+<p>Unfortunately, the imbalance in resources and research effort has led to a situation where the advances in processing the English language are occasionally claimed to hold for natural language in general.</p>
+<p>However, as Bender (<a class="reference external" href="https://thegradient.pub/the-benderrule-on-naming-the-languages-we-study-and-why-it-matters/">2019</a>) has shown, <em>English is not a synonym for natural language</em>: even if one demonstrates that computers can achieve or surpass human-level performance in some natural language processing task for the English language, this does not mean that one has solved this task or problem for <em>natural language as a whole</em>.</p>
+<p>To measure progress in the field of natural language processing and to ensure that as many languages as possible can benefit from advances in language technology, it is highly desirable to conduct research on processing languages used across the world.</p>
+</div>
+<div class="section" id="stanza-a-python-library-for-processing-many-languages">
+<h2>Stanza – a Python library for processing many languages<a class="headerlink" href="#stanza-a-python-library-for-processing-many-languages" title="Permalink to this headline">¶</a></h2>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+<iframe
+    width="600"
+    height="350"
+    src="https://www.youtube.com/embed/41aN-_NNY8g"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</div></div>
+</div>
+<p>To get started with working languages other than English, we can use a library named Stanza.</p>
+<p><a class="reference external" href="https://stanfordnlp.github.io/stanza/">Stanza</a> is a Python library for natural language processing that provides pre-trained language models for <a class="reference external" href="https://stanfordnlp.github.io/stanza/available_models.html">many languages</a> (Qi et al. <a class="reference external" href="https://www.aclweb.org/anthology/2020.acl-demos.14/">2020</a>).</p>
+<p>Stanza language models are trained on corpora annotated using the <a class="reference external" href="https://universaldependencies.org/">Universal Dependencies</a> formalism, which means that these models can perform tasks such as tokenization, part-of-speech tagging, morphological tagging and dependency parsing.</p>
+<p>These are essentially the same tasks that we explored using the spaCy natural language processing library in <a class="reference internal" href="../part_ii/03_basic_nlp.html"><span class="doc std std-doc">Part II</span></a>.</p>
+<p>Let’s start exploring Stanza by importing the library.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the Stanza library</span>
+<span class="kn">import</span> <span class="nn">stanza</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To process a given language, we must first download a Stanza language model using the <code class="docutils literal notranslate"><span class="pre">download()</span></code> function.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">download()</span></code> function requires a single argument, <code class="docutils literal notranslate"><span class="pre">lang</span></code>, which defines the language model to be downloaded.</p>
+<p>To download a language model for a given language, retrieve the two-letter language code (e.g. <code class="docutils literal notranslate"><span class="pre">wo</span></code>) for the language from <a class="reference external" href="https://stanfordnlp.github.io/stanza/available_models.html">the list of available language models</a> and pass the language code as a string object to the <code class="docutils literal notranslate"><span class="pre">lang</span></code> argument.</p>
+<p>For example, the following code would download a model for Wolof, a language spoken in West Africa that belongs to the family of Niger-Congo languages. This model has been trained using the Wolof treebank (Dione <a class="reference external" href="https://www.aclweb.org/anthology/W19-8003/">2019</a>).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Download Stanza language model for Wolof</span>
+<span class="n">stanza</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">lang</span><span class="o">=</span><span class="s1">&#39;wo&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For some languages, Stanza provides models that have been trained on different datasets. Stanza refers to models trained on different datasets as <em>packages</em>. By default, Stanza automatically downloads the package with model trained on the largest dataset available for the language in question.</p>
+<p>To select a model trained on a specific dataset, pass the name of its package as a string object to the <code class="docutils literal notranslate"><span class="pre">package</span></code> argument.</p>
+<p>To exemplify, the following command would download a model for Finnish trained on the <a class="reference external" href="https://universaldependencies.org/treebanks/fi_ftb/index.html"><em>FinnTreeBank</em></a> (package: <code class="docutils literal notranslate"><span class="pre">ftb</span></code>) dataset instead of the default model, which is trained on the <a class="reference external" href="https://universaldependencies.org/treebanks/fi_tdt/index.html"><em>Turku Dependency Treebank</em></a> dataset (package: <code class="docutils literal notranslate"><span class="pre">tbt</span></code>).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Download a Stanza language model for Finnish trained using the FinnTreeBank (package &#39;ftb&#39;)</span>
+<span class="n">stanza</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">lang</span><span class="o">=</span><span class="s1">&#39;fi&#39;</span><span class="p">,</span> <span class="n">package</span><span class="o">=</span><span class="s1">&#39;ftb&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The package names are provided in <a class="reference external" href="https://stanfordnlp.github.io/stanza/available_models.html">the list of language models</a> available for Stanza.</p>
+<div class="section" id="loading-a-language-model-into-stanza">
+<h3>Loading a language model into Stanza<a class="headerlink" href="#loading-a-language-model-into-stanza" title="Permalink to this headline">¶</a></h3>
+<p>To load a Stanza language model into Python, we must first create a <em>Pipeline</em> object by initialising an instance of the <code class="docutils literal notranslate"><span class="pre">Pipeline()</span></code> class from the <code class="docutils literal notranslate"><span class="pre">stanza</span></code> module.</p>
+<p>To exemplify this procedure, let’s initialise a pipeline with a language model for Wolof.</p>
+<p>To load a language model for Wolof into the pipeline, we must provide the string <code class="docutils literal notranslate"><span class="pre">wo</span></code> to the <code class="docutils literal notranslate"><span class="pre">lang</span></code> argument of the <code class="docutils literal notranslate"><span class="pre">Pipeline()</span></code> function.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialise a Stanza pipeline with a language model for Wolof;</span>
+<span class="c1"># assign model to variable &#39;nlp_wo&#39;.</span>
+<span class="n">nlp_wo</span> <span class="o">=</span> <span class="n">stanza</span><span class="o">.</span><span class="n">Pipeline</span><span class="p">(</span><span class="n">lang</span><span class="o">=</span><span class="s1">&#39;wo&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Call the variable to examine the output</span>
+<span class="n">nlp_wo</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;stanza.pipeline.core.Pipeline at 0x1328d4370&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Loading a language model into Stanza returns <em>Pipeline</em> object, which consists of a number of <em>processors</em> that perform various natural language processing tasks.</p>
+<p>The output above lists the processors under the heading of the same name, together with the names of the packages used to train these processors.</p>
+<p>As we learned in <a class="reference external" href="http://localhost:8888/notebooks/part_ii/04_basic_nlp_continued.ipynb#Modifying-spaCy-pipelines">Part II</a>, one might not always need all linguistic annotations created by a model, which always come with a computational cost.</p>
+<p>To speed up processing, you can define the processors to be included in the <em>Pipeline</em> object by providing the argument <code class="docutils literal notranslate"><span class="pre">processors</span></code> with a string object that contains the <a class="reference external" href="https://stanfordnlp.github.io/stanza/pipeline.html#processors">processor names</a> to be included in the pipeline, which must be separated by commas.</p>
+<p>For example, creating a <em>Pipeline</em> using the command below would only include the processors for tokenization and part-of-speech tagging into the pipeline.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialise a Stanza pipeline with a language model for Wolof;</span>
+<span class="c1"># assign model to variable &#39;nlp_wo&#39;. Only include tokenizer </span>
+<span class="c1"># and part-of-speech tagger.</span>
+<span class="n">nlp_wo</span> <span class="o">=</span> <span class="n">stanza</span><span class="o">.</span><span class="n">Pipeline</span><span class="p">(</span><span class="n">lang</span><span class="o">=</span><span class="s1">&#39;wo&#39;</span><span class="p">,</span> <span class="n">processors</span><span class="o">=</span><span class="s1">&#39;tokenize, pos&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="processing-text-using-stanza">
+<h3>Processing text using Stanza<a class="headerlink" href="#processing-text-using-stanza" title="Permalink to this headline">¶</a></h3>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+<iframe
+    width="600"
+    height="350"
+    src="https://www.youtube.com/embed/w8vvgP4dQTU"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</div></div>
+</div>
+<p>Now that we have initialised a Stanza <em>Pipeline</em> with a language model, we can feed some text in Wolof to the model under <code class="docutils literal notranslate"><span class="pre">nlp_wo</span></code> as a string object.</p>
+<p>We store the result under the variable <code class="docutils literal notranslate"><span class="pre">doc_wo</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Feed text to the model under &#39;nlp_wo&#39;; store result under the variable &#39;doc&#39;</span>
+<span class="n">doc_wo</span> <span class="o">=</span> <span class="n">nlp_wo</span><span class="p">(</span><span class="s2">&quot;Réew maa ngi lebe turam wi ci dex gi ko peek ci penku ak bëj-gànnaar, te ab balluwaayam bawoo ca Fuuta Jallon ca Ginne, di Dexug Senegaal. Ab kilimaam bu gëwéel la te di bu fendi te yor ñaari jamono: jamonoy nawet (jamonoy taw) ak ju noor (jamonoy fendi).&quot;</span><span class="p">)</span>
+
+<span class="c1"># Check the type of the output</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">doc_wo</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/thiippal/alt_build/lib/python3.9/site-packages/stanza/models/common/beam.py:86: UserWarning: __floordiv__ is deprecated, and its behavior will change in a future version of pytorch. It currently rounds toward 0 (like the &#39;trunc&#39; function NOT &#39;floor&#39;). This results in incorrect rounding for negative values. To keep the current behavior, use torch.div(a, b, rounding_mode=&#39;trunc&#39;), or for actual floor division, use torch.div(a, b, rounding_mode=&#39;floor&#39;).
+  prevK = bestScoresId // numWords
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>stanza.models.common.doc.Document
+</pre></div>
+</div>
+</div>
+</div>
+<p>This returns a Stanza <a class="reference external" href="https://stanfordnlp.github.io/stanza/data_objects.html#document"><em>Document</em></a> object, which contains the linguistic annotations created by passing the text through the pipeline.</p>
+<p>The attribute <code class="docutils literal notranslate"><span class="pre">sentences</span></code> of a Stanza <em>Document</em> object contains a list, where each item contains a single sentence.</p>
+<p>Thus we can use brackets to access the first item <code class="docutils literal notranslate"><span class="pre">[0]</span></code> in the list.</p>
+<div class="cell tag_output_scroll docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the first item in the list of sentences</span>
+<span class="n">doc_wo</span><span class="o">.</span><span class="n">sentences</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[
+  {
+    &quot;id&quot;: 1,
+    &quot;text&quot;: &quot;Réew&quot;,
+    &quot;lemma&quot;: &quot;réew&quot;,
+    &quot;upos&quot;: &quot;NOUN&quot;,
+    &quot;xpos&quot;: &quot;NOUN&quot;,
+    &quot;head&quot;: 4,
+    &quot;deprel&quot;: &quot;nsubj&quot;,
+    &quot;start_char&quot;: 0,
+    &quot;end_char&quot;: 4
+  },
+  {
+    &quot;id&quot;: 2,
+    &quot;text&quot;: &quot;maa&quot;,
+    &quot;lemma&quot;: &quot;a&quot;,
+    &quot;upos&quot;: &quot;AUX&quot;,
+    &quot;xpos&quot;: &quot;AUX&quot;,
+    &quot;feats&quot;: &quot;PronType=Prs&quot;,
+    &quot;head&quot;: 4,
+    &quot;deprel&quot;: &quot;aux&quot;,
+    &quot;start_char&quot;: 5,
+    &quot;end_char&quot;: 8
+  },
+  {
+    &quot;id&quot;: 3,
+    &quot;text&quot;: &quot;ngi&quot;,
+    &quot;lemma&quot;: &quot;ngi&quot;,
+    &quot;upos&quot;: &quot;AUX&quot;,
+    &quot;xpos&quot;: &quot;AUX&quot;,
+    &quot;feats&quot;: &quot;Aspect=Prog&quot;,
+    &quot;head&quot;: 4,
+    &quot;deprel&quot;: &quot;aux&quot;,
+    &quot;start_char&quot;: 9,
+    &quot;end_char&quot;: 12
+  },
+  {
+    &quot;id&quot;: 4,
+    &quot;text&quot;: &quot;lebe&quot;,
+    &quot;lemma&quot;: &quot;lebe&quot;,
+    &quot;upos&quot;: &quot;VERB&quot;,
+    &quot;xpos&quot;: &quot;VERB&quot;,
+    &quot;feats&quot;: &quot;Mood=Ind|VerbForm=Fin&quot;,
+    &quot;head&quot;: 0,
+    &quot;deprel&quot;: &quot;root&quot;,
+    &quot;start_char&quot;: 13,
+    &quot;end_char&quot;: 17
+  },
+  {
+    &quot;id&quot;: 5,
+    &quot;text&quot;: &quot;turam&quot;,
+    &quot;lemma&quot;: &quot;tur&quot;,
+    &quot;upos&quot;: &quot;NOUN&quot;,
+    &quot;xpos&quot;: &quot;NOUN&quot;,
+    &quot;feats&quot;: &quot;Number=Sing|Poss=Yes&quot;,
+    &quot;head&quot;: 4,
+    &quot;deprel&quot;: &quot;obj&quot;,
+    &quot;start_char&quot;: 18,
+    &quot;end_char&quot;: 23
+  },
+  {
+    &quot;id&quot;: 6,
+    &quot;text&quot;: &quot;wi&quot;,
+    &quot;lemma&quot;: &quot;bi&quot;,
+    &quot;upos&quot;: &quot;DET&quot;,
+    &quot;xpos&quot;: &quot;DET&quot;,
+    &quot;feats&quot;: &quot;Definite=Def|Deixis=Prox|NounClass=Wol10|Number=Sing|PronType=Art&quot;,
+    &quot;head&quot;: 5,
+    &quot;deprel&quot;: &quot;det&quot;,
+    &quot;start_char&quot;: 24,
+    &quot;end_char&quot;: 26
+  },
+  {
+    &quot;id&quot;: 7,
+    &quot;text&quot;: &quot;ci&quot;,
+    &quot;lemma&quot;: &quot;ci&quot;,
+    &quot;upos&quot;: &quot;ADP&quot;,
+    &quot;xpos&quot;: &quot;PREP&quot;,
+    &quot;head&quot;: 8,
+    &quot;deprel&quot;: &quot;case&quot;,
+    &quot;start_char&quot;: 27,
+    &quot;end_char&quot;: 29
+  },
+  {
+    &quot;id&quot;: 8,
+    &quot;text&quot;: &quot;dex&quot;,
+    &quot;lemma&quot;: &quot;dex&quot;,
+    &quot;upos&quot;: &quot;NOUN&quot;,
+    &quot;xpos&quot;: &quot;NOUN&quot;,
+    &quot;head&quot;: 4,
+    &quot;deprel&quot;: &quot;obl&quot;,
+    &quot;start_char&quot;: 30,
+    &quot;end_char&quot;: 33
+  },
+  {
+    &quot;id&quot;: 9,
+    &quot;text&quot;: &quot;gi&quot;,
+    &quot;lemma&quot;: &quot;bi&quot;,
+    &quot;upos&quot;: &quot;PRON&quot;,
+    &quot;xpos&quot;: &quot;PRON&quot;,
+    &quot;feats&quot;: &quot;Definite=Def|Deixis=Prox|NounClass=Wol3|Number=Sing|Person=3|PronType=Rel&quot;,
+    &quot;head&quot;: 11,
+    &quot;deprel&quot;: &quot;nsubj&quot;,
+    &quot;start_char&quot;: 34,
+    &quot;end_char&quot;: 36
+  },
+  {
+    &quot;id&quot;: 10,
+    &quot;text&quot;: &quot;ko&quot;,
+    &quot;lemma&quot;: &quot;ko&quot;,
+    &quot;upos&quot;: &quot;PRON&quot;,
+    &quot;xpos&quot;: &quot;CL&quot;,
+    &quot;feats&quot;: &quot;Case=Acc|Number=Sing|Person=3|PronType=Prs&quot;,
+    &quot;head&quot;: 11,
+    &quot;deprel&quot;: &quot;obj&quot;,
+    &quot;start_char&quot;: 37,
+    &quot;end_char&quot;: 39
+  },
+  {
+    &quot;id&quot;: 11,
+    &quot;text&quot;: &quot;peek&quot;,
+    &quot;lemma&quot;: &quot;peek&quot;,
+    &quot;upos&quot;: &quot;VERB&quot;,
+    &quot;xpos&quot;: &quot;VERB&quot;,
+    &quot;feats&quot;: &quot;Mood=Ind|VerbForm=Fin&quot;,
+    &quot;head&quot;: 8,
+    &quot;deprel&quot;: &quot;acl:relcl&quot;,
+    &quot;start_char&quot;: 40,
+    &quot;end_char&quot;: 44
+  },
+  {
+    &quot;id&quot;: 12,
+    &quot;text&quot;: &quot;ci&quot;,
+    &quot;lemma&quot;: &quot;ci&quot;,
+    &quot;upos&quot;: &quot;ADP&quot;,
+    &quot;xpos&quot;: &quot;PREP&quot;,
+    &quot;head&quot;: 13,
+    &quot;deprel&quot;: &quot;case&quot;,
+    &quot;start_char&quot;: 45,
+    &quot;end_char&quot;: 47
+  },
+  {
+    &quot;id&quot;: 13,
+    &quot;text&quot;: &quot;penku&quot;,
+    &quot;lemma&quot;: &quot;penku&quot;,
+    &quot;upos&quot;: &quot;NOUN&quot;,
+    &quot;xpos&quot;: &quot;NOUN&quot;,
+    &quot;head&quot;: 11,
+    &quot;deprel&quot;: &quot;obl&quot;,
+    &quot;start_char&quot;: 48,
+    &quot;end_char&quot;: 53
+  },
+  {
+    &quot;id&quot;: 14,
+    &quot;text&quot;: &quot;ak&quot;,
+    &quot;lemma&quot;: &quot;ak&quot;,
+    &quot;upos&quot;: &quot;CCONJ&quot;,
+    &quot;xpos&quot;: &quot;CONJ&quot;,
+    &quot;head&quot;: 15,
+    &quot;deprel&quot;: &quot;cc&quot;,
+    &quot;start_char&quot;: 54,
+    &quot;end_char&quot;: 56
+  },
+  {
+    &quot;id&quot;: 15,
+    &quot;text&quot;: &quot;bëj-gànnaar&quot;,
+    &quot;lemma&quot;: &quot;bëj-gànnaar&quot;,
+    &quot;upos&quot;: &quot;NOUN&quot;,
+    &quot;xpos&quot;: &quot;NOUN&quot;,
+    &quot;head&quot;: 13,
+    &quot;deprel&quot;: &quot;conj&quot;,
+    &quot;start_char&quot;: 57,
+    &quot;end_char&quot;: 68
+  },
+  {
+    &quot;id&quot;: 16,
+    &quot;text&quot;: &quot;,&quot;,
+    &quot;lemma&quot;: &quot;,&quot;,
+    &quot;upos&quot;: &quot;PUNCT&quot;,
+    &quot;xpos&quot;: &quot;COMMA&quot;,
+    &quot;head&quot;: 20,
+    &quot;deprel&quot;: &quot;punct&quot;,
+    &quot;start_char&quot;: 68,
+    &quot;end_char&quot;: 69
+  },
+  {
+    &quot;id&quot;: 17,
+    &quot;text&quot;: &quot;te&quot;,
+    &quot;lemma&quot;: &quot;te&quot;,
+    &quot;upos&quot;: &quot;CCONJ&quot;,
+    &quot;xpos&quot;: &quot;CONJ&quot;,
+    &quot;head&quot;: 20,
+    &quot;deprel&quot;: &quot;cc&quot;,
+    &quot;start_char&quot;: 70,
+    &quot;end_char&quot;: 72
+  },
+  {
+    &quot;id&quot;: 18,
+    &quot;text&quot;: &quot;ab&quot;,
+    &quot;lemma&quot;: &quot;ab&quot;,
+    &quot;upos&quot;: &quot;DET&quot;,
+    &quot;xpos&quot;: &quot;DET&quot;,
+    &quot;feats&quot;: &quot;Definite=Ind|NounClass=Wol5|Number=Sing|PronType=Art&quot;,
+    &quot;head&quot;: 19,
+    &quot;deprel&quot;: &quot;det&quot;,
+    &quot;start_char&quot;: 73,
+    &quot;end_char&quot;: 75
+  },
+  {
+    &quot;id&quot;: 19,
+    &quot;text&quot;: &quot;balluwaayam&quot;,
+    &quot;lemma&quot;: &quot;balluwaay&quot;,
+    &quot;upos&quot;: &quot;NOUN&quot;,
+    &quot;xpos&quot;: &quot;NOUN&quot;,
+    &quot;feats&quot;: &quot;Number=Sing|Poss=Yes&quot;,
+    &quot;head&quot;: 20,
+    &quot;deprel&quot;: &quot;nsubj&quot;,
+    &quot;start_char&quot;: 76,
+    &quot;end_char&quot;: 87
+  },
+  {
+    &quot;id&quot;: 20,
+    &quot;text&quot;: &quot;bawoo&quot;,
+    &quot;lemma&quot;: &quot;bawoo&quot;,
+    &quot;upos&quot;: &quot;VERB&quot;,
+    &quot;xpos&quot;: &quot;VERB&quot;,
+    &quot;feats&quot;: &quot;Mood=Ind|VerbForm=Fin&quot;,
+    &quot;head&quot;: 4,
+    &quot;deprel&quot;: &quot;conj&quot;,
+    &quot;start_char&quot;: 88,
+    &quot;end_char&quot;: 93
+  },
+  {
+    &quot;id&quot;: 21,
+    &quot;text&quot;: &quot;ca&quot;,
+    &quot;lemma&quot;: &quot;ca&quot;,
+    &quot;upos&quot;: &quot;ADP&quot;,
+    &quot;xpos&quot;: &quot;PREP&quot;,
+    &quot;head&quot;: 22,
+    &quot;deprel&quot;: &quot;case&quot;,
+    &quot;start_char&quot;: 94,
+    &quot;end_char&quot;: 96
+  },
+  {
+    &quot;id&quot;: 22,
+    &quot;text&quot;: &quot;Fuuta&quot;,
+    &quot;lemma&quot;: &quot;Fuuta&quot;,
+    &quot;upos&quot;: &quot;PROPN&quot;,
+    &quot;xpos&quot;: &quot;NAME&quot;,
+    &quot;head&quot;: 20,
+    &quot;deprel&quot;: &quot;obl&quot;,
+    &quot;start_char&quot;: 97,
+    &quot;end_char&quot;: 102
+  },
+  {
+    &quot;id&quot;: 23,
+    &quot;text&quot;: &quot;Jallon&quot;,
+    &quot;lemma&quot;: &quot;Jallon&quot;,
+    &quot;upos&quot;: &quot;PROPN&quot;,
+    &quot;xpos&quot;: &quot;NAME&quot;,
+    &quot;head&quot;: 22,
+    &quot;deprel&quot;: &quot;flat&quot;,
+    &quot;start_char&quot;: 103,
+    &quot;end_char&quot;: 109
+  },
+  {
+    &quot;id&quot;: 24,
+    &quot;text&quot;: &quot;ca&quot;,
+    &quot;lemma&quot;: &quot;ca&quot;,
+    &quot;upos&quot;: &quot;ADP&quot;,
+    &quot;xpos&quot;: &quot;PREP&quot;,
+    &quot;head&quot;: 25,
+    &quot;deprel&quot;: &quot;case&quot;,
+    &quot;start_char&quot;: 110,
+    &quot;end_char&quot;: 112
+  },
+  {
+    &quot;id&quot;: 25,
+    &quot;text&quot;: &quot;Ginne&quot;,
+    &quot;lemma&quot;: &quot;Ginne&quot;,
+    &quot;upos&quot;: &quot;PROPN&quot;,
+    &quot;xpos&quot;: &quot;NAME&quot;,
+    &quot;head&quot;: 20,
+    &quot;deprel&quot;: &quot;obl&quot;,
+    &quot;start_char&quot;: 113,
+    &quot;end_char&quot;: 118
+  },
+  {
+    &quot;id&quot;: 26,
+    &quot;text&quot;: &quot;,&quot;,
+    &quot;lemma&quot;: &quot;,&quot;,
+    &quot;upos&quot;: &quot;PUNCT&quot;,
+    &quot;xpos&quot;: &quot;COMMA&quot;,
+    &quot;head&quot;: 28,
+    &quot;deprel&quot;: &quot;punct&quot;,
+    &quot;start_char&quot;: 118,
+    &quot;end_char&quot;: 119
+  },
+  {
+    &quot;id&quot;: 27,
+    &quot;text&quot;: &quot;di&quot;,
+    &quot;lemma&quot;: &quot;di&quot;,
+    &quot;upos&quot;: &quot;AUX&quot;,
+    &quot;xpos&quot;: &quot;COP&quot;,
+    &quot;feats&quot;: &quot;Aspect=Imp|Mood=Ind|Tense=Pres|VerbForm=Fin&quot;,
+    &quot;head&quot;: 28,
+    &quot;deprel&quot;: &quot;cop&quot;,
+    &quot;start_char&quot;: 120,
+    &quot;end_char&quot;: 122
+  },
+  {
+    &quot;id&quot;: 28,
+    &quot;text&quot;: &quot;Dexug&quot;,
+    &quot;lemma&quot;: &quot;dex&quot;,
+    &quot;upos&quot;: &quot;NOUN&quot;,
+    &quot;xpos&quot;: &quot;NOUN&quot;,
+    &quot;feats&quot;: &quot;Case=Gen|Number=Sing&quot;,
+    &quot;head&quot;: 22,
+    &quot;deprel&quot;: &quot;appos&quot;,
+    &quot;start_char&quot;: 123,
+    &quot;end_char&quot;: 128
+  },
+  {
+    &quot;id&quot;: 29,
+    &quot;text&quot;: &quot;Senegaal&quot;,
+    &quot;lemma&quot;: &quot;Senegaal&quot;,
+    &quot;upos&quot;: &quot;PROPN&quot;,
+    &quot;xpos&quot;: &quot;NAME&quot;,
+    &quot;head&quot;: 28,
+    &quot;deprel&quot;: &quot;nmod&quot;,
+    &quot;start_char&quot;: 129,
+    &quot;end_char&quot;: 137
+  },
+  {
+    &quot;id&quot;: 30,
+    &quot;text&quot;: &quot;.&quot;,
+    &quot;lemma&quot;: &quot;.&quot;,
+    &quot;upos&quot;: &quot;PUNCT&quot;,
+    &quot;xpos&quot;: &quot;PERIOD&quot;,
+    &quot;head&quot;: 4,
+    &quot;deprel&quot;: &quot;punct&quot;,
+    &quot;start_char&quot;: 137,
+    &quot;end_char&quot;: 138
+  }
+]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Although the output contains both brackets <code class="docutils literal notranslate"><span class="pre">[]</span></code> and curly braces <code class="docutils literal notranslate"><span class="pre">{}</span></code>, which Python typically uses for marking lists and dictionaries, respectively, the output is not a list with nested dictionaries, but a Stanza <a class="reference external" href="https://stanfordnlp.github.io/stanza/data_objects.html#sentence"><em>Sentence</em></a> object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the type of the first item in the Document object</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">doc_wo</span><span class="o">.</span><span class="n">sentences</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>stanza.models.common.doc.Sentence
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <em>Sentence</em> object contains <a class="reference external" href="https://stanfordnlp.github.io/stanza/data_objects.html#sentence">various attributes and methods</a> for accessing the linguistic annotations created by the language model.</p>
+<p>If we wish to interact with the annotations using data structures native to Python, we can use the <code class="docutils literal notranslate"><span class="pre">to_dict()</span></code> method to cast the annotations into a list of dictionaries, in which each dictionary stands for a single Stanza <a class="reference external" href="https://stanfordnlp.github.io/stanza/data_objects.html#token"><em>Token</em></a> object.</p>
+<p>The <em>key</em> and <em>value</em> pairs in these dictionaries contain the linguistic annotations for each <em>Token</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cast the first Sentence object into a Python dictionary; store under variable &#39;doc_dict&#39;</span>
+<span class="n">doc_dict</span> <span class="o">=</span> <span class="n">doc_wo</span><span class="o">.</span><span class="n">sentences</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+
+<span class="c1"># Get the dictionary for the first Token</span>
+<span class="n">doc_dict</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;id&#39;: 1,
+ &#39;text&#39;: &#39;Réew&#39;,
+ &#39;lemma&#39;: &#39;réew&#39;,
+ &#39;upos&#39;: &#39;NOUN&#39;,
+ &#39;xpos&#39;: &#39;NOUN&#39;,
+ &#39;head&#39;: 4,
+ &#39;deprel&#39;: &#39;nsubj&#39;,
+ &#39;start_char&#39;: 0,
+ &#39;end_char&#39;: 4}
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, the dictionary consists of key and value pairs, which hold the linguistic annotations.</p>
+<p>We can retrieve a list of keys available for a Python dictionary using the <code class="docutils literal notranslate"><span class="pre">keys()</span></code> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get a list of keys for the first Token in the dictionary &#39;doc_dict&#39;</span>
+<span class="n">doc_dict</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_keys([&#39;id&#39;, &#39;text&#39;, &#39;lemma&#39;, &#39;upos&#39;, &#39;xpos&#39;, &#39;head&#39;, &#39;deprel&#39;, &#39;start_char&#39;, &#39;end_char&#39;])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now that we have listed the keys, let’s retrieve the value under the key <code class="docutils literal notranslate"><span class="pre">lemma</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the value under key &#39;lemma&#39; for the first item [0] in the dictionary &#39;doc_dict&#39;</span>
+<span class="n">doc_dict</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;lemma&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;réew&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>This returns the lemma of the word “réew”, which stands for “country”.</p>
+</div>
+<div class="section" id="processing-multiple-texts-using-stanza">
+<h3>Processing multiple texts using Stanza<a class="headerlink" href="#processing-multiple-texts-using-stanza" title="Permalink to this headline">¶</a></h3>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+<iframe
+    width="600"
+    height="350"
+    src="https://www.youtube.com/embed/L2MmfJ3x5Jk"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</div></div>
+</div>
+<p>To process multiple documents with Stanza, the most efficent way is to first collect the documents as string objects into a Python list.</p>
+<p>Let’s define a toy example with a couple of example documents in Wolof and store them as string objects into a list under the variable <code class="docutils literal notranslate"><span class="pre">str_docs</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a Python list consisting of two strings</span>
+<span class="n">str_docs</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Lislaam a ngi njëkk a tàbbi ci Senegaal ci diggante VIIIeelu xarnu ak IXeelu xarnu, ña ko fa dugal di ay yaxantukat yu araab-yu-berber.&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;Li ëpp ci gëstu yi ñu def ci wàllug Gëstu-askan (walla demogaraafi) ci Senegaal dafa sukkandiku ci Waññ (recensement) yi ñu jotoon a def ci 1976, 1988 rawati na 2002.&#39;</span><span class="p">]</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we create a list of Stanza <em>Document</em> objects using a Python list comprehension. These <em>Document</em> objects are annotated for their linguistic features when they are passed through a <em>Pipeline</em> object.</p>
+<p>At this stage, we simply cast each string in the list <code class="docutils literal notranslate"><span class="pre">str_docs</span></code> to a Stanza <em>Document</em> object. We store the result into a list named <code class="docutils literal notranslate"><span class="pre">docs_wo_in</span></code>.</p>
+<p>Before proceeding to create the <em>Document</em> objects, let’s examine how the list comprehension is structured by taking apart its syntax step by step.</p>
+<p>The list comprehension is like a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop, which was introduced in <a class="reference external" href="../part_ii/01_basic_text_processing.html#manipulating-text">Part II</a>, which uses the contents of an existing list to create a new list.</p>
+<p>To begin with, just like lists, list comprehensions are marked using surrounding brackets <code class="docutils literal notranslate"><span class="pre">[]</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">docs_wo_in</span> <span class="o">=</span> <span class="p">[]</span>
+</pre></div>
+</div>
+<p>Next, on the right-hand side of the <code class="docutils literal notranslate"><span class="pre">for</span></code> statement, we use the variable <code class="docutils literal notranslate"><span class="pre">doc</span></code> to refer to items in the list <code class="docutils literal notranslate"><span class="pre">str_docs</span></code> that we are looping over.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">docs_wo_in</span> <span class="o">=</span> <span class="p">[</span><span class="o">...</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">str_docs</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Now that we can refer to list items using the variable <code class="docutils literal notranslate"><span class="pre">doc</span></code>, we can define what we do to each item on the left-hand side of the <code class="docutils literal notranslate"><span class="pre">for</span></code> statement.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">docs_wo_in</span> <span class="o">=</span> <span class="p">[</span><span class="n">stanza</span><span class="o">.</span><span class="n">Document</span><span class="p">([],</span> <span class="n">text</span><span class="o">=</span><span class="n">doc</span><span class="p">)</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">str_docs</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>For each item in the list <code class="docutils literal notranslate"><span class="pre">str_docs</span></code>, we initialise an empty <code class="docutils literal notranslate"><span class="pre">Document</span></code> object and pass two inputs to this object:</p>
+<ol class="simple">
+<li><p>an empty list <code class="docutils literal notranslate"><span class="pre">[]</span></code> that will be populated with linguistic annotations,</p></li>
+<li><p>the contents of the string variable under <code class="docutils literal notranslate"><span class="pre">doc</span></code> to the argument <code class="docutils literal notranslate"><span class="pre">text</span></code>.</p></li>
+</ol>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use a list comprehension to create a Python list with Stanza Document objects.</span>
+<span class="n">docs_wo_in</span> <span class="o">=</span> <span class="p">[</span><span class="n">stanza</span><span class="o">.</span><span class="n">Document</span><span class="p">([],</span> <span class="n">text</span><span class="o">=</span><span class="n">doc</span><span class="p">)</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">str_docs</span><span class="p">]</span>
+
+<span class="c1"># Call the variable to check the output</span>
+<span class="n">docs_wo_in</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[], []]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Don’t let the output fool you here: what looks like two empty Python lists nested within a list are actually Stanza <em>Document</em> objects.</p>
+<p>Let’s use the brackets to access and examine the first <em>Document</em> object in the list <code class="docutils literal notranslate"><span class="pre">docs_wo_in</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the type of the first item in the list &#39;docs_wo_in&#39;</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">docs_wo_in</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>stanza.models.common.doc.Document
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, the object is indeed a Stanza <em>Document</em> object.</p>
+<p>We can verify that our input texts made it into this document by examining the <code class="docutils literal notranslate"><span class="pre">text</span></code> attribute.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the contents of the &#39;text&#39; attribute under the </span>
+<span class="c1"># first Sentence in the list &#39;docs_wo_in&#39;</span>
+<span class="n">docs_wo_in</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Lislaam a ngi njëkk a tàbbi ci Senegaal ci diggante VIIIeelu xarnu ak IXeelu xarnu, ña ko fa dugal di ay yaxantukat yu araab-yu-berber.&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now that we have a list of Stanza <em>Document</em> objects, we can pass them all at once to the language model for annotation.</p>
+<p>This can be achieved by simply providing the list as input to the Wolof language model stored under <code class="docutils literal notranslate"><span class="pre">nlp_wo</span></code>.</p>
+<p>We then store the annotated Stanza <em>Document</em> objects under the variable <code class="docutils literal notranslate"><span class="pre">docs_wo_out</span></code>.</p>
+<div class="cell tag_output_scroll docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pass the list of Document objects to the language model &#39;nlp_wo&#39;</span>
+<span class="c1"># for annotation.</span>
+<span class="n">docs_wo_out</span> <span class="o">=</span> <span class="n">nlp_wo</span><span class="p">(</span><span class="n">docs_wo_in</span><span class="p">)</span>
+
+<span class="c1"># Call the variable to check the output</span>
+<span class="n">docs_wo_out</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[
+   [
+     {
+       &quot;id&quot;: 1,
+       &quot;text&quot;: &quot;Lislaam&quot;,
+       &quot;lemma&quot;: &quot;Lislaam&quot;,
+       &quot;upos&quot;: &quot;PROPN&quot;,
+       &quot;xpos&quot;: &quot;NAME&quot;,
+       &quot;head&quot;: 4,
+       &quot;deprel&quot;: &quot;nsubj&quot;,
+       &quot;start_char&quot;: 0,
+       &quot;end_char&quot;: 7
+     },
+     {
+       &quot;id&quot;: 2,
+       &quot;text&quot;: &quot;a&quot;,
+       &quot;lemma&quot;: &quot;a&quot;,
+       &quot;upos&quot;: &quot;AUX&quot;,
+       &quot;xpos&quot;: &quot;AUX&quot;,
+       &quot;feats&quot;: &quot;PronType=Prs&quot;,
+       &quot;head&quot;: 4,
+       &quot;deprel&quot;: &quot;aux&quot;,
+       &quot;start_char&quot;: 8,
+       &quot;end_char&quot;: 9
+     },
+     {
+       &quot;id&quot;: 3,
+       &quot;text&quot;: &quot;ngi&quot;,
+       &quot;lemma&quot;: &quot;ngi&quot;,
+       &quot;upos&quot;: &quot;AUX&quot;,
+       &quot;xpos&quot;: &quot;AUX&quot;,
+       &quot;feats&quot;: &quot;Aspect=Prog&quot;,
+       &quot;head&quot;: 4,
+       &quot;deprel&quot;: &quot;aux&quot;,
+       &quot;start_char&quot;: 10,
+       &quot;end_char&quot;: 13
+     },
+     {
+       &quot;id&quot;: 4,
+       &quot;text&quot;: &quot;njëkk&quot;,
+       &quot;lemma&quot;: &quot;njëkk&quot;,
+       &quot;upos&quot;: &quot;VERB&quot;,
+       &quot;xpos&quot;: &quot;VERB&quot;,
+       &quot;feats&quot;: &quot;Mood=Ind|VerbForm=Fin&quot;,
+       &quot;head&quot;: 0,
+       &quot;deprel&quot;: &quot;root&quot;,
+       &quot;start_char&quot;: 14,
+       &quot;end_char&quot;: 19
+     },
+     {
+       &quot;id&quot;: 5,
+       &quot;text&quot;: &quot;a&quot;,
+       &quot;lemma&quot;: &quot;a&quot;,
+       &quot;upos&quot;: &quot;PART&quot;,
+       &quot;xpos&quot;: &quot;PART&quot;,
+       &quot;head&quot;: 6,
+       &quot;deprel&quot;: &quot;mark&quot;,
+       &quot;start_char&quot;: 20,
+       &quot;end_char&quot;: 21
+     },
+     {
+       &quot;id&quot;: 6,
+       &quot;text&quot;: &quot;tàbbi&quot;,
+       &quot;lemma&quot;: &quot;tàbbi&quot;,
+       &quot;upos&quot;: &quot;VERB&quot;,
+       &quot;xpos&quot;: &quot;VERB&quot;,
+       &quot;feats&quot;: &quot;VerbForm=Inf&quot;,
+       &quot;head&quot;: 4,
+       &quot;deprel&quot;: &quot;xcomp&quot;,
+       &quot;start_char&quot;: 22,
+       &quot;end_char&quot;: 27
+     },
+     {
+       &quot;id&quot;: 7,
+       &quot;text&quot;: &quot;ci&quot;,
+       &quot;lemma&quot;: &quot;ci&quot;,
+       &quot;upos&quot;: &quot;ADP&quot;,
+       &quot;xpos&quot;: &quot;PREP&quot;,
+       &quot;head&quot;: 8,
+       &quot;deprel&quot;: &quot;case&quot;,
+       &quot;start_char&quot;: 28,
+       &quot;end_char&quot;: 30
+     },
+     {
+       &quot;id&quot;: 8,
+       &quot;text&quot;: &quot;Senegaal&quot;,
+       &quot;lemma&quot;: &quot;Senegaal&quot;,
+       &quot;upos&quot;: &quot;PROPN&quot;,
+       &quot;xpos&quot;: &quot;NAME&quot;,
+       &quot;head&quot;: 6,
+       &quot;deprel&quot;: &quot;obl&quot;,
+       &quot;start_char&quot;: 31,
+       &quot;end_char&quot;: 39
+     },
+     {
+       &quot;id&quot;: 9,
+       &quot;text&quot;: &quot;ci&quot;,
+       &quot;lemma&quot;: &quot;ci&quot;,
+       &quot;upos&quot;: &quot;ADP&quot;,
+       &quot;xpos&quot;: &quot;PREP&quot;,
+       &quot;head&quot;: 12,
+       &quot;deprel&quot;: &quot;case&quot;,
+       &quot;start_char&quot;: 40,
+       &quot;end_char&quot;: 42
+     },
+     {
+       &quot;id&quot;: 10,
+       &quot;text&quot;: &quot;diggante&quot;,
+       &quot;lemma&quot;: &quot;diggante&quot;,
+       &quot;upos&quot;: &quot;NOUN&quot;,
+       &quot;xpos&quot;: &quot;NOUN&quot;,
+       &quot;head&quot;: 9,
+       &quot;deprel&quot;: &quot;fixed&quot;,
+       &quot;start_char&quot;: 43,
+       &quot;end_char&quot;: 51
+     },
+     {
+       &quot;id&quot;: 11,
+       &quot;text&quot;: &quot;VIIIeelu&quot;,
+       &quot;lemma&quot;: &quot;VIII&quot;,
+       &quot;upos&quot;: &quot;NUM&quot;,
+       &quot;xpos&quot;: &quot;NUMBER&quot;,
+       &quot;feats&quot;: &quot;NumType=Ord&quot;,
+       &quot;head&quot;: 12,
+       &quot;deprel&quot;: &quot;nummod&quot;,
+       &quot;start_char&quot;: 52,
+       &quot;end_char&quot;: 60
+     },
+     {
+       &quot;id&quot;: 12,
+       &quot;text&quot;: &quot;xarnu&quot;,
+       &quot;lemma&quot;: &quot;xarnu&quot;,
+       &quot;upos&quot;: &quot;NOUN&quot;,
+       &quot;xpos&quot;: &quot;NOUN&quot;,
+       &quot;head&quot;: 6,
+       &quot;deprel&quot;: &quot;obl&quot;,
+       &quot;start_char&quot;: 61,
+       &quot;end_char&quot;: 66
+     },
+     {
+       &quot;id&quot;: 13,
+       &quot;text&quot;: &quot;ak&quot;,
+       &quot;lemma&quot;: &quot;ak&quot;,
+       &quot;upos&quot;: &quot;CCONJ&quot;,
+       &quot;xpos&quot;: &quot;CONJ&quot;,
+       &quot;head&quot;: 14,
+       &quot;deprel&quot;: &quot;cc&quot;,
+       &quot;start_char&quot;: 67,
+       &quot;end_char&quot;: 69
+     },
+     {
+       &quot;id&quot;: 14,
+       &quot;text&quot;: &quot;IXeelu&quot;,
+       &quot;lemma&quot;: &quot;IX&quot;,
+       &quot;upos&quot;: &quot;NUM&quot;,
+       &quot;xpos&quot;: &quot;NUMBER&quot;,
+       &quot;feats&quot;: &quot;NumType=Ord&quot;,
+       &quot;head&quot;: 15,
+       &quot;deprel&quot;: &quot;nummod&quot;,
+       &quot;start_char&quot;: 70,
+       &quot;end_char&quot;: 76
+     },
+     {
+       &quot;id&quot;: 15,
+       &quot;text&quot;: &quot;xarnu&quot;,
+       &quot;lemma&quot;: &quot;xarnu&quot;,
+       &quot;upos&quot;: &quot;NOUN&quot;,
+       &quot;xpos&quot;: &quot;NOUN&quot;,
+       &quot;head&quot;: 12,
+       &quot;deprel&quot;: &quot;conj&quot;,
+       &quot;start_char&quot;: 77,
+       &quot;end_char&quot;: 82
+     },
+     {
+       &quot;id&quot;: 16,
+       &quot;text&quot;: &quot;,&quot;,
+       &quot;lemma&quot;: &quot;,&quot;,
+       &quot;upos&quot;: &quot;PUNCT&quot;,
+       &quot;xpos&quot;: &quot;COMMA&quot;,
+       &quot;head&quot;: 23,
+       &quot;deprel&quot;: &quot;punct&quot;,
+       &quot;start_char&quot;: 82,
+       &quot;end_char&quot;: 83
+     },
+     {
+       &quot;id&quot;: 17,
+       &quot;text&quot;: &quot;ña&quot;,
+       &quot;lemma&quot;: &quot;ba&quot;,
+       &quot;upos&quot;: &quot;PRON&quot;,
+       &quot;xpos&quot;: &quot;PRON&quot;,
+       &quot;feats&quot;: &quot;Definite=Def|Deixis=Remt|NounClass=Wol2|Number=Plur|Person=3|PronType=Rel&quot;,
+       &quot;head&quot;: 23,
+       &quot;deprel&quot;: &quot;nsubj&quot;,
+       &quot;start_char&quot;: 84,
+       &quot;end_char&quot;: 86
+     },
+     {
+       &quot;id&quot;: 18,
+       &quot;text&quot;: &quot;ko&quot;,
+       &quot;lemma&quot;: &quot;ko&quot;,
+       &quot;upos&quot;: &quot;PRON&quot;,
+       &quot;xpos&quot;: &quot;CL&quot;,
+       &quot;feats&quot;: &quot;Case=Acc|Number=Sing|Person=3|PronType=Prs&quot;,
+       &quot;head&quot;: 20,
+       &quot;deprel&quot;: &quot;obj&quot;,
+       &quot;start_char&quot;: 87,
+       &quot;end_char&quot;: 89
+     },
+     {
+       &quot;id&quot;: 19,
+       &quot;text&quot;: &quot;fa&quot;,
+       &quot;lemma&quot;: &quot;fa&quot;,
+       &quot;upos&quot;: &quot;ADV&quot;,
+       &quot;xpos&quot;: &quot;ADV&quot;,
+       &quot;feats&quot;: &quot;Deixis=Remt|NounClass=Wol11|PronType=Dem&quot;,
+       &quot;head&quot;: 20,
+       &quot;deprel&quot;: &quot;advmod&quot;,
+       &quot;start_char&quot;: 90,
+       &quot;end_char&quot;: 92
+     },
+     {
+       &quot;id&quot;: 20,
+       &quot;text&quot;: &quot;dugal&quot;,
+       &quot;lemma&quot;: &quot;dugal&quot;,
+       &quot;upos&quot;: &quot;VERB&quot;,
+       &quot;xpos&quot;: &quot;VERB&quot;,
+       &quot;feats&quot;: &quot;Mood=Ind|VerbForm=Fin&quot;,
+       &quot;head&quot;: 17,
+       &quot;deprel&quot;: &quot;acl:relcl&quot;,
+       &quot;start_char&quot;: 93,
+       &quot;end_char&quot;: 98
+     },
+     {
+       &quot;id&quot;: 21,
+       &quot;text&quot;: &quot;di&quot;,
+       &quot;lemma&quot;: &quot;di&quot;,
+       &quot;upos&quot;: &quot;AUX&quot;,
+       &quot;xpos&quot;: &quot;COP&quot;,
+       &quot;feats&quot;: &quot;Aspect=Imp|Mood=Ind|Tense=Pres|VerbForm=Fin&quot;,
+       &quot;head&quot;: 23,
+       &quot;deprel&quot;: &quot;cop&quot;,
+       &quot;start_char&quot;: 99,
+       &quot;end_char&quot;: 101
+     },
+     {
+       &quot;id&quot;: 22,
+       &quot;text&quot;: &quot;ay&quot;,
+       &quot;lemma&quot;: &quot;ab&quot;,
+       &quot;upos&quot;: &quot;DET&quot;,
+       &quot;xpos&quot;: &quot;DET&quot;,
+       &quot;feats&quot;: &quot;Definite=Ind|NounClass=Wol8|Number=Plur|PronType=Art&quot;,
+       &quot;head&quot;: 23,
+       &quot;deprel&quot;: &quot;det&quot;,
+       &quot;start_char&quot;: 102,
+       &quot;end_char&quot;: 104
+     },
+     {
+       &quot;id&quot;: 23,
+       &quot;text&quot;: &quot;yaxantukat&quot;,
+       &quot;lemma&quot;: &quot;yaxantukat&quot;,
+       &quot;upos&quot;: &quot;NOUN&quot;,
+       &quot;xpos&quot;: &quot;NOUN&quot;,
+       &quot;head&quot;: 4,
+       &quot;deprel&quot;: &quot;conj&quot;,
+       &quot;start_char&quot;: 105,
+       &quot;end_char&quot;: 115
+     },
+     {
+       &quot;id&quot;: 24,
+       &quot;text&quot;: &quot;yu&quot;,
+       &quot;lemma&quot;: &quot;yu&quot;,
+       &quot;upos&quot;: &quot;ADP&quot;,
+       &quot;xpos&quot;: &quot;PREP&quot;,
+       &quot;head&quot;: 25,
+       &quot;deprel&quot;: &quot;case&quot;,
+       &quot;start_char&quot;: 116,
+       &quot;end_char&quot;: 118
+     },
+     {
+       &quot;id&quot;: 25,
+       &quot;text&quot;: &quot;araab-yu-berber&quot;,
+       &quot;lemma&quot;: &quot;araab-yu-berber&quot;,
+       &quot;upos&quot;: &quot;NOUN&quot;,
+       &quot;xpos&quot;: &quot;NOUN&quot;,
+       &quot;head&quot;: 23,
+       &quot;deprel&quot;: &quot;nmod&quot;,
+       &quot;start_char&quot;: 119,
+       &quot;end_char&quot;: 134
+     },
+     {
+       &quot;id&quot;: 26,
+       &quot;text&quot;: &quot;.&quot;,
+       &quot;lemma&quot;: &quot;.&quot;,
+       &quot;upos&quot;: &quot;PUNCT&quot;,
+       &quot;xpos&quot;: &quot;PERIOD&quot;,
+       &quot;head&quot;: 4,
+       &quot;deprel&quot;: &quot;punct&quot;,
+       &quot;start_char&quot;: 134,
+       &quot;end_char&quot;: 135
+     }
+   ]
+ ],
+ [
+   [
+     {
+       &quot;id&quot;: 1,
+       &quot;text&quot;: &quot;Li&quot;,
+       &quot;lemma&quot;: &quot;bi&quot;,
+       &quot;upos&quot;: &quot;PRON&quot;,
+       &quot;xpos&quot;: &quot;PRON&quot;,
+       &quot;feats&quot;: &quot;Definite=Def|Deixis=Prox|NounClass=Wol7|Number=Sing|Person=3|PronType=Rel&quot;,
+       &quot;head&quot;: 19,
+       &quot;deprel&quot;: &quot;dislocated&quot;,
+       &quot;start_char&quot;: 0,
+       &quot;end_char&quot;: 2
+     },
+     {
+       &quot;id&quot;: 2,
+       &quot;text&quot;: &quot;ëpp&quot;,
+       &quot;lemma&quot;: &quot;ëpp&quot;,
+       &quot;upos&quot;: &quot;VERB&quot;,
+       &quot;xpos&quot;: &quot;VERB&quot;,
+       &quot;feats&quot;: &quot;Mood=Ind|VerbForm=Fin&quot;,
+       &quot;head&quot;: 1,
+       &quot;deprel&quot;: &quot;acl:relcl&quot;,
+       &quot;start_char&quot;: 3,
+       &quot;end_char&quot;: 6
+     },
+     {
+       &quot;id&quot;: 3,
+       &quot;text&quot;: &quot;ci&quot;,
+       &quot;lemma&quot;: &quot;ci&quot;,
+       &quot;upos&quot;: &quot;ADP&quot;,
+       &quot;xpos&quot;: &quot;PREP&quot;,
+       &quot;head&quot;: 4,
+       &quot;deprel&quot;: &quot;case&quot;,
+       &quot;start_char&quot;: 7,
+       &quot;end_char&quot;: 9
+     },
+     {
+       &quot;id&quot;: 4,
+       &quot;text&quot;: &quot;gëstu&quot;,
+       &quot;lemma&quot;: &quot;gëstu&quot;,
+       &quot;upos&quot;: &quot;NOUN&quot;,
+       &quot;xpos&quot;: &quot;NOUN&quot;,
+       &quot;head&quot;: 2,
+       &quot;deprel&quot;: &quot;obl&quot;,
+       &quot;start_char&quot;: 10,
+       &quot;end_char&quot;: 15
+     },
+     {
+       &quot;id&quot;: 5,
+       &quot;text&quot;: &quot;yi&quot;,
+       &quot;lemma&quot;: &quot;bi&quot;,
+       &quot;upos&quot;: &quot;PRON&quot;,
+       &quot;xpos&quot;: &quot;PRON&quot;,
+       &quot;feats&quot;: &quot;Definite=Def|Deixis=Prox|NounClass=Wol8|Number=Plur|Person=3|PronType=Rel&quot;,
+       &quot;head&quot;: 7,
+       &quot;deprel&quot;: &quot;obj&quot;,
+       &quot;start_char&quot;: 16,
+       &quot;end_char&quot;: 18
+     },
+     {
+       &quot;id&quot;: 6,
+       &quot;text&quot;: &quot;ñu&quot;,
+       &quot;lemma&quot;: &quot;mu&quot;,
+       &quot;upos&quot;: &quot;PRON&quot;,
+       &quot;xpos&quot;: &quot;PRON&quot;,
+       &quot;feats&quot;: &quot;Case=Nom|Number=Plur|Person=3|PronType=Prs&quot;,
+       &quot;head&quot;: 7,
+       &quot;deprel&quot;: &quot;nsubj&quot;,
+       &quot;start_char&quot;: 19,
+       &quot;end_char&quot;: 21
+     },
+     {
+       &quot;id&quot;: 7,
+       &quot;text&quot;: &quot;def&quot;,
+       &quot;lemma&quot;: &quot;def&quot;,
+       &quot;upos&quot;: &quot;VERB&quot;,
+       &quot;xpos&quot;: &quot;VERB&quot;,
+       &quot;feats&quot;: &quot;Mood=Ind|VerbForm=Fin&quot;,
+       &quot;head&quot;: 4,
+       &quot;deprel&quot;: &quot;acl:relcl&quot;,
+       &quot;start_char&quot;: 22,
+       &quot;end_char&quot;: 25
+     },
+     {
+       &quot;id&quot;: 8,
+       &quot;text&quot;: &quot;ci&quot;,
+       &quot;lemma&quot;: &quot;ci&quot;,
+       &quot;upos&quot;: &quot;ADP&quot;,
+       &quot;xpos&quot;: &quot;PREP&quot;,
+       &quot;head&quot;: 9,
+       &quot;deprel&quot;: &quot;case&quot;,
+       &quot;start_char&quot;: 26,
+       &quot;end_char&quot;: 28
+     },
+     {
+       &quot;id&quot;: 9,
+       &quot;text&quot;: &quot;wàllug&quot;,
+       &quot;lemma&quot;: &quot;wàll&quot;,
+       &quot;upos&quot;: &quot;NOUN&quot;,
+       &quot;xpos&quot;: &quot;NOUN&quot;,
+       &quot;feats&quot;: &quot;Case=Gen|Number=Sing&quot;,
+       &quot;head&quot;: 7,
+       &quot;deprel&quot;: &quot;obl&quot;,
+       &quot;start_char&quot;: 29,
+       &quot;end_char&quot;: 35
+     },
+     {
+       &quot;id&quot;: 10,
+       &quot;text&quot;: &quot;Gëstu-askan&quot;,
+       &quot;lemma&quot;: &quot;Gëstu-askan&quot;,
+       &quot;upos&quot;: &quot;PROPN&quot;,
+       &quot;xpos&quot;: &quot;NAME&quot;,
+       &quot;head&quot;: 9,
+       &quot;deprel&quot;: &quot;nmod&quot;,
+       &quot;start_char&quot;: 36,
+       &quot;end_char&quot;: 47
+     },
+     {
+       &quot;id&quot;: 11,
+       &quot;text&quot;: &quot;(&quot;,
+       &quot;lemma&quot;: &quot;(&quot;,
+       &quot;upos&quot;: &quot;PUNCT&quot;,
+       &quot;xpos&quot;: &quot;PAREN&quot;,
+       &quot;head&quot;: 13,
+       &quot;deprel&quot;: &quot;punct&quot;,
+       &quot;start_char&quot;: 48,
+       &quot;end_char&quot;: 49
+     },
+     {
+       &quot;id&quot;: 12,
+       &quot;text&quot;: &quot;walla&quot;,
+       &quot;lemma&quot;: &quot;walla&quot;,
+       &quot;upos&quot;: &quot;CCONJ&quot;,
+       &quot;xpos&quot;: &quot;CONJ&quot;,
+       &quot;head&quot;: 13,
+       &quot;deprel&quot;: &quot;cc&quot;,
+       &quot;start_char&quot;: 49,
+       &quot;end_char&quot;: 54
+     },
+     {
+       &quot;id&quot;: 13,
+       &quot;text&quot;: &quot;demogaraafi&quot;,
+       &quot;lemma&quot;: &quot;demogaraafi&quot;,
+       &quot;upos&quot;: &quot;NOUN&quot;,
+       &quot;xpos&quot;: &quot;NOUN&quot;,
+       &quot;feats&quot;: &quot;Case=Gen|Number=Plur&quot;,
+       &quot;head&quot;: 9,
+       &quot;deprel&quot;: &quot;conj&quot;,
+       &quot;start_char&quot;: 55,
+       &quot;end_char&quot;: 66
+     },
+     {
+       &quot;id&quot;: 14,
+       &quot;text&quot;: &quot;)&quot;,
+       &quot;lemma&quot;: &quot;)&quot;,
+       &quot;upos&quot;: &quot;PUNCT&quot;,
+       &quot;xpos&quot;: &quot;PAREN&quot;,
+       &quot;head&quot;: 13,
+       &quot;deprel&quot;: &quot;punct&quot;,
+       &quot;start_char&quot;: 66,
+       &quot;end_char&quot;: 67
+     },
+     {
+       &quot;id&quot;: 15,
+       &quot;text&quot;: &quot;ci&quot;,
+       &quot;lemma&quot;: &quot;ci&quot;,
+       &quot;upos&quot;: &quot;ADP&quot;,
+       &quot;xpos&quot;: &quot;PREP&quot;,
+       &quot;head&quot;: 16,
+       &quot;deprel&quot;: &quot;case&quot;,
+       &quot;start_char&quot;: 68,
+       &quot;end_char&quot;: 70
+     },
+     {
+       &quot;id&quot;: 16,
+       &quot;text&quot;: &quot;Senegaal&quot;,
+       &quot;lemma&quot;: &quot;Senegaal&quot;,
+       &quot;upos&quot;: &quot;PROPN&quot;,
+       &quot;xpos&quot;: &quot;NAME&quot;,
+       &quot;head&quot;: 13,
+       &quot;deprel&quot;: &quot;nmod&quot;,
+       &quot;start_char&quot;: 71,
+       &quot;end_char&quot;: 79
+     },
+     {
+       &quot;id&quot;: [
+         17,
+         18
+       ],
+       &quot;text&quot;: &quot;dafa&quot;,
+       &quot;start_char&quot;: 80,
+       &quot;end_char&quot;: 84
+     },
+     {
+       &quot;id&quot;: 17,
+       &quot;text&quot;: &quot;da&quot;,
+       &quot;lemma&quot;: &quot;da&quot;,
+       &quot;upos&quot;: &quot;AUX&quot;,
+       &quot;xpos&quot;: &quot;INFL&quot;,
+       &quot;feats&quot;: &quot;FocusType=Verb|Mood=Ind&quot;,
+       &quot;head&quot;: 19,
+       &quot;deprel&quot;: &quot;aux&quot;
+     },
+     {
+       &quot;id&quot;: 18,
+       &quot;text&quot;: &quot;mu&quot;,
+       &quot;lemma&quot;: &quot;mu&quot;,
+       &quot;upos&quot;: &quot;PRON&quot;,
+       &quot;xpos&quot;: &quot;PRON&quot;,
+       &quot;feats&quot;: &quot;Case=Nom|Number=Sing|Person=3|PronType=Prs&quot;,
+       &quot;head&quot;: 19,
+       &quot;deprel&quot;: &quot;nsubj&quot;
+     },
+     {
+       &quot;id&quot;: 19,
+       &quot;text&quot;: &quot;sukkandiku&quot;,
+       &quot;lemma&quot;: &quot;sukkandiku&quot;,
+       &quot;upos&quot;: &quot;VERB&quot;,
+       &quot;xpos&quot;: &quot;VERB&quot;,
+       &quot;feats&quot;: &quot;Mood=Ind|VerbForm=Fin&quot;,
+       &quot;head&quot;: 0,
+       &quot;deprel&quot;: &quot;root&quot;,
+       &quot;start_char&quot;: 85,
+       &quot;end_char&quot;: 95
+     },
+     {
+       &quot;id&quot;: 20,
+       &quot;text&quot;: &quot;ci&quot;,
+       &quot;lemma&quot;: &quot;ci&quot;,
+       &quot;upos&quot;: &quot;ADP&quot;,
+       &quot;xpos&quot;: &quot;PREP&quot;,
+       &quot;head&quot;: 21,
+       &quot;deprel&quot;: &quot;case&quot;,
+       &quot;start_char&quot;: 96,
+       &quot;end_char&quot;: 98
+     },
+     {
+       &quot;id&quot;: 21,
+       &quot;text&quot;: &quot;Waññ&quot;,
+       &quot;lemma&quot;: &quot;waññ&quot;,
+       &quot;upos&quot;: &quot;NOUN&quot;,
+       &quot;xpos&quot;: &quot;NOUN&quot;,
+       &quot;head&quot;: 19,
+       &quot;deprel&quot;: &quot;obl:appl&quot;,
+       &quot;start_char&quot;: 99,
+       &quot;end_char&quot;: 103
+     },
+     {
+       &quot;id&quot;: 22,
+       &quot;text&quot;: &quot;(&quot;,
+       &quot;lemma&quot;: &quot;(&quot;,
+       &quot;upos&quot;: &quot;PUNCT&quot;,
+       &quot;xpos&quot;: &quot;PAREN&quot;,
+       &quot;head&quot;: 23,
+       &quot;deprel&quot;: &quot;punct&quot;,
+       &quot;start_char&quot;: 104,
+       &quot;end_char&quot;: 105
+     },
+     {
+       &quot;id&quot;: 23,
+       &quot;text&quot;: &quot;recensement&quot;,
+       &quot;lemma&quot;: &quot;recensement&quot;,
+       &quot;upos&quot;: &quot;NOUN&quot;,
+       &quot;xpos&quot;: &quot;NOUN&quot;,
+       &quot;head&quot;: 21,
+       &quot;deprel&quot;: &quot;appos&quot;,
+       &quot;start_char&quot;: 105,
+       &quot;end_char&quot;: 116
+     },
+     {
+       &quot;id&quot;: 24,
+       &quot;text&quot;: &quot;)&quot;,
+       &quot;lemma&quot;: &quot;)&quot;,
+       &quot;upos&quot;: &quot;PUNCT&quot;,
+       &quot;xpos&quot;: &quot;PAREN&quot;,
+       &quot;head&quot;: 23,
+       &quot;deprel&quot;: &quot;punct&quot;,
+       &quot;start_char&quot;: 116,
+       &quot;end_char&quot;: 117
+     },
+     {
+       &quot;id&quot;: 25,
+       &quot;text&quot;: &quot;yi&quot;,
+       &quot;lemma&quot;: &quot;bi&quot;,
+       &quot;upos&quot;: &quot;PRON&quot;,
+       &quot;xpos&quot;: &quot;PRON&quot;,
+       &quot;feats&quot;: &quot;Definite=Def|Deixis=Prox|NounClass=Wol8|Number=Plur|Person=3|PronType=Rel&quot;,
+       &quot;head&quot;: 27,
+       &quot;deprel&quot;: &quot;obj&quot;,
+       &quot;start_char&quot;: 118,
+       &quot;end_char&quot;: 120
+     },
+     {
+       &quot;id&quot;: 26,
+       &quot;text&quot;: &quot;ñu&quot;,
+       &quot;lemma&quot;: &quot;mu&quot;,
+       &quot;upos&quot;: &quot;PRON&quot;,
+       &quot;xpos&quot;: &quot;PRON&quot;,
+       &quot;feats&quot;: &quot;Case=Nom|Number=Plur|Person=3|PronType=Prs&quot;,
+       &quot;head&quot;: 27,
+       &quot;deprel&quot;: &quot;nsubj&quot;,
+       &quot;start_char&quot;: 121,
+       &quot;end_char&quot;: 123
+     },
+     {
+       &quot;id&quot;: 27,
+       &quot;text&quot;: &quot;jotoon&quot;,
+       &quot;lemma&quot;: &quot;jot&quot;,
+       &quot;upos&quot;: &quot;VERB&quot;,
+       &quot;xpos&quot;: &quot;VERB&quot;,
+       &quot;feats&quot;: &quot;Mood=Ind|Tense=Past|VerbForm=Fin&quot;,
+       &quot;head&quot;: 21,
+       &quot;deprel&quot;: &quot;acl:relcl&quot;,
+       &quot;start_char&quot;: 124,
+       &quot;end_char&quot;: 130
+     },
+     {
+       &quot;id&quot;: 28,
+       &quot;text&quot;: &quot;a&quot;,
+       &quot;lemma&quot;: &quot;a&quot;,
+       &quot;upos&quot;: &quot;PART&quot;,
+       &quot;xpos&quot;: &quot;PART&quot;,
+       &quot;head&quot;: 29,
+       &quot;deprel&quot;: &quot;mark&quot;,
+       &quot;start_char&quot;: 131,
+       &quot;end_char&quot;: 132
+     },
+     {
+       &quot;id&quot;: 29,
+       &quot;text&quot;: &quot;def&quot;,
+       &quot;lemma&quot;: &quot;def&quot;,
+       &quot;upos&quot;: &quot;VERB&quot;,
+       &quot;xpos&quot;: &quot;VERB&quot;,
+       &quot;feats&quot;: &quot;VerbForm=Inf&quot;,
+       &quot;head&quot;: 27,
+       &quot;deprel&quot;: &quot;xcomp&quot;,
+       &quot;start_char&quot;: 133,
+       &quot;end_char&quot;: 136
+     },
+     {
+       &quot;id&quot;: 30,
+       &quot;text&quot;: &quot;ci&quot;,
+       &quot;lemma&quot;: &quot;ci&quot;,
+       &quot;upos&quot;: &quot;ADP&quot;,
+       &quot;xpos&quot;: &quot;PREP&quot;,
+       &quot;head&quot;: 31,
+       &quot;deprel&quot;: &quot;case&quot;,
+       &quot;start_char&quot;: 137,
+       &quot;end_char&quot;: 139
+     },
+     {
+       &quot;id&quot;: 31,
+       &quot;text&quot;: &quot;1976&quot;,
+       &quot;lemma&quot;: &quot;1976&quot;,
+       &quot;upos&quot;: &quot;NUM&quot;,
+       &quot;xpos&quot;: &quot;NUMBER&quot;,
+       &quot;feats&quot;: &quot;NumType=Card&quot;,
+       &quot;head&quot;: 29,
+       &quot;deprel&quot;: &quot;obl&quot;,
+       &quot;start_char&quot;: 140,
+       &quot;end_char&quot;: 144
+     },
+     {
+       &quot;id&quot;: 32,
+       &quot;text&quot;: &quot;,&quot;,
+       &quot;lemma&quot;: &quot;,&quot;,
+       &quot;upos&quot;: &quot;PUNCT&quot;,
+       &quot;xpos&quot;: &quot;COMMA&quot;,
+       &quot;head&quot;: 34,
+       &quot;deprel&quot;: &quot;punct&quot;,
+       &quot;start_char&quot;: 144,
+       &quot;end_char&quot;: 145
+     },
+     {
+       &quot;id&quot;: 33,
+       &quot;text&quot;: &quot;1988&quot;,
+       &quot;lemma&quot;: &quot;1988&quot;,
+       &quot;upos&quot;: &quot;NUM&quot;,
+       &quot;xpos&quot;: &quot;NUMBER&quot;,
+       &quot;feats&quot;: &quot;NumType=Card&quot;,
+       &quot;head&quot;: 34,
+       &quot;deprel&quot;: &quot;discourse&quot;,
+       &quot;start_char&quot;: 146,
+       &quot;end_char&quot;: 150
+     },
+     {
+       &quot;id&quot;: 34,
+       &quot;text&quot;: &quot;rawati&quot;,
+       &quot;lemma&quot;: &quot;rawati&quot;,
+       &quot;upos&quot;: &quot;VERB&quot;,
+       &quot;xpos&quot;: &quot;VERB&quot;,
+       &quot;feats&quot;: &quot;Mood=Ind|VerbForm=Fin&quot;,
+       &quot;head&quot;: 19,
+       &quot;deprel&quot;: &quot;parataxis&quot;,
+       &quot;start_char&quot;: 151,
+       &quot;end_char&quot;: 157
+     },
+     {
+       &quot;id&quot;: 35,
+       &quot;text&quot;: &quot;na&quot;,
+       &quot;lemma&quot;: &quot;na&quot;,
+       &quot;upos&quot;: &quot;AUX&quot;,
+       &quot;xpos&quot;: &quot;INFL&quot;,
+       &quot;feats&quot;: &quot;Aspect=Perf|Mood=Ind|Number=Sing|Person=3&quot;,
+       &quot;head&quot;: 34,
+       &quot;deprel&quot;: &quot;aux&quot;,
+       &quot;start_char&quot;: 158,
+       &quot;end_char&quot;: 160
+     },
+     {
+       &quot;id&quot;: 36,
+       &quot;text&quot;: &quot;2002&quot;,
+       &quot;lemma&quot;: &quot;2002&quot;,
+       &quot;upos&quot;: &quot;NUM&quot;,
+       &quot;xpos&quot;: &quot;NUMBER&quot;,
+       &quot;feats&quot;: &quot;NumType=Card&quot;,
+       &quot;head&quot;: 34,
+       &quot;deprel&quot;: &quot;obj&quot;,
+       &quot;start_char&quot;: 161,
+       &quot;end_char&quot;: 165
+     },
+     {
+       &quot;id&quot;: 37,
+       &quot;text&quot;: &quot;.&quot;,
+       &quot;lemma&quot;: &quot;.&quot;,
+       &quot;upos&quot;: &quot;PUNCT&quot;,
+       &quot;xpos&quot;: &quot;PERIOD&quot;,
+       &quot;head&quot;: 19,
+       &quot;deprel&quot;: &quot;punct&quot;,
+       &quot;start_char&quot;: 165,
+       &quot;end_char&quot;: 166
+     }
+   ]
+ ]]
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, passing the <em>Document</em> objects to the language model populates them with linguistic annotations, which can be then explored as introduced <a class="reference external" href="#Processing-text-using-Stanza">above</a>.</p>
+</div>
+</div>
+<div class="section" id="interfacing-stanza-with-spacy">
+<h2>Interfacing Stanza with spaCy<a class="headerlink" href="#interfacing-stanza-with-spacy" title="Permalink to this headline">¶</a></h2>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+<iframe
+    width="600"
+    height="350"
+    src="https://www.youtube.com/embed/Yqy7I7c7EXc"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</div></div>
+</div>
+<p>If you are more familiar with the spaCy library for natural language processing, whose use was covered extensively in <a class="reference internal" href="../part_ii/03_basic_nlp.html"><span class="doc std std-doc">Part II</span></a>, then you will be happy to know that you can also use some of the Stanza language models in spaCy!</p>
+<p>This can be achieved using a Python library named <a class="reference external" href="https://spacy.io/universe/project/spacy-stanza">spacy-stanza</a>, which interfaces the two libraries.</p>
+<p>Given that Stanza currently has more pre-trained language models available than spaCy, the spacy-stanza library considerably increases the number of language models available for spaCy.</p>
+<p>There is, however, <strong>one major limitation</strong>: the language in question must be supported by both <a class="reference external" href="https://stanfordnlp.github.io/stanza/available_models.html">Stanza</a> and <a class="reference external" href="https://spacy.io/usage/models#languages">spaCy</a>.</p>
+<p>For example, we cannot use the Stanza language model for Wolof in spaCy, because spaCy does not support the Wolof language.</p>
+<p>To start using Stanza language models in spaCy, let’s start by importing the spacy-stanza library (module name: <code class="docutils literal notranslate"><span class="pre">spacy_stanza</span></code>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the spaCy and spacy-stanza libraries</span>
+<span class="kn">import</span> <span class="nn">spacy</span>
+<span class="kn">import</span> <span class="nn">spacy_stanza</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This imports both spaCy and spacy-stanza libraries into Python. To continue, we must ensure that we have the Stanza language model for Finnish available as well.</p>
+<p>As shown above, this model can be downloaded using the following command:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Download a Stanza language model for Finnish</span>
+<span class="n">stanza</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="n">lang</span><span class="o">=</span><span class="s1">&#39;fi&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Because spaCy supports <a class="reference external" href="https://spacy.io/usage/models#languages">the Finnish language</a>, we can load Stanza language models for Finnish into spaCy using the spacy-stanza library.</p>
+<p>This can be achieved using the <code class="docutils literal notranslate"><span class="pre">load_pipeline()</span></code> function available under the <code class="docutils literal notranslate"><span class="pre">spacy_stanza</span></code> module.</p>
+<p>To load Stanza language model for a given language, you must provide the two-letter code for the language in question (e.g. <code class="docutils literal notranslate"><span class="pre">fi</span></code>) to the argument <code class="docutils literal notranslate"><span class="pre">name</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load a Stanza language model for Finnish into spaCy</span>
+<span class="n">nlp_fi</span> <span class="o">=</span> <span class="n">spacy_stanza</span><span class="o">.</span><span class="n">load_pipeline</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;fi&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If we examine the resulting object under the variable <code class="docutils literal notranslate"><span class="pre">nlp_fi</span></code> using Python’s <code class="docutils literal notranslate"><span class="pre">type()</span></code> function, we will see that the object is indeed a spaCy <em>Language</em> object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the type of the object under &#39;nlp_fi&#39;</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">nlp_fi</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>spacy.lang.fi.Finnish
+</pre></div>
+</div>
+</div>
+</div>
+<p>Generally, this object behaves just like any other spaCy <em>Language</em> object that we learned to use in <a class="reference external" href="../part_ii/03_basic_nlp.ipynb#Performing-basic-NLP-tasks-using-spaCy">Part II</a>.</p>
+<p>We can explore its use by processing a few sentences from a recent <a class="reference external" href="https://yle.fi/aihe/artikkeli/2021/03/08/yleiso-aanesti-tarja-halonen-on-inspiroivin-nainen-karkikolmikkoon-ylsivat-myos">news article</a> in written Finnish.</p>
+<p>We feed the text as a string object to the <em>Language</em> object under <code class="docutils literal notranslate"><span class="pre">nlp_fi</span></code> and store the result under the variable <code class="docutils literal notranslate"><span class="pre">doc_fi</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Feed the text to the language model under &#39;nlp_fi&#39;, store result under &#39;doc_fi&#39;</span>
+<span class="n">doc_fi</span> <span class="o">=</span> <span class="n">nlp_fi</span><span class="p">(</span><span class="s1">&#39;Tove Jansson keräsi 148 ääntä eli 18,2</span><span class="si">% a</span><span class="s1">nnetuista äänistä. Kirjailija, kuvataiteilija ja pilapiirtäjä tuli kansainvälisesti tunnetuksi satukirjoistaan ja sarjakuvistaan.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s continue by retrieving sentences from the <em>Doc</em> object, which are available under the attribute <code class="docutils literal notranslate"><span class="pre">sents</span></code>, as we learned in <a class="reference external" href="../part_ii/03_basic_nlp.ipynb#Sentence-segmentation">Part II</a>.</p>
+<p>The object available under the <code class="docutils literal notranslate"><span class="pre">sents</span></code> attribute is a Python generator that yields <em>Doc</em> objects.</p>
+<p>To examine them, we must catch the objects into a suitable data structure. In this case, the data structure that best fits our needs is a Python list.</p>
+<p>Hence we cast the output from the generator object under <code class="docutils literal notranslate"><span class="pre">sents</span></code> into a list using the <code class="docutils literal notranslate"><span class="pre">list()</span></code> function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get sentences contained in the Doc object &#39;doc_fi&#39;.</span>
+<span class="c1"># Cast the result into list.</span>
+<span class="n">sents_fi</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">doc_fi</span><span class="o">.</span><span class="n">sents</span><span class="p">)</span>
+
+<span class="c1"># Call the variable to check the output</span>
+<span class="n">sents_fi</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[Tove Jansson keräsi 148 ääntä eli 18,2% annetuista äänistä.,
+ Kirjailija, kuvataiteilija ja pilapiirtäjä tuli kansainvälisesti tunnetuksi satukirjoistaan ja sarjakuvistaan.]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also use spaCy’s <code class="docutils literal notranslate"><span class="pre">displacy</span></code> submodule to visualise the syntactic dependencies.</p>
+<p>To do so for the first sentence under <code class="docutils literal notranslate"><span class="pre">sents_fi</span></code>, we must first access the first item in the list using brackets <code class="docutils literal notranslate"><span class="pre">[0]</span></code> as usual.</p>
+<p>Let’s start by checking the type of this object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the type of the first item in the list &#39;sents_fi&#39;</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">sents_fi</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>spacy.tokens.span.Span
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, the result is a spaCy <em>Span</em> object, which is a sequence of <em>Token</em> objects contained within a <em>Doc</em> object.</p>
+<p>We can then call the <code class="docutils literal notranslate"><span class="pre">render</span></code> function from the <code class="docutils literal notranslate"><span class="pre">displacy</span></code> submodule to visualise the syntactic dependencies for the <em>Span</em> object under <code class="docutils literal notranslate"><span class="pre">sents_fi[0]</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the displacy submodule</span>
+<span class="kn">from</span> <span class="nn">spacy</span> <span class="kn">import</span> <span class="n">displacy</span>
+
+<span class="c1"># Use the render function to render the first item [0] in the list &#39;sents_fi&#39;.</span>
+<span class="c1"># Pass the argument &#39;style&#39; with the value &#39;dep&#39; to visualise syntactic dependencies.</span>
+<span class="n">displacy</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">sents_fi</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;dep&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span class="tex2jax_ignore"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:lang="fi" id="112f4633e80840779812b63bc2cd0102-0" class="displacy" width="1625" height="312.0" direction="ltr" style="max-width: none; height: 312.0px; color: #000000; background: #ffffff; font-family: Arial; direction: ltr">
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="222.0">
+    <tspan class="displacy-word" fill="currentColor" x="50">Tove</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="50">PROPN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="222.0">
+    <tspan class="displacy-word" fill="currentColor" x="225">Jansson</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="225">PROPN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="222.0">
+    <tspan class="displacy-word" fill="currentColor" x="400">keräsi</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="400">VERB</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="222.0">
+    <tspan class="displacy-word" fill="currentColor" x="575">148</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="575">NUM</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="222.0">
+    <tspan class="displacy-word" fill="currentColor" x="750">ääntä</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="750">NOUN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="222.0">
+    <tspan class="displacy-word" fill="currentColor" x="925">eli</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="925">CCONJ</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="222.0">
+    <tspan class="displacy-word" fill="currentColor" x="1100">18,2%</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1100">SYM</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="222.0">
+    <tspan class="displacy-word" fill="currentColor" x="1275">annetuista</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1275">VERB</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="222.0">
+    <tspan class="displacy-word" fill="currentColor" x="1450">äänistä.</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1450">NOUN</tspan>
+</text>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-112f4633e80840779812b63bc2cd0102-0-0" stroke-width="2px" d="M70,177.0 C70,2.0 400.0,2.0 400.0,177.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-112f4633e80840779812b63bc2cd0102-0-0" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nsubj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M70,179.0 L62,167.0 78,167.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-112f4633e80840779812b63bc2cd0102-0-1" stroke-width="2px" d="M70,177.0 C70,89.5 220.0,89.5 220.0,177.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-112f4633e80840779812b63bc2cd0102-0-1" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">flat:name</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M220.0,179.0 L228.0,167.0 212.0,167.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-112f4633e80840779812b63bc2cd0102-0-2" stroke-width="2px" d="M595,177.0 C595,89.5 745.0,89.5 745.0,177.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-112f4633e80840779812b63bc2cd0102-0-2" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nummod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M595,179.0 L587,167.0 603,167.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-112f4633e80840779812b63bc2cd0102-0-3" stroke-width="2px" d="M420,177.0 C420,2.0 750.0,2.0 750.0,177.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-112f4633e80840779812b63bc2cd0102-0-3" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">obj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M750.0,179.0 L758.0,167.0 742.0,167.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-112f4633e80840779812b63bc2cd0102-0-4" stroke-width="2px" d="M945,177.0 C945,89.5 1095.0,89.5 1095.0,177.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-112f4633e80840779812b63bc2cd0102-0-4" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">cc</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M945,179.0 L937,167.0 953,167.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-112f4633e80840779812b63bc2cd0102-0-5" stroke-width="2px" d="M770,177.0 C770,2.0 1100.0,2.0 1100.0,177.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-112f4633e80840779812b63bc2cd0102-0-5" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">conj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1100.0,179.0 L1108.0,167.0 1092.0,167.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-112f4633e80840779812b63bc2cd0102-0-6" stroke-width="2px" d="M1295,177.0 C1295,89.5 1445.0,89.5 1445.0,177.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-112f4633e80840779812b63bc2cd0102-0-6" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">acl</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1295,179.0 L1287,167.0 1303,167.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-112f4633e80840779812b63bc2cd0102-0-7" stroke-width="2px" d="M1120,177.0 C1120,2.0 1450.0,2.0 1450.0,177.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-112f4633e80840779812b63bc2cd0102-0-7" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nmod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1450.0,179.0 L1458.0,167.0 1442.0,167.0" fill="currentColor"/>
+</g>
+</svg></span></div></div>
+</div>
+<p>Note that spaCy will raise a warning about storing custom attributes when writing the <em>Doc</em> object to disk for visualisation.</p>
+<p>We can also examine the linguistic annotations created for individual <em>Token</em> objects within this <em>Span</em> object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loop over each Token object in the Span</span>
+<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">sents_fi</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+    
+    <span class="c1"># Print the token, its lemma, dependency and morphological features</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">lemma_</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">dep_</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">morph</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Tove Tove nsubj Case=Nom|Number=Sing
+Jansson Jansson flat:name Case=Nom|Number=Sing
+keräsi kerätä root Mood=Ind|Number=Sing|Person=3|Tense=Past|VerbForm=Fin|Voice=Act
+148 148 nummod NumType=Card
+ääntä ääni obj Case=Par|Number=Sing
+eli eli cc 
+18,2 18,2 nummod NumType=Card
+% % conj 
+annetuista antaa acl Case=Ela|Degree=Pos|Number=Plur|PartForm=Past|VerbForm=Part|Voice=Pass
+äänistä ääni nmod Case=Ela|Number=Plur
+. . punct 
+</pre></div>
+</div>
+</div>
+</div>
+<p>The examples above show how we can access the linguistic annotations created by a Stanza language model through spaCy <em>Doc</em>, <em>Span</em> and <em>Token</em> objects.</p>
+<p>This section should have given you an idea of how to begin processing diverse languages.</p>
+<p>In the next section, we will dive deeper into the Universal Dependencies framework.</p>
+</div>
+</div>
+
+
+<script type="application/vnd.jupyter.widget-state+json">
+{"state": {"7c80a483d632497cb0e4aef362ac3c99": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "ea2c01ecb75f497998ca937b394e6af5": {"model_name": "ProgressStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ProgressStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "bar_color": null, "description_width": ""}}, "4556c0224a164e0fbc56817d44ed3a64": {"model_name": "FloatProgressModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatProgressModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "ProgressView", "bar_style": "success", "description": "", "description_tooltip": null, "layout": "IPY_MODEL_7c80a483d632497cb0e4aef362ac3c99", "max": 24459.0, "min": 0.0, "orientation": "horizontal", "style": "IPY_MODEL_ea2c01ecb75f497998ca937b394e6af5", "value": 24459.0}}, "84d06e91ca5b444b893bac098aa5911c": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "74a67882d0eb44e39e16f866022b3702": {"model_name": "DescriptionStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "1204868f42194795bc3280ff5c9242e3": {"model_name": "HTMLModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "HTMLView", "description": "", "description_tooltip": null, "layout": "IPY_MODEL_84d06e91ca5b444b893bac098aa5911c", "placeholder": "\u200b", "style": "IPY_MODEL_74a67882d0eb44e39e16f866022b3702", "value": "Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.3.0.json: "}}, "9f75d401fb4441db912f29b2c43f9de5": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "9480528425e94e35a699df58162132d4": {"model_name": "DescriptionStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "a5ee60a486ea4289acea0054b040dcf5": {"model_name": "HTMLModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "HTMLView", "description": "", "description_tooltip": null, "layout": "IPY_MODEL_9f75d401fb4441db912f29b2c43f9de5", "placeholder": "\u200b", "style": "IPY_MODEL_9480528425e94e35a699df58162132d4", "value": " 142k/? [00:00&lt;00:00, 4.86MB/s]"}}, "d0458f85b66c40be994307912b1da77c": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "d6d81d94f7ee4d73a93ed467064bb32e": {"model_name": "HBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "HBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "HBoxView", "box_style": "", "children": ["IPY_MODEL_1204868f42194795bc3280ff5c9242e3", "IPY_MODEL_4556c0224a164e0fbc56817d44ed3a64", "IPY_MODEL_a5ee60a486ea4289acea0054b040dcf5"], "layout": "IPY_MODEL_d0458f85b66c40be994307912b1da77c"}}, "07437927134246409ef1aeb3b23d789d": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "648a9611087b47c99ea259d4c6b7dc9f": {"model_name": "ProgressStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ProgressStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "bar_color": null, "description_width": ""}}, "d652d16dea014847ac69881402588239": {"model_name": "FloatProgressModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatProgressModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "ProgressView", "bar_style": "success", "description": "", "description_tooltip": null, "layout": "IPY_MODEL_07437927134246409ef1aeb3b23d789d", "max": 24459.0, "min": 0.0, "orientation": "horizontal", "style": "IPY_MODEL_648a9611087b47c99ea259d4c6b7dc9f", "value": 24459.0}}, "0e80f1fa090548f5a8592e32de0e6ccb": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "9fafe80746184d139c136e0c94f2cf6c": {"model_name": "DescriptionStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "f0cb2dd70ea84387af18e2a3e4076bea": {"model_name": "HTMLModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "HTMLView", "description": "", "description_tooltip": null, "layout": "IPY_MODEL_0e80f1fa090548f5a8592e32de0e6ccb", "placeholder": "\u200b", "style": "IPY_MODEL_9fafe80746184d139c136e0c94f2cf6c", "value": "Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.3.0.json: "}}, "6cad1eca2b424205861cb79c7d18d1b3": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "a85e5053cea047d6b6ca0d974344060a": {"model_name": "DescriptionStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "9859f5436d8a42968bf54d2f852c4b95": {"model_name": "HTMLModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "HTMLView", "description": "", "description_tooltip": null, "layout": "IPY_MODEL_6cad1eca2b424205861cb79c7d18d1b3", "placeholder": "\u200b", "style": "IPY_MODEL_a85e5053cea047d6b6ca0d974344060a", "value": " 142k/? [00:00&lt;00:00, 5.52MB/s]"}}, "22c41742d2924a81820bf82c255b92b6": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "453eb6f52b1c48d09b7b08f792cd14ee": {"model_name": "HBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "HBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "HBoxView", "box_style": "", "children": ["IPY_MODEL_f0cb2dd70ea84387af18e2a3e4076bea", "IPY_MODEL_d652d16dea014847ac69881402588239", "IPY_MODEL_9859f5436d8a42968bf54d2f852c4b95"], "layout": "IPY_MODEL_22c41742d2924a81820bf82c255b92b6"}}}, "version_major": 2, "version_minor": 0}
+</script>
+
+
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="../../nlp_for_linguists.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Part III: Natural Language Processing for Linguists</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="02_universal_dependencies.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Universal Dependencies</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+   <div class="footer"><a href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0;padding:10px" src="https://mirrors.creativecommons.org/presskit/buttons/88x31/svg/by-nc.svg"/></a> © 2020– <a href="http://www.helsinki.fi/~thiippal">Tuomo Hiippala</a></div>
+    
+
+  </body>
+</html>

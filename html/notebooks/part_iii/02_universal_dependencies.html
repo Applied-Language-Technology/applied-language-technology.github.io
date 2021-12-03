@@ -1,0 +1,1648 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QDXYHY09XJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QDXYHY09XJ');
+</script>
+    
+    
+    <title>Universal Dependencies</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Finding linguistic patterns using spaCy" href="03_pattern_matching.html" />
+    <link rel="prev" title="Processing diverse languages" href="01_multilingual_nlp.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../about.html">
+   About this Website
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../getting_started.html">
+   Getting Started
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../notebook_login.html">
+     Log in to CSC Notebooks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../launch_server.html">
+     Launch JupyterLab on your personal server
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../jupyter.html">
+     Interact with the server in JupyterLab
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../github_pull.html">
+     Retrieve learning materials and exercises from GitHub
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../github_push.html">
+     Return completed exercises to GitHub for grading
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../python_intro.html">
+   Part I: A Minimal Introduction to Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_i/01_working_with_jupyter_notebooks.html">
+     The elements of a Jupyter Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_i/02_getting_started_with_python.html">
+     Getting started with Python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../working_with_text.html">
+   Part II: Working with Text in Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_ii/01_basic_text_processing.html">
+     Manipulating text using Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_ii/02_basic_text_processing_continued.html">
+     Manipulating text at scale
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_ii/03_basic_nlp.html">
+     Processing texts using spaCy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_ii/04_basic_nlp_continued.html">
+     Customising the spaCy pipeline
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_ii/05_evaluating_nlp.html">
+     Evaluating language models
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_ii/06_managing_data.html">
+     Managing textual data using pandas
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../../nlp_for_linguists.html">
+   Part III: Natural Language Processing for Linguists
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="01_multilingual_nlp.html">
+     Processing diverse languages
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Universal Dependencies
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03_pattern_matching.html">
+     Finding linguistic patterns using spaCy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04_embeddings.html">
+     Introducing word embeddings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="05_embeddings_continued.html">
+     Word embeddings in spaCy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="06_text_linguistics.html">
+     Working with discourse-level annotations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../citation.html">
+   Citation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../resources.html">
+   Resources
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/part_iii/02_universal_dependencies.ipynb.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/Applied-Language-Technology/website"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/Applied-Language-Technology/website/binder?urlpath=lab/tree/notebooks/part_iii/02_universal_dependencies.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-brief-introduction-to-universal-dependencies-as-a-project">
+   A brief introduction to Universal Dependencies as a project
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#basic-assumptions-behind-universal-dependencies">
+   Basic assumptions behind Universal Dependencies
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#nominals">
+     Nominals
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#clauses">
+     Clauses
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#modifiers">
+     Modifiers
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#understanding-the-annotation-schema">
+   Understanding the annotation schema
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exploring-parse-trees-using-spacy">
+   Exploring parse trees using spaCy
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#a-final-word-on-evaluation">
+   A final word on evaluation
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="universal-dependencies">
+<h1>Universal Dependencies<a class="headerlink" href="#universal-dependencies" title="Permalink to this headline">¶</a></h1>
+<p>In this section we will dive deeper into Universal Dependencies, a framework that we already encountered in connection with syntactic parsing and morphological analysis in <a class="reference internal" href="../part_ii/03_basic_nlp.html"><span class="doc std std-doc">Part II</span></a> and <a class="reference internal" href="01_multilingual_nlp.html"><span class="doc std std-doc">Part III</span></a>.</p>
+<p>After reading through this section, you should:</p>
+<ul class="simple">
+<li><p>understand the goals of Universal Dependencies as a project</p></li>
+<li><p>understand the Universal Dependencies as a framework for describing the structure of language</p></li>
+<li><p>know the basics of the Universal Dependencies annotation schema</p></li>
+<li><p>know how to explore Universal Dependencies annotations using spaCy</p></li>
+</ul>
+<div class="section" id="a-brief-introduction-to-universal-dependencies-as-a-project">
+<h2>A brief introduction to Universal Dependencies as a project<a class="headerlink" href="#a-brief-introduction-to-universal-dependencies-as-a-project" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://universaldependencies.org/introduction.html">Universal Dependencies</a>, or UD for short, is a collaborative project that has two overlapping aims:</p>
+<ol class="simple">
+<li><p>to develop a common framework for describing the grammatical structure of diverse languages (de Marneffe et al. <a class="reference external" href="https://doi.org/10.1162/coli_a_00402">2021</a>)</p></li>
+<li><p>to create annotated corpora – or treebanks – for diverse languages that apply this framework (Nivre et al. <a class="reference external" href="https://aclanthology.org/2020.lrec-1.497/">2020</a>)</p></li>
+</ol>
+<p>In this way, the project seeks to enable the systematic description of syntactic structures and morphological features across various languages, which naturally also enables drawing comparisons between languages.</p>
+<p>The goal of achieving broad applicability across diverse languages lends the project the epithet “Universal”, whereas the term “Dependencies” refers to the way the framework describes syntactic structures, which will be expanded on shortly below.</p>
+<p>Linguistic corpora annotated for syntactic relations are often called <em>treebanks</em>, because syntactic structures are generally represented using tree structures. In this context, then, a treebank is simply a collection of syntactic trees, which have been consistently annotated using UD or some other framework.</p>
+<p>The number of treebanks annotated using UD has grown steadily over the years (for a recent overview of 90 treebanks, see Nivre et al. <a class="reference external" href="https://aclanthology.org/2020.lrec-1.497/">2020</a>). The design and creation of such treebanks has been documented in detail for various languages, such as Finnish (Haverinen et al. <a class="reference external" href="https://link.springer.com/article/10.1007/s10579-013-9244-1">2014</a>), Wolof (Dione <a class="reference external" href="https://aclanthology.org/W19-8003/">2019</a>) and Hindi/Urdu (Bhat et al. <a class="reference external" href="https://link.springer.com/chapter/10.1007/978-94-024-0881-2_24">2017</a>).</p>
+<p>To better understand the effort involved in UD as a project, one should acknowledge that developing a consistent annotation schema that can be used to describe the grammatical structure of diverse languages such as Finnish, Wolof and Hindi/Urdu is far from trivial.</p>
+<p>Additional challenges emerge from the intended use of UD treebanks: they are meant to serve both computational and linguistic research communities. As de Marneffe et al. (<a class="reference external" href="https://doi.org/10.1162/coli_a_00402">2021: 302–303</a>) point out, the UD framework is a compromise between several competing criteria, which are provided in slightly abbreviated form below:</p>
+<ol class="simple">
+<li><p>UD needs to be reasonably satisfactory for linguistic analysis of individual languages</p></li>
+<li><p>UD needs to be good for bringing out structural similarities across related languages</p></li>
+<li><p>UD must be suitable for rapid, consistent annotation by a human annotator</p></li>
+<li><p>UD must be easily comprehended and used by non-linguist users</p></li>
+<li><p>UD must be suitable for computer parsing with high accuracy</p></li>
+<li><p>UD must support well downstream natural language processing tasks</p></li>
+</ol>
+<p>The need to balance these criteria is also reflected in the design of the UD framework, which is introduced in greater detail below.</p>
+</div>
+<div class="section" id="basic-assumptions-behind-universal-dependencies">
+<h2>Basic assumptions behind Universal Dependencies<a class="headerlink" href="#basic-assumptions-behind-universal-dependencies" title="Permalink to this headline">¶</a></h2>
+<p>The Universal Dependencies framework is strongly influenced by typologically-oriented theories of grammar. These theories seek to describe and classify languages based on their structural features (for an extensive discussion of the theoretical foundations of UD, see de Marneffe et al. <a class="reference external" href="https://doi.org/10.1162/coli_a_00402">2021</a>).</p>
+<p>The basic unit of analysis in UD is a word. The representation of syntactic relations, in turn, is based on <strong>dependencies</strong>, that is, relations that hold between words. In some aspects, however, UD diverges from traditional dependency grammars, mainly due to its need to serve the range of purposes described above (see Osborne &amp; Gerdes <a class="reference external" href="https://doi.org/10.5334/gjgl.537">2019</a>).</p>
+<p>The description of linguistic structures in UD is based on three types of phrasal units: <strong>nominals</strong>, <strong>clauses</strong> and <strong>modifiers</strong> (de Marneffe et al. <a class="reference external" href="https://doi.org/10.1162/coli_a_00402">2021: 257</a>). These phrasal units can consist of one or more words.</p>
+<p>In this context, the notion of phrasal units refers to linguistic structures that are built around words that belong to particular word classes. Whereas nominals are used for representing things – often realised using nouns – clauses are used for representing events, which are built around verbs. Modifiers, in turn, rely on adjectives and adverbs to expand the meaning of both nominals and clauses.</p>
+<p>The following sections examine each phrasal unit in greater detail.</p>
+<div class="section" id="nominals">
+<h3>Nominals<a class="headerlink" href="#nominals" title="Permalink to this headline">¶</a></h3>
+<p>Let’s start by focusing on the first phrasal unit, nominals.</p>
+<p>What UD defines as nominals have been described extensively in various linguistic theories, in which they have been treated, for example, as noun phrases (Keizer <a class="reference external" href="https://doi.org/10.1017/CBO9780511627699">2007</a>) and nominal groups (Martin et al. <a class="reference external" href="https://doi.org/10.1080/00437956.2021.1957545">2021</a>). What these definitions have in common is that nominals are generally built around nouns.</p>
+<p>To explore nominals in UD, we will begin by importing three libraries: spaCy, Stanza and spacy-stanza, which were introduced in the <a class="reference internal" href="01_multilingual_nlp.html"><span class="doc std std-doc">previous chapter</span></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the spaCy, Stanza and spacy-stanza libraries</span>
+<span class="kn">import</span> <span class="nn">spacy</span>
+<span class="kn">import</span> <span class="nn">stanza</span>
+<span class="kn">import</span> <span class="nn">spacy_stanza</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We then use the <code class="docutils literal notranslate"><span class="pre">load_pipeline()</span></code> function from spacy-stanza to load a Stanza language model for English, which we store under the variable <code class="docutils literal notranslate"><span class="pre">nlp</span></code>.</p>
+<p>We also pass the language code for English (<code class="docutils literal notranslate"><span class="pre">'en'</span></code>) to the argument <code class="docutils literal notranslate"><span class="pre">name</span></code> and the string <code class="docutils literal notranslate"><span class="pre">'tokenize,</span> <span class="pre">pos,</span> <span class="pre">lemma,</span> <span class="pre">depparse'</span></code> to the <code class="docutils literal notranslate"><span class="pre">processors</span></code> argument to load only the components that we need.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load a Stanza language model for English into spaCy</span>
+<span class="n">nlp_fi</span> <span class="o">=</span> <span class="n">spacy_stanza</span><span class="o">.</span><span class="n">load_pipeline</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;en&#39;</span><span class="p">,</span> <span class="n">processors</span><span class="o">=</span><span class="s1">&#39;tokenize, pos, lemma, depparse&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you have not downloaded a language model for English yet, follow the instructions in the <a class="reference internal" href="01_multilingual_nlp.html"><span class="doc std std-doc">previous section</span></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Call the variable to examine the language model</span>
+<span class="n">nlp</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;spacy.lang.en.English at 0x16628dac0&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>This gives us a Stanza language model wrapped into a spaCy <em>Language</em> object!</p>
+<p>If you wonder why we use a Stanza language model instead of a model native to spaCy, the reason is that the dependency parser in spaCy is not trained using a corpus annotated using UD.</p>
+<p>In <a class="reference internal" href="../part_ii/03_basic_nlp.html"><span class="doc std std-doc">Part II</span></a>, we learned that spaCy language models for English are trained using the OntoNotes 5.0 corpus. This corpus uses a different schema for describing syntactic relations, which was originally developed for the Penn Treebank (PTB; Marcus et al. <a class="reference external" href="https://aclanthology.org/J93-2004/">1993</a>). spaCy uses another tool to map the Penn Treebank relations to those defined in UD, but the relations defined in PTB only cover a subset of the relations defined in UD.</p>
+<p>For this reason, we use the English language model from Stanza, which has been trained on <a class="reference external" href="https://github.com/UniversalDependencies/UD_English-EWT">a corpus of texts</a> annotated using UD.</p>
+<p>We do, however, also want to use some capabilities provided by spaCy, such as the <em>displacy</em> module for visualising syntactic dependencies, as we learned in <a class="reference internal" href="../part_ii/03_basic_nlp.html"><span class="doc std std-doc">Part II</span></a>, which is why we use the Stanza language model via the spacy-stanza library.</p>
+<p>Let’s continue by importing the displacy module for visualising syntactic dependencies.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the displacy module from spaCy</span>
+<span class="kn">from</span> <span class="nn">spacy</span> <span class="kn">import</span> <span class="n">displacy</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We then define a string – “A large green bird” – that we feed to the language model under <code class="docutils literal notranslate"><span class="pre">nlp</span></code>, and assign the resulting <em>Doc</em> object under the variable <code class="docutils literal notranslate"><span class="pre">nominal</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Feed a string to the language model; store the result under the variable &#39;nominal&#39;</span>
+<span class="n">nominal</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="s1">&#39;A large green bird&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Next, we use the <code class="docutils literal notranslate"><span class="pre">render()</span></code> function to draw the syntactic dependencies between the <em>Tokens</em> in the <em>Doc</em> object <code class="docutils literal notranslate"><span class="pre">nominal_group</span></code>.</p>
+<p>By passing the string <code class="docutils literal notranslate"><span class="pre">dep</span></code> to the argument <code class="docutils literal notranslate"><span class="pre">style</span></code>, we explicitly instruct <em>displacy</em> to visualise the syntactic dependencies (because <em>displacy</em> can also visualise <a class="reference internal" href="../part_ii/03_basic_nlp.html"><span class="doc std std-doc">named entities</span></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Render the syntactic dependencies using the render() function from displacy</span>
+<span class="n">displacy</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">nominal</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;dep&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span class="tex2jax_ignore"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:lang="en" id="05b996fe861c4b4c90ca3cc816ec3622-0" class="displacy" width="750" height="399.5" direction="ltr" style="max-width: none; height: 399.5px; color: #000000; background: #ffffff; font-family: Arial; direction: ltr">
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="309.5">
+    <tspan class="displacy-word" fill="currentColor" x="50">A</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="50">DET</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="309.5">
+    <tspan class="displacy-word" fill="currentColor" x="225">large</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="225">ADJ</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="309.5">
+    <tspan class="displacy-word" fill="currentColor" x="400">green</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="400">ADJ</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="309.5">
+    <tspan class="displacy-word" fill="currentColor" x="575">bird</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="575">NOUN</tspan>
+</text>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-05b996fe861c4b4c90ca3cc816ec3622-0-0" stroke-width="2px" d="M70,264.5 C70,2.0 575.0,2.0 575.0,264.5" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-05b996fe861c4b4c90ca3cc816ec3622-0-0" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">det</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M70,266.5 L62,254.5 78,254.5" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-05b996fe861c4b4c90ca3cc816ec3622-0-1" stroke-width="2px" d="M245,264.5 C245,89.5 570.0,89.5 570.0,264.5" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-05b996fe861c4b4c90ca3cc816ec3622-0-1" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">amod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M245,266.5 L237,254.5 253,254.5" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-05b996fe861c4b4c90ca3cc816ec3622-0-2" stroke-width="2px" d="M420,264.5 C420,177.0 565.0,177.0 565.0,264.5" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-05b996fe861c4b4c90ca3cc816ec3622-0-2" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">amod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M420,266.5 L412,254.5 428,254.5" fill="currentColor"/>
+</g>
+</svg></span></div></div>
+</div>
+<p>This gives us a visualisation of the syntactic dependencies between the four <em>Tokens</em> that make up the <em>Doc</em> object <code class="docutils literal notranslate"><span class="pre">nominal</span></code>.</p>
+<p>Three arcs lead out from the <em>Token</em> “bird” and point towards the <em>Tokens</em> “A”, “large” and “green”. This means that the noun “bird” acts as the <strong>head</strong>, whereas the three other <em>Tokens</em> are <strong>dependents</strong> of this head.</p>
+<p>These dependencies are further specified by syntactic relations defined in the UD framework, which are given by the label below each arc. In this case, the head noun “bird” has two adjectival modifiers (<code class="docutils literal notranslate"><span class="pre">amod</span></code>), “large” and “green”, and a determiner (<code class="docutils literal notranslate"><span class="pre">det</span></code>), “a”.</p>
+<p>If we loop over the <em>Tokens</em> in the <em>Doc</em> object under the variable <code class="docutils literal notranslate"><span class="pre">nominal</span></code> and print out the syntactic dependencies for each Token, which are available under the attribute <code class="docutils literal notranslate"><span class="pre">dep_</span></code>, we can see that the head noun “bird” has the dependency tag <code class="docutils literal notranslate"><span class="pre">root</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loop over each Token in the Doc object &#39;nominal&#39;</span>
+<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">nominal</span><span class="p">:</span>
+    
+    <span class="c1"># Print out each Token and its dependency tag</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">dep_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>A det
+large amod
+green amod
+bird root
+</pre></div>
+</div>
+</div>
+</div>
+<p>In other words, the entire syntactic structure of this nominal is built around a noun, which is then elaborated by modifiers, which will be discussed shortly below.</p>
+<p>First, however, we turn our attention to another phrasal unit, namely clauses.</p>
+</div>
+<div class="section" id="clauses">
+<h3>Clauses<a class="headerlink" href="#clauses" title="Permalink to this headline">¶</a></h3>
+<p>The clause plays a fundamental role in natural language. In <em>Introduction to Functional Grammar</em>, Halliday and Matthiessen (<a class="reference external" href="https://doi.org/10.4324/9780203431269">2013</a>: 10) observe that:</p>
+<blockquote>
+<div><p>The clause is the central processing unit in the lexicogrammar — in the specific sense that it is in the clause that meanings of different kinds are mapped into an integrated grammatical structure.</p>
+</div></blockquote>
+<p>These three distinct kinds of meanings – clause as a message, clause as an exchange and clause as a representation – are encoded into every clause. As messages, clauses have a thematic structure, which allows highlighting key information. As a form of exchange, clauses allow enacting social relationships, as they are used to give and demand information or things. Finally, as a form of representation, clauses enable representing all aspects of human experience: which entities participate in what kinds of processes, and under what kinds of circumstances (Halliday and Matthiessen <a class="reference external" href="https://doi.org/10.4324/9780203431269">2013</a>: 83–85).</p>
+<p>To better understand what enables clauses to perform all these functions, let’s consider their <em>rank</em> among different linguistic units, as defined by Halliday and Matthiessen (<a class="reference external" href="https://doi.org/10.4324/9780203431269">2013</a>: 9–10):</p>
+<ol class="simple">
+<li><p>clause</p></li>
+<li><p>phrase / group</p></li>
+<li><p>word</p></li>
+<li><p>morpheme</p></li>
+</ol>
+<p>The linguistic units at each rank consist of one or more units of the rank below. Clauses consist of phrases or groups (or nominals), which in turn consist of words that are made up of morphemes.</p>
+<p>If we apply this idea to UD, we can think that clauses outrank nominals, which allows clauses to combine nominals into larger units (cf. de Marneffe et al. <a class="reference external" href="https://doi.org/10.1162/coli_a_00402">2021: 258</a>).</p>
+<p>To explore this idea further, let’s define a string with the clause “I saw a large green bird” and provide the string as input to the language model under the variable <code class="docutils literal notranslate"><span class="pre">nlp</span></code>. We then store the result under the variable <code class="docutils literal notranslate"><span class="pre">clause</span></code>.</p>
+<p>Just as above, we then use the <code class="docutils literal notranslate"><span class="pre">render()</span></code> function from the <em>displacy</em> module to visualise the syntactic dependencies.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a string object, feed it to the language model under &#39;nlp&#39; and</span>
+<span class="c1"># store the result under the variable &#39;clause&#39;.</span>
+<span class="n">clause</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="s1">&#39;I saw a large green bird.&#39;</span><span class="p">)</span>
+
+<span class="c1"># Use displacy to render the syntactic dependencies</span>
+<span class="n">displacy</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">clause</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;dep&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span class="tex2jax_ignore"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:lang="en" id="02aab3de141e48f6aa28cc5070c2df3d-0" class="displacy" width="1100" height="487.0" direction="ltr" style="max-width: none; height: 487.0px; color: #000000; background: #ffffff; font-family: Arial; direction: ltr">
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="50">I</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="50">PRON</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="225">saw</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="225">VERB</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="400">a</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="400">DET</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="575">large</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="575">ADJ</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="750">green</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="750">ADJ</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="925">bird.</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="925">NOUN</tspan>
+</text>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-02aab3de141e48f6aa28cc5070c2df3d-0-0" stroke-width="2px" d="M70,352.0 C70,264.5 210.0,264.5 210.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-02aab3de141e48f6aa28cc5070c2df3d-0-0" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nsubj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M70,354.0 L62,342.0 78,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-02aab3de141e48f6aa28cc5070c2df3d-0-1" stroke-width="2px" d="M420,352.0 C420,89.5 920.0,89.5 920.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-02aab3de141e48f6aa28cc5070c2df3d-0-1" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">det</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M420,354.0 L412,342.0 428,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-02aab3de141e48f6aa28cc5070c2df3d-0-2" stroke-width="2px" d="M595,352.0 C595,177.0 915.0,177.0 915.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-02aab3de141e48f6aa28cc5070c2df3d-0-2" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">amod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M595,354.0 L587,342.0 603,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-02aab3de141e48f6aa28cc5070c2df3d-0-3" stroke-width="2px" d="M770,352.0 C770,264.5 910.0,264.5 910.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-02aab3de141e48f6aa28cc5070c2df3d-0-3" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">amod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M770,354.0 L762,342.0 778,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-02aab3de141e48f6aa28cc5070c2df3d-0-4" stroke-width="2px" d="M245,352.0 C245,2.0 925.0,2.0 925.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-02aab3de141e48f6aa28cc5070c2df3d-0-4" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">obj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M925.0,354.0 L933.0,342.0 917.0,342.0" fill="currentColor"/>
+</g>
+</svg></span></div></div>
+</div>
+<p>This gives us the syntactic relations that hold between the <em>Tokens</em> in the clause.</p>
+<p>Before going any further, let’s print out the dependency tags for each <em>Token</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loop over each Token in the Doc object &#39;clause&#39;</span>
+<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">clause</span><span class="p">:</span>
+    
+    <span class="c1"># Print out each token and its dependency tag</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">dep_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>I nsubj
+saw root
+a det
+large amod
+green amod
+bird obj
+. punct
+</pre></div>
+</div>
+</div>
+</div>
+<p>The output shows that the <code class="docutils literal notranslate"><span class="pre">root</span></code> or the head of the clause is the verb “saw”. As the visualisation shows, two arcs lead out from the <code class="docutils literal notranslate"><span class="pre">root</span></code> towards the <em>Tokens</em> “I” and “bird”.</p>
+<p>Both “I” and “a large green bird” are nominals and dependents of the verb “saw”, which is the head of the clause.  The pronoun “I” acts as the nominal subject of the clause, as identified by the label (<code class="docutils literal notranslate"><span class="pre">nsubj</span></code>), whereas the nominal “a large green bird” is the object (<code class="docutils literal notranslate"><span class="pre">obj</span></code>).</p>
+<p>Note that syntactic dependencies are always drawn between heads: the arcs lead out from the head verb of the clause and terminate at the heads of the nominals. These heads may then have their own dependencies, as illustrated by the nominal “a large green bird”, which was discussed below.</p>
+<p>Just like nominals, clauses can be expanded into larger units, as exemplified below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define another example and feed it to the language model under &#39;nlp&#39;</span>
+<span class="n">clause_2</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="s1">&#39;I saw a large green bird outside and headed out immediately.&#39;</span><span class="p">)</span>
+
+<span class="c1"># Use displacy to render the syntactic dependencies</span>
+<span class="n">displacy</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">clause_2</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;dep&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span class="tex2jax_ignore"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:lang="en" id="cdefc39f164f463b9e5bf46ddccd5264-0" class="displacy" width="1975" height="662.0" direction="ltr" style="max-width: none; height: 662.0px; color: #000000; background: #ffffff; font-family: Arial; direction: ltr">
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="572.0">
+    <tspan class="displacy-word" fill="currentColor" x="50">I</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="50">PRON</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="572.0">
+    <tspan class="displacy-word" fill="currentColor" x="225">saw</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="225">VERB</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="572.0">
+    <tspan class="displacy-word" fill="currentColor" x="400">a</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="400">DET</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="572.0">
+    <tspan class="displacy-word" fill="currentColor" x="575">large</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="575">ADJ</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="572.0">
+    <tspan class="displacy-word" fill="currentColor" x="750">green</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="750">ADJ</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="572.0">
+    <tspan class="displacy-word" fill="currentColor" x="925">bird</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="925">NOUN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="572.0">
+    <tspan class="displacy-word" fill="currentColor" x="1100">outside</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1100">ADV</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="572.0">
+    <tspan class="displacy-word" fill="currentColor" x="1275">and</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1275">CCONJ</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="572.0">
+    <tspan class="displacy-word" fill="currentColor" x="1450">headed</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1450">VERB</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="572.0">
+    <tspan class="displacy-word" fill="currentColor" x="1625">out</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1625">ADP</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="572.0">
+    <tspan class="displacy-word" fill="currentColor" x="1800">immediately.</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1800">ADV</tspan>
+</text>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-cdefc39f164f463b9e5bf46ddccd5264-0-0" stroke-width="2px" d="M70,527.0 C70,439.5 200.0,439.5 200.0,527.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-cdefc39f164f463b9e5bf46ddccd5264-0-0" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nsubj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M70,529.0 L62,517.0 78,517.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-cdefc39f164f463b9e5bf46ddccd5264-0-1" stroke-width="2px" d="M420,527.0 C420,264.5 910.0,264.5 910.0,527.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-cdefc39f164f463b9e5bf46ddccd5264-0-1" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">det</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M420,529.0 L412,517.0 428,517.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-cdefc39f164f463b9e5bf46ddccd5264-0-2" stroke-width="2px" d="M595,527.0 C595,352.0 905.0,352.0 905.0,527.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-cdefc39f164f463b9e5bf46ddccd5264-0-2" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">amod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M595,529.0 L587,517.0 603,517.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-cdefc39f164f463b9e5bf46ddccd5264-0-3" stroke-width="2px" d="M770,527.0 C770,439.5 900.0,439.5 900.0,527.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-cdefc39f164f463b9e5bf46ddccd5264-0-3" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">amod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M770,529.0 L762,517.0 778,517.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-cdefc39f164f463b9e5bf46ddccd5264-0-4" stroke-width="2px" d="M245,527.0 C245,177.0 915.0,177.0 915.0,527.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-cdefc39f164f463b9e5bf46ddccd5264-0-4" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">obj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M915.0,529.0 L923.0,517.0 907.0,517.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-cdefc39f164f463b9e5bf46ddccd5264-0-5" stroke-width="2px" d="M245,527.0 C245,89.5 1095.0,89.5 1095.0,527.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-cdefc39f164f463b9e5bf46ddccd5264-0-5" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">advmod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1095.0,529.0 L1103.0,517.0 1087.0,517.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-cdefc39f164f463b9e5bf46ddccd5264-0-6" stroke-width="2px" d="M1295,527.0 C1295,439.5 1425.0,439.5 1425.0,527.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-cdefc39f164f463b9e5bf46ddccd5264-0-6" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">cc</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1295,529.0 L1287,517.0 1303,517.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-cdefc39f164f463b9e5bf46ddccd5264-0-7" stroke-width="2px" d="M245,527.0 C245,2.0 1450.0,2.0 1450.0,527.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-cdefc39f164f463b9e5bf46ddccd5264-0-7" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">conj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1450.0,529.0 L1458.0,517.0 1442.0,517.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-cdefc39f164f463b9e5bf46ddccd5264-0-8" stroke-width="2px" d="M1470,527.0 C1470,439.5 1600.0,439.5 1600.0,527.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-cdefc39f164f463b9e5bf46ddccd5264-0-8" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">compound:prt</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1600.0,529.0 L1608.0,517.0 1592.0,517.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-cdefc39f164f463b9e5bf46ddccd5264-0-9" stroke-width="2px" d="M1470,527.0 C1470,352.0 1780.0,352.0 1780.0,527.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-cdefc39f164f463b9e5bf46ddccd5264-0-9" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">advmod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1780.0,529.0 L1788.0,517.0 1772.0,517.0" fill="currentColor"/>
+</g>
+</svg></span></div></div>
+</div>
+<p>This adds another arc, which leads from the head verb “saw” to the verb “headed”, and has the relation <code class="docutils literal notranslate"><span class="pre">conj</span></code> or conjunct. The conjunct is used to join together two clauses:</p>
+<ol class="simple">
+<li><p>I saw a large green bird outside</p></li>
+<li><p>and headed out immediately.</p></li>
+</ol>
+<p>This illustrates how clauses can also be expanded into larger units that consist of multiple clauses. In this case, the clauses participating in a larger unit may be identified by the dependency relation <code class="docutils literal notranslate"><span class="pre">conj</span></code> drawn between verbs.</p>
+<p>Note, however, that the <code class="docutils literal notranslate"><span class="pre">conj</span></code> relation can also be used within nominals to join nouns together, as exemplified below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define another example and use displacy to render the syntactic dependencies</span>
+<span class="n">displacy</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">nlp</span><span class="p">(</span><span class="s1">&#39;cats, dogs and birds&#39;</span><span class="p">),</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;dep&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span class="tex2jax_ignore"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:lang="en" id="1bf3f2cf56e94285897c91f03cf5cc7b-0" class="displacy" width="750" height="312.0" direction="ltr" style="max-width: none; height: 312.0px; color: #000000; background: #ffffff; font-family: Arial; direction: ltr">
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="222.0">
+    <tspan class="displacy-word" fill="currentColor" x="50">cats,</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="50">NOUN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="222.0">
+    <tspan class="displacy-word" fill="currentColor" x="225">dogs</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="225">NOUN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="222.0">
+    <tspan class="displacy-word" fill="currentColor" x="400">and</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="400">CCONJ</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="222.0">
+    <tspan class="displacy-word" fill="currentColor" x="575">birds</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="575">NOUN</tspan>
+</text>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-1bf3f2cf56e94285897c91f03cf5cc7b-0-0" stroke-width="2px" d="M70,177.0 C70,89.5 220.0,89.5 220.0,177.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-1bf3f2cf56e94285897c91f03cf5cc7b-0-0" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">conj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M220.0,179.0 L228.0,167.0 212.0,167.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-1bf3f2cf56e94285897c91f03cf5cc7b-0-1" stroke-width="2px" d="M420,177.0 C420,89.5 570.0,89.5 570.0,177.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-1bf3f2cf56e94285897c91f03cf5cc7b-0-1" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">cc</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M420,179.0 L412,167.0 428,167.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-1bf3f2cf56e94285897c91f03cf5cc7b-0-2" stroke-width="2px" d="M70,177.0 C70,2.0 575.0,2.0 575.0,177.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-1bf3f2cf56e94285897c91f03cf5cc7b-0-2" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">conj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M575.0,179.0 L583.0,167.0 567.0,167.0" fill="currentColor"/>
+</g>
+</svg></span></div></div>
+</div>
+<p>This illustrates how UD uses the same relation to describe syntactic relations between words in different phrasal units.</p>
+<p>For this reason, one needs to pay attention to both part-of-speech tags <em>and</em> syntactic dependencies when querying UD annotations to identify the phrasal unit in question.</p>
+<p>To exemplify, when the relation <code class="docutils literal notranslate"><span class="pre">conj</span></code> is drawn between nouns, one may assume that the phrasal unit is a nominal. Alternatively, if the <code class="docutils literal notranslate"><span class="pre">conj</span></code> relation exists between verbs, the unit in question is a clause.</p>
+</div>
+<div class="section" id="modifiers">
+<h3>Modifiers<a class="headerlink" href="#modifiers" title="Permalink to this headline">¶</a></h3>
+<p>The final type of phrasal unit to be discussed are modifiers, which allow refining the meaning of both clauses and nominals.</p>
+<p>Let’s start with a simple example of modifiers in a nominal.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a string object, feed it to the language model under &#39;nlp&#39; and</span>
+<span class="c1"># store the result under the variable &#39;mod_example&#39;.</span>
+<span class="n">modifier_n</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="s1">&#39;A very nasty comment&#39;</span><span class="p">)</span>
+
+<span class="c1"># Use displacy to render the syntactic dependencies</span>
+<span class="n">displacy</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">modifier_n</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;dep&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span class="tex2jax_ignore"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:lang="en" id="e03466f33e7f47ca87098bb60bc06339-0" class="displacy" width="750" height="312.0" direction="ltr" style="max-width: none; height: 312.0px; color: #000000; background: #ffffff; font-family: Arial; direction: ltr">
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="222.0">
+    <tspan class="displacy-word" fill="currentColor" x="50">A</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="50">DET</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="222.0">
+    <tspan class="displacy-word" fill="currentColor" x="225">very</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="225">ADV</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="222.0">
+    <tspan class="displacy-word" fill="currentColor" x="400">nasty</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="400">ADJ</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="222.0">
+    <tspan class="displacy-word" fill="currentColor" x="575">comment</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="575">NOUN</tspan>
+</text>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-e03466f33e7f47ca87098bb60bc06339-0-0" stroke-width="2px" d="M70,177.0 C70,2.0 575.0,2.0 575.0,177.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-e03466f33e7f47ca87098bb60bc06339-0-0" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">det</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M70,179.0 L62,167.0 78,167.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-e03466f33e7f47ca87098bb60bc06339-0-1" stroke-width="2px" d="M245,177.0 C245,89.5 395.0,89.5 395.0,177.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-e03466f33e7f47ca87098bb60bc06339-0-1" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">advmod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M245,179.0 L237,167.0 253,167.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-e03466f33e7f47ca87098bb60bc06339-0-2" stroke-width="2px" d="M420,177.0 C420,89.5 570.0,89.5 570.0,177.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-e03466f33e7f47ca87098bb60bc06339-0-2" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">amod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M420,179.0 L412,167.0 428,167.0" fill="currentColor"/>
+</g>
+</svg></span></div></div>
+</div>
+<p>The arc that leads from the head noun “comment” to the adjective “nasty” has the relation <code class="docutils literal notranslate"><span class="pre">amod</span></code>, which stands for adjectival modifier.</p>
+<p>In addition, the adjective “nasty” has further dependent, the adverb “very”, which acts as its adverbial modifier (<code class="docutils literal notranslate"><span class="pre">advmod</span></code>).</p>
+<p>Both of these modifiers serve to refine the meaning of the head noun “comment”.</p>
+<p>Just as we saw with the conjunct relation (<code class="docutils literal notranslate"><span class="pre">conj</span></code>) above, these relations can be applied to both clauses and nominals.</p>
+<p>Consider the example below, in which the adverb “slowly” is a dependent of the head verb “opened”.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a string object, feed it to the language model under &#39;nlp&#39; and</span>
+<span class="c1"># store the result under the variable &#39;mod_example&#39;.</span>
+<span class="n">modifier_c</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="s1">&#39;The door opened slowly.&#39;</span><span class="p">)</span>
+
+<span class="c1"># Use displacy to render the syntactic dependencies</span>
+<span class="n">displacy</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">modifier_c</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;dep&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span class="tex2jax_ignore"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:lang="en" id="bad1905543b64580889e92462aa1e44e-0" class="displacy" width="750" height="224.5" direction="ltr" style="max-width: none; height: 224.5px; color: #000000; background: #ffffff; font-family: Arial; direction: ltr">
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="134.5">
+    <tspan class="displacy-word" fill="currentColor" x="50">The</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="50">DET</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="134.5">
+    <tspan class="displacy-word" fill="currentColor" x="225">door</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="225">NOUN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="134.5">
+    <tspan class="displacy-word" fill="currentColor" x="400">opened</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="400">VERB</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="134.5">
+    <tspan class="displacy-word" fill="currentColor" x="575">slowly.</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="575">ADV</tspan>
+</text>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-bad1905543b64580889e92462aa1e44e-0-0" stroke-width="2px" d="M70,89.5 C70,2.0 225.0,2.0 225.0,89.5" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-bad1905543b64580889e92462aa1e44e-0-0" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">det</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M70,91.5 L62,79.5 78,79.5" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-bad1905543b64580889e92462aa1e44e-0-1" stroke-width="2px" d="M245,89.5 C245,2.0 400.0,2.0 400.0,89.5" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-bad1905543b64580889e92462aa1e44e-0-1" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nsubj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M245,91.5 L237,79.5 253,79.5" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-bad1905543b64580889e92462aa1e44e-0-2" stroke-width="2px" d="M420,89.5 C420,2.0 575.0,2.0 575.0,89.5" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-bad1905543b64580889e92462aa1e44e-0-2" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">advmod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M575.0,91.5 L583.0,79.5 567.0,79.5" fill="currentColor"/>
+</g>
+</svg></span></div></div>
+</div>
+<p>Clauses can also be modified by clauses, as shown by the adverbial clause modifier (<code class="docutils literal notranslate"><span class="pre">advcl</span></code>) in the example below.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a string object, feed it to the language model under &#39;nlp&#39; and</span>
+<span class="c1"># store the result under the variable &#39;mod_example&#39;.</span>
+<span class="n">modifier_c2</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="s1">&#39;The door opened slowly, without making a sound.&#39;</span><span class="p">)</span>
+
+<span class="c1"># Use displacy to render the syntactic dependencies</span>
+<span class="n">displacy</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">modifier_c2</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;dep&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span class="tex2jax_ignore"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:lang="en" id="6be56361a62f4d18af05058815659752-0" class="displacy" width="1450" height="399.5" direction="ltr" style="max-width: none; height: 399.5px; color: #000000; background: #ffffff; font-family: Arial; direction: ltr">
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="309.5">
+    <tspan class="displacy-word" fill="currentColor" x="50">The</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="50">DET</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="309.5">
+    <tspan class="displacy-word" fill="currentColor" x="225">door</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="225">NOUN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="309.5">
+    <tspan class="displacy-word" fill="currentColor" x="400">opened</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="400">VERB</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="309.5">
+    <tspan class="displacy-word" fill="currentColor" x="575">slowly,</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="575">ADV</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="309.5">
+    <tspan class="displacy-word" fill="currentColor" x="750">without</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="750">SCONJ</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="309.5">
+    <tspan class="displacy-word" fill="currentColor" x="925">making</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="925">VERB</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="309.5">
+    <tspan class="displacy-word" fill="currentColor" x="1100">a</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1100">DET</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="309.5">
+    <tspan class="displacy-word" fill="currentColor" x="1275">sound.</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1275">NOUN</tspan>
+</text>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-6be56361a62f4d18af05058815659752-0-0" stroke-width="2px" d="M70,264.5 C70,177.0 215.0,177.0 215.0,264.5" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-6be56361a62f4d18af05058815659752-0-0" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">det</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M70,266.5 L62,254.5 78,254.5" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-6be56361a62f4d18af05058815659752-0-1" stroke-width="2px" d="M245,264.5 C245,177.0 390.0,177.0 390.0,264.5" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-6be56361a62f4d18af05058815659752-0-1" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nsubj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M245,266.5 L237,254.5 253,254.5" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-6be56361a62f4d18af05058815659752-0-2" stroke-width="2px" d="M420,264.5 C420,177.0 565.0,177.0 565.0,264.5" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-6be56361a62f4d18af05058815659752-0-2" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">advmod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M565.0,266.5 L573.0,254.5 557.0,254.5" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-6be56361a62f4d18af05058815659752-0-3" stroke-width="2px" d="M770,264.5 C770,177.0 915.0,177.0 915.0,264.5" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-6be56361a62f4d18af05058815659752-0-3" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">mark</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M770,266.5 L762,254.5 778,254.5" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-6be56361a62f4d18af05058815659752-0-4" stroke-width="2px" d="M420,264.5 C420,2.0 925.0,2.0 925.0,264.5" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-6be56361a62f4d18af05058815659752-0-4" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">advcl</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M925.0,266.5 L933.0,254.5 917.0,254.5" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-6be56361a62f4d18af05058815659752-0-5" stroke-width="2px" d="M1120,264.5 C1120,177.0 1265.0,177.0 1265.0,264.5" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-6be56361a62f4d18af05058815659752-0-5" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">det</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1120,266.5 L1112,254.5 1128,254.5" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-6be56361a62f4d18af05058815659752-0-6" stroke-width="2px" d="M945,264.5 C945,89.5 1270.0,89.5 1270.0,264.5" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-6be56361a62f4d18af05058815659752-0-6" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">obj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1270.0,266.5 L1278.0,254.5 1262.0,254.5" fill="currentColor"/>
+</g>
+</svg></span></div></div>
+</div>
+</div>
+</div>
+<div class="section" id="understanding-the-annotation-schema">
+<h2>Understanding the annotation schema<a class="headerlink" href="#understanding-the-annotation-schema" title="Permalink to this headline">¶</a></h2>
+<p>So far, we have mainly discussed the description of syntactic relations within the Universal Dependencies (UD) framework.</p>
+<p>In addition to the <a class="reference external" href="https://universaldependencies.org/u/dep/">37 syntactic relations</a> defined in UD, the framework provides <a class="reference external" href="https://universaldependencies.org/u/overview/morphology.html">a rich schema for describing morphology</a>, that is, the <em>form</em> of words.</p>
+<p>The UD schema for morphology contains three levels of representation:</p>
+<ol class="simple">
+<li><p>A lemma, or the base form of the word</p></li>
+<li><p>A part-of-speech tag determining the word class to which the word belongs</p></li>
+<li><p>A set of features that define the lexical and grammatical features of the word</p></li>
+</ol>
+<p>UD defines <a class="reference external" href="https://universaldependencies.org/u/pos/index.html">17 part-of-speech or word classes</a>, which can be divided into three groups:</p>
+<ol class="simple">
+<li><p>Open class or lexical words: <code class="docutils literal notranslate"><span class="pre">ADJ</span> <span class="pre">ADV</span> <span class="pre">INTJ</span> <span class="pre">NOUN</span> <span class="pre">PROPN</span> <span class="pre">VERB</span></code></p></li>
+<li><p>Closed class or grammatical words: <code class="docutils literal notranslate"><span class="pre">ADP,</span> <span class="pre">AUX,</span> <span class="pre">CCONJ,</span> <span class="pre">DET,</span> <span class="pre">NUM,</span> <span class="pre">PART,</span> <span class="pre">PRON,</span> <span class="pre">SCONJ</span></code></p></li>
+<li><p>Other: <code class="docutils literal notranslate"><span class="pre">PUNCT,</span> <span class="pre">SYM,</span> <span class="pre">X</span></code></p></li>
+</ol>
+<p>UD also defines a large number of <a class="reference external" href="https://universaldependencies.org/u/feat/index.html">lexical and inflectional features</a> for describing morphological features, that is, the word forms.</p>
+<p>UD defines morphological features using two components, <em>names</em> and <em>values</em>. As we learned in <a class="reference internal" href="../part_ii/03_basic_nlp.html"><span class="doc std std-doc">Part II</span></a>, spaCy stores morphological features under the <code class="docutils literal notranslate"><span class="pre">morph</span></code> attribute of a <em>Token</em> object.</p>
+<p>Let’s define a quick example, feed it to the language model under the variable <code class="docutils literal notranslate"><span class="pre">nlp</span></code> and print out each <em>Token</em> and its morphological features.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define an example sentence; feed it to the language</span>
+<span class="c1"># model and store the result under the variable &#39;books&#39;</span>
+<span class="n">books</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="s1">&#39;I like those books.&#39;</span><span class="p">)</span>
+
+<span class="c1"># Loop over each Token in the Doc object</span>
+<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">books</span><span class="p">:</span>
+    
+    <span class="c1"># Print out each Token, its part-of-speech tag and</span>
+    <span class="c1"># morphological features. Separate these using strings</span>
+    <span class="c1"># that contain tabulator &#39;\t&#39; characters for cleaner</span>
+    <span class="c1"># output.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">pos_</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">morph</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>I 	 PRON 	 Case=Nom|Number=Sing|Person=1|PronType=Prs
+like 	 VERB 	 Mood=Ind|Tense=Pres|VerbForm=Fin
+those 	 DET 	 Number=Plur|PronType=Dem
+books 	 NOUN 	 Number=Plur
+. 	 PUNCT 	 
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the result, each <em>Token</em> on the left-hand side is accompanied by its part-of-speech tag and morphological features on the right.</p>
+<p>Note how the morphological features differ according to the part-of-speech tag of the <em>Token</em>.</p>
+<p>For the pronoun (<code class="docutils literal notranslate"><span class="pre">PRON</span></code>) “I”, the language model predicts four types of morphological features: <code class="docutils literal notranslate"><span class="pre">Case</span></code>, <code class="docutils literal notranslate"><span class="pre">Number</span></code>, <code class="docutils literal notranslate"><span class="pre">Person</span></code> and <code class="docutils literal notranslate"><span class="pre">PronType</span></code> (pronoun type). Verbs such as “like”, in turn, are assigned features for <code class="docutils literal notranslate"><span class="pre">Mood</span></code>, <code class="docutils literal notranslate"><span class="pre">Tense</span></code> and <code class="docutils literal notranslate"><span class="pre">VerbForm</span></code>.</p>
+<p>As we will learn later in <a class="reference internal" href="03_pattern_matching.html"><span class="doc std std-doc">Part III</span></a>, morphological features can be used to perform very specific queries for particular linguistic structures.</p>
+</div>
+<div class="section" id="exploring-parse-trees-using-spacy">
+<h2>Exploring parse trees using spaCy<a class="headerlink" href="#exploring-parse-trees-using-spacy" title="Permalink to this headline">¶</a></h2>
+<p>spaCy offers powerful means exploring syntactic dependencies through the <em>Token</em> object.</p>
+<p>Let’s start by defining another example, feeding it to the language model and visualising its syntactic dependencies.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define an example string and feed it to the language model under &#39;nlp&#39;,</span>
+<span class="c1"># store the result under the variable &#39;tree&#39;.</span>
+<span class="n">tree</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="s1">&#39;I never saw the bird, because it had flown away.&#39;</span><span class="p">)</span>
+
+<span class="c1"># Use displacy to render the syntactic dependencies</span>
+<span class="n">displacy</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">tree</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;dep&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span class="tex2jax_ignore"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:lang="en" id="d723cbeb7fcc42e1a9f65a63f7e9b366-0" class="displacy" width="1800" height="487.0" direction="ltr" style="max-width: none; height: 487.0px; color: #000000; background: #ffffff; font-family: Arial; direction: ltr">
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="50">I</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="50">PRON</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="225">never</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="225">ADV</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="400">saw</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="400">VERB</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="575">the</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="575">DET</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="750">bird,</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="750">NOUN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="925">because</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="925">SCONJ</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="1100">it</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1100">PRON</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="1275">had</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1275">AUX</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="1450">flown</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1450">VERB</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="1625">away.</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1625">ADV</tspan>
+</text>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-d723cbeb7fcc42e1a9f65a63f7e9b366-0-0" stroke-width="2px" d="M70,352.0 C70,177.0 390.0,177.0 390.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-d723cbeb7fcc42e1a9f65a63f7e9b366-0-0" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nsubj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M70,354.0 L62,342.0 78,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-d723cbeb7fcc42e1a9f65a63f7e9b366-0-1" stroke-width="2px" d="M245,352.0 C245,264.5 385.0,264.5 385.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-d723cbeb7fcc42e1a9f65a63f7e9b366-0-1" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">advmod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M245,354.0 L237,342.0 253,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-d723cbeb7fcc42e1a9f65a63f7e9b366-0-2" stroke-width="2px" d="M595,352.0 C595,264.5 735.0,264.5 735.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-d723cbeb7fcc42e1a9f65a63f7e9b366-0-2" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">det</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M595,354.0 L587,342.0 603,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-d723cbeb7fcc42e1a9f65a63f7e9b366-0-3" stroke-width="2px" d="M420,352.0 C420,177.0 740.0,177.0 740.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-d723cbeb7fcc42e1a9f65a63f7e9b366-0-3" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">obj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M740.0,354.0 L748.0,342.0 732.0,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-d723cbeb7fcc42e1a9f65a63f7e9b366-0-4" stroke-width="2px" d="M945,352.0 C945,89.5 1445.0,89.5 1445.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-d723cbeb7fcc42e1a9f65a63f7e9b366-0-4" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">mark</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M945,354.0 L937,342.0 953,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-d723cbeb7fcc42e1a9f65a63f7e9b366-0-5" stroke-width="2px" d="M1120,352.0 C1120,177.0 1440.0,177.0 1440.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-d723cbeb7fcc42e1a9f65a63f7e9b366-0-5" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nsubj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1120,354.0 L1112,342.0 1128,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-d723cbeb7fcc42e1a9f65a63f7e9b366-0-6" stroke-width="2px" d="M1295,352.0 C1295,264.5 1435.0,264.5 1435.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-d723cbeb7fcc42e1a9f65a63f7e9b366-0-6" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">aux</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1295,354.0 L1287,342.0 1303,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-d723cbeb7fcc42e1a9f65a63f7e9b366-0-7" stroke-width="2px" d="M420,352.0 C420,2.0 1450.0,2.0 1450.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-d723cbeb7fcc42e1a9f65a63f7e9b366-0-7" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">advcl</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1450.0,354.0 L1458.0,342.0 1442.0,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-d723cbeb7fcc42e1a9f65a63f7e9b366-0-8" stroke-width="2px" d="M1470,352.0 C1470,264.5 1610.0,264.5 1610.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-d723cbeb7fcc42e1a9f65a63f7e9b366-0-8" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">advmod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1610.0,354.0 L1618.0,342.0 1602.0,342.0" fill="currentColor"/>
+</g>
+</svg></span></div></div>
+</div>
+<p>In this example, the head verb “saw” has a dependent, “flown”, which are connected by the dependency relation <code class="docutils literal notranslate"><span class="pre">advcl</span></code> – an adverbial clause modifier.</p>
+<p>If we wish to retrieve everything that modifies the main clause “I never saw the bird”, we can use the <code class="docutils literal notranslate"><span class="pre">subtree</span></code> attribute of a <em>Token</em> object.</p>
+<p>Let’s explore this by looping over each <em>Token</em> in the <em>Doc</em> object <code class="docutils literal notranslate"><span class="pre">tree</span></code>.</p>
+<p>If the <em>Token</em> has the dependency <code class="docutils literal notranslate"><span class="pre">advcl</span></code> under the <code class="docutils literal notranslate"><span class="pre">dep_</span></code> attribute, we print out the <em>Token</em>, its index in the <em>Doc</em> object and whatever is stored under the <code class="docutils literal notranslate"><span class="pre">subtree</span></code> attribute.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loop over each Token in the Doc object &#39;tree&#39;</span>
+<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tree</span><span class="p">:</span>
+    
+    <span class="c1"># Check if the Token has the dependency relation &#39;acl:relcl&#39;,</span>
+    <span class="c1"># which stands for a relative clause</span>
+    <span class="k">if</span> <span class="n">token</span><span class="o">.</span><span class="n">dep_</span> <span class="o">==</span> <span class="s1">&#39;advcl&#39;</span><span class="p">:</span>
+        
+        <span class="c1"># If the Token has this dependency, use the subtree attribute</span>
+        <span class="c1"># to fetch all dependents below this Token. The subtree attribute</span>
+        <span class="c1"># returns a generator, so cast the result into a list and print.</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">i</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">token</span><span class="o">.</span><span class="n">subtree</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>flown 9 [because, it, had, flown, away]
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you compare this output to the syntactic dependencies visualised above, you should see that the <code class="docutils literal notranslate"><span class="pre">subtree</span></code> attribute returns every dependent of the <em>Token</em>, and the <em>Token</em> itself.</p>
+<p>If we want to retrieve only the <em>Tokens</em> that depend on the current <em>Token</em>, we can use the <code class="docutils literal notranslate"><span class="pre">children</span></code> attribute.</p>
+<p>Let’s use the index of the <em>Token</em> to retrieve its children and print out the result.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Retrieve Token at index 9 in the Doc object and fetch its children.</span>
+<span class="c1"># This returns a generator, so cast the output into a list before printing.</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span><span class="o">.</span><span class="n">children</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[because, it, had, away]
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, the <code class="docutils literal notranslate"><span class="pre">children</span></code> attribute does not return the <em>Token</em> itself, but only includes the dependents.</p>
+<p>spaCy also allows retrieving the immediate dependents of a <em>Token</em> using the attributes <code class="docutils literal notranslate"><span class="pre">lefts</span></code> and <code class="docutils literal notranslate"><span class="pre">rights</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Retrieve the syntactic dependents left and right of the Token at</span>
+<span class="c1"># index 9 in the Doc object &#39;tree&#39;. Cast the results into lists and</span>
+<span class="c1"># print.</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span><span class="o">.</span><span class="n">lefts</span><span class="p">),</span> <span class="nb">list</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="mi">9</span><span class="p">]</span><span class="o">.</span><span class="n">rights</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[because, it, had] [away]
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can also move the other way – up the parse tree – using the <code class="docutils literal notranslate"><span class="pre">head</span></code> and <code class="docutils literal notranslate"><span class="pre">ancestors</span></code> attributes.</p>
+<p>Let’s start by examining the auxiliary verb “have” immediately left of the verb “flown” at index 8 of the <em>Doc</em> object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Retrieve the Token</span>
+<span class="n">tree</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>had
+</pre></div>
+</div>
+</div>
+</div>
+<p>To retrieve the <em>Token</em> that acts as the head of the auxiliary verb, we can use the <code class="docutils literal notranslate"><span class="pre">head</span></code> attribute, as we learned in <a class="reference external" href="../part_ii/03_basic_nlp.ipynb#Syntactic-parsing">Part II</a>.</p>
+<p>Let’s retrieve the head for the auxiliary verb “had” at index 8 of the <em>Doc</em> object <code class="docutils literal notranslate"><span class="pre">tree</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Retrieve the &#39;head&#39; attribute of the Token</span>
+<span class="n">tree</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="o">.</span><span class="n">head</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>flown
+</pre></div>
+</div>
+</div>
+</div>
+<p>This, however, only gives us the immediate head, that is, the verb “flown”.</p>
+<p>To retrieve the head and all its heads, we can use the <code class="docutils literal notranslate"><span class="pre">ancestors</span></code> attribute. This attribute returns a generator object, which must be cast into a list for examination.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Retrieve the ancestors for Token at index 8. Cast the result into a list.</span>
+<span class="nb">list</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="o">.</span><span class="n">ancestors</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[flown, saw]
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can think of this attribute as tracing a way back through the dependencies all the way to the root of the parse tree.</p>
+<p>Let’s loop over the ancestors and print out each <em>Token</em> together with its index, head and syntactic dependency.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loop over each Token in the list of ancestors for Token at index 8.</span>
+<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">tree</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span><span class="o">.</span><span class="n">ancestors</span><span class="p">):</span>
+    
+    <span class="c1"># Print out each Token, its index, head and dependency.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">i</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">head</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">dep_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>flown 9 saw advcl
+saw 2 saw root
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, the first head of the auxiliary verb “had” is the verb “flown” at index 9 of the <em>Doc</em> object, which in turn is a dependent of the verb “saw” at index 2. The verb “saw” is also the root of the parse tree.</p>
+</div>
+<div class="section" id="a-final-word-on-evaluation">
+<h2>A final word on evaluation<a class="headerlink" href="#a-final-word-on-evaluation" title="Permalink to this headline">¶</a></h2>
+<p>Language models trained on Universal Dependencies treebanks are generally accompanied by information on how well the models can predict the linguistic features defined in the UD annotation schema.</p>
+<p>As we learned in <a class="reference internal" href="../part_ii/05_evaluating_nlp.html"><span class="doc std std-doc">Part II</span></a>, the performance of models is evaluated against human-annotated data, a so-called gold standard or ground truth.</p>
+<p>For dependency parsing, how well a model performs is traditionally measured using two metrics:</p>
+<ul class="simple">
+<li><p>UAS, or <em>unlabeled attachment score</em>, is simply the percentage of words that are assigned the correct head.</p></li>
+<li><p>LAS, or <em>labeled attachment score</em>, is the percentage of words that are assigned the correct head <em>and</em> the correct dependency tag (or “label”).</p></li>
+</ul>
+<p>Let’s define a quick example to examine these metrics.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define an example string and feed it to the language model under &#39;nlp&#39;,</span>
+<span class="c1"># store the result under the variable &#39;las&#39;.</span>
+<span class="n">las</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="s1">&#39;I went to the cinema.&#39;</span><span class="p">)</span>
+
+<span class="c1"># Use displacy to render the syntactic dependencies. Set the &#39;collapse_punct&#39;</span>
+<span class="c1"># argument to False.</span>
+<span class="n">displacy</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">las</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;dep&#39;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;collapse_punct&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span class="tex2jax_ignore"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:lang="en" id="40c4e82bdd834be1903c0525d1a81f14-0" class="displacy" width="1100" height="487.0" direction="ltr" style="max-width: none; height: 487.0px; color: #000000; background: #ffffff; font-family: Arial; direction: ltr">
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="50">I</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="50">PRON</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="225">went</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="225">VERB</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="400">to</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="400">ADP</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="575">the</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="575">DET</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="750">cinema</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="750">NOUN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="925">.</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="925">PUNCT</tspan>
+</text>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-40c4e82bdd834be1903c0525d1a81f14-0-0" stroke-width="2px" d="M70,352.0 C70,264.5 210.0,264.5 210.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-40c4e82bdd834be1903c0525d1a81f14-0-0" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nsubj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M70,354.0 L62,342.0 78,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-40c4e82bdd834be1903c0525d1a81f14-0-1" stroke-width="2px" d="M420,352.0 C420,177.0 740.0,177.0 740.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-40c4e82bdd834be1903c0525d1a81f14-0-1" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">case</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M420,354.0 L412,342.0 428,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-40c4e82bdd834be1903c0525d1a81f14-0-2" stroke-width="2px" d="M595,352.0 C595,264.5 735.0,264.5 735.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-40c4e82bdd834be1903c0525d1a81f14-0-2" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">det</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M595,354.0 L587,342.0 603,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-40c4e82bdd834be1903c0525d1a81f14-0-3" stroke-width="2px" d="M245,352.0 C245,89.5 745.0,89.5 745.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-40c4e82bdd834be1903c0525d1a81f14-0-3" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">obl</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M745.0,354.0 L753.0,342.0 737.0,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-40c4e82bdd834be1903c0525d1a81f14-0-4" stroke-width="2px" d="M245,352.0 C245,2.0 925.0,2.0 925.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-40c4e82bdd834be1903c0525d1a81f14-0-4" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">punct</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M925.0,354.0 L933.0,342.0 917.0,342.0" fill="currentColor"/>
+</g>
+</svg></span></div></div>
+</div>
+<p>If the parse tree above were annotated by a human, we could then feed the same text to a language model and compare the model output to the human-annotated parse tree.</p>
+<p>To calculate the unlabeled attachment score (UAS), we would simply calculate how many words were assigned the correct head by the model.</p>
+<p>When calculating the labeled attachment score (LAS), a prediction is only considered correct if the model assigns the correct head to the word <em>and</em> correctly predicts the syntactic relation between these words.</p>
+<p>However, UAS and LAS become problematic when considering the cross-linguistic goals of UD as a project: one should also be able to compare the performance of models <em>across languages</em>.</p>
+<p>Consider, for instance, the Finnish equivalent of the example above: “<em>Menin elokuviin.</em>” (“I went to the cinema.”).</p>
+<p>If the English language model were to predict the wrong head for a single word, the model would nevertheless achieve a UAS or LAS score of <span class="math notranslate nohighlight">\(5/6 \approx 0.83\)</span>.</p>
+<p>If the Finnish parser, in turn, would make a single mistake, the corresponding score would be <span class="math notranslate nohighlight">\(2/3 \approx 0.66\)</span>.</p>
+<p>Zeman et al. <a class="reference external" href="https://aclanthology.org/K18-2001.pdf">2018: 5</a> summarise the problem succinctly:</p>
+<blockquote>
+<div><p>… function words often correspond to morphological features in other languages. Furthermore, languages with many function words (e.g. English) have longer sentences than morphologically rich languages (e.g. Finnish), hence a single error in Finnish costs the parser significantly more than an error in English according to LAS.</p>
+</div></blockquote>
+<p>For this reason, several alternative metrics have been proposed for measuring the performance of language models for dependency parsing.</p>
+<p>CLAS, or <em>content-labeled attachment score</em>, is like LAS, but ignores function words (e.g. words with relations <code class="docutils literal notranslate"><span class="pre">aux</span></code> <code class="docutils literal notranslate"><span class="pre">case</span></code> <code class="docutils literal notranslate"><span class="pre">cc</span></code> <code class="docutils literal notranslate"><span class="pre">clf</span></code> <code class="docutils literal notranslate"><span class="pre">cop</span></code> <code class="docutils literal notranslate"><span class="pre">det</span></code> <code class="docutils literal notranslate"><span class="pre">mark</span></code>) and punctuation (<code class="docutils literal notranslate"><span class="pre">punct</span></code>) when calculating the score. Only content words are counted (Nivre &amp; Fang <a class="reference external" href="https://aclanthology.org/W17-0411.pdf">2017</a>).</p>
+<p>MLAS, or <em>morphologically-aware labeled attachment score</em>, is largely similar to CLAS, but also evaluates whether the part-of-speech tag and selected morphological features have been predicted correctly (Zeman et al. <a class="reference external" href="https://aclanthology.org/K18-2001.pdf">2018: 5</a>)</p>
+<p>BLEX, or <em>bilexical dependency score</em>, is like MLAS, but morphological information is replaced by lemmas (Zeman et al. <a class="reference external" href="https://aclanthology.org/K18-2001.pdf">2018: 5</a>).</p>
+<p>This section should have given you an idea of Universal Dependencies as a project and an annotation schema.</p>
+<p>In the <a class="reference internal" href="03_pattern_matching.html"><span class="doc std std-doc">next section</span></a>, we will learn how to search linguistic annotations for patterns.</p>
+</div>
+</div>
+
+
+<script type="application/vnd.jupyter.widget-state+json">
+{"state": {"7e9c4bcd43ea4822b8451ff87f401da3": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "8c1d4b851b8c4c04b709a44f1abbc6ce": {"model_name": "ProgressStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "ProgressStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "bar_color": null, "description_width": ""}}, "e97ee6af9c7647468b412d2b53a86e2a": {"model_name": "FloatProgressModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "FloatProgressModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "ProgressView", "bar_style": "success", "description": "", "description_tooltip": null, "layout": "IPY_MODEL_7e9c4bcd43ea4822b8451ff87f401da3", "max": 24459.0, "min": 0.0, "orientation": "horizontal", "style": "IPY_MODEL_8c1d4b851b8c4c04b709a44f1abbc6ce", "value": 24459.0}}, "131712f3f60043c0a2ad87370dbab384": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "ed4ba38e8d56469caf3c2987fdd70d04": {"model_name": "DescriptionStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "a09ef38eb9844aa182f2f67f88186400": {"model_name": "HTMLModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "HTMLView", "description": "", "description_tooltip": null, "layout": "IPY_MODEL_131712f3f60043c0a2ad87370dbab384", "placeholder": "\u200b", "style": "IPY_MODEL_ed4ba38e8d56469caf3c2987fdd70d04", "value": "Downloading https://raw.githubusercontent.com/stanfordnlp/stanza-resources/main/resources_1.3.0.json: "}}, "cc2edac812e744bfbaab654ea91a62f4": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "a63e91841d9c4153935c340c4c143466": {"model_name": "DescriptionStyleModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "DescriptionStyleModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "StyleView", "description_width": ""}}, "b7c84a9d7ac14a02b9a78e742c76497d": {"model_name": "HTMLModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "HTMLModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "HTMLView", "description": "", "description_tooltip": null, "layout": "IPY_MODEL_cc2edac812e744bfbaab654ea91a62f4", "placeholder": "\u200b", "style": "IPY_MODEL_a63e91841d9c4153935c340c4c143466", "value": " 142k/? [00:00&lt;00:00, 4.52MB/s]"}}, "3c9ffb8a6eec49bc97c3cc954b96161a": {"model_name": "LayoutModel", "model_module": "@jupyter-widgets/base", "model_module_version": "1.2.0", "state": {"_model_module": "@jupyter-widgets/base", "_model_module_version": "1.2.0", "_model_name": "LayoutModel", "_view_count": null, "_view_module": "@jupyter-widgets/base", "_view_module_version": "1.2.0", "_view_name": "LayoutView", "align_content": null, "align_items": null, "align_self": null, "border": null, "bottom": null, "display": null, "flex": null, "flex_flow": null, "grid_area": null, "grid_auto_columns": null, "grid_auto_flow": null, "grid_auto_rows": null, "grid_column": null, "grid_gap": null, "grid_row": null, "grid_template_areas": null, "grid_template_columns": null, "grid_template_rows": null, "height": null, "justify_content": null, "justify_items": null, "left": null, "margin": null, "max_height": null, "max_width": null, "min_height": null, "min_width": null, "object_fit": null, "object_position": null, "order": null, "overflow": null, "overflow_x": null, "overflow_y": null, "padding": null, "right": null, "top": null, "visibility": null, "width": null}}, "dd7fa30eda874a4cbc463ba31cf6515e": {"model_name": "HBoxModel", "model_module": "@jupyter-widgets/controls", "model_module_version": "1.5.0", "state": {"_dom_classes": [], "_model_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_model_name": "HBoxModel", "_view_count": null, "_view_module": "@jupyter-widgets/controls", "_view_module_version": "1.5.0", "_view_name": "HBoxView", "box_style": "", "children": ["IPY_MODEL_a09ef38eb9844aa182f2f67f88186400", "IPY_MODEL_e97ee6af9c7647468b412d2b53a86e2a", "IPY_MODEL_b7c84a9d7ac14a02b9a78e742c76497d"], "layout": "IPY_MODEL_3c9ffb8a6eec49bc97c3cc954b96161a"}}}, "version_major": 2, "version_minor": 0}
+</script>
+
+
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="01_multilingual_nlp.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Processing diverse languages</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="03_pattern_matching.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Finding linguistic patterns using spaCy</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+   <div class="footer"><a href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0;padding:10px" src="https://mirrors.creativecommons.org/presskit/buttons/88x31/svg/by-nc.svg"/></a> © 2020– <a href="http://www.helsinki.fi/~thiippal">Tuomo Hiippala</a></div>
+    
+
+  </body>
+</html>

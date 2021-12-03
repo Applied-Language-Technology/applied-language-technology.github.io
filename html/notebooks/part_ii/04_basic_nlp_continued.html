@@ -1,0 +1,1376 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QDXYHY09XJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-QDXYHY09XJ');
+</script>
+    
+    
+    <title>Customising the spaCy pipeline</title>
+    
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Evaluating language models" href="05_evaluating_nlp.html" />
+    <link rel="prev" title="Processing texts using spaCy" href="03_basic_nlp.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../about.html">
+   About this Website
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../getting_started.html">
+   Getting Started
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../notebook_login.html">
+     Log in to CSC Notebooks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../launch_server.html">
+     Launch JupyterLab on your personal server
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../jupyter.html">
+     Interact with the server in JupyterLab
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../github_pull.html">
+     Retrieve learning materials and exercises from GitHub
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../github_push.html">
+     Return completed exercises to GitHub for grading
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../python_intro.html">
+   Part I: A Minimal Introduction to Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_i/01_working_with_jupyter_notebooks.html">
+     The elements of a Jupyter Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_i/02_getting_started_with_python.html">
+     Getting started with Python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../../working_with_text.html">
+   Part II: Working with Text in Python
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="01_basic_text_processing.html">
+     Manipulating text using Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02_basic_text_processing_continued.html">
+     Manipulating text at scale
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03_basic_nlp.html">
+     Processing texts using spaCy
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Customising the spaCy pipeline
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="05_evaluating_nlp.html">
+     Evaluating language models
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="06_managing_data.html">
+     Managing textual data using pandas
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../nlp_for_linguists.html">
+   Part III: Natural Language Processing for Linguists
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_iii/01_multilingual_nlp.html">
+     Processing diverse languages
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_iii/02_universal_dependencies.html">
+     Universal Dependencies
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_iii/03_pattern_matching.html">
+     Finding linguistic patterns using spaCy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_iii/04_embeddings.html">
+     Introducing word embeddings
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_iii/05_embeddings_continued.html">
+     Word embeddings in spaCy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_iii/06_text_linguistics.html">
+     Working with discourse-level annotations
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../citation.html">
+   Citation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../resources.html">
+   Resources
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/part_ii/04_basic_nlp_continued.ipynb.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/Applied-Language-Technology/website"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
+    </div>
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/Applied-Language-Technology/website/binder?urlpath=lab/tree/notebooks/part_ii/04_basic_nlp_continued.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#modifying-spacy-pipelines">
+   Modifying spaCy pipelines
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#processing-texts-efficiently">
+   Processing texts efficiently
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#adding-custom-attributes-to-spacy-objects">
+   Adding custom attributes to spaCy objects
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#writing-processed-texts-to-disk">
+   Writing processed texts to disk
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#simplifying-output-for-noun-phrases-and-named-entities">
+   Simplifying output for noun phrases and named entities
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#merging-noun-phrases">
+     Merging noun phrases
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#merging-named-entities">
+     Merging named entities
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="tex2jax_ignore mathjax_ignore section" id="customising-the-spacy-pipeline">
+<h1>Customising the spaCy pipeline<a class="headerlink" href="#customising-the-spacy-pipeline" title="Permalink to this headline">¶</a></h1>
+<p>This section introduces you to customising the spaCy pipeline, that is, determining just what spaCy does with text and how.</p>
+<p>After reading this section, you should know how to:</p>
+<ul class="simple">
+<li><p>examine and modify the spaCy pipeline</p></li>
+<li><p>process texts efficiently</p></li>
+<li><p>add custom attributes to spaCy objects</p></li>
+<li><p>save processed texts on disk</p></li>
+<li><p>merge noun phrases and named entities</p></li>
+</ul>
+<p>Let’s start by importing the spaCy library and the displacy module for drawing dependency trees.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the spaCy library and the displacy module</span>
+<span class="kn">from</span> <span class="nn">spacy</span> <span class="kn">import</span> <span class="n">displacy</span>
+<span class="kn">import</span> <span class="nn">spacy</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We then import a language model for English.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load a small language model for English and assign it to the variable &#39;nlp&#39;</span>
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;en_core_web_sm&#39;</span><span class="p">)</span>
+
+<span class="c1"># Call the variable to examine the object</span>
+<span class="n">nlp</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;spacy.lang.en.English at 0x10d56da30&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="modifying-spacy-pipelines">
+<h2>Modifying spaCy pipelines<a class="headerlink" href="#modifying-spacy-pipelines" title="Permalink to this headline">¶</a></h2>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+<iframe
+    width="600"
+    height="350"
+    src="https://www.youtube.com/embed/F4SJJQF49b0"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</div></div>
+</div>
+<p>Let’s start by examining the spaCy <em>Language</em> object in more detail.</p>
+<p>The <em>Language</em> object is a essentially pipeline that applies some language model to text by performing the tasks that the model has been trained to do.</p>
+<p>The tasks performed depend on the components present in the pipeline.</p>
+<p>We can examine the components of a pipeline using the <code class="docutils literal notranslate"><span class="pre">pipeline</span></code> attribute of a <em>Language</em> object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nlp</span><span class="o">.</span><span class="n">pipeline</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;tok2vec&#39;, &lt;spacy.pipeline.tok2vec.Tok2Vec at 0x16efe5f40&gt;),
+ (&#39;tagger&#39;, &lt;spacy.pipeline.tagger.Tagger at 0x16efe59a0&gt;),
+ (&#39;parser&#39;, &lt;spacy.pipeline.dep_parser.DependencyParser at 0x16eec3580&gt;),
+ (&#39;attribute_ruler&#39;,
+  &lt;spacy.pipeline.attributeruler.AttributeRuler at 0x16f13d200&gt;),
+ (&#39;lemmatizer&#39;, &lt;spacy.lang.en.lemmatizer.EnglishLemmatizer at 0x16f1df640&gt;),
+ (&#39;ner&#39;, &lt;spacy.pipeline.ner.EntityRecognizer at 0x16eec37b0&gt;)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>This returns a spaCy <em>SimpleFrozenList</em> object, which consists of Python <em>tuples</em> with two items:</p>
+<ol class="simple">
+<li><p>component names, e.g. <code class="docutils literal notranslate"><span class="pre">tagger</span></code>,</p></li>
+<li><p>the actual components that perform different tasks, e.g. <code class="docutils literal notranslate"><span class="pre">spacy.pipeline.tok2vec.Tok2Vec</span></code>.</p></li>
+</ol>
+<p>Components such as <code class="docutils literal notranslate"><span class="pre">tagger</span></code>, <code class="docutils literal notranslate"><span class="pre">parser</span></code>, <code class="docutils literal notranslate"><span class="pre">ner</span></code>and <code class="docutils literal notranslate"><span class="pre">lemmatizer</span></code> should already be familiar to you from the <a class="reference internal" href="03_basic_nlp.html"><span class="doc std std-doc">previous section</span></a>.</p>
+<p>There are, however, two components present in <code class="docutils literal notranslate"><span class="pre">nlp.pipeline</span></code> that we have not yet encountered.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">tok2vec</span></code> maps <em>Tokens</em> to their numerical representations. We will learn about these representations in <a class="reference internal" href="../part_iii/04_embeddings.html"><span class="doc std std-doc">Part III</span></a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">attribute_ruler</span></code> applies user-defined rules to <em>Tokens</em>, such as matches for a given linguistic pattern, and adds this information to the <em>Token</em> as an attribute if requested. We will explore the use of matchers in <a class="reference internal" href="../part_iii/03_pattern_matching.html"><span class="doc std std-doc">Part III</span></a>.</p></li>
+</ul>
+<p>Note also that the list of components under <code class="docutils literal notranslate"><span class="pre">nlp.pipeline</span></code> does not include a <em>Tokenizer</em>, because all texts must be tokenized for any kind of processing to take place. Hence the <em>Tokenizer</em> is placed under the <code class="docutils literal notranslate"><span class="pre">tokenizer</span></code> attribute of a <em>Language</em> object rather than the <code class="docutils literal notranslate"><span class="pre">pipeline</span></code> attribute.</p>
+<p>It is important to understand that all pipeline components come with a computational cost.</p>
+<p>If you do not need the output, you should not include a component in the pipeline, because the time needed to process the data will be longer.</p>
+<p>To exclude a component from the pipeline, provide the <code class="docutils literal notranslate"><span class="pre">exclude</span></code> argument with a <em>string</em> or a <em>list</em> that contain the names of the components to exclude when initialising a <em>Language</em> object using the <code class="docutils literal notranslate"><span class="pre">load()</span></code> function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load a small language model for English, but exclude named entity</span>
+<span class="c1"># recognition (&#39;ner&#39;) and syntactic dependency parsing (&#39;parser&#39;). </span>
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;en_core_web_sm&#39;</span><span class="p">,</span> <span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ner&#39;</span><span class="p">,</span> <span class="s1">&#39;parser&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s examine the <code class="docutils literal notranslate"><span class="pre">pipeline</span></code> attribute again.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Examine the active components under the Language object &#39;nlp&#39;</span>
+<span class="n">nlp</span><span class="o">.</span><span class="n">pipeline</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;tok2vec&#39;, &lt;spacy.pipeline.tok2vec.Tok2Vec at 0x1700aa460&gt;),
+ (&#39;tagger&#39;, &lt;spacy.pipeline.tagger.Tagger at 0x1700aa8e0&gt;),
+ (&#39;attribute_ruler&#39;,
+  &lt;spacy.pipeline.attributeruler.AttributeRuler at 0x170300640&gt;),
+ (&#39;lemmatizer&#39;, &lt;spacy.lang.en.lemmatizer.EnglishLemmatizer at 0x1703098c0&gt;)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>As the output shows, the <code class="docutils literal notranslate"><span class="pre">ner</span></code> and <code class="docutils literal notranslate"><span class="pre">parser</span></code> components are no longer included in the pipeline.</p>
+<p>A <em>Language</em> object also provides a <code class="docutils literal notranslate"><span class="pre">analyze_pipes()</span></code> method for an overview of the pipeline components and their interactions. By setting the attribute <code class="docutils literal notranslate"><span class="pre">pretty</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code>, spaCy prints out a table that lists the components and the annotations they produce.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Analyse the pipeline and store the analysis under &#39;pipe_analysis&#39;</span>
+<span class="n">pipe_analysis</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">analyze_pipes</span><span class="p">(</span><span class="n">pretty</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>
+<span class=" -Color -Color-Bold">============================= Pipeline Overview =============================</span>
+
+#   Component         Assigns       Requires   Scores      Retokenizes
+-   ---------------   -----------   --------   ---------   -----------
+0   tok2vec           doc.tensor                           False      
+                                                                      
+1   tagger            token.tag                tag_acc     False      
+                                                                      
+2   attribute_ruler                                        False      
+                                                                      
+3   lemmatizer        token.lemma              lemma_acc   False      
+
+<span class=" -Color -Color-C2">✔ No problems found.</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">analyze_pipes()</span></code> method returns a Python <em>dictionary</em>, which contains the same information presented in the table above.</p>
+<p>You can use this dictionary to check that no problems are found before processing large volumes of data.</p>
+<p>Problem reports are stored in a dictionary under the key <code class="docutils literal notranslate"><span class="pre">problems</span></code>.</p>
+<p>We can access the values under the <code class="docutils literal notranslate"><span class="pre">problems</span></code> key by placing the name of the key in brackets <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">]</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Examine the value stored under the key &#39;problems&#39;</span>
+<span class="n">pipe_analysis</span><span class="p">[</span><span class="s1">&#39;problems&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;tok2vec&#39;: [], &#39;tagger&#39;: [], &#39;attribute_ruler&#39;: [], &#39;lemmatizer&#39;: []}
+</pre></div>
+</div>
+</div>
+</div>
+<p>This returns a dictionary with component names as keys, whose values contain lists of problems.</p>
+<p>In this case, the lists are empty, because no problems exist.</p>
+<p>We can, however, easily write a piece of code that checks if this is indeed the case.</p>
+<p>To do so, we loop over the <code class="docutils literal notranslate"><span class="pre">pipe_analysis</span></code> dictionary, using the <code class="docutils literal notranslate"><span class="pre">items()</span></code> method to fetch the key/value pairs.</p>
+<p>We assign the keys and values to variables <code class="docutils literal notranslate"><span class="pre">component_name</span></code> and <code class="docutils literal notranslate"><span class="pre">problem_list</span></code>, respectively.</p>
+<p>We then use the <code class="docutils literal notranslate"><span class="pre">assert</span></code> statement with the <code class="docutils literal notranslate"><span class="pre">len()</span></code> function and the <em>comparison operator</em> <code class="docutils literal notranslate"><span class="pre">==</span></code> to check that the length of the list is 0.</p>
+<p>If this assertion is not true, that is, if the length of <code class="docutils literal notranslate"><span class="pre">problem_list</span></code> is more than 0, which would indicate the presence of a problem, Python will raise an <code class="docutils literal notranslate"><span class="pre">AssertionError</span></code> and stop.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loop over the key/value pairs in the dictionary. Assign the key and</span>
+<span class="c1"># value pairs to the variables &#39;component_name&#39; and &#39;problem_list&#39;.</span>
+<span class="k">for</span> <span class="n">component_name</span><span class="p">,</span> <span class="n">problem_list</span> <span class="ow">in</span> <span class="n">pipe_analysis</span><span class="p">[</span><span class="s1">&#39;problems&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    
+    <span class="c1"># Use the assert statement to check the list of problems; raise Error if necessary.</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">problem_list</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;There is a problem with </span><span class="si">{</span><span class="n">component_name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">problem_list</span><span class="si">}</span><span class="s2">!&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this case, we also print an error message using a <em>formatted string</em>. The error message is separated from the assertion by a comma.</p>
+<p>Note that the quotation marks are preceded by the character <code class="docutils literal notranslate"><span class="pre">f</span></code>. By declaring that this string can be formatted, we can insert variables into the string!</p>
+<p>The variable names inserted into the string are surrounded by curly braces <code class="docutils literal notranslate"><span class="pre">{}</span></code>. If an error message is raised, these parts of the string will be populated using the values currently stored under the variables <code class="docutils literal notranslate"><span class="pre">component_name</span></code> and <code class="docutils literal notranslate"><span class="pre">problem_list</span></code>.</p>
+<p>If no problems are encountered, the loop will pass silently.</p>
+</div>
+<div class="section" id="processing-texts-efficiently">
+<h2>Processing texts efficiently<a class="headerlink" href="#processing-texts-efficiently" title="Permalink to this headline">¶</a></h2>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+<iframe
+    width="600"
+    height="350"
+    src="https://www.youtube.com/embed/00yChd449uI"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</div></div>
+</div>
+<p>When working with high volumes of data, processing the data as efficiently as possible is highly desirable.</p>
+<p>To illustrate the best practices of processing texts efficiently using spaCy, let’s define a toy example that consists of a Python list with three example sentences from English Wikipedia.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialise the language model again, because we need dependency</span>
+<span class="c1"># parsing for the following sections.</span>
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;en_core_web_sm&#39;</span><span class="p">)</span>
+
+<span class="c1"># Define a list of example sentences</span>
+<span class="n">sents</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;On October 1, 2009, the Obama administration went ahead with a Bush administration program, increasing nuclear weapons production.&quot;</span><span class="p">,</span> 
+         <span class="s2">&quot;The &#39;Complex Modernization&#39; initiative expanded two existing nuclear sites to produce new bomb parts.&quot;</span><span class="p">,</span> 
+         <span class="s2">&quot;The administration built new plutonium pits at the Los Alamos lab in New Mexico and expanded enriched uranium processing at the Y-12 facility in Oak Ridge, Tennessee.&quot;</span><span class="p">]</span>
+
+<span class="c1"># Call the variable to examine output</span>
+<span class="n">sents</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;On October 1, 2009, the Obama administration went ahead with a Bush administration program, increasing nuclear weapons production.&#39;,
+ &quot;The &#39;Complex Modernization&#39; initiative expanded two existing nuclear sites to produce new bomb parts.&quot;,
+ &#39;The administration built new plutonium pits at the Los Alamos lab in New Mexico and expanded enriched uranium processing at the Y-12 facility in Oak Ridge, Tennessee.&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>This returns a list with three sentences.</p>
+<p>spaCy <em>Language</em> objects have a specific method, <code class="docutils literal notranslate"><span class="pre">pipe()</span></code>, for processing texts stored in a Python list.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">pipe()</span></code> method has been optimised for this purpose, processing texts in <em>batches</em> rather than individually, which makes this method faster than processing each list item separately using a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">pipe()</span></code> method takes a <em>list</em> as input and returns a Python <em>generator</em> named <code class="docutils literal notranslate"><span class="pre">pipe</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Feed the list of sentences to the pipe() method</span>
+<span class="n">docs</span> <span class="o">=</span> <span class="n">nlp</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">sents</span><span class="p">)</span>
+
+<span class="c1"># Call the variable to examine the output</span>
+<span class="n">docs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;generator object Language.pipe at 0x170363510&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Generators are Python objects that contain other objects. When called, a generator object will yield objects contained within itself.</p>
+<p>To retrieve all objects in a generator, we must cast the output into another object type, such as a list.</p>
+<p>You can think of the list as a data structure that is able to collect the generator output for examination.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cast the pipe generator into a list</span>
+<span class="n">docs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">docs</span><span class="p">)</span>
+
+<span class="c1"># Call the variable to examine the output</span>
+<span class="n">docs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[On October 1, 2009, the Obama administration went ahead with a Bush administration program, increasing nuclear weapons production.,
+ The &#39;Complex Modernization&#39; initiative expanded two existing nuclear sites to produce new bomb parts.,
+ The administration built new plutonium pits at the Los Alamos lab in New Mexico and expanded enriched uranium processing at the Y-12 facility in Oak Ridge, Tennessee.]
+</pre></div>
+</div>
+</div>
+</div>
+<p>This gives us a list of spaCy <em>Doc</em> objects for further processing.</p>
+</div>
+<div class="section" id="adding-custom-attributes-to-spacy-objects">
+<h2>Adding custom attributes to spaCy objects<a class="headerlink" href="#adding-custom-attributes-to-spacy-objects" title="Permalink to this headline">¶</a></h2>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+<iframe
+    width="600"
+    height="350"
+    src="https://www.youtube.com/embed/oWsuCwCW29g"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</div></div>
+</div>
+<p>The <a class="reference internal" href="03_basic_nlp.html"><span class="doc std std-doc">previous section</span></a> showed how linguistic annotations produced by spaCy can be accessed through their attributes.</p>
+<p>In addition, spaCy allows setting custom attributes to <em>Doc</em>, <em>Span</em> and <em>Token</em> objects. These attributes can be used, for example, to store additional information about the texts that are being processed.</p>
+<p>If you are working with texts that contain information about language users, you can incorporate this information directly into the spaCy objects.</p>
+<p>To exemplify, custom attributes can be added directly to the <em>Doc</em> object using the <code class="docutils literal notranslate"><span class="pre">set_extension()</span></code> method.</p>
+<p>Because these attributes are added to all <em>Doc</em> objects instead of individual <em>Doc</em> objects, we must first import the generic <em>Doc</em> object from spaCy’s <code class="docutils literal notranslate"><span class="pre">tokens</span></code> module.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the Doc object from the &#39;tokens&#39; module in spaCy</span>
+<span class="kn">from</span> <span class="nn">spacy.tokens</span> <span class="kn">import</span> <span class="n">Doc</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can now use the <code class="docutils literal notranslate"><span class="pre">set_extension()</span></code> method to add two attributes, <code class="docutils literal notranslate"><span class="pre">age</span></code> and <code class="docutils literal notranslate"><span class="pre">location</span></code> to the <em>Doc</em> object.</p>
+<p>We use the <code class="docutils literal notranslate"><span class="pre">default</span></code> argument to set a default value for both variables. For this purpose, we use the <code class="docutils literal notranslate"><span class="pre">None</span></code> keyword in Python.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add two custom attributes to the Doc object, &#39;age&#39; and &#39;location&#39;</span>
+<span class="c1"># using the set_extension() method.</span>
+<span class="n">Doc</span><span class="o">.</span><span class="n">set_extension</span><span class="p">(</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">Doc</span><span class="o">.</span><span class="n">set_extension</span><span class="p">(</span><span class="s2">&quot;location&quot;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">age</span></code> and <code class="docutils literal notranslate"><span class="pre">location</span></code> attributes are now added to the <em>Doc</em> object.</p>
+<p>Unlike attributes such as <code class="docutils literal notranslate"><span class="pre">sents</span></code> or <code class="docutils literal notranslate"><span class="pre">heads</span></code>, the custom attributes are placed under an attribute that consists of the underscore character <code class="docutils literal notranslate"><span class="pre">_</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">Doc._.age</span></code>.</p>
+<p>To exemplify how these custom attributes can be set for actual <em>Doc</em> objects, let’s define a toy example that consists of a Python dictionary.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">sents_dict</span></code> dictionary contains three keys: <code class="docutils literal notranslate"><span class="pre">0</span></code>, <code class="docutils literal notranslate"><span class="pre">1</span></code> and <code class="docutils literal notranslate"><span class="pre">2</span></code>. The values under these keys consist of dictionaries with three keys: <code class="docutils literal notranslate"><span class="pre">age</span></code>, <code class="docutils literal notranslate"><span class="pre">location</span></code> and <code class="docutils literal notranslate"><span class="pre">text</span></code>.</p>
+<p>This also exemplifies how Python data structures and formats are often nested within one another: a dictionary can easily include another dictionary, which contain both integer and string objects as keys and values.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a dictionary whose values consist of another dictionary</span>
+<span class="c1"># with three keys: &#39;age&#39;, &#39;location&#39; and &#39;text&#39;.</span>
+<span class="n">sents_dict</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">23</span><span class="p">,</span> 
+                  <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="s2">&quot;Helsinki&quot;</span><span class="p">,</span> 
+                  <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;The Senate Square is by far the most important landmark in Helsinki.&quot;</span>
+                 <span class="p">},</span>
+              <span class="mi">1</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">35</span><span class="p">,</span> 
+                  <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="s2">&quot;Tallinn&quot;</span><span class="p">,</span> 
+                  <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;The Old Town, for sure.&quot;</span>
+                 <span class="p">},</span>
+              <span class="mi">2</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;age&quot;</span><span class="p">:</span> <span class="mi">58</span><span class="p">,</span> 
+                  <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="s2">&quot;Stockholm&quot;</span><span class="p">,</span> 
+                  <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Södermalm is interesting!&quot;</span>
+                 <span class="p">}</span>
+             <span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s loop over the <code class="docutils literal notranslate"><span class="pre">sents_dict</span></code> dictionary to process the examples and add the custom attributes to the resulting <em>Doc</em> objects.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up a placeholder list to hold the processed texts</span>
+<span class="n">docs</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Loop over pairs of keys and values in the &#39;sents_dict&#39; dictionary.</span>
+<span class="c1"># Note that the key/value pairs are available under the items() method.</span>
+<span class="c1"># We refer to these keys and values as &#39;key&#39; and &#39;data&#39;, respectively.</span>
+<span class="c1"># This means that we used the variable &#39;data&#39; to refer to the nested</span>
+<span class="c1"># dictionary.</span>
+<span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">sents_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    
+    <span class="c1"># Retrieve the value under the key &#39;text&#39; from the nested dictionary.</span>
+    <span class="c1"># Feed this text to the language model under &#39;nlp&#39; and assign the </span>
+    <span class="c1"># result to the variable &#39;doc&#39;.</span>
+    <span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span>
+    
+    <span class="c1"># Retrieve the values for &#39;age&#39; and &#39;location&#39; from the nested dictionary.</span>
+    <span class="c1"># Assign these values into the custom attributes defined for the Doc object.</span>
+    <span class="c1"># Note that custom attributes reside under a pseudo attribute consisting of</span>
+    <span class="c1"># an underscore &#39;_&#39;!  </span>
+    <span class="n">doc</span><span class="o">.</span><span class="n">_</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]</span>
+    <span class="n">doc</span><span class="o">.</span><span class="n">_</span><span class="o">.</span><span class="n">location</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;location&#39;</span><span class="p">]</span>
+    
+    <span class="c1"># Append the current Doc object under &#39;doc&#39; to the list &#39;docs&#39;</span>
+    <span class="n">docs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This provides a list of <em>Doc</em> objects, which is assigned under the variable <code class="docutils literal notranslate"><span class="pre">docs</span></code>.</p>
+<p>Let’s loop over the <code class="docutils literal notranslate"><span class="pre">docs</span></code> list and print out the <em>Doc</em> and its custom attributes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loop over each Doc object in the list &#39;docs&#39;</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">docs</span><span class="p">:</span>
+    
+    <span class="c1"># Print each Doc and the &#39;age&#39; and &#39;location&#39; attributes</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">doc</span><span class="o">.</span><span class="n">_</span><span class="o">.</span><span class="n">age</span><span class="p">,</span> <span class="n">doc</span><span class="o">.</span><span class="n">_</span><span class="o">.</span><span class="n">location</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Senate Square is by far the most important landmark in Helsinki. 23 Helsinki
+The Old Town, for sure. 35 Tallinn
+Södermalm is interesting! 58 Stockholm
+</pre></div>
+</div>
+</div>
+</div>
+<p>The custom attributes can be used, for example, to filter the data.</p>
+<p>One efficient way to filter the data is to use a Python <em>list comprehension</em>.</p>
+<p>A comprehension evaluates the contents of an existing list and populates a new list based on some criteria.</p>
+<p>A list comprehension is like a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop that is declared on the fly using brackets <code class="docutils literal notranslate"><span class="pre">[]</span></code>, which are used to designate lists in Python.</p>
+<p>In this case, the list comprehension consists of three components:</p>
+<ul class="simple">
+<li><p>The first reference to <code class="docutils literal notranslate"><span class="pre">doc</span></code> on the left hand-side of the <code class="docutils literal notranslate"><span class="pre">for</span></code> statement defines what is stored in the new list. We store whatever is stored in the original list, that is, a <em>Doc</em> object.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">for</span></code> .. <code class="docutils literal notranslate"><span class="pre">in</span></code> statements operate just like in a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop. We loop over items in the list <code class="docutils literal notranslate"><span class="pre">docs</span></code> and refer to each item using the variable <code class="docutils literal notranslate"><span class="pre">doc</span></code>.</p></li>
+<li><p>The third statement beginning with <code class="docutils literal notranslate"><span class="pre">if</span></code> defines a conditional: we only include <em>Doc</em> objects whose custom attribute <code class="docutils literal notranslate"><span class="pre">age</span></code> has a value below 40.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use a list comprehension to filter the Docs for those whose</span>
+<span class="c1"># &#39;age&#39; attribute has a value under 40.</span>
+<span class="n">under_forty</span> <span class="o">=</span> <span class="p">[</span><span class="n">doc</span> <span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">docs</span> <span class="k">if</span> <span class="n">doc</span><span class="o">.</span><span class="n">_</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;age&#39;</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">40</span><span class="p">]</span>
+
+<span class="c1"># Call the variable to examine the output</span>
+<span class="n">under_forty</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[The Senate Square is by far the most important landmark in Helsinki.,
+ The Old Town, for sure.]
+</pre></div>
+</div>
+</div>
+</div>
+<p>This returns a list with only two <em>Doc</em> objects that fill the designated criteria, that is, their <code class="docutils literal notranslate"><span class="pre">age</span></code> attribute has a value below 40.</p>
+</div>
+<div class="section" id="writing-processed-texts-to-disk">
+<h2>Writing processed texts to disk<a class="headerlink" href="#writing-processed-texts-to-disk" title="Permalink to this headline">¶</a></h2>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+<iframe
+    width="600"
+    height="350"
+    src="https://www.youtube.com/embed/zKvW8o-1wmk"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</div></div>
+</div>
+<p>When working with high volumes of texts, you should first ensure that the pipeline produces the desired results by using a smaller number of texts.</p>
+<p>Once everything works as desired, you can proceed to process all of the text and save the result, because processing large volumes of text takes time and resources.</p>
+<p>spaCy provides a special object type named <em>DocBin</em> for storing <em>Doc</em> objects that contain linguistic annotations from spaCy.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the DocBin object from the &#39;tokens&#39; module in spacy</span>
+<span class="kn">from</span> <span class="nn">spacy.tokens</span> <span class="kn">import</span> <span class="n">DocBin</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Creating a <em>DocBin</em> object is easy. To populate the <em>DocBin</em> object with <em>Docs</em> upon creation, use the <code class="docutils literal notranslate"><span class="pre">docs</span></code> argument to pass a Python generator or list that contains <em>Doc</em> objects.</p>
+<p>In this case, we add the three <em>Docs</em> stored under the variable <code class="docutils literal notranslate"><span class="pre">docs</span></code> to the <em>DocBin</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize a DocBin object and add Docs from &#39;docs&#39;</span>
+<span class="n">docbin</span> <span class="o">=</span> <span class="n">DocBin</span><span class="p">(</span><span class="n">docs</span><span class="o">=</span><span class="n">docs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you have added custom attributes to <em>Docs</em>, <em>Spans</em>, or <em>Tokens</em>, you must also set the <code class="docutils literal notranslate"><span class="pre">store_user_data</span></code> argument to <code class="docutils literal notranslate"><span class="pre">True</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">DocBin(docs=docs,</span> <span class="pre">store_user_data=True)</span></code>.</p>
+<p>We can easily verify that all three <em>Docs</em> made it into the <em>DocBin</em> by examining the output of its <code class="docutils literal notranslate"><span class="pre">__len__()</span></code> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Get the number of Docs in the DocBin</span>
+<span class="n">docbin</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">add()</span></code> method allows adding additional <em>Doc</em> objects to the <em>DocBin</em> if necessary.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define and feed a string object the language model under &#39;nlp&#39;</span>
+<span class="c1"># and add the resulting Doc to the DocBin object &#39;docbin&#39;</span>
+<span class="n">docbin</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">nlp</span><span class="p">(</span><span class="s2">&quot;Yet another Doc object.&quot;</span><span class="p">))</span>
+
+<span class="c1"># Verify that the Doc was added; length should be now 4</span>
+<span class="n">docbin</span><span class="o">.</span><span class="fm">__len__</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+</pre></div>
+</div>
+</div>
+</div>
+<p>Once you have populated a <em>DocBin</em> object with your data, you must write the object to a disk for storage.</p>
+<p>This can be achieved using the <code class="docutils literal notranslate"><span class="pre">to_disk()</span></code> method of the <em>DocBin</em>.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">to_disk()</span></code> method takes a single argument, <code class="docutils literal notranslate"><span class="pre">path</span></code>, which defines a path to the file in which the <em>DocBin</em> object should be written.</p>
+<p>Let’s write the <em>DocBin</em> object into a file named <code class="docutils literal notranslate"><span class="pre">docbin.spacy</span></code> in the <code class="docutils literal notranslate"><span class="pre">data</span></code> directory.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Write the DocBin object to disk</span>
+<span class="n">docbin</span><span class="o">.</span><span class="n">to_disk</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s1">&#39;data/docbin.spacy&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To load a <em>DocBin</em> object from disk, you need to first initialise an empty <em>DocBin</em> object using <code class="docutils literal notranslate"><span class="pre">DocBin()</span></code> and then use the <code class="docutils literal notranslate"><span class="pre">from_disk()</span></code> method to load the actual <em>DocBin</em> object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialise a new DocBin object and use the &#39;from_disk&#39; method to</span>
+<span class="c1"># load the data from the disk. Assign the result to the variable</span>
+<span class="c1"># &#39;docbin_loaded&#39;.</span>
+<span class="n">docbin_loaded</span> <span class="o">=</span> <span class="n">DocBin</span><span class="p">()</span><span class="o">.</span><span class="n">from_disk</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="s1">&#39;data/docbin.spacy&#39;</span><span class="p">)</span>
+
+<span class="c1"># Call the variable to examine the output</span>
+<span class="n">docbin_loaded</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;spacy.tokens._serialize.DocBin at 0x1700bd460&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, to access the <em>Doc</em> object stored within the <em>DocBin</em>, you must use the <code class="docutils literal notranslate"><span class="pre">get_docs()</span></code> method.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">get_docs()</span></code> method takes a single argument, <code class="docutils literal notranslate"><span class="pre">vocab</span></code>, which takes the vocabulary of a <em>Language</em> object as input.</p>
+<p>The vocabulary, which is stored under the <code class="docutils literal notranslate"><span class="pre">vocab</span></code> attribute of a <em>Language</em> object, is needed to reconstruct the information stored in the <em>DocBin</em>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use the &#39;get_docs&#39; method to retrieve Doc objects from the DocBin,</span>
+<span class="c1"># passing the vocabulary under &#39;nlp.vocab&#39; to reconstruct the data.</span>
+<span class="c1"># Cast the resulting generator object into a list for examination.</span>
+<span class="n">docs_loaded</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">docbin_loaded</span><span class="o">.</span><span class="n">get_docs</span><span class="p">(</span><span class="n">nlp</span><span class="o">.</span><span class="n">vocab</span><span class="p">))</span>
+
+<span class="c1"># Call the variable to examine the output</span>
+<span class="n">docs_loaded</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[The Senate Square is by far the most important landmark in Helsinki.,
+ The Old Town, for sure.,
+ Södermalm is interesting!,
+ Yet another Doc object.]
+</pre></div>
+</div>
+</div>
+</div>
+<p>This returns a list that contains the four <em>Doc</em> objects added to the <em>DocBin</em> above.</p>
+<p>To summarise, you should ideally process the texts once, write them to disk and load them for further analysis.</p>
+</div>
+<div class="section" id="simplifying-output-for-noun-phrases-and-named-entities">
+<h2>Simplifying output for noun phrases and named entities<a class="headerlink" href="#simplifying-output-for-noun-phrases-and-named-entities" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="merging-noun-phrases">
+<h3>Merging noun phrases<a class="headerlink" href="#merging-noun-phrases" title="Permalink to this headline">¶</a></h3>
+<p>The <a class="reference internal" href="03_basic_nlp.html"><span class="doc std std-doc">previous section</span></a> described how tasks such as part-of-speech tagging and dependency parsing involve making predictions about individual <em>Tokens</em> and their properties, such as their part-of-speech tags or syntactic dependencies.</p>
+<p>Occasionally, however, it may be more beneficial to operate with larger linguistic units instead of individual <em>Tokens</em>, such as noun phrases that consist of multiple <em>Tokens</em>.</p>
+<p>spaCy provides access to noun phrases via the attribute <code class="docutils literal notranslate"><span class="pre">noun_chunks</span></code> of a <em>Doc</em> object.</p>
+<p>Let’s print out the noun chunks in each <em>Doc</em> object contained in the list <code class="docutils literal notranslate"><span class="pre">docs</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the first for-loop over the list &#39;docs&#39;</span>
+<span class="c1"># The variable &#39;doc&#39; refers to items in the list</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">docs</span><span class="p">:</span>
+    
+    <span class="c1"># Loop over each noun chunk in the Doc object</span>
+    <span class="k">for</span> <span class="n">noun_chunk</span> <span class="ow">in</span> <span class="n">doc</span><span class="o">.</span><span class="n">noun_chunks</span><span class="p">:</span>
+        
+        <span class="c1"># Print noun chunk</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">noun_chunk</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Senate Square
+the most important landmark
+Helsinki
+The Old Town
+Södermalm
+</pre></div>
+</div>
+</div>
+</div>
+<p>These two <code class="docutils literal notranslate"><span class="pre">for</span></code> loops return several noun phrases that consist of multiple <em>Tokens</em>.</p>
+<p>For merging noun phrases into a single <em>Token</em>, spaCy provides a function named <code class="docutils literal notranslate"><span class="pre">merge_noun_tokens</span></code> that can be added to the pipeline stored in a <em>Language</em> object using the <code class="docutils literal notranslate"><span class="pre">add_pipe</span></code> method.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add component that merges noun phrases into single Tokens</span>
+<span class="n">nlp</span><span class="o">.</span><span class="n">add_pipe</span><span class="p">(</span><span class="s1">&#39;merge_noun_chunks&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;function spacy.pipeline.functions.merge_noun_chunks(doc: spacy.tokens.doc.Doc) -&gt; spacy.tokens.doc.Doc&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>In this case, we do not need to reassign the <em>Language</em> object under <code class="docutils literal notranslate"><span class="pre">nlp</span></code> to the same variable to update its contents. The <code class="docutils literal notranslate"><span class="pre">add_pipe</span></code> method adds the component to the <em>Language</em> object automatically.</p>
+<p>We can verify that the component was added successfully by examining the <code class="docutils literal notranslate"><span class="pre">pipeline</span></code> attribute under the <em>Language</em> object <code class="docutils literal notranslate"><span class="pre">nlp</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># List the pipeline components</span>
+<span class="n">nlp</span><span class="o">.</span><span class="n">pipeline</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;tok2vec&#39;, &lt;spacy.pipeline.tok2vec.Tok2Vec at 0x171183ee0&gt;),
+ (&#39;tagger&#39;, &lt;spacy.pipeline.tagger.Tagger at 0x171183e20&gt;),
+ (&#39;parser&#39;, &lt;spacy.pipeline.dep_parser.DependencyParser at 0x17117f6d0&gt;),
+ (&#39;attribute_ruler&#39;,
+  &lt;spacy.pipeline.attributeruler.AttributeRuler at 0x171359040&gt;),
+ (&#39;lemmatizer&#39;, &lt;spacy.lang.en.lemmatizer.EnglishLemmatizer at 0x171362400&gt;),
+ (&#39;ner&#39;, &lt;spacy.pipeline.ner.EntityRecognizer at 0x17117f580&gt;),
+ (&#39;merge_noun_chunks&#39;,
+  &lt;function spacy.pipeline.functions.merge_noun_chunks(doc: spacy.tokens.doc.Doc) -&gt; spacy.tokens.doc.Doc&gt;)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, the final tuple in the list consists of the <code class="docutils literal notranslate"><span class="pre">merge_noun_chunks</span></code> function.</p>
+<p>To examine the consequences of adding this function to the pipeline, let’s process the three example sentences again using the <code class="docutils literal notranslate"><span class="pre">pipe()</span></code> method of the <em>Language</em> object <code class="docutils literal notranslate"><span class="pre">nlp</span></code>.</p>
+<p>We overwrite the previous results stored under the same variable by assigning the output to the variable <code class="docutils literal notranslate"><span class="pre">docs</span></code>.</p>
+<p>Note that we also cast the result into a list by wrapping the <em>Language</em> object and the <code class="docutils literal notranslate"><span class="pre">pipe()</span></code> method into a <code class="docutils literal notranslate"><span class="pre">list()</span></code> function.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Apply the Language object &#39;nlp&#39; to the list of sentences under &#39;sents&#39;</span>
+<span class="n">docs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">nlp</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">sents</span><span class="p">))</span>
+
+<span class="c1"># Call the variable to examine the output</span>
+<span class="n">docs</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[On October 1, 2009, the Obama administration went ahead with a Bush administration program, increasing nuclear weapons production.,
+ The &#39;Complex Modernization&#39; initiative expanded two existing nuclear sites to produce new bomb parts.,
+ The administration built new plutonium pits at the Los Alamos lab in New Mexico and expanded enriched uranium processing at the Y-12 facility in Oak Ridge, Tennessee.]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Superficially, everything remains the same: the list contains three <em>Doc</em> objects.</p>
+<p>However, if we loop over the <em>Tokens</em> in the first <em>Doc</em> object in the list, which can be accessed using brackets at position zero, e.g. <code class="docutils literal notranslate"><span class="pre">[0]</span></code>, we can see that the noun phrases are now merged and tagged using the label <code class="docutils literal notranslate"><span class="pre">NOUN</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loop over Tokens in the first Doc object in the list</span>
+<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">docs</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+    
+    <span class="c1"># Print out the Token and its part-of-speech tag</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">pos_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>On ADP
+October PROPN
+1 NUM
+, PUNCT
+2009 NUM
+, PUNCT
+the Obama administration NOUN
+went VERB
+ahead ADV
+with ADP
+a Bush administration program NOUN
+, PUNCT
+increasing VERB
+nuclear weapons production NOUN
+. PUNCT
+</pre></div>
+</div>
+</div>
+</div>
+<p>Tagging noun phrases using the label <code class="docutils literal notranslate"><span class="pre">NOUN</span></code> is a reasonable approximation, as noun phrases typically take on similar grammatical functions as nouns.</p>
+<p>As rendering the syntactic parse using displacy shows, merging the noun phrases simplifies the parse tree.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">displacy</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">docs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;dep&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><span class="tex2jax_ignore"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:lang="en" id="0eae69e992cf4a1598df56debc72fdb2-0" class="displacy" width="1975" height="487.0" direction="ltr" style="max-width: none; height: 487.0px; color: #000000; background: #ffffff; font-family: Arial; direction: ltr">
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="50">On</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="50">ADP</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="225">October</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="225">PROPN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="400">1,</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="400">NUM</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="575">2009,</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="575">NUM</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="750">the Obama administration</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="750">NOUN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="925">went</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="925">VERB</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="1100">ahead</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1100">ADV</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="1275">with</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1275">ADP</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="1450">a Bush administration program,</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1450">NOUN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="1625">increasing</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1625">VERB</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
+    <tspan class="displacy-word" fill="currentColor" x="1800">nuclear weapons production.</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1800">NOUN</tspan>
+</text>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-0eae69e992cf4a1598df56debc72fdb2-0-0" stroke-width="2px" d="M70,352.0 C70,2.0 925.0,2.0 925.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-0eae69e992cf4a1598df56debc72fdb2-0-0" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">prep</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M70,354.0 L62,342.0 78,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-0eae69e992cf4a1598df56debc72fdb2-0-1" stroke-width="2px" d="M70,352.0 C70,264.5 210.0,264.5 210.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-0eae69e992cf4a1598df56debc72fdb2-0-1" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">pobj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M210.0,354.0 L218.0,342.0 202.0,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-0eae69e992cf4a1598df56debc72fdb2-0-2" stroke-width="2px" d="M245,352.0 C245,264.5 385.0,264.5 385.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-0eae69e992cf4a1598df56debc72fdb2-0-2" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nummod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M385.0,354.0 L393.0,342.0 377.0,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-0eae69e992cf4a1598df56debc72fdb2-0-3" stroke-width="2px" d="M245,352.0 C245,177.0 565.0,177.0 565.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-0eae69e992cf4a1598df56debc72fdb2-0-3" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nummod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M565.0,354.0 L573.0,342.0 557.0,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-0eae69e992cf4a1598df56debc72fdb2-0-4" stroke-width="2px" d="M770,352.0 C770,264.5 910.0,264.5 910.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-0eae69e992cf4a1598df56debc72fdb2-0-4" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nsubj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M770,354.0 L762,342.0 778,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-0eae69e992cf4a1598df56debc72fdb2-0-5" stroke-width="2px" d="M945,352.0 C945,264.5 1085.0,264.5 1085.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-0eae69e992cf4a1598df56debc72fdb2-0-5" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">advmod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1085.0,354.0 L1093.0,342.0 1077.0,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-0eae69e992cf4a1598df56debc72fdb2-0-6" stroke-width="2px" d="M945,352.0 C945,177.0 1265.0,177.0 1265.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-0eae69e992cf4a1598df56debc72fdb2-0-6" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">prep</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1265.0,354.0 L1273.0,342.0 1257.0,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-0eae69e992cf4a1598df56debc72fdb2-0-7" stroke-width="2px" d="M1295,352.0 C1295,264.5 1435.0,264.5 1435.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-0eae69e992cf4a1598df56debc72fdb2-0-7" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">pobj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1435.0,354.0 L1443.0,342.0 1427.0,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-0eae69e992cf4a1598df56debc72fdb2-0-8" stroke-width="2px" d="M945,352.0 C945,89.5 1620.0,89.5 1620.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-0eae69e992cf4a1598df56debc72fdb2-0-8" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">advcl</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1620.0,354.0 L1628.0,342.0 1612.0,342.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-0eae69e992cf4a1598df56debc72fdb2-0-9" stroke-width="2px" d="M1645,352.0 C1645,264.5 1785.0,264.5 1785.0,352.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-0eae69e992cf4a1598df56debc72fdb2-0-9" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">dobj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1785.0,354.0 L1793.0,342.0 1777.0,342.0" fill="currentColor"/>
+</g>
+</svg></span></div></div>
+</div>
+<p>Although the noun phrases are now represented by single <em>Tokens</em>, the noun chunks are still available under the <code class="docutils literal notranslate"><span class="pre">noun_chunks</span></code> attribute of the <em>Doc</em> object.</p>
+<p>As shown below, spaCy stores noun chunks as <em>Spans</em>, whose <code class="docutils literal notranslate"><span class="pre">start</span></code> attribute determines the index of the Token where the <em>Span</em> starts, while the <code class="docutils literal notranslate"><span class="pre">end</span></code> attribute determines where the <em>Span</em> has ended.</p>
+<p>This information is useful, if the syntactic analysis reveals patterns that warrant a closer examination of the noun chunks and their structure.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loop over the noun chunks in the first Doc object [0] in the list &#39;docs&#39;</span>
+<span class="k">for</span> <span class="n">noun_chunk</span> <span class="ow">in</span> <span class="n">docs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">noun_chunks</span><span class="p">:</span>
+    
+    <span class="c1"># Print out noun chunk, its type, the Token where the chunks starts and where it ends</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">noun_chunk</span><span class="p">,</span> <span class="nb">type</span><span class="p">(</span><span class="n">noun_chunk</span><span class="p">),</span> <span class="n">noun_chunk</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="n">noun_chunk</span><span class="o">.</span><span class="n">end</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>October &lt;class &#39;spacy.tokens.span.Span&#39;&gt; 1 2
+the Obama administration &lt;class &#39;spacy.tokens.span.Span&#39;&gt; 6 7
+a Bush administration program &lt;class &#39;spacy.tokens.span.Span&#39;&gt; 10 11
+nuclear weapons production &lt;class &#39;spacy.tokens.span.Span&#39;&gt; 13 14
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="merging-named-entities">
+<h3>Merging named entities<a class="headerlink" href="#merging-named-entities" title="Permalink to this headline">¶</a></h3>
+<p>Named entities can be merged in the same way as noun phrases by providing <code class="docutils literal notranslate"><span class="pre">merge_entities</span></code> to the <code class="docutils literal notranslate"><span class="pre">add_pipe()</span></code> method of the <em>Language</em> object.</p>
+<p>Let’s start by removing the <code class="docutils literal notranslate"><span class="pre">merge_noun_chunks</span></code> function from the pipeline.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">remove_pipe()</span></code> method can be used to remove a pipeline component.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Remove the &#39;merge_noun_chunks&#39; function from the pipeline under &#39;nlp&#39;</span>
+<span class="n">nlp</span><span class="o">.</span><span class="n">remove_pipe</span><span class="p">(</span><span class="s1">&#39;merge_noun_chunks&#39;</span><span class="p">)</span>
+
+<span class="c1"># Process the original sentences again</span>
+<span class="n">docs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">nlp</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">sents</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>The method returns a tuple containing the name of the removed component (in this case, a function) and the component itself.</p>
+<p>We can verify this by calling the <code class="docutils literal notranslate"><span class="pre">pipeline</span></code> attribute of the <em>Language</em> object <code class="docutils literal notranslate"><span class="pre">nlp</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nlp</span><span class="o">.</span><span class="n">pipeline</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;tok2vec&#39;, &lt;spacy.pipeline.tok2vec.Tok2Vec at 0x171183ee0&gt;),
+ (&#39;tagger&#39;, &lt;spacy.pipeline.tagger.Tagger at 0x171183e20&gt;),
+ (&#39;parser&#39;, &lt;spacy.pipeline.dep_parser.DependencyParser at 0x17117f6d0&gt;),
+ (&#39;attribute_ruler&#39;,
+  &lt;spacy.pipeline.attributeruler.AttributeRuler at 0x171359040&gt;),
+ (&#39;lemmatizer&#39;, &lt;spacy.lang.en.lemmatizer.EnglishLemmatizer at 0x171362400&gt;),
+ (&#39;ner&#39;, &lt;spacy.pipeline.ner.EntityRecognizer at 0x17117f580&gt;)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>Finally, let’s add the <code class="docutils literal notranslate"><span class="pre">merge_entities</span></code> component to the pipeline under <code class="docutils literal notranslate"><span class="pre">nlp</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add the &#39;merge_entities&#39; function to the pipeline</span>
+<span class="n">nlp</span><span class="o">.</span><span class="n">add_pipe</span><span class="p">(</span><span class="s1">&#39;merge_entities&#39;</span><span class="p">)</span>
+
+<span class="c1"># Process the data again</span>
+<span class="n">docs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">nlp</span><span class="o">.</span><span class="n">pipe</span><span class="p">(</span><span class="n">sents</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s examine the result by looping over the <em>Tokens</em> in the third <em>Doc</em> object.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loop over Tokens in the third Doc object in the list</span>
+<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">docs</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>
+    
+    <span class="c1"># Print out the Token and its part-of-speech tag</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">pos_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The DET
+administration NOUN
+built VERB
+new ADJ
+plutonium NOUN
+pits NOUN
+at ADP
+the DET
+Los Alamos PROPN
+lab NOUN
+in ADP
+New Mexico PROPN
+and CCONJ
+expanded VERB
+enriched ADJ
+uranium NOUN
+processing NOUN
+at ADP
+the DET
+Y-12 NUM
+facility NOUN
+in ADP
+Oak Ridge PROPN
+, PUNCT
+Tennessee PROPN
+. PUNCT
+</pre></div>
+</div>
+</div>
+</div>
+<p>Named entities that consist of multiple <em>Tokens</em>, as exemplified by place names such as “Los Alamos” and “New Mexico”, have been merged into single <em>Tokens</em>.</p>
+<p>This section should have given you an idea of how to tailor spaCy to fit your needs, how to process texts efficiently and how to save the result to disk.</p>
+<p>The <a class="reference internal" href="05_evaluating_nlp.html"><span class="doc std std-doc">following section</span></a> introduces you to evaluating the performance of language models.</p>
+</div>
+</div>
+</div>
+
+
+              </div>
+              
+        
+            <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="03_basic_nlp.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Processing texts using spaCy</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="05_evaluating_nlp.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Evaluating language models</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+        
+        </div>
+    </div>
+    <footer class="footer">
+    <div class="container">
+      <p>
+        
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+   <div class="footer"><a href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0;padding:10px" src="https://mirrors.creativecommons.org/presskit/buttons/88x31/svg/by-nc.svg"/></a> © 2020– <a href="http://www.helsinki.fi/~thiippal">Tuomo Hiippala</a></div>
+    
+
+  </body>
+</html>
