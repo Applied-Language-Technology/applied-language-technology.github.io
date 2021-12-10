@@ -12,4 +12,8 @@ The main view of JupyterLab has two major elements: *File Browser* (left) and *L
    :width: 600
    :alt: The initial view in JupyterLab.
 
-To get started with the course, you must :ref:`retrieve learning materials and exercises from GitHub <github_pull>`.
+|
+
+.. raw:: html
+
+   <iframe width="560" height="315" src="https://www.youtube.com/embed/JA8eXq2O2tc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
