@@ -50,7 +50,7 @@
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Return exercises to GitHub" href="github_push.html" />
+    <link rel="next" title="Check your exercises using TestMyCode" href="tmc.html" />
     <link rel="prev" title="Working in JupyterLab" href="jupyter.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -109,7 +109,7 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="launch_server.html">
-     Launch JupyterLab on your personal server
+     Launch a server on CSC Notebooks
     </a>
    </li>
    <li class="toctree-l2">
@@ -119,12 +119,12 @@
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     Retrieve learning materials and exercises from GitHub
+     Retrieve learning materials from GitHub
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="github_push.html">
-     Return completed exercises to GitHub for grading
+    <a class="reference internal" href="tmc.html">
+     Check your exercises using TestMyCode
     </a>
    </li>
   </ul>
@@ -330,74 +330,33 @@
                 
   <div class="section" id="retrieve-learning-materials-from-github">
 <span id="github-pull"></span><h1>Retrieve learning materials from GitHub<a class="headerlink" href="#retrieve-learning-materials-from-github" title="Permalink to this headline">¶</a></h1>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/uukaUqOLRr4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>The learning materials and exercises for this course are hosted on <a class="reference external" href="https://www.github.com">GitHub</a>.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/uukaUqOLRr4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><p>The learning materials for this course are hosted on <a class="reference external" href="https://www.github.com">GitHub</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
 <p>GitHub is a service that allows hosting code for programs and various other file types, which are organised into <em>repositories</em>. The name of the service alludes to the underlying program, <a class="reference external" href="https://en.wikipedia.org/wiki/Git">Git</a>, which keeps track of any modifications to the files and retains a history of changes made to previous versions of the file. Git is responsible for <em>version control</em>: GitHub enables multiple people to collaborate on the same repository, while Git keeps track of the changes made.</p>
-<p>To retrieve learning materials and exercises from GitHub, navigate to the main view in JupyterLab and follow the instructions below.</p>
-<ol class="arabic">
-<li><p>Click the Terminal button to launch a terminal.</p>
-<div class="line-block">
-<div class="line"><br /></div>
 </div>
+<p>To the retrieve learning materials from GitHub, navigate to <a class="reference internal" href="jupyter.html#jupyterlab"><span class="std std-ref">the main view in JupyterLab</span></a> and follow the instructions below.</p>
+<p>Click the Terminal button to launch a terminal.</p>
 <a class="reference internal image-reference" href="_images/jl_launch_terminal.gif"><img alt="Click the &quot;Terminal&quot; button." src="_images/jl_launch_terminal.gif" style="width: 400px;" /></a>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-</li>
-<li><p>Terminal opens a command line interface. We will use the command line interface to establish a connection to GitHub.</p>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<a class="reference internal image-reference" href="_images/jl_terminal_idle.gif"><img alt="A view of the command line interface." src="_images/jl_terminal_idle.gif" style="width: 600px;" /></a>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-</li>
-<li><p>Navigate to the repository on GitHub in another browser window and copy the address of the repository from the top-right hand corner.</p>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
+<p>Terminal opens a command line interface. We will use the command line interface to establish a connection to GitHub.</p>
+<a class="reference internal image-reference" href="_images/terminal_blank.gif"><img alt="A view of the command line interface." src="_images/terminal_blank.gif" style="width: 600px;" /></a>
+<p>Navigate to the repository on GitHub in another browser window and copy the address of the repository from the top-right hand corner.</p>
 <a class="reference internal image-reference" href="_images/gh_copy_https.gif"><img alt="Copying the address of a repository from GitHub." src="_images/gh_copy_https.gif" style="width: 350px;" /></a>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-</li>
-<li><p>Change back to Terminal in JupyterLab and type the following command:</p>
+<p>Change back to Terminal in JupyterLab and type the following command:</p>
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">git clone &lt;address of the GitHub repository&gt;</span>
 </pre></div>
 </div>
-<p>You can paste the address of the GitHub repository into the command line by pressing <em>Control</em> and <em>v</em> at the  same time. Then press <em>Enter</em> to execute the command.</p>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>GitHub will prompt you for your username and password.</p>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<a class="reference internal image-reference" href="_images/gh_clone_repo.gif"><img alt="Cloning a repository from GitHub." src="_images/gh_clone_repo.gif" style="width: 600px;" /></a>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>Cloning the repository creates a local copy of the repository on your server. You should now see a directory named after the repository in the File Browser on the left-hand side of the main view in JupyterLab.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
+<p>You can paste the address of the GitHub repository into the command line by pressing the <cite>Control</cite> and <cite>v</cite> keys at the same time. Then press ⏎ to execute the command.</p>
+<a class="reference internal image-reference" href="_images/git_clone.gif"><img alt="Cloning a repository from GitHub." src="_images/git_clone.gif" style="width: 600px;" /></a>
+<p>Cloning the repository creates a local copy of the repository on your server.</p>
+<p>You should now see a directory named after the repository in the <em>File Browser</em> on the left-hand side of the main view in JupyterLab.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
 <p>Cloning a repository establishes a connection between the local repository on your server and the remote repository on GitHub.</p>
-<div class="line-block">
-<div class="line"><br /></div>
+<p>To incorporate any changes to the remote repository to your local repository, you do not need to clone the repository again. You can use the command <code class="code docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> to apply the changes to your local repository.</p>
 </div>
-<p>To incorporate any changes to the remote repository to your local repository, you do not need to clone the repository again. You can use the command below to apply the changes to your local repository:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">git pull</span>
-</pre></div>
-</div>
-</div>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-</li>
-<li><p>When you have completed the exercise, you must <a class="reference internal" href="github_push.html#github-push"><span class="std std-ref">return the exercise to GitHub for grading</span></a>.</p></li>
-</ol>
+<p>The video below provides some basic tips for using the learning materials in Jupyter Notebooks.</p>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/JA8eXq2O2tc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><p>When you have the learning materials, you can proceed to <a class="reference internal" href="tmc.html#tmc-usage"><span class="std std-ref">retrieve and complete the exercises</span></a>.</p>
 </div>
 
 
@@ -413,10 +372,10 @@
             <p class="prev-next-title">Working in JupyterLab</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="github_push.html" title="next page">
+    <a class='right-next' id="next-link" href="tmc.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Return exercises to GitHub</p>
+        <p class="prev-next-title">Check your exercises using TestMyCode</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

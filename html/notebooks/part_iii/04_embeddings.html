@@ -47,6 +47,8 @@
     <script src="../../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -119,12 +121,12 @@
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../../github_pull.html">
-     Retrieve learning materials and exercises from GitHub
+     Retrieve learning materials from GitHub
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../github_push.html">
-     Return completed exercises to GitHub for grading
+    <a class="reference internal" href="../../tmc.html">
+     Complete and check your exercises using TestMyCode
     </a>
    </li>
   </ul>
@@ -966,7 +968,7 @@ lexicography, and semantics each handles its own components of the complex in it
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
 </pre></div>
 </div>
-<img alt="../../_images/04_embeddings_31_1.png" src="../../_images/04_embeddings_31_1.png" />
+<img alt="../../_images/04_embeddings_29_1.png" src="../../_images/04_embeddings_29_1.png" />
 </div>
 </div>
 <p>Each row and column in the heatmap represent a single <em>Doc</em>, whose numbers are given on the labels for vertical and horizontal axes. The bar on the right-hand side maps the colours to values for cosine similarity.</p>
@@ -2757,7 +2759,7 @@ lexicography, and semantics each handles its own components of the complex in it
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-12-10 22:07:36.147086: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2021-12-22 15:10:29.462337: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
 To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
 </pre></div>
 </div>
@@ -2859,7 +2861,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;keras.callbacks.History at 0x17ad61970&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;keras.callbacks.History at 0x187ff1370&gt;
 </pre></div>
 </div>
 </div>
@@ -2897,11 +2899,11 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.03980903, 0.01812887, 0.02782477, 0.0146768 , 0.02240338,
-        0.00528404, 0.16780859, 0.00694326, 0.02609136, 0.17761774,
-        0.00573476, 0.00140377, 0.00530992, 0.00200735, 0.01243021,
-        0.04000564, 0.00239727, 0.02170894, 0.04377094, 0.08545123,
-        0.01551919, 0.19550374, 0.00239598, 0.05977319]], dtype=float32)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.02953477, 0.03742957, 0.05076698, 0.01942368, 0.05033932,
+        0.02776151, 0.14821206, 0.00747943, 0.03195913, 0.1434157 ,
+        0.00367061, 0.00157338, 0.00689893, 0.00182033, 0.00859999,
+        0.02921237, 0.00415913, 0.01890639, 0.04136205, 0.06976289,
+        0.01683629, 0.13790317, 0.00564232, 0.10733002]], dtype=float32)
 </pre></div>
 </div>
 </div>
@@ -2917,7 +2919,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;the&#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;be&#39;
 </pre></div>
 </div>
 </div>
@@ -2956,11 +2958,11 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-2.3084338 , -2.4047987 ],
-       [-0.4747274 ,  1.1339763 ],
-       [-1.2263234 ,  0.8099216 ],
-       [ 2.3780754 , -1.6912686 ],
-       [-2.023447  ,  0.12386487]], dtype=float32)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 2.1790736 , -1.796355  ],
+       [-0.8011157 ,  0.04167028],
+       [-0.676821  , -0.748454  ],
+       [ 1.5468143 ,  1.8741106 ],
+       [-0.8200804 , -2.235155  ]], dtype=float32)
 </pre></div>
 </div>
 </div>
@@ -3009,7 +3011,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/04_embeddings_105_0.png" src="../../_images/04_embeddings_105_0.png" />
+<img alt="../../_images/04_embeddings_103_0.png" src="../../_images/04_embeddings_103_0.png" />
 </div>
 </div>
 <p>We can now visualise each lemma as a point in the two-dimensional embedding space by plotting the dimensions against each other.</p>
