@@ -22,7 +22,7 @@ This course uses several learning environments, which are directly accessible th
 The following diagram provides an overview of the environments and services used in this course.
 
 .. image:: ../img/environment_overview.svg
-  :width: 600
+  :width: 90%
   :alt: An overview of the environments and services used.
 
 How to use the learning environments in practice?
