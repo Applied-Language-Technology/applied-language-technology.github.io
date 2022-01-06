@@ -2758,12 +2758,6 @@ lexicography, and semantics each handles its own components of the complex in it
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2022-01-03 21:05:03.376964: I tensorflow/core/platform/cpu_feature_guard.cc:151] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
-To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
-</pre></div>
-</div>
-</div>
 </div>
 <p>To make predictions about which context lemmas occur close to the target lemmas, we define another <em>Dense</em> layer, whose <code class="docutils literal notranslate"><span class="pre">units</span></code> argument matches the size of our vocabulary.</p>
 <p>This layer acts as the output layer of our network.</p>
@@ -2861,7 +2855,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;keras.callbacks.History at 0x178aeaee0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;keras.callbacks.History at 0x17a1dbfa0&gt;
 </pre></div>
 </div>
 </div>
@@ -2899,11 +2893,11 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.01332526, 0.03947474, 0.06496582, 0.01263097, 0.02489408,
-        0.01463163, 0.13588616, 0.00398316, 0.02751014, 0.19799164,
-        0.00286283, 0.00203436, 0.0052569 , 0.00139543, 0.00825387,
-        0.01553221, 0.004655  , 0.02688586, 0.02696047, 0.10697354,
-        0.03538517, 0.13008332, 0.00455895, 0.09386852]], dtype=float32)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.03559991, 0.03071749, 0.03368941, 0.00966336, 0.02624489,
+        0.01885142, 0.18239884, 0.00581196, 0.027108  , 0.17011757,
+        0.00292925, 0.0013973 , 0.00358941, 0.00125797, 0.00414843,
+        0.03577086, 0.00180332, 0.02012409, 0.03951441, 0.0887022 ,
+        0.02296094, 0.1876776 , 0.00274908, 0.04717231]], dtype=float32)
 </pre></div>
 </div>
 </div>
@@ -2919,7 +2913,7 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;capital&#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;the&#39;
 </pre></div>
 </div>
 </div>
@@ -2958,11 +2952,11 @@ _________________________________________________________________
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 1.3265903 , -2.284272  ],
-       [ 0.51317465,  0.6825287 ],
-       [-0.04513829,  0.6463427 ],
-       [-2.1740856 ,  0.0079281 ],
-       [ 1.7652947 , -0.51926804]], dtype=float32)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-2.2173789 ,  0.2572727 ],
+       [ 0.6945032 ,  0.49555367],
+       [ 0.11267289,  0.6330882 ],
+       [ 0.913749  , -2.6686854 ],
+       [-1.1363143 ,  2.4945247 ]], dtype=float32)
 </pre></div>
 </div>
 </div>
