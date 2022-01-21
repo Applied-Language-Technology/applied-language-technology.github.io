@@ -345,11 +345,6 @@
             <nav id="bd-toc-nav" aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#scaling-up">
-   Scaling up
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#regular-expressions">
    Regular expressions
   </a>
@@ -373,18 +368,15 @@
   <div class="tex2jax_ignore mathjax_ignore section" id="manipulating-text-at-scale">
 <h1>Manipulating text at scale<a class="headerlink" href="#manipulating-text-at-scale" title="Permalink to this headline">¶</a></h1>
 <p>This section introduces you to regular expressions for manipulating text and how to apply the same procedure to several files.</p>
+<p>Ideally, Python should enable you to manipulate text at scale, that is, to apply the same procedure to ten, hundred or thousand text files <em>with the same effort</em>.</p>
+<p>To do so, we must be able to define more flexible patterns than the fixed strings that we used previously with the <code class="docutils literal notranslate"><span class="pre">replace()</span></code> method, while opening and closing files automatically.</p>
+<p>This capability is provided by Python modules for <em>regular expressions</em> and <em>file handling</em>.</p>
 <p>After reading this section, you should know:</p>
 <ul class="simple">
 <li><p>how to manipulate multiple text files using Python</p></li>
 <li><p>how to define simple patterns using <em>regular expressions</em></p></li>
 <li><p>how to save the results</p></li>
 </ul>
-<div class="section" id="scaling-up">
-<h2>Scaling up<a class="headerlink" href="#scaling-up" title="Permalink to this headline">¶</a></h2>
-<p>Ideally, Python should enable you to manipulate text at scale, that is, to apply the same procedure to ten, hundred or thousand text files <em>with the same effort</em>.</p>
-<p>To do so, we must be able to define more flexible patterns than the fixed strings that we used previously with the <code class="docutils literal notranslate"><span class="pre">replace()</span></code> method, while opening and closing files automatically.</p>
-<p>This capability is provided by Python modules for <em>regular expressions</em> and <em>file handling</em>.</p>
-</div>
 <div class="section" id="regular-expressions">
 <h2>Regular expressions<a class="headerlink" href="#regular-expressions" title="Permalink to this headline">¶</a></h2>
 <div class="cell tag_remove-input docutils container">
@@ -416,10 +408,10 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a path to the file, open the file for (r)eading using utf-8 encoding</span>
-<span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="s1">&#39;data/WP_1990-08-10-25A.txt&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="s1">&#39;data/WP_1990-08-10-25A.txt&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
 
-<span class="c1"># Read the file contents using the .read() method</span>
-<span class="n">text</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="c1"># Read the file contents using the .read() method</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 
 <span class="c1"># Get the *last* 2000 characters – note the minus sign before the number</span>
 <span class="n">extract</span> <span class="o">=</span> <span class="n">text</span><span class="p">[</span><span class="o">-</span><span class="mi">2000</span><span class="p">:]</span>
@@ -583,8 +575,8 @@ Reproduced with permission of the copyright owner. Further reproduction prohibit
 </div></div>
 </div>
 <p>Many corpora contain texts in multiple files.</p>
-<p>To make manipulating the text as efficient as possible, we must open the files, read their contents, perform the requested operations and close them <em>programmatically</em>.</p>
-<p>This procedure is fairly simple using the <code class="docutils literal notranslate"><span class="pre">Path</span></code> class from Python’s <code class="docutils literal notranslate"><span class="pre">pathlib</span></code> module.</p>
+<p>To make manipulating high volumes of text as efficient as possible, we must open the files, read their contents, perform the requested operations and close them <em>programmatically</em>.</p>
+<p>This procedure is made fairly simple using the <code class="docutils literal notranslate"><span class="pre">Path</span></code> class from Python’s <code class="docutils literal notranslate"><span class="pre">pathlib</span></code> module.</p>
 <p>Let’s import the class first. Using the command <code class="docutils literal notranslate"><span class="pre">from</span></code> with <code class="docutils literal notranslate"><span class="pre">import</span></code> allows us to import only a part of the <code class="docutils literal notranslate"><span class="pre">pathlib</span></code> module, namely the <code class="docutils literal notranslate"><span class="pre">Path</span></code> class. This is useful if you only need some feature contained in a Python module or library.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -596,7 +588,7 @@ Reproduced with permission of the copyright owner. Further reproduction prohibit
 <p>The <code class="docutils literal notranslate"><span class="pre">Path</span></code> class encodes information about <em>paths</em> in a <em>directory structure</em>.</p>
 <p>What’s particularly great about the Path class is that it can automatically infer what kinds of paths your operating system uses.</p>
 <p>Here the problem is that operating systems such as Windows, Linux and Mac OS X have different file system paths.</p>
-<p>Using the <code class="docutils literal notranslate"><span class="pre">Path</span></code> class allows us to avoid a lot of trouble, particularly if we want to code to run on different operating systems.</p>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">Path</span></code> class allows us to avoid a lot of trouble, particularly if we want our code to run on different operating systems.</p>
 <p>Our repository contains a directory named <code class="docutils literal notranslate"><span class="pre">data</span></code>, which contains the text files that we have been working with recently.</p>
 <p>Let’s initialise a Path <em>object</em> that points towards this directory by providing a string with the directory name to the Path <em>class</em>. We assign the object to the variable <code class="docutils literal notranslate"><span class="pre">corpus_dir</span></code>.</p>
 <div class="cell docutils container">
@@ -610,6 +602,7 @@ Reproduced with permission of the copyright owner. Further reproduction prohibit
 </div>
 <p>The Path object stored under <code class="docutils literal notranslate"><span class="pre">corpus_dir</span></code> has various useful methods and attributes.</p>
 <p>We can, for instance, easily check if the path is valid using the <code class="docutils literal notranslate"><span class="pre">exists()</span></code> method.</p>
+<p>This returns a Boolean value, that is, either <em>True</em> or <em>False</em>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use the exists() method to check if the path is valid</span>
@@ -651,7 +644,7 @@ Reproduced with permission of the copyright owner. Further reproduction prohibit
 </div>
 </div>
 </div>
-<p>Now that we know that the path referred to is indeed a directory, we can use the <code class="docutils literal notranslate"><span class="pre">glob()</span></code> method to collect all text files in the directory.</p>
+<p>Now that we know that the path points toward a directory, we can use the <code class="docutils literal notranslate"><span class="pre">glob()</span></code> method to collect all text files in the directory.</p>
 <p><code class="docutils literal notranslate"><span class="pre">glob</span></code> stands for <a class="reference external" href="https://en.wikipedia.org/wiki/Glob_(programming)"><em>global</em></a>, and was first implemented as a program for matching filenames and paths using wildcards.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">glob()</span></code> method requires one argument, <code class="docutils literal notranslate"><span class="pre">pattern</span></code>, which takes a string as input. This string defines the kinds of files to be collected. The asterisk symbol <code class="docutils literal notranslate"><span class="pre">*</span></code> acts as a wildcard, which can refer to <em>any sequence of characters</em> preceding the sequence <code class="docutils literal notranslate"><span class="pre">.txt</span></code>.</p>
 <p>The file identifier <code class="docutils literal notranslate"><span class="pre">.txt</span></code> is a commonly-used suffix for plain text files.</p>
@@ -677,55 +670,54 @@ Reproduced with permission of the copyright owner. Further reproduction prohibit
 </div>
 <p>We now have a list of three Path objects that point towards three text files!</p>
 <p>This allows us to loop over the files using a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop and manipulate text in each file.</p>
+<p>In the cell below, we iterate over each file defined in the Path object, read and modify its contents, and write them to a new file.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Begin the loop</span>
-<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loop over the list of Path objects under &#39;files&#39;. Refer to the individual files using</span>
+<span class="c1"># the variable &#39;file&#39;.</span>
+<span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">:</span>
     
-    <span class="c1"># Open the file at the path stored under the variable &#39;f&#39; and declare encoding (&#39;utf-8&#39;)</span>
-    <span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+    <span class="c1"># Use the read_text() method of a Path object to read the file contents. Provide </span>
+    <span class="c1"># the value &#39;utf-8&#39; to the &#39;encoding&#39; argument to declare the file encoding.</span>
+    <span class="c1"># Store the result under the variable &#39;text&#39;.</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
     
-    <span class="c1"># The Path object contains the filename under the attribute name. Let&#39;s assign the filename to a variable.</span>
-    <span class="n">filename</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">name</span>
+    <span class="c1"># Apply the regular expression we defined above to remove excessive punctuation </span>
+    <span class="c1"># from the text. Store the result under the variable &#39;mod_text&#39;</span>
+    <span class="n">mod_text</span> <span class="o">=</span> <span class="n">punct</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
     
-    <span class="c1"># Read the file contents</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="c1"># Define a new filename which has the prefix &#39;mod_&#39; by creating a new string. </span>
+    <span class="c1"># The Path object contains the filename as a string under the attribute &#39;name&#39;. </span>
+    <span class="c1"># Combine the two strings using the &#39;+&#39; expression.</span>
+    <span class="n">new_filename</span> <span class="o">=</span> <span class="s1">&#39;mod_&#39;</span> <span class="o">+</span> <span class="n">file</span><span class="o">.</span><span class="n">name</span>
     
-    <span class="c1"># Print the filename and the first 100 characters in the file</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="n">text</span><span class="p">[:</span><span class="mi">100</span><span class="p">])</span>
-    
-    <span class="c1"># Define a new filename for our modified file, which has the prefix &#39;mod_&#39;</span>
-    <span class="n">new_filename</span> <span class="o">=</span> <span class="s1">&#39;mod_&#39;</span> <span class="o">+</span> <span class="n">filename</span>
-    
-    <span class="c1"># Define a new path. Path will automatically join the directory and filenames for us.</span>
+    <span class="c1"># Define a new Path object that points towards the new file. The Path object </span>
+    <span class="c1"># will automatically join the directory and filename for us.</span>
     <span class="n">new_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s1">&#39;data&#39;</span><span class="p">,</span> <span class="n">new_filename</span><span class="p">)</span>
     
-    <span class="c1"># We then create a file with the new filename. Note the mode for *writing*</span>
-    <span class="n">new_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">new_path</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;w+&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+    <span class="c1"># Print a status message using string formatting. By adding the prefix &#39;f&#39; to </span>
+    <span class="c1"># a string, we can use curly brackets {} to insert a variable within the string. </span>
+    <span class="c1"># Here we add the current file path to the string for printing.</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Writing modified text to </span><span class="si">{</span><span class="n">new_path</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
     
-    <span class="c1"># Apply our regular expression for removing excessive punctuation to the text</span>
-    <span class="n">modified_text</span> <span class="o">=</span> <span class="n">punct</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
-    
-    <span class="c1"># Write the modified text to the new file</span>
-    <span class="n">new_file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">modified_text</span><span class="p">)</span>
-    
-    <span class="c1"># Let&#39;s close the files</span>
-    <span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-    <span class="n">new_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="c1"># Use the write_text() method to write the modified text under &#39;mod_text&#39; to </span>
+    <span class="c1"># the file using UTF-8 encoding.   </span>
+    <span class="n">new_path</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">mod_text</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>WP_1990-08-10-25A.txt ﻿*We Don’t Stand for Bullies&#39;: Diverse Voices in Area Back Action Against Iraq
-Mary Jordan Washingto
-NYT_1991-01-16-A15.txt ﻿U.S. TAKING STEPS TO CURB TERRORISM: F.B.I. Is Ordered to Find Iraqis Whose Visas Have Expired
-By J
-WP_1991-01-17-A1B.txt ﻿U.S., Allies Launch Massive Air War Against Targets in Iraq and ...
-Atkinson, Rick;David S Broder W
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing modified text to data/mod_WP_1990-08-10-25A.txt
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Writing modified text to data/mod_NYT_1991-01-16-A15.txt
+Writing modified text to data/mod_WP_1991-01-17-A1B.txt
 </pre></div>
 </div>
 </div>
 </div>
+<p>As you can see from the code block above, Path objects provide two convenient methods for working with text files: <code class="docutils literal notranslate"><span class="pre">read_text()</span></code> and <code class="docutils literal notranslate"><span class="pre">write_text()</span></code>.</p>
+<p>These methods can be used to read and write text from files without using the <code class="docutils literal notranslate"><span class="pre">with</span></code> statement, which was introduced in the previous <a class="reference internal" href="01_basic_text_processing.html"><span class="doc std std-doc">section</span></a>. Just as using the <code class="docutils literal notranslate"><span class="pre">with</span></code> statement, the file that the Path points to is closed after the text has been read.</p>
 <p>This should have given you an idea of the some more powerful methods for manipulating text available in Python, such as regular expressions, and how to apply them to multiple files at the same time.</p>
 <p>The <a class="reference internal" href="03_basic_nlp.html"><span class="doc std std-doc">following section</span></a> will teach you how to apply basic natural language processing techniques to texts.</p>
 </div>

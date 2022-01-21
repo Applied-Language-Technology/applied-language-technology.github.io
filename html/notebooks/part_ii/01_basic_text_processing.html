@@ -47,8 +47,6 @@
     <script src="../../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -416,7 +414,7 @@
 <ul class="simple">
 <li><p>understand the difference between rich text, structured text and plain text</p></li>
 <li><p>understand the concept of text encoding</p></li>
-<li><p>know how to load plain text files into Python</p></li>
+<li><p>know how to load plain text files into Python and manipulate their content</p></li>
 </ul>
 <div class="section" id="computers-and-text">
 <h2>Computers and text<a class="headerlink" href="#computers-and-text" title="Permalink to this headline">¶</a></h2>
@@ -456,8 +454,6 @@
 </pre></div>
 </div>
 <p>This information is used for structuring plain text when <em>rendering</em> text for display, typically by styling its appearance.</p>
-<p>If you double-click any content cell in this Jupyter Notebook, you will see the underlying structured text in Markdown.</p>
-<p>Running the cell renders the structured text for visual inspection!</p>
 </div>
 <div class="section" id="why-does-this-matter">
 <h3>Why does this matter?<a class="headerlink" href="#why-does-this-matter" title="Permalink to this headline">¶</a></h3>
@@ -495,7 +491,7 @@
 <iframe
     width="600"
     height="350"
-    src="https://www.youtube.com/embed/HMsoCeCn5rA"
+    src="https://www.youtube.com/embed/ulRFLvNkhHA"
     frameborder="0"
     allowfullscreen
 
@@ -504,19 +500,32 @@
 </div>
 <p>Plain text files can be loaded into Python using the <code class="docutils literal notranslate"><span class="pre">open()</span></code> function.</p>
 <p>The first argument to the <code class="docutils literal notranslate"><span class="pre">open()</span></code> function must be a string, which contains a <em>path</em> to the file that is being opened.</p>
-<p>In this case, the directory <code class="docutils literal notranslate"><span class="pre">data</span></code> contains a file named <code class="docutils literal notranslate"><span class="pre">NYT_1991-01-16-A15.txt</span></code>. The directory and the filename are separated by the backslash <code class="docutils literal notranslate"><span class="pre">/</span></code>, as shown below.</p>
+<p>In this case, we have a path that points towards a file named <code class="docutils literal notranslate"><span class="pre">NYT_1991-01-16-A15.txt</span></code>, which is located in a directory named <code class="docutils literal notranslate"><span class="pre">data</span></code>. In the definition of the path, the directory and the filename are separated by a backslash <code class="docutils literal notranslate"><span class="pre">/</span></code>.</p>
+<p>To access the file that this path points to, we must provide the path as a string object to the <code class="docutils literal notranslate"><span class="pre">file</span></code> argument of the <code class="docutils literal notranslate"><span class="pre">open()</span></code> function:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="s1">&#39;data/NYT_1991-01-16-A15.txt&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Before proceeding any further, let’s focus on the other arguments provided to the <code class="docutils literal notranslate"><span class="pre">open()</span></code> function.</p>
+<p>By default, Python 3 assumes that the text is encoded using UTF-8, but we can make this explicit using the <code class="docutils literal notranslate"><span class="pre">encoding</span></code> argument.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">encoding</span></code> argument takes a string as input: we pass the string <code class="docutils literal notranslate"><span class="pre">utf-8</span></code> to the argument to declare that the plain text is encoded in UTF-8.</p>
+<p>We also use the <code class="docutils literal notranslate"><span class="pre">mode</span></code> argument to define that we only want to open the file for <em>reading</em>, which is done by passing the string <code class="docutils literal notranslate"><span class="pre">r</span></code> to the argument.</p>
+<p>Finally, we use the <code class="docutils literal notranslate"><span class="pre">open()</span></code> function in combination with the <code class="docutils literal notranslate"><span class="pre">with</span></code> statement, which ensures that the file will be closed after performing whatever we do within the <em>indented</em> block of code that follows the <code class="docutils literal notranslate"><span class="pre">with</span></code> statement. This prevents the file from consuming memory and resources after we no longer need it.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Open a file and assign it to the variable &#39;file&#39;</span>
-<span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="s1">&#39;data/NYT_1991-01-16-A15.txt&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="s1">&#39;data/NYT_1991-01-16-A15.txt&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    
+    <span class="c1"># The &#39;with&#39; statement must be followed by an indented code block.</span>
+    <span class="c1"># Here we call the read() method to read the file contents and </span>
+    <span class="c1"># assign the result under the variable &#39;text&#39;.</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>By default, Python 3 assumes that the text is encoded using UTF-8, but we can make this explicit using the <code class="docutils literal notranslate"><span class="pre">encoding</span></code> argument.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">encoding</span></code> argument takes a string as its input: we pass <code class="docutils literal notranslate"><span class="pre">utf-8</span></code> to the argument to declare that the plain text is encoded in UTF-8.</p>
-<p>Moreover, we use the <code class="docutils literal notranslate"><span class="pre">mode</span></code> argument to define that we only want to open the file for <em>reading</em>, which is done by passing the string <code class="docutils literal notranslate"><span class="pre">r</span></code> to the argument.</p>
-<p>If we call the variable <code class="docutils literal notranslate"><span class="pre">file</span></code>, we see a Python object that contains three arguments: the path to the file under the argument <code class="docutils literal notranslate"><span class="pre">name</span></code> and the <code class="docutils literal notranslate"><span class="pre">mode</span></code> and <code class="docutils literal notranslate"><span class="pre">encoding</span></code> arguments that we specified above.</p>
+<p>As you can see, the <code class="docutils literal notranslate"><span class="pre">with</span></code> statement and the <code class="docutils literal notranslate"><span class="pre">open()</span></code> function are followed by the statement <code class="docutils literal notranslate"><span class="pre">as</span></code> and a variable named <code class="docutils literal notranslate"><span class="pre">file</span></code>.</p>
+<p>This tells Python to assign whatever is returned by the <code class="docutils literal notranslate"><span class="pre">open()</span></code> function under the variable <code class="docutils literal notranslate"><span class="pre">file</span></code>.</p>
+<p>If we now call the variable <code class="docutils literal notranslate"><span class="pre">file</span></code>, we get a Python <code class="docutils literal notranslate"><span class="pre">TextIOWrapper</span></code> object that contains three arguments: the path to the file under the argument <code class="docutils literal notranslate"><span class="pre">name</span></code> and the <code class="docutils literal notranslate"><span class="pre">mode</span></code> and <code class="docutils literal notranslate"><span class="pre">encoding</span></code> arguments that we specified above.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Call the variable to examine the object</span>
@@ -530,23 +539,37 @@
 </div>
 </div>
 </div>
-<p>Calling the file, however, is not sufficient for inspecting its contents. We must use the <code class="docutils literal notranslate"><span class="pre">read()</span></code> method provided by this object to read the contents of the file first. We then assign the result to the variable <code class="docutils literal notranslate"><span class="pre">text</span></code>.</p>
+<p>Keep in mind that in the indented code block following the <code class="docutils literal notranslate"><span class="pre">with</span></code> statement, we called the <code class="docutils literal notranslate"><span class="pre">read()</span></code> method of the <code class="docutils literal notranslate"><span class="pre">TextIOWrapper</span></code> object.</p>
+<p>This method read the contents of the file, which we assigned under the variable <code class="docutils literal notranslate"><span class="pre">text</span></code>.</p>
+<p>However, if we attempt to call the <code class="docutils literal notranslate"><span class="pre">read()</span></code> method for the variable <code class="docutils literal notranslate"><span class="pre">file</span></code> outside the <code class="docutils literal notranslate"><span class="pre">with</span></code> statement, Python will raise an error, because the file has been closed.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use the read() method to read the file context and assign the</span>
-<span class="c1"># result to the variable &#39;text&#39;</span>
-<span class="n">text</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Attempt to use the read() method to read the file content</span>
+<span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="n">qw</span><span class="o">/</span><span class="mi">3</span><span class="n">f1xq85n6vl73ksgmtslw2_mzhdr7p</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_23666</span><span class="o">/</span><span class="mf">2099702776.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Attempt to use the read() method to read the file content</span>
+<span class="ne">----&gt; </span><span class="mi">2</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="ne">ValueError</span>: I/O operation on closed file.
 </pre></div>
 </div>
 </div>
 </div>
-<p>Let’s check the result of the <code class="docutils literal notranslate"><span class="pre">read()</span></code> method which is now stored under the variable <code class="docutils literal notranslate"><span class="pre">text</span></code>.</p>
+<p>This behaviour is expected, as we want the file to be closed, so that it does not consume memory or resources now that we no longer need it. This is especially important when working with thousands of files, as every open file will take up memory and resources.</p>
+<p>Let’s check the output from applying the <code class="docutils literal notranslate"><span class="pre">read()</span></code> method, which we stored under the variable <code class="docutils literal notranslate"><span class="pre">text</span></code> within the <code class="docutils literal notranslate"><span class="pre">with</span></code> statement.</p>
 <p>The text is fairly long, so let’s just take a slice of the text containing the first 500 characters, which can be achieved using brackets <code class="docutils literal notranslate"><span class="pre">[:500]</span></code>.</p>
-<p>As we learned in <a class="reference internal" href="../part_i/02_getting_started_with_python.html"><span class="doc std std-doc">Part I</span></a>, adding brackets directly after the name of a variable allows accessing parts of the object, if the object in question allows this. For example, the expression <code class="docutils literal notranslate"><span class="pre">text[1]</span></code> would retrieve the character at position 1 in the string object under the variable <code class="docutils literal notranslate"><span class="pre">text</span></code>.</p>
+<p>As we learned in <a class="reference internal" href="../part_i/02_getting_started_with_python.html"><span class="doc std std-doc">Part I</span></a>, adding brackets directly after the name of a variable allows accessing parts of the object, if the object in question allows this.</p>
+<p>For example, the expression <code class="docutils literal notranslate"><span class="pre">text[1]</span></code> would retrieve the character at position 1 in the string object under the variable <code class="docutils literal notranslate"><span class="pre">text</span></code>.</p>
 <p>Adding the colon <code class="docutils literal notranslate"><span class="pre">:</span></code> as a prefix to the number instructs Python to retrieve all characters contained in the string up to the 500th character.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Call the first 500 characters under the variable &#39;text&#39;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Retrieve the first 500 characters under the variable &#39;text&#39;</span>
 <span class="n">text</span><span class="p">[:</span><span class="mi">500</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -583,18 +606,32 @@ By JAMES BARRON
 </div>
 </div>
 </div>
-<p>As you can see, Python knows how to interpret <code class="docutils literal notranslate"><span class="pre">\n</span></code> character sequences and inserts a line break if it encounters this sequence when printing the string contents.</p>
+<p>As you can see, Python knows how to interpret <code class="docutils literal notranslate"><span class="pre">\n</span></code> character sequences and inserts a line break if it encounters this sequence when printing the contents of the string object.</p>
+<p>We can also see that the first few lines of the file contain metadata on the article, such as its name, author and source. This information precedes the body text.</p>
 </div>
 <div class="section" id="manipulating-text">
 <h2>Manipulating text<a class="headerlink" href="#manipulating-text" title="Permalink to this headline">¶</a></h2>
-<p>Because the entire text stored under the variable <code class="docutils literal notranslate"><span class="pre">text</span></code> is a string object, we can use all methods available for manipulating strings.</p>
-<p>Let’s use the <code class="docutils literal notranslate"><span class="pre">replace()</span></code> method to replace all line breaks <code class="docutils literal notranslate"><span class="pre">&quot;\n&quot;</span></code> with empty strings <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> and store the text under the variable <code class="docutils literal notranslate"><span class="pre">processed_text</span></code>.</p>
-<p>Finally, we use the <code class="docutils literal notranslate"><span class="pre">print()</span></code> function to print out a slice containing the first 1000 characters using the brackets <code class="docutils literal notranslate"><span class="pre">[:1000]</span></code>.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+<iframe
+    width="600"
+    height="350"
+    src="https://www.youtube.com/embed/v4FY6TXt0PU"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</div></div>
+</div>
+<p>Because the entire text stored under the variable <code class="docutils literal notranslate"><span class="pre">text</span></code> is a string object, we can use all methods available for manipulating strings in Python.</p>
+<p>Let’s use the <code class="docutils literal notranslate"><span class="pre">replace()</span></code> method to replace all line breaks <code class="docutils literal notranslate"><span class="pre">&quot;\n&quot;</span></code> with empty strings <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> and store the result under the variable <code class="docutils literal notranslate"><span class="pre">processed_text</span></code>.</p>
+<p>We then use the <code class="docutils literal notranslate"><span class="pre">print()</span></code> function to print out a slice containing the first 1000 characters using the brackets <code class="docutils literal notranslate"><span class="pre">[:1000]</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Replace line breaks \n with empty strings and assign the result to </span>
 <span class="c1"># the variable &#39;processed_text&#39;</span>
-<span class="n">processed_text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">processed_text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
 
 <span class="c1"># Print out the first 1000 characters under the variable &#39;processed_text&#39;</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">processed_text</span><span class="p">[:</span><span class="mi">1000</span><span class="p">])</span>
@@ -607,82 +644,216 @@ By JAMES BARRON
 </div>
 </div>
 </div>
-<p>This simple replacement operation would allow us to remove erroneous line breaks within the text.</p>
-<p>We can still identify actual line breaks by the indentations at the beginning of each paragraph, which are marked by three whitespaces.</p>
-<p>We can use this information to insert actual line breaks back into the text by replacing sequences of three whitespaces with the line break sequence and three whitespaces.</p>
+<p>As you can see, all of the text is now clumped together. We can, however, still identify the beginning of each paragraph, which are marked by three whitespaces.</p>
+<p>Note that replacing the line breaks also causes the article metadata to form a single paragraph, which is also missing some whitespace characters. For this reason, one must always pay attention to unwanted effects of replacements and other transformations!</p>
+<p>However, if we were only interested in the body text of the article, we can now easily remove the metadata, as we know that it is separated from the body text by three whitespace characters.</p>
+<p>The easiest way to do this is to use the <code class="docutils literal notranslate"><span class="pre">split()</span></code> method to split the string into a list by using three whitespace characters as the separator.</p>
+<p>Let’s assign the result under the same variable, that is, <code class="docutils literal notranslate"><span class="pre">processed_text</span></code>, and print out the result.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Replace three whitespaces with a line break and three white spaces</span>
-<span class="c1"># Store the result under the same variable &#39;processed_text&#39;</span>
-<span class="n">processed_text</span> <span class="o">=</span> <span class="n">processed_text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;   &quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">    &quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use the split() method with three whitespaces as a separator. Assign the</span>
+<span class="c1"># result under the variable &#39;processed_text&#39;.</span>
+<span class="n">processed_text</span> <span class="o">=</span> <span class="n">processed_text</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;   &#39;</span><span class="p">)</span>
 
-<span class="c1"># Print out the first 1000 characters under the variable &#39;processed_text&#39;</span>
+<span class="c1"># Print out the result under &#39;processed_text&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">processed_text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;\ufeffU.S. TAKING STEPS TO CURB TERRORISM: F.B.I. Is Ordered to Find Iraqis Whose Visas Have ExpiredBy JAMES BARRONNew York Times (1923-Current file); Jan 16, 1991;ProQuest Historical Newspapers: The New York Times with Index pg. A15U.S. TAKING STEPS TO CURB TERRORISMF.B.I. Is Ordered to Find Iraqis Whose Visas Have ExpiredBy JAMES BARRON&#39;, &#39;The Federal Bureau of Investigation has been ordered to track down as many as 3,000 Iraqis in this country whose visas have expired, the Justice Department said yesterday.&#39;, &#39;The announcement came as security precautions were tightened throughout the United States. From financial exchanges in lower Manhattan to cloakrooms in Washington and homeless shelters in California, unfamiliar rituals were the order of the day. In many cities, identification badges were being given close scrutiny in office buildings that used to be open to anyone.&#39;, &#39;Concerns about terrorist attack disrupted other daily routines as well. No fast-food deliveries are being allowed at the New York Stock Exchange. And metal detectors at the Los Angeles International Airport were fine-tuned until they were so sensitive that “even your keys will set it off,&quot; the airport manager said. Airport officials in Dallas said the Federal Aviation Administration had ordered them to post uniformed guards near ticket counters.&#39;, &#39;There were new precautions at many levels of government. A larger than usual complement of Secret Service agents is on duty at the White House, and marines at the Twentynine Palms training base in California were advised to drive with their car windows rolled up and not to go jogging alone.Potential Schemes UncoveredAndrea Mohln/Tho New York TimesSecret Service agents on guard duty outside the Iraqi Embassy yesterday in Washington. Security precautions were being taken around the country as the deadline for Iraq to withdraw from Kuwait neared.&#39;, &#39;Law-enforcement officials said they had found no evidence that terrorist groups had chosen specific targets in New York. But in Washington, a high- ranking official said more than five potential schemes that could result in terrorist acts had been uncovered since Iraq invaded Kuwait on Aug. 2.&#39;, &#39;Each of these involved people who appeared to be &quot;lone zealots” acting independently of groups allied with President Saddam Hussein of Iraq, the official said. He would not provide further details.&#39;, &#39;Only one person has been arrested in these incidents, but the investigationsare continuing. Some of the suspects have left the country, one official said. But he refused to say who they were or why they were allowed to go.&#39;, &#39;Foreigners who remain in the United States after the expiration of their visas are subject to immediate expulsion, but a senior official in the Justice Department said the purpose of having the F.B.I. track down Iraqis whose visas had expired was to determine “who is here, where they are and why they stayed.’’&#39;, &#39;As the hours ticked by and the United Nations deadline for Iraq’s withdrawal from Kuwait neared and then passed, with no evidence of terrorist actions, fear outpaced reality. Some New Yorkers filled their bathtubs with water and stocked up on powdered milk. And some decided to stay close to home. Jonathan Bond, president of the Ktrsh- enbaum &amp; Bond advertising agency in SoHo, canceled plans to fly to Toronto today to make a presentation to a new client.&#39;, &#39;&quot;New York is a terrorist target,&quot; he said. “It\&#39;s the first day of a war and I’m not going near an airport. Anything that needs to be done we can do by fax machine.&quot;&#39;, &#39;In Washington there was increased security and alertness, even though the Government seemed to be trying to avoid giving the impression that the nation was on the brink of war.&#39;, &#39;At the Pentagon, security guards were jittery after an unattended package was found early yesterday near an entrance to the Metro subway system. The package turned out to be be harmless, but officials canceled most tours of the Pentagon later in the day.&#39;, &#39;The Secret Service would not talk about the precise steps being taken to increase security for high-ranking offi cials. &quot;We’re redefining and testing out systems and trying to be prepared, said K. David Homes, a spokesman for the Secret Service.&#39;, &quot;Access to some state capitols has also been tightened. State troopers were stationed at entrances to the Louisiana Statehouse and at the Governor&#39;s Mansion in Baton Rouge.&quot;, &#39;In Albany, Gov. Mario M. Cuomo ordered the state police to stay in con stant communication with the F.B.I., although he said that &quot;there is no threat that I’m aware of anywhere in the state.”&#39;, &#39;The New York City Police Department received 54 calls about bombs yesterday, nearly four times the normal number, said Sgt. Peter Berry, a police spokesman. But he said no bombs were found, and most of the reports turned out to be unattended packages or lost luggage.&#39;, &#39;That was also a concern at airports around the country. At Logan International Airport in Boston, the public address system crackled with caution. ‘‘Please be advised,” one warning said. “Any luggage left unattended will be immediately ticketed and towed.”&#39;, &#39;The no-nonsense mood extended to I non-passengers. A state police officer stopped a reporter from questioning a guard at Logan, saying it was &quot;a breach of the security guard’s contract&quot; to talk about anti-terrorism precautions.&#39;, &quot;In Dallas, airport officials said the F.A.A. had raised the level of security by one step under the agency&#39;s five- step security plan. Managers at Dallas- Fort Worth Airport and Love Field said they were operating at level 2-A, the middle step and the first at which an airport is required to post uniformed guards at ticket counters.Reproduced with permission of the copyright owner. Further reproduction prohibited without permission.&quot;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you examine the output, you will see that the <code class="docutils literal notranslate"><span class="pre">split()</span></code> method returned a list of string objects. Let’s quickly verify this by checking the type of the object stored under <code class="docutils literal notranslate"><span class="pre">processed_text</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the type of the object under &#39;processed_text&#39;</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">processed_text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>list
+</pre></div>
+</div>
+</div>
+</div>
+<p>The metadata is stored in the first item in the list, as the first sequence of three whitespace characters was found where the metadata ends. This is where we first split the string object.</p>
+<p>Let’s fetch the first item in the list – remember that Python starts counting from zero, which means that the item we want to access can be found at index <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Retrieve the string object at index 0 from the list &#39;processed_text&#39;</span>
+<span class="n">processed_text</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;\ufeffU.S. TAKING STEPS TO CURB TERRORISM: F.B.I. Is Ordered to Find Iraqis Whose Visas Have ExpiredBy JAMES BARRONNew York Times (1923-Current file); Jan 16, 1991;ProQuest Historical Newspapers: The New York Times with Index pg. A15U.S. TAKING STEPS TO CURB TERRORISMF.B.I. Is Ordered to Find Iraqis Whose Visas Have ExpiredBy JAMES BARRON&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>If we want to remove the metadata and retain just the body text, we can use the <code class="docutils literal notranslate"><span class="pre">pop()</span></code> method of a list object.</p>
+<p>This method expects an integer as input, which corresponds to the index of an item that we want to remove from the list.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Call the pop() method of the list under &#39;processed_text&#39; and the</span>
+<span class="c1"># index of the item to be removed.</span>
+<span class="n">processed_text</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;\ufeffU.S. TAKING STEPS TO CURB TERRORISM: F.B.I. Is Ordered to Find Iraqis Whose Visas Have ExpiredBy JAMES BARRONNew York Times (1923-Current file); Jan 16, 1991;ProQuest Historical Newspapers: The New York Times with Index pg. A15U.S. TAKING STEPS TO CURB TERRORISMF.B.I. Is Ordered to Find Iraqis Whose Visas Have ExpiredBy JAMES BARRON&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>If you are wondering why we do not assign the result into a variable, the answer is because Python lists are <em>mutable</em>, that is, they can be manipulated in place.</p>
+<p>In other words, the <code class="docutils literal notranslate"><span class="pre">pop()</span></code> method can modify the list without “updating” the variable by reassigning the value under the same variable name.</p>
+<p>Let’s check the result by retrieving the first three items in the list <code class="docutils literal notranslate"><span class="pre">processed_text</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Retrieve the first three items in the list &#39;processed_text&#39;</span>
+<span class="n">processed_text</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;The Federal Bureau of Investigation has been ordered to track down as many as 3,000 Iraqis in this country whose visas have expired, the Justice Department said yesterday.&#39;,
+ &#39;The announcement came as security precautions were tightened throughout the United States. From financial exchanges in lower Manhattan to cloakrooms in Washington and homeless shelters in California, unfamiliar rituals were the order of the day. In many cities, identification badges were being given close scrutiny in office buildings that used to be open to anyone.&#39;,
+ &#39;Concerns about terrorist attack disrupted other daily routines as well. No fast-food deliveries are being allowed at the New York Stock Exchange. And metal detectors at the Los Angeles International Airport were fine-tuned until they were so sensitive that “even your keys will set it off,&quot; the airport manager said. Airport officials in Dallas said the Federal Aviation Administration had ordered them to post uniformed guards near ticket counters.&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>As you can see, the first item in the list no longer corresponds to the metadata!</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+<iframe
+    width="600"
+    height="350"
+    src="https://www.youtube.com/embed/iabwQKS5lVk"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</div></div>
+</div>
+<p>If we want to convert the list back into a string, we can use the <code class="docutils literal notranslate"><span class="pre">join()</span></code> method of a string object.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">join()</span></code> method expects an <em>iterable</em> as input, that is, something that can be iterated over, such as a Python list or a dictionary.</p>
+<p>This is where things may get a little confusing: the <code class="docutils literal notranslate"><span class="pre">join()</span></code> method must be called on a <em>string</em> that will be used to join the items in the iterable!</p>
+<p>In this case, we want to use the original sequence of characters that were used to separate paragraphs of text – a line break and three whitespaces – as the string object that joins the items.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use the join() method to join the items in the list &#39;processed_text&#39; using</span>
+<span class="c1"># the string object &#39;\n   &#39; – a line break and three whitespaces. Store the </span>
+<span class="c1"># result under the variable of the same name.</span>
+<span class="n">processed_text</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">   &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">processed_text</span><span class="p">)</span>
+
+<span class="c1"># Check the result by printing the first 1000 characters of the resulting </span>
+<span class="c1"># string object under &#39;processed_text&#39;</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">processed_text</span><span class="p">[:</span><span class="mi">1000</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>U.S. TAKING STEPS TO CURB TERRORISM: F.B.I. Is Ordered to Find Iraqis Whose Visas Have ExpiredBy JAMES BARRONNew York Times (1923-Current file); Jan 16, 1991;ProQuest Historical Newspapers: The New York Times with Index pg. A15U.S. TAKING STEPS TO CURB TERRORISMF.B.I. Is Ordered to Find Iraqis Whose Visas Have ExpiredBy JAMES BARRON
-    The Federal Bureau of Investigation has been ordered to track down as many as 3,000 Iraqis in this country whose visas have expired, the Justice Department said yesterday.
-    The announcement came as security precautions were tightened throughout the United States. From financial exchanges in lower Manhattan to cloakrooms in Washington and homeless shelters in California, unfamiliar rituals were the order of the day. In many cities, identification badges were being given close scrutiny in office buildings that used to be open to anyone.
-    Concerns about terrorist attack disrupted other daily routines as well. No fast-food deliveries are being allowe
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Federal Bureau of Investigation has been ordered to track down as many as 3,000 Iraqis in this country whose visas have expired, the Justice Department said yesterday.
+   The announcement came as security precautions were tightened throughout the United States. From financial exchanges in lower Manhattan to cloakrooms in Washington and homeless shelters in California, unfamiliar rituals were the order of the day. In many cities, identification badges were being given close scrutiny in office buildings that used to be open to anyone.
+   Concerns about terrorist attack disrupted other daily routines as well. No fast-food deliveries are being allowed at the New York Stock Exchange. And metal detectors at the Los Angeles International Airport were fine-tuned until they were so sensitive that “even your keys will set it off,&quot; the airport manager said. Airport officials in Dallas said the Federal Aviation Administration had ordered them to post uniformed guards near ticket counters.
+   T
 </pre></div>
 </div>
 </div>
 </div>
-<p>Note that the replacement operation above causes the article title and source information to form a single paragraph, which also now misses some whitespace characters. In other words, one must always pay attention to unwanted effects of replacements and other transformations.</p>
-<p>Moreover, each pattern requires its own call to the <code class="docutils literal notranslate"><span class="pre">replace()</span></code> method, which makes the process extremely tedious if one has multiple patterns to find and replace.</p>
+<p>As you can see, applying the <code class="docutils literal notranslate"><span class="pre">join()</span></code> method returns a string object with the original paragraph breaks!</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html">
+<iframe
+    width="600"
+    height="350"
+    src="https://www.youtube.com/embed/HEinzGt8LG4"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</div></div>
+</div>
+<p>If you examine the text closely, you can also see remnants of the digitalisation process: the application of optical character recognition, which was discussed <a class="reference external" href="#Why-does-this-matter?">above</a>, has resulted in a mixture of various types of quotation marks, such as <code class="docutils literal notranslate"><span class="pre">&quot;</span></code>, <code class="docutils literal notranslate"><span class="pre">“</span></code>, <code class="docutils literal notranslate"><span class="pre">”</span></code>, <code class="docutils literal notranslate"><span class="pre">’’</span></code> and <code class="docutils literal notranslate"><span class="pre">‘‘</span></code> (two single quotation marks), being used in the text.</p>
+<p>If we were interested in retrieving quotes from the body text, it would be good to use the quotation marks consistently. Let’s choose <code class="docutils literal notranslate"><span class="pre">&quot;</span></code> (a single double-quote) as our preferred quotation mark.</p>
+<p>We could replace each quotation mark with this character using the <code class="docutils literal notranslate"><span class="pre">replace()</span></code> method, but applying this method separately for each type of quotation mark would be tedious.</p>
 <p>To make the process more efficient, we can leverage two other Python data structures: <em>lists</em> and <em>tuples</em>.</p>
 <p>Let’s start by defining a list named <code class="docutils literal notranslate"><span class="pre">pipeline</span></code>. We can create and populate a list by simply placing objects within brackets <code class="docutils literal notranslate"><span class="pre">[]</span></code>. Each list item must be separated by a comma (<code class="docutils literal notranslate"><span class="pre">,</span></code>).</p>
 <p>As we saw above, the <code class="docutils literal notranslate"><span class="pre">replace()</span></code> method takes two strings as inputs.</p>
 <p>To combine two strings into a single Python object, the most obvious candidate is a data structure named <em>tuple</em>, which consist of finite, ordered lists of items.</p>
-<p>Tuples are marked by parentheses <code class="docutils literal notranslate"><span class="pre">(</span> <span class="pre">)</span></code>: items in a tuple are also separated by a comma.</p>
+<p>Tuples are marked by parentheses <code class="docutils literal notranslate"><span class="pre">(</span> <span class="pre">)</span></code>, and the items in a tuple are also separated by a comma.</p>
+<p>In each tuple, we place the character to be replaced in the first string, and its replacement in the second string.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a list with two tuples, of which each consist of two strings</span>
-<span class="n">pipeline</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;   &quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">   &quot;</span><span class="p">)]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a list with four tuples, which each consist of two strings: the character</span>
+<span class="c1"># to be replaced and its replacement.</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">&#39;“&#39;</span><span class="p">,</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;´´&#39;</span><span class="p">,</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;”&#39;</span><span class="p">,</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;’’&#39;</span><span class="p">,</span> <span class="s1">&#39;&quot;&#39;</span><span class="p">)]</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>This shows how different data structures are often nested in Python: the list consists of tuples, and the tuples consist of string objects.</p>
-<p>We can now perform a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop over each item in the list.</p>
+<p>This also illustrates how different data structures are often nested in Python: the list consists of tuples, and the tuples consist of string objects.</p>
+<p>We can now perform a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop over each item in the list, which iterates through each item in the order in which they appear in the list.</p>
 <p>Each item in the list consists of a tuple, which contains two strings.</p>
-<p>Note that to enter a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop, Python expects the next line to be indented. Press the <kbd>Tab ↹</kbd> key on your keyboard to move the cursor.</p>
+<p>Note that to enter a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop, Python expects the next line of code to be indented. Press the <kbd>Tab ↹</kbd> key on your keyboard to move the cursor.</p>
 <p>What happens next is exactly same that we did before with using the <code class="docutils literal notranslate"><span class="pre">replace()</span></code> method, but instead of manually defining the strings that we want to replace, we use the strings contained in the variables <code class="docutils literal notranslate"><span class="pre">old</span></code> and <code class="docutils literal notranslate"><span class="pre">new</span></code>!</p>
-<p>After each loop, we automatically store the result in to the variable <code class="docutils literal notranslate"><span class="pre">updated_text</span></code>.</p>
+<p>After each loop, we automatically update the string object stored under the variable <code class="docutils literal notranslate"><span class="pre">processed_text</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s first create a copy of the original text to manipulate during the loop</span>
-<span class="n">updated_text</span> <span class="o">=</span> <span class="n">text</span>
-
-<span class="c1"># Loop over tuples in the list &#39;pipeline&#39;. Each tuple has two values, which we </span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loop over tuples in the list &#39;pipeline&#39;. Each tuple has two values, which we </span>
 <span class="c1"># assign to variables &#39;old&#39; and &#39;new&#39; on the fly!</span>
 <span class="k">for</span> <span class="n">old</span><span class="p">,</span> <span class="n">new</span> <span class="ow">in</span> <span class="n">pipeline</span><span class="p">:</span>
     
     <span class="c1"># Use the replace() method to replace the string under the variable &#39;old&#39; </span>
     <span class="c1"># with the string under the variable new &#39;new&#39;</span>
-    <span class="n">updated_text</span> <span class="o">=</span> <span class="n">updated_text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">)</span>
+    <span class="n">processed_text</span> <span class="o">=</span> <span class="n">processed_text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>Let’s examine the output by printing out the string under the variable <code class="docutils literal notranslate"><span class="pre">processed_text</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">updated_text</span><span class="p">[:</span><span class="mi">1000</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print the string</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">processed_text</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>U.S. TAKING STEPS TO CURB TERRORISM: F.B.I. Is Ordered to Find Iraqis Whose Visas Have ExpiredBy JAMES BARRONNew York Times (1923-Current file); Jan 16, 1991;ProQuest Historical Newspapers: The New York Times with Index pg. A15U.S. TAKING STEPS TO CURB TERRORISMF.B.I. Is Ordered to Find Iraqis Whose Visas Have ExpiredBy JAMES BARRON
-   The Federal Bureau of Investigation has been ordered to track down as many as 3,000 Iraqis in this country whose visas have expired, the Justice Department said yesterday.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The Federal Bureau of Investigation has been ordered to track down as many as 3,000 Iraqis in this country whose visas have expired, the Justice Department said yesterday.
    The announcement came as security precautions were tightened throughout the United States. From financial exchanges in lower Manhattan to cloakrooms in Washington and homeless shelters in California, unfamiliar rituals were the order of the day. In many cities, identification badges were being given close scrutiny in office buildings that used to be open to anyone.
-   Concerns about terrorist attack disrupted other daily routines as well. No fast-food deliveries are being allowed a
+   Concerns about terrorist attack disrupted other daily routines as well. No fast-food deliveries are being allowed at the New York Stock Exchange. And metal detectors at the Los Angeles International Airport were fine-tuned until they were so sensitive that &quot;even your keys will set it off,&quot; the airport manager said. Airport officials in Dallas said the Federal Aviation Administration had ordered them to post uniformed guards near ticket counters.
+   There were new precautions at many levels of government. A larger than usual complement of Secret Service agents is on duty at the White House, and marines at the Twentynine Palms training base in California were advised to drive with their car windows rolled up and not to go jogging alone.Potential Schemes UncoveredAndrea Mohln/Tho New York TimesSecret Service agents on guard duty outside the Iraqi Embassy yesterday in Washington. Security precautions were being taken around the country as the deadline for Iraq to withdraw from Kuwait neared.
+   Law-enforcement officials said they had found no evidence that terrorist groups had chosen specific targets in New York. But in Washington, a high- ranking official said more than five potential schemes that could result in terrorist acts had been uncovered since Iraq invaded Kuwait on Aug. 2.
+   Each of these involved people who appeared to be &quot;lone zealots&quot; acting independently of groups allied with President Saddam Hussein of Iraq, the official said. He would not provide further details.
+   Only one person has been arrested in these incidents, but the investigationsare continuing. Some of the suspects have left the country, one official said. But he refused to say who they were or why they were allowed to go.
+   Foreigners who remain in the United States after the expiration of their visas are subject to immediate expulsion, but a senior official in the Justice Department said the purpose of having the F.B.I. track down Iraqis whose visas had expired was to determine &quot;who is here, where they are and why they stayed.&quot;
+   As the hours ticked by and the United Nations deadline for Iraq’s withdrawal from Kuwait neared and then passed, with no evidence of terrorist actions, fear outpaced reality. Some New Yorkers filled their bathtubs with water and stocked up on powdered milk. And some decided to stay close to home. Jonathan Bond, president of the Ktrsh- enbaum &amp; Bond advertising agency in SoHo, canceled plans to fly to Toronto today to make a presentation to a new client.
+   &quot;New York is a terrorist target,&quot; he said. &quot;It&#39;s the first day of a war and I’m not going near an airport. Anything that needs to be done we can do by fax machine.&quot;
+   In Washington there was increased security and alertness, even though the Government seemed to be trying to avoid giving the impression that the nation was on the brink of war.
+   At the Pentagon, security guards were jittery after an unattended package was found early yesterday near an entrance to the Metro subway system. The package turned out to be be harmless, but officials canceled most tours of the Pentagon later in the day.
+   The Secret Service would not talk about the precise steps being taken to increase security for high-ranking offi cials. &quot;We’re redefining and testing out systems and trying to be prepared, said K. David Homes, a spokesman for the Secret Service.
+   Access to some state capitols has also been tightened. State troopers were stationed at entrances to the Louisiana Statehouse and at the Governor&#39;s Mansion in Baton Rouge.
+   In Albany, Gov. Mario M. Cuomo ordered the state police to stay in con stant communication with the F.B.I., although he said that &quot;there is no threat that I’m aware of anywhere in the state.&quot;
+   The New York City Police Department received 54 calls about bombs yesterday, nearly four times the normal number, said Sgt. Peter Berry, a police spokesman. But he said no bombs were found, and most of the reports turned out to be unattended packages or lost luggage.
+   That was also a concern at airports around the country. At Logan International Airport in Boston, the public address system crackled with caution. ‘‘Please be advised,&quot; one warning said. &quot;Any luggage left unattended will be immediately ticketed and towed.&quot;
+   The no-nonsense mood extended to I non-passengers. A state police officer stopped a reporter from questioning a guard at Logan, saying it was &quot;a breach of the security guard’s contract&quot; to talk about anti-terrorism precautions.
+   In Dallas, airport officials said the F.A.A. had raised the level of security by one step under the agency&#39;s five- step security plan. Managers at Dallas- Fort Worth Airport and Love Field said they were operating at level 2-A, the middle step and the first at which an airport is required to post uniformed guards at ticket counters.Reproduced with permission of the copyright owner. Further reproduction prohibited without permission.
 </pre></div>
 </div>
 </div>
 </div>
-<p>The syntax for the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop is as follows: declare the beginning of a loop using <code class="docutils literal notranslate"><span class="pre">for</span></code>, followed by a <em>variable</em> assigned to the items retrieved from the list.</p>
+<p>As the output shows, we could perform a series of replacements by looping over the list of tuples, which defined the patterns to be replaced and their replacements!</p>
+<p>To recap, the syntax for the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop is as follows: declare the beginning of a loop using <code class="docutils literal notranslate"><span class="pre">for</span></code>, followed by a <em>variable</em> that is used to refer to items retrieved from the list.</p>
 <p>The list that is being looped over is preceded by <code class="docutils literal notranslate"><span class="pre">in</span></code> and the name of the variable assigned to the entire <em>list</em>.</p>
 <p>To better understand how a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop works, let’s define only one variable, <code class="docutils literal notranslate"><span class="pre">our_tuple</span></code>, to refer to the items that we fetch from the list.</p>
 <div class="cell docutils container">
@@ -696,8 +867,10 @@ By JAMES BARRON
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;\n&#39;, &#39;&#39;)
-(&#39;   &#39;, &#39;\n   &#39;)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;“&#39;, &#39;&quot;&#39;)
+(&#39;´´&#39;, &#39;&quot;&#39;)
+(&#39;”&#39;, &#39;&quot;&#39;)
+(&#39;’’&#39;, &#39;&quot;&#39;)
 </pre></div>
 </div>
 </div>
