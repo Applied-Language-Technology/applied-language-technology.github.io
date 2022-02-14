@@ -47,8 +47,6 @@
     <script src="../../_static/togglebutton.js"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -652,21 +650,18 @@
 </table>
 </div></div></div>
 </div>
-<p>Now that we have an empty data with rows for each file in the corpus, we can loop over the file paths under <code class="docutils literal notranslate"><span class="pre">corpus_files</span></code> and add their contents to the DataFrame.</p>
+<p>Now that we have an empty data with rows for each file in the corpus, we can loop over the <em>Path</em> objects under <code class="docutils literal notranslate"><span class="pre">corpus_files</span></code>, read their contents and add them to the DataFrame.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loop over the corpus files and count each loop using enumerate()</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">f</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">corpus_files</span><span class="p">):</span>
     
-    <span class="c1"># Open the file for reading</span>
-    <span class="n">c_file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
+    <span class="c1"># Read the file contents</span>
+    <span class="n">text</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read_text</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
     
     <span class="c1"># Get the filename from the Path object</span>
     <span class="n">filename</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">name</span>
-        
-    <span class="c1"># Read the file contents</span>
-    <span class="n">text</span> <span class="o">=</span> <span class="n">c_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-    
+
     <span class="c1"># Assign the text from the file to index &#39;i&#39; at column &#39;text&#39;</span>
     <span class="c1"># using the .at accessor – note that this modifies the DataFrame</span>
     <span class="c1"># &quot;in place&quot; – you don&#39;t need to assign the result into a variable</span>
