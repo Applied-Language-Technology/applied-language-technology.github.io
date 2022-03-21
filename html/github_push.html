@@ -5,18 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-Y6ZQJ0S1M2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-Y6ZQJ0S1M2');
-</script>
-    
-    
-    <title>Return exercises to GitHub</title>
+    <title>5. Return exercises to GitHub &#8212; Applied Language Technology  documentation</title>
     
   <link href="_static/css/theme.css" rel="stylesheet">
   <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
@@ -35,8 +24,6 @@
     
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
     
   <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
 
@@ -44,12 +31,13 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script src="_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Part I: A Minimal Introduction to Python" href="python_intro.html" />
+    <link rel="prev" title="4. Launch a Jupyter Notebook" href="jupyter.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -71,12 +59,9 @@
         <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="index.html">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
-        
       
       
-      <img src="_static/logo.png" class="logo" alt="logo">
-      
+      <h1 class="site-logo" id="site-title">Applied Language Technology  documentation</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
@@ -84,45 +69,45 @@
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="about.html">
    About this Website
   </a>
  </li>
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="getting_started.html">
    Getting Started
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="notebook_login.html">
-     Log in to CSC Notebooks
+     1. Log in to CSC Notebooks
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="launch_server.html">
-     Launch a server on CSC Notebooks
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="jupyter.html">
-     Interact with the server in JupyterLab
+     2. Launch your personal server
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="github_pull.html">
-     Retrieve learning materials from GitHub
+     3. Retrieve learning materials and exercises from GitHub
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="tmc.html">
-     Check your exercises using TestMyCode
+    <a class="reference internal" href="jupyter.html">
+     4. Interact with the learning materials on Jupyter Notebooks
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     5. Return completed exercises to GitHub for grading
     </a>
    </li>
   </ul>
@@ -138,12 +123,12 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="notebooks/part_i/01_working_with_jupyter_notebooks.html">
+    <a class="reference internal" href="part_i/working_with_jupyter_notebooks.html">
      The elements of a Jupyter Notebook
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="notebooks/part_i/02_getting_started_with_python.html">
+    <a class="reference internal" href="part_i/getting_started_with_python.html">
      Getting started with Python
     </a>
    </li>
@@ -160,33 +145,31 @@
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="notebooks/part_ii/01_basic_text_processing.html">
+    <a class="reference internal" href="part_ii/basic_text_processing.html">
      Manipulating text using Python
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="notebooks/part_ii/02_basic_text_processing_continued.html">
+    <a class="reference internal" href="part_ii/basic_text_processing_continued.html">
      Manipulating text at scale
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="notebooks/part_ii/03_basic_nlp.html">
-     Processing texts using spaCy
+    <a class="reference internal" href="part_ii/basic_nlp.html">
+     Basic natural language processing using spaCy
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="notebooks/part_ii/04_basic_nlp_continued.html">
-     Customising the spaCy pipeline
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="notebooks/part_ii/05_evaluating_nlp.html">
+    <a class="reference internal" href="part_ii/evaluating_nlp.html">
      Evaluating language models
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="notebooks/part_ii/06_managing_data.html">
-     Managing textual data using pandas
+    <a class="reference internal" href="part_ii/managing_data.html">
+     Managing textual data using
+     <em>
+      pandas
+     </em>
     </a>
    </li>
   </ul>
@@ -200,53 +183,17 @@
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="notebooks/part_iii/01_multilingual_nlp.html">
-     Processing diverse languages
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="notebooks/part_iii/02_universal_dependencies.html">
-     Universal Dependencies
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="notebooks/part_iii/03_pattern_matching.html">
-     Finding linguistic patterns using spaCy
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="notebooks/part_iii/04_embeddings.html">
-     Introducing word embeddings
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="notebooks/part_iii/05_embeddings_continued.html">
-     Word embeddings in spaCy
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="notebooks/part_iii/06_text_linguistics.html">
-     Working with discourse-level annotations
-    </a>
-   </li>
+  <ul class="simple">
   </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="citation.html">
-   Citation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="resources.html">
-   Resources
-  </a>
  </li>
 </ul>
 
     </div>
 </nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
 
 </div>
 
@@ -285,24 +232,11 @@
                 data-placement="left">.rst</button></a>
         <!-- Download PDF via print -->
         <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
             <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/Applied-Language-Technology/website"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        
-        
-    </div>
-</div>
 
             <!-- Full screen (wrap in <a> to have style consistency -->
 
@@ -316,79 +250,62 @@
         </div>
 
         <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
             
         </div>
     </div>
 </div>
     <div id="main-content" class="row">
         <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Return exercises to GitHub</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                    </div>
+                </div>
+            </div>
+            
               <div>
                 
   <div class="section" id="return-exercises-to-github">
-<span id="github-push"></span><h1>Return exercises to GitHub<a class="headerlink" href="#return-exercises-to-github" title="Permalink to this headline">¶</a></h1>
-<p>Cloning a repository from GitHub establishes a “connection” between the local repository and GitHub. This connection does not, however, automatically add changes made to the local repository to GitHub. You must manually inform GitHub of any changes.</p>
-<p>This also applies to completing the course exercises: when you clone a repository containing an exercise from GitHub, you must manually add the changes resulting from completing the exercise to GitHub.</p>
-<p>Follow the instructions below to add your changes to GitHub.</p>
-<ol class="arabic">
-<li><p>Move to the directory that contains the Git repository using the following command.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">cd &lt;name of the directory&gt;</span>
-</pre></div>
-</div>
-<p>Git keeps track of modifications to the files in the directory.</p>
-<p>Use the following command to check if tracked files have been modified.</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">git status</span>
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="../img/jl_git_status.gif"><img alt="Change directory and check the status of git repository." src="../img/jl_git_status.gif" style="width: 600px;" /></a>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-</li>
-<li><p>Any files that have been modified must be <em>added</em> to a <em>commit</em> in preparation for adding these changes to the remote repository on GitHub. Use the following command to add files to a commit:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">git add &lt;filename or directory&gt;</span>
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="../img/jl_git_add.gif"><img alt="Add files to a commit, which are then pushed to GitHub." src="../img/jl_git_add.gif" style="width: 600px;" /></a>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-</li>
-<li><p>When all the requested changes have been <em>staged</em> into a commit, you must verify the commit and add a message that describes the changes made using the following command:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">git commit -m &quot;your message here - e.g. completed exercise&quot;</span>
-</pre></div>
-</div>
-<p>This will prepare the commit, which can now be <em>pushed</em> to the remote repository on GitHub using the following command:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">git push</span>
-</pre></div>
-</div>
-<a class="reference internal image-reference" href="../img/jl_git_push.gif"><img alt="Push a commit to GitHub." src="../img/jl_git_push.gif" style="width: 600px;" /></a>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>If you navigate to the repository on GitHub, you should now see the changes that you added to the commit.</p>
-</li>
-</ol>
+<h1><span class="section-number">5. </span>Return exercises to GitHub<a class="headerlink" href="#return-exercises-to-github" title="Permalink to this headline">¶</a></h1>
 </div>
 
 
               </div>
               
-        
-            <!-- Previous / next buttons -->
-<div class='prev-next-area'>
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="jupyter.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">4. </span>Launch a Jupyter Notebook</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="python_intro.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Part I: A Minimal Introduction to Python</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
-        
+            
         </div>
     </div>
     <footer class="footer">
-    <div class="container">
-      <p>
-        
-      </p>
-    </div>
-  </footer>
+  <p>
+    
+      By Tuomo Hiippala<br/>
+    
+        &copy; Copyright 2020- Tuomo Hiippala, CC BY-NC 4.0.<br/>
+  </p>
+</footer>
 </main>
 
 
@@ -396,10 +313,6 @@
     </div>
   
   <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
-
-   <div class="footer"><a href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0;padding:10px" src="https://mirrors.creativecommons.org/presskit/buttons/88x31/svg/by-nc.svg"/></a> © 2020– <a href="http://www.helsinki.fi/~thiippal">Tuomo Hiippala</a>
-       in collaboration with <a href="https://mooc.fi/en" target="_blank">mooc.fi<img src="https://applied-language-technology.mooc.fi/html/_static/moocfi.svg" style="border-width:0;padding:2px" width=50></a></div>
-    
 
   </body>
 </html>
