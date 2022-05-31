@@ -55,8 +55,8 @@
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Part I: A Minimal Introduction to Python" href="python_intro.html" />
-    <link rel="prev" title="Retrieve learning materials from GitHub" href="github_pull.html" />
+    <link rel="next" title="Frequently Asked Questions" href="faq.html" />
+    <link rel="prev" title="Working in JupyterLab" href="jupyter.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -94,7 +94,7 @@
         <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="about.html">
-   About this Website
+   About this MOOC
   </a>
  </li>
  <li class="toctree-l1 current active has-children">
@@ -122,17 +122,17 @@
      Interact with the server in JupyterLab
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="github_pull.html">
-     Retrieve learning materials from GitHub
-    </a>
-   </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
      Check your exercises using TestMyCode
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="faq.html">
+   Frequently Asked Questions
+  </a>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="python_intro.html">
@@ -341,18 +341,23 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#downloading-and-updating-exercises-using-tmc">
-   Downloading and updating exercises using TMC
+  <a class="reference internal nav-link" href="#downloading-and-updating-exercises">
+   Downloading and updating exercises
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#testing-your-code-locally-using-tmc">
-   Testing your code locally using TMC
+  <a class="reference internal nav-link" href="#completing-the-exercises">
+   Completing the exercises
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#submitting-your-code-to-the-tmc-server">
-   Submitting your code to the TMC server
+  <a class="reference internal nav-link" href="#testing-your-code-locally">
+   Testing your code locally
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#submitting-your-code-to-the-server">
+   Submitting your code to the server
   </a>
  </li>
 </ul>
@@ -386,18 +391,23 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#downloading-and-updating-exercises-using-tmc">
-   Downloading and updating exercises using TMC
+  <a class="reference internal nav-link" href="#downloading-and-updating-exercises">
+   Downloading and updating exercises
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#testing-your-code-locally-using-tmc">
-   Testing your code locally using TMC
+  <a class="reference internal nav-link" href="#completing-the-exercises">
+   Completing the exercises
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#submitting-your-code-to-the-tmc-server">
-   Submitting your code to the TMC server
+  <a class="reference internal nav-link" href="#testing-your-code-locally">
+   Testing your code locally
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#submitting-your-code-to-the-server">
+   Submitting your code to the server
   </a>
  </li>
 </ul>
@@ -414,12 +424,12 @@
 <div class="section" id="what-is-testmycode-tmc">
 <h2>What is TestMyCode (TMC)?<a class="headerlink" href="#what-is-testmycode-tmc" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://testmycode.github.io/">TestMyCode</a> (or TMC for short) is a tool that enables you to submit your Python code for automatic grading.</p>
-<p>TMC has a command line interface, which may be accessed through the Terminal application in JupyterLab, as instructed in the <a class="reference internal" href="jupyter.html#jupyterlab"><span class="std std-ref">previous section</span></a>.</p>
+<p>TMC has a command line interface, which may be accessed through the Terminal application in JupyterLab.</p>
 <p>To get started with TMC, follow the instructions below.</p>
 </div>
 <div class="section" id="logging-in-to-tmc">
 <h2>Logging in to TMC<a class="headerlink" href="#logging-in-to-tmc" title="Permalink to this headline">¶</a></h2>
-<p>To use TMC, you need to register as a user on the <a class="reference external" href="https://mooc.fi">mooc.fi</a> website.</p>
+<p>To use TMC, you need to first register as a user on the <a class="reference external" href="https://mooc.fi">mooc.fi</a> website.</p>
 <p>Next, open a new Terminal from the <a class="reference internal" href="jupyter.html#jupyterlab"><span class="std std-ref">JupyterLab Launcher</span></a> to access the command line interface.</p>
 <a class="reference internal image-reference" href="_images/jl_launch_terminal.gif"><img alt="A view of JupyterLab." src="_images/jl_launch_terminal.gif" style="width: 50%;" /></a>
 <br><img alt="_images/empty.png" src="_images/empty.png" />
@@ -427,7 +437,7 @@
 <a class="reference internal image-reference" href="_images/tmc_login.gif"><img alt="A view of the TMC command line interface." src="_images/tmc_login.gif" style="width: 75%;" /></a>
 <br><img alt="_images/empty.png" src="_images/empty.png" />
 <p>TMC will prompt you for your e-mail address or username.</p>
-<p>Enter the e-mail or username that you used to register on the <a class="reference external" href="https://mooc.fi">mooc.fi</a> website and press ⏎.</p>
+<p>Enter the e-mail or username that you registered on the <a class="reference external" href="https://mooc.fi">mooc.fi</a> website and press ⏎.</p>
 <a class="reference internal image-reference" href="_images/tmc_username.gif"><img alt="A view of the TMC command line interface." src="_images/tmc_username.gif" style="width: 75%;" /></a>
 <br><img alt="_images/empty.png" src="_images/empty.png" />
 <p>Next, type in your password for the <a class="reference external" href="https://mooc.fi">mooc.fi</a> platform and press ⏎.</p>
@@ -440,27 +450,34 @@
 <p>If the login is successful, TMC will prompt you to select an organization.</p>
 <a class="reference internal image-reference" href="_images/tmc_done.gif"><img alt="A view of the TMC command line interface." src="_images/tmc_done.gif" style="width: 75%;" /></a>
 <br><img alt="_images/empty.png" src="_images/empty.png" />
-<p>Use the arrow keys ↑↓ to navigate the list and choose <code class="code docutils literal notranslate"><span class="pre">MOOC</span></code>. Press ⏎ to confirm your selection.</p>
+<p>Use the arrow keys ↑↓ to navigate the list and choose the <code class="code docutils literal notranslate"><span class="pre">MOOC</span></code> organization. Press ⏎ to confirm your selection.</p>
 <p>Next, TMC will prompt you to select a course.</p>
-<p>Again, use the arrow keys ↑↓ to navigate the list and choose <code class="code docutils literal notranslate"><span class="pre">Applied</span> <span class="pre">Language</span> <span class="pre">Technology</span></code>. Press ⏎ to confirm your selection.</p>
-<p>This downloads the exercises into a directory named <code class="code docutils literal notranslate"><span class="pre">mooc-applied-lt-2022</span></code>, which should be visible in the <a class="reference internal" href="jupyter.html#jupyterlab"><span class="std std-ref">JupyterLab File Browser</span></a>.</p>
+<p>Again, use the arrow keys ↑↓ to navigate the list and choose <code class="code docutils literal notranslate"><span class="pre">Working</span> <span class="pre">with</span> <span class="pre">Text</span> <span class="pre">in</span> <span class="pre">Python</span></code> or <code class="code docutils literal notranslate"><span class="pre">Natural</span> <span class="pre">Language</span> <span class="pre">Processing</span> <span class="pre">for</span> <span class="pre">Beginners</span></code> depending on the course that you wish to take. Press ⏎ to confirm your selection.</p>
+<p>This downloads the exercises into a directory named <code class="code docutils literal notranslate"><span class="pre">mooc-wtp</span></code> (Working with Text in Python) or <code class="code docutils literal notranslate"><span class="pre">mooc-nlp</span></code> (Natural Language Processing for Linguists), depending on the course that you chose above. The directory should be visible in the <a class="reference internal" href="jupyter.html#jupyterlab"><span class="std std-ref">JupyterLab File Browser</span></a>.</p>
 </div>
-<div class="section" id="downloading-and-updating-exercises-using-tmc">
-<span id="tmc-dl"></span><h2>Downloading and updating exercises using TMC<a class="headerlink" href="#downloading-and-updating-exercises-using-tmc" title="Permalink to this headline">¶</a></h2>
-<p>When new exercises become available as you progress through the course, you must download them to the server so that you can complete them in JupyterLab.</p>
-<p>To download exercises, open a Terminal and type the command <code class="code docutils literal notranslate"><span class="pre">tmc</span> <span class="pre">download</span></code> and press ⏎.</p>
+<div class="section" id="downloading-and-updating-exercises">
+<span id="tmc-dl"></span><h2>Downloading and updating exercises<a class="headerlink" href="#downloading-and-updating-exercises" title="Permalink to this headline">¶</a></h2>
+<p>TMC will automatically download any missing exercises on your server when you log into the system.</p>
+<p>To download exercises manually, open a Terminal and type the command <code class="code docutils literal notranslate"><span class="pre">tmc</span> <span class="pre">download</span></code> and press ⏎.</p>
 <p>TMC will prompt you to select a course.</p>
-<p>Use the arrow keys ↑↓ to navigate to <code class="code docutils literal notranslate"><span class="pre">Applied</span> <span class="pre">Language</span> <span class="pre">Technology</span></code> and press ⏎ to confirm your selection.</p>
+<p>Use the arrow keys ↑↓ to navigate to <code class="code docutils literal notranslate"><span class="pre">Working</span> <span class="pre">with</span> <span class="pre">Text</span> <span class="pre">in</span> <span class="pre">Python</span></code> or <code class="code docutils literal notranslate"><span class="pre">Natural</span> <span class="pre">Language</span> <span class="pre">Processing</span> <span class="pre">for</span> <span class="pre">Beginners</span></code> and press ⏎ to confirm your selection.</p>
 <a class="reference internal image-reference" href="_images/tmc_dl.gif"><img alt="A view of the TMC command line interface." src="_images/tmc_dl.gif" style="width: 75%;" /></a>
 <br><img alt="_images/empty.png" src="_images/empty.png" />
-<p>This will download all available exercises into the directory <code class="code docutils literal notranslate"><span class="pre">mooc-applied-lt-2022</span></code> in your home directory.</p>
-<p>If instructed to do so, you can also update the exercises by typing <code class="code docutils literal notranslate"><span class="pre">tmc</span> <span class="pre">update</span></code> and  pressing ⏎.</p>
+<p>This will download all available exercises into the exercise directory.</p>
+<p>If instructed to do so, you can also update the exercises by typing <code class="code docutils literal notranslate"><span class="pre">tmc</span> <span class="pre">update</span></code> and pressing ⏎.</p>
 <a class="reference internal image-reference" href="_images/tmc_update.gif"><img alt="A view of the TMC command line interface." src="_images/tmc_update.gif" style="width: 75%;" /></a>
 <br><img alt="_images/empty.png" src="_images/empty.png" />
 <p>This will update all exercises available to you.</p>
 </div>
-<div class="section" id="testing-your-code-locally-using-tmc">
-<span id="tmc-test"></span><h2>Testing your code locally using TMC<a class="headerlink" href="#testing-your-code-locally-using-tmc" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="completing-the-exercises">
+<h2>Completing the exercises<a class="headerlink" href="#completing-the-exercises" title="Permalink to this headline">¶</a></h2>
+<p>To complete the course exercises, use the <a class="reference internal" href="jupyter.html#jupyterlab"><span class="std std-ref">JupyterLab File Browser</span></a> to enter the directory that contains the exercises.</p>
+<p>Each directory contains subdirectories, which hold the individual exercises. A new exercise will become available for download via TMC when you have received 80% of the points available for the previous exercise.</p>
+<p>Open the Jupyter Notebook in the subdirectory and follow the instructions provided in the notebook.</p>
+<p>When you want to check your solutions to the exercises, see the instructions below.</p>
+</div>
+<div class="section" id="testing-your-code-locally">
+<span id="tmc-test"></span><h2>Testing your code locally<a class="headerlink" href="#testing-your-code-locally" title="Permalink to this headline">¶</a></h2>
 <p>After completing an exercise in a Jupyter Notebook, you can test your code by following the steps below.</p>
 <p>In this context, <em>testing</em> refers to evaluating whether the Python code you wrote produces the expected output.</p>
 <p>To get started, save the Jupyter Notebook by entering the <em>File</em> menu and selecting <em>Save Notebook</em>, or click the save icon at the top of the Notebook.</p>
@@ -470,7 +487,7 @@
 <a class="reference internal image-reference" href="_images/tmc_test.gif"><img alt="A view of the TMC command line interface." src="_images/tmc_test.gif" style="width: 75%;" /></a>
 <br><img alt="_images/empty.png" src="_images/empty.png" />
 <p>TMC will prompt you to select a course.</p>
-<p>Use the arrow keys ↑↓ to navigate to <code class="code docutils literal notranslate"><span class="pre">mooc-applied-lt-2022</span></code> and press ⏎ to confirm your selection.</p>
+<p>Use the arrow keys ↑↓ to navigate to <code class="code docutils literal notranslate"><span class="pre">mooc-wtp</span></code> (Working with Text in Python) or <code class="code docutils literal notranslate"><span class="pre">mooc-nlp</span></code> (Natural Language Processing for Linguists) and press ⏎ to confirm your selection.</p>
 <p>Next, TMC will prompt you to select an exercise to test.</p>
 <p>Use the arrow keys ↑↓ to navigate the list, select the exercise you want to test and press ⏎.</p>
 <p>TMC evaluates your solutions to the exercise and prints out the result, which includes the points given for the exercise.</p>
@@ -482,9 +499,9 @@
 </div>
 <p>Remember to <a class="reference internal" href="#tmc-submit"><span class="std std-ref">submit your code to the TMC server</span></a> when you are done with an exercise to register any points.</p>
 </div>
-<div class="section" id="submitting-your-code-to-the-tmc-server">
-<span id="tmc-submit"></span><h2>Submitting your code to the TMC server<a class="headerlink" href="#submitting-your-code-to-the-tmc-server" title="Permalink to this headline">¶</a></h2>
-<p>When you are finished with an exercise, you must submit your code to the TMC server for final grading. This will also register your points for the exercise.</p>
+<div class="section" id="submitting-your-code-to-the-server">
+<span id="tmc-submit"></span><h2>Submitting your code to the server<a class="headerlink" href="#submitting-your-code-to-the-server" title="Permalink to this headline">¶</a></h2>
+<p>When you are finished with an exercise, you must submit your code to the TMC server for grading and registering the points.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>You can submit your code to the TMC server even if it does not pass <a class="reference internal" href="#tmc-test"><span class="std std-ref">all local tests</span></a>.</p>
@@ -492,13 +509,13 @@
 <p>To submit your code to the TMC server, open a Terminal and type the command <code class="code docutils literal notranslate"><span class="pre">tmc</span> <span class="pre">submit</span></code> and press ⏎.</p>
 <a class="reference internal image-reference" href="_images/tmc_submit.gif"><img alt="A view of the TMC command line interface." src="_images/tmc_submit.gif" style="width: 75%;" /></a>
 <br><img alt="_images/empty.png" src="_images/empty.png" />
-<p>Use the arrow keys ↑↓ to navigate to <code class="code docutils literal notranslate"><span class="pre">mooc-applied-lt-2022</span></code> and press ⏎ to confirm your selection.</p>
+<p>Use the arrow keys ↑↓ to select the course you are currently taking and press ⏎ to confirm your selection.</p>
 <p>Next, TMC will prompt you to select an exercise to submit.</p>
 <p>Use the arrow keys ↑↓ to navigate the list, select the exercise you want to submit and press ⏎.</p>
 <p>The server will run the tests and return information on any points awarded for the submission.</p>
 <div class="admonition important">
 <p class="admonition-title">Important</p>
-<p>All points are awarded permanently. Even if you submit a wrong solution afterwards, points will not be deducted.</p>
+<p>All points from the exercises are awarded permanently. Even if you submit an incorrect solution to the TMC server afterwards, the points you have earned will not be deducted.</p>
 </div>
 <p>You can monitor your overall progress by visiting <a class="reference external" href="https://mooc.fi">mooc.fi</a> and viewing your profile information.</p>
 <p>To view your profile, click your e-mail address / username in the top right-hand corner.</p>
@@ -511,17 +528,17 @@
             
                 <!-- Previous / next buttons -->
 <div class='prev-next-area'> 
-    <a class='left-prev' id="prev-link" href="github_pull.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="jupyter.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Retrieve learning materials from GitHub</p>
+            <p class="prev-next-title">Working in JupyterLab</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="python_intro.html" title="next page">
+    <a class='right-next' id="next-link" href="faq.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Part I: A Minimal Introduction to Python</p>
+        <p class="prev-next-title">Frequently Asked Questions</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

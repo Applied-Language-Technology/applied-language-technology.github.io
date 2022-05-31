@@ -4,7 +4,7 @@
 Log in to CSC Notebooks
 ***********************
 
-CSC Notebooks is a service provided by `CSC – IT Centre for Science <https://www.csc.fi>`_, a company jointly owned by the Finnish state and universities.
+CSC Notebooks is a cloud service provided by `CSC – IT Centre for Science <https://www.csc.fi>`_.
 
 The CSC Notebooks platform allows users to run their own virtual servers on CSC computers.
 
@@ -22,7 +22,7 @@ Next, click the green **Login** button. You will be redirected to the login page
 
 .. image:: _static/empty.png
 
-Choose **Haka** as your login method.
+If you are currently enrolled in a Finnish higher education institution, choose **Haka** as your login method.
 
 .. image:: ../img/csc_nb_login_method.gif
    :width: 50%
@@ -34,11 +34,11 @@ Choose **Haka** as your login method.
 
 .. image:: _static/empty.png
 
-Choose your university from the drop-down menu and click **Select**.
+Choose your institution from the drop-down menu and click **Select**.
 
 .. image:: ../img/csc_nb_haka_affiliation.gif
    :width: 40%
-   :alt: Choose your university from the drop-down menu and click select.
+   :alt: Choose your institution from the drop-down menu and click select.
 
 .. raw:: html
 
@@ -46,7 +46,7 @@ Choose your university from the drop-down menu and click **Select**.
 
 .. image:: _static/empty.png
 
-Enter your *university username and password* and click **Login**.
+Enter your institutional *username and password* and click **Login**.
 
 .. image:: ../img/csc_nb_haka_login.gif
    :width: 30%
@@ -74,7 +74,7 @@ If the login was successful, you should see the environments available on CSC No
 
    1. Click the *Join workspace* button on the upper right corner of the page.
 
-   2. Enter the code you received from the course organiser and press the *+* button.
+   2. Enter the code :code:`app-0h9vawkw` and press the *+* button.
 
    You only need to complete these steps once. 
 

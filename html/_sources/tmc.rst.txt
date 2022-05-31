@@ -9,14 +9,14 @@ What is TestMyCode (TMC)?
 
 `TestMyCode <https://testmycode.github.io/>`_ (or TMC for short) is a tool that enables you to submit your Python code for automatic grading.
 
-TMC has a command line interface, which may be accessed through the Terminal application in JupyterLab, as instructed in the :ref:`previous section <jupyterlab>`.
+TMC has a command line interface, which may be accessed through the Terminal application in JupyterLab.
 
 To get started with TMC, follow the instructions below.
 
 Logging in to TMC
 =================
 
-To use TMC, you need to register as a user on the `mooc.fi <https://mooc.fi>`_ website.
+To use TMC, you need to first register as a user on the `mooc.fi <https://mooc.fi>`_ website.
 
 Next, open a new Terminal from the :ref:`JupyterLab Launcher <jupyterlab>` to access the command line interface.
 
@@ -44,7 +44,7 @@ To log in to TMC, type the command :code:`tmc login` on the command line and pre
 
 TMC will prompt you for your e-mail address or username.
 
-Enter the e-mail or username that you used to register on the `mooc.fi <https://mooc.fi>`_ website and press ⏎.
+Enter the e-mail or username that you registered on the `mooc.fi <https://mooc.fi>`_ website and press ⏎.
 
 .. image:: ../img/tmc_username.gif
   :width: 75%
@@ -85,26 +85,26 @@ If the login is successful, TMC will prompt you to select an organization.
 .. image:: _static/empty.png
 
 
-Use the arrow keys ↑↓ to navigate the list and choose :code:`MOOC`. Press ⏎ to confirm your selection.
+Use the arrow keys ↑↓ to navigate the list and choose the :code:`MOOC` organization. Press ⏎ to confirm your selection.
 
 Next, TMC will prompt you to select a course. 
 
-Again, use the arrow keys ↑↓ to navigate the list and choose :code:`Applied Language Technology`. Press ⏎ to confirm your selection.
+Again, use the arrow keys ↑↓ to navigate the list and choose :code:`Working with Text in Python` or :code:`Natural Language Processing for Beginners` depending on the course that you wish to take. Press ⏎ to confirm your selection.
 
-This downloads the exercises into a directory named :code:`mooc-applied-lt-2022`, which should be visible in the :ref:`JupyterLab File Browser <jupyterlab>`.
+This downloads the exercises into a directory named :code:`mooc-wtp` (Working with Text in Python) or :code:`mooc-nlp` (Natural Language Processing for Linguists), depending on the course that you chose above. The directory should be visible in the :ref:`JupyterLab File Browser <jupyterlab>`.
 
 .. _tmc_dl:
 
-Downloading and updating exercises using TMC
-============================================
+Downloading and updating exercises
+==================================
 
-When new exercises become available as you progress through the course, you must download them to the server so that you can complete them in JupyterLab.
+TMC will automatically download any missing exercises on your server when you log into the system.
 
-To download exercises, open a Terminal and type the command :code:`tmc download` and press ⏎.
+To download exercises manually, open a Terminal and type the command :code:`tmc download` and press ⏎.
 
 TMC will prompt you to select a course.
 
-Use the arrow keys ↑↓ to navigate to :code:`Applied Language Technology` and press ⏎ to confirm your selection.
+Use the arrow keys ↑↓ to navigate to :code:`Working with Text in Python` or :code:`Natural Language Processing for Beginners` and press ⏎ to confirm your selection.
 
 .. image:: ../img/tmc_dl.gif
   :width: 75%
@@ -116,9 +116,9 @@ Use the arrow keys ↑↓ to navigate to :code:`Applied Language Technology` and
 
 .. image:: _static/empty.png
 
-This will download all available exercises into the directory :code:`mooc-applied-lt-2022` in your home directory.
+This will download all available exercises into the exercise directory.
 
-If instructed to do so, you can also update the exercises by typing :code:`tmc update` and  pressing ⏎.
+If instructed to do so, you can also update the exercises by typing :code:`tmc update` and pressing ⏎.
 
 .. image:: ../img/tmc_update.gif
   :width: 75%
@@ -132,10 +132,21 @@ If instructed to do so, you can also update the exercises by typing :code:`tmc u
 
 This will update all exercises available to you.
 
+Completing the exercises
+========================
+
+To complete the course exercises, use the :ref:`JupyterLab File Browser <jupyterlab>` to enter the directory that contains the exercises.
+
+Each directory contains subdirectories, which hold the individual exercises. A new exercise will become available for download via TMC when you have received 80% of the points available for the previous exercise.
+
+Open the Jupyter Notebook in the subdirectory and follow the instructions provided in the notebook.
+
+When you want to check your solutions to the exercises, see the instructions below.
+
 .. _tmc_test:
-  
-Testing your code locally using TMC
-===================================
+
+Testing your code locally
+=========================
 
 After completing an exercise in a Jupyter Notebook, you can test your code by following the steps below.
 
@@ -161,7 +172,7 @@ To test your code, type the command :code:`tmc test` and press ⏎.
 
 TMC will prompt you to select a course.
 
-Use the arrow keys ↑↓ to navigate to :code:`mooc-applied-lt-2022` and press ⏎ to confirm your selection.
+Use the arrow keys ↑↓ to navigate to :code:`mooc-wtp` (Working with Text in Python) or :code:`mooc-nlp` (Natural Language Processing for Linguists) and press ⏎ to confirm your selection.
 
 Next, TMC will prompt you to select an exercise to test.
 
@@ -181,10 +192,10 @@ Remember to :ref:`submit your code to the TMC server <tmc_submit>` when you are 
  
 .. _tmc_submit:
 
-Submitting your code to the TMC server
-======================================
+Submitting your code to the server
+==================================
 
-When you are finished with an exercise, you must submit your code to the TMC server for final grading. This will also register your points for the exercise.
+When you are finished with an exercise, you must submit your code to the TMC server for grading and registering the points.
 
 .. tip::
 
@@ -202,7 +213,7 @@ To submit your code to the TMC server, open a Terminal and type the command :cod
 
 .. image:: _static/empty.png
 
-Use the arrow keys ↑↓ to navigate to :code:`mooc-applied-lt-2022` and press ⏎ to confirm your selection.
+Use the arrow keys ↑↓ to select the course you are currently taking and press ⏎ to confirm your selection.
 
 Next, TMC will prompt you to select an exercise to submit.
 
@@ -212,9 +223,8 @@ The server will run the tests and return information on any points awarded for t
 
 .. important::
 
-   All points are awarded permanently. Even if you submit a wrong solution afterwards, points will not be deducted.
+   All points from the exercises are awarded permanently. Even if you submit an incorrect solution to the TMC server afterwards, the points you have earned will not be deducted.
 
 You can monitor your overall progress by visiting `mooc.fi <https://mooc.fi>`_ and viewing your profile information.
 
 To view your profile, click your e-mail address / username in the top right-hand corner.
-

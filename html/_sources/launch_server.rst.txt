@@ -28,7 +28,7 @@ If you cannot see the window, click the link symbol in the upper part of the *"P
 
 .. image:: _static/empty.png
 
-When you are done, click the lower part of the *"Power on"* button to shut down the server. This will save computational and natural resources. 🍃 
+When you are done studying, click the lower part of the *"Power on"* button to shut down the server. This will save computational and natural resources. 🍃
 
 .. image:: ../img/csc_nb_course_env_destroy.png
    :width: 100%

@@ -3,11 +3,11 @@
 Working in JupyterLab
 =====================
 
-JupyterLab is a web-based interactive environment for programming, which runs on the server on CSC Notebooks, and is accessible through your web browser.
+JupyterLab is a web-based, interactive environment for programming, which runs on the server on CSC Notebooks and can be accessed through your web browser.
 
-This course uses JupyterLab for interactive programming using Jupyter Notebooks, which can combine code, text, images and video.
+This MOOC relies on JupyterLab for interactive programming using Jupyter Notebooks, which can contain executable code, text, images and video.
 
-We also use the Terminal, which provides a command line interface to the server.
+We also use the Terminal, which provides a command line interface to the server, to use the TestMyCode tool.
 
 .. raw:: html
 
@@ -34,4 +34,16 @@ The *File Browser* allows you to explore the files stored on the server, whereas
 
 .. image:: _static/empty.png
 
-When you have launched JupyterLab, you can proceed to :ref:`retrieve the learning materials <github_pull>`. 
+You can find the learning materials as Jupyter Notebooks in the directory :code:`notebooks`.
+
+Use the File Browser to navigate the directory and to open the Jupyter Notebooks.
+
+The video below offers tips on using the learning materials.
+
+.. raw:: html
+
+   <iframe width="560" height="315" src="https://www.youtube.com/embed/JA8eXq2O2tc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe><br>
+
+.. image:: _static/empty.png
+
+Next, you can proceed to :ref:`retrieve and check the exercises using TestMyCode <tmc_usage>`.
