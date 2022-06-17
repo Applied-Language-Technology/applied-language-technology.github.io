@@ -228,3 +228,12 @@ The server will run the tests and return information on any points awarded for t
 You can monitor your overall progress by visiting `mooc.fi <https://mooc.fi>`_ and viewing your profile information.
 
 To view your profile, click your e-mail address / username in the top right-hand corner.
+
+.. _completion:
+
+Requesting a completion for your coursework
+===========================================
+
+To request your work to be graded and marked as complete on `mooc.fi <https://mooc.fi>`_, open the exercise named :code:`grade_my_work` on your server, follow the instructions in the Jupyter Notebook and return the exercise to TMC.
+
+The instructor will then check your coursework and mark it as complete on `mooc.fi <https://mooc.fi>`_.
