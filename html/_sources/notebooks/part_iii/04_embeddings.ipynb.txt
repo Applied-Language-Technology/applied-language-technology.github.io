@@ -165,7 +165,7 @@
    "source": [
     "We can then feed this list to the English language model under `nlp` and store the resulting _Doc_ objects into a list under the variable `docs`.\n",
     "\n",
-    "To process the example clauses effectively, we can use the `pipe()` method introduced in [Part II](../notebooks/part_ii/04_basic_nlp_continued.ipynb#Processing-texts-efficiently), which takes a list as input.\n",
+    "To process the example clauses effectively, we can use the `pipe()` method introduced in [Part II](../part_ii/04_basic_nlp_continued.ipynb), which takes a list as input.\n",
     "\n",
     "The `pipe()` method returns a generator object, which we have to cast into a list using Python's `list()` function."
    ]
@@ -1507,7 +1507,7 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.9.7"
+   "version": "3.8.9"
   }
  },
  "nbformat": 4,

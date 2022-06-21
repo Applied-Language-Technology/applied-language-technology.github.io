@@ -787,7 +787,7 @@
    "id": "1eeb18a6",
    "metadata": {},
    "source": [
-    "To retrieve the *Token* that acts as the head of the auxiliary verb, we can use the `head` attribute, as we learned in [Part II](../part_ii/03_basic_nlp.ipynb#Syntactic-parsing).\n",
+    "To retrieve the *Token* that acts as the head of the auxiliary verb, we can use the `head` attribute, as we learned in [Part II](../part_ii/03_basic_nlp.ipynb).\n",
     "\n",
     "Let's retrieve the head for the auxiliary verb \"had\" at index 8 of the *Doc* object `tree`."
    ]
@@ -973,7 +973,7 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.9.10"
+   "version": "3.8.9"
   }
  },
  "nbformat": 4,

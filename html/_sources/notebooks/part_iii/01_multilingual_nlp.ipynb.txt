@@ -231,7 +231,7 @@
     "\n",
     "The output above lists the processors under the heading of the same name, together with the names of the packages used to train these processors.\n",
     "\n",
-    "As we learned in [Part II](http://localhost:8888/notebooks/part_ii/04_basic_nlp_continued.ipynb#Modifying-spaCy-pipelines), one might not always need all linguistic annotations created by a model, which always come with a computational cost. \n",
+    "As we learned in [Part II](../part_ii/04_basic_nlp_continued.ipynb), one might not always need all linguistic annotations created by a model, which always come with a computational cost. \n",
     "\n",
     "To speed up processing, you can define the processors to be included in the *Pipeline* object by providing the argument `processors` with a string object that contains the [processor names](https://stanfordnlp.github.io/stanza/pipeline.html#processors) to be included in the pipeline, which must be separated by commas.\n",
     "\n",
@@ -450,7 +450,7 @@
     "\n",
     "Before proceeding to create the *Document* objects, let's examine how the list comprehension is structured by taking apart its syntax step by step.\n",
     "\n",
-    "The list comprehension is like a `for` loop, which was introduced in [Part II](../part_ii/01_basic_text_processing.html#manipulating-text), which uses the contents of an existing list to create a new list.\n",
+    "The list comprehension is like a `for` loop, which was introduced in [Part II](../part_ii/01_basic_text_processing.ipynb), which uses the contents of an existing list to create a new list.\n",
     "\n",
     "To begin with, just like lists, list comprehensions are marked using surrounding brackets `[]`.\n",
     "\n",
@@ -561,7 +561,7 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "As you can see, passing the *Document* objects to the language model populates them with linguistic annotations, which can be then explored as introduced [above](#Processing-text-using-Stanza)."
+    "As you can see, passing the *Document* objects to the language model populates them with linguistic annotations, which can be then explored as introduced above."
    ]
   },
   {
@@ -720,7 +720,7 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "Generally, this object behaves just like any other spaCy *Language* object that we learned to use in [Part II](../part_ii/03_basic_nlp.ipynb#Performing-basic-NLP-tasks-using-spaCy).\n",
+    "Generally, this object behaves just like any other spaCy *Language* object that we learned to use in [Part II](../part_ii/03_basic_nlp.ipynb).\n",
     "\n",
     "We can explore its use by processing a few sentences from a recent [news article](https://yle.fi/aihe/artikkeli/2021/03/08/yleiso-aanesti-tarja-halonen-on-inspiroivin-nainen-karkikolmikkoon-ylsivat-myos) in written Finnish.\n",
     "\n",
@@ -741,7 +741,7 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "Let's continue by retrieving sentences from the *Doc* object, which are available under the attribute `sents`, as we learned in [Part II](../part_ii/03_basic_nlp.ipynb#Sentence-segmentation).\n",
+    "Let's continue by retrieving sentences from the *Doc* object, which are available under the attribute `sents`, as we learned in [Part II](../part_ii/03_basic_nlp.ipynb).\n",
     "\n",
     "The object available under the `sents` attribute is a Python generator that yields *Doc* objects. \n",
     "\n",
@@ -862,7 +862,7 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.9.7"
+   "version": "3.8.9"
   }
  },
  "nbformat": 4,

@@ -692,7 +692,7 @@
    "source": [
     "On the surface, a *Language* object that contains a Transformer-based model looks and works just like any other language model in spaCy.\n",
     "\n",
-    "However, if we look under the hood of the *Language* object under `nlp_trf` using the `pipeline` attribute (see [Part II](../part_ii/04_basic_nlp_continued.ipynb#Modifying-spaCy-pipelines)), we will see that the first component in the processing pipeline is a *Transformer*."
+    "However, if we look under the hood of the *Language* object under `nlp_trf` using the `pipeline` attribute (see [Part II](../part_ii/04_basic_nlp_continued.ipynb)), we will see that the first component in the processing pipeline is a *Transformer*."
    ]
   },
   {
@@ -1040,7 +1040,7 @@
    "source": [
     "Although the previous cell is relatively long, note that the comments explaining the actions taken took up most of the space!\n",
     "\n",
-    "With the *Class* `Tensor2Attr` defined, we can now add it to the pipeline by referring to the name we registered with spaCy using `@Language.factory()`, that is, `tensor2attr`, as instructed in [Part II](../part_ii/04_basic_nlp_continued.ipynb#Simplifying-output-for-noun-phrases-and-named-entities). "
+    "With the *Class* `Tensor2Attr` defined, we can now add it to the pipeline by referring to the name we registered with spaCy using `@Language.factory()`, that is, `tensor2attr`, as instructed in [Part II](../part_ii/04_basic_nlp_continued.ipynb). "
    ]
   },
   {
@@ -1195,7 +1195,7 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.9.7"
+   "version": "3.8.9"
   }
  },
  "nbformat": 4,

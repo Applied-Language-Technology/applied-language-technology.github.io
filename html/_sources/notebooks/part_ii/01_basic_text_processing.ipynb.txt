@@ -542,7 +542,7 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "If you examine the text closely, you can also see remnants of the digitalisation process: the application of optical character recognition, which was discussed [above](#Why-does-this-matter?), has resulted in a mixture of various types of quotation marks, such as `\"`, `“`, `”`, `’’` and `‘‘` (two single quotation marks), being used in the text.\n",
+    "If you examine the text closely, you can also see remnants of the digitalisation process: the application of optical character recognition, which was discussed above, has resulted in a mixture of various types of quotation marks, such as `\"`, `“`, `”`, `’’` and `‘‘` (two single quotation marks), being used in the text.\n",
     "\n",
     "If we were interested in retrieving quotes from the body text, it would be good to use the quotation marks consistently. Let's choose `\"` (a single double-quote) as our preferred quotation mark.\n",
     "\n",
@@ -685,7 +685,7 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.9.10"
+   "version": "3.8.9"
   }
  },
  "nbformat": 4,

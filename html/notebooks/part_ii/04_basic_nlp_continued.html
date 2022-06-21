@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y6ZQJ0S1M2"></script>
 <script>
@@ -18,8 +19,9 @@
     
     <title>Customising the spaCy pipeline</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet">
-  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -29,16 +31,13 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -48,10 +47,8 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -64,7 +61,21 @@
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -73,9 +84,10 @@
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -253,100 +265,173 @@
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/part_ii/04_basic_nlp_continued.ipynb.txt"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/Applied-Language-Technology/website"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        
-        
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/Applied-Language-Technology/website/binder?urlpath=lab/tree/notebooks/part_ii/04_basic_nlp_continued.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
-    </div>
-</div>
-
         </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
 
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/Applied-Language-Technology/website/binder?urlpath=lab/tree/notebooks/part_ii/04_basic_nlp_continued.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/Applied-Language-Technology/website"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/notebooks/part_ii/04_basic_nlp_continued.ipynb.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#modifying-spacy-pipelines">
    Modifying spaCy pipelines
@@ -386,12 +471,11 @@
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Customising the spaCy pipeline</h1>
@@ -447,11 +531,12 @@
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="customising-the-spacy-pipeline">
-<h1>Customising the spaCy pipeline<a class="headerlink" href="#customising-the-spacy-pipeline" title="Permalink to this headline">¶</a></h1>
+  <section id="customising-the-spacy-pipeline">
+<h1>Customising the spaCy pipeline<a class="headerlink" href="#customising-the-spacy-pipeline" title="Permalink to this headline">#</a></h1>
 <p>This section introduces you to customising the spaCy pipeline, that is, determining just what spaCy does with text and how.</p>
 <p>After reading this section, you should know how to:</p>
 <ul class="simple">
@@ -483,25 +568,25 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;spacy.lang.en.English at 0x16fbf5fa0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;spacy.lang.en.English at 0x2914b8400&gt;
 </pre></div>
 </div>
 </div>
 </div>
-<div class="section" id="modifying-spacy-pipelines">
-<h2>Modifying spaCy pipelines<a class="headerlink" href="#modifying-spacy-pipelines" title="Permalink to this headline">¶</a></h2>
+<section id="modifying-spacy-pipelines">
+<h2>Modifying spaCy pipelines<a class="headerlink" href="#modifying-spacy-pipelines" title="Permalink to this headline">#</a></h2>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<iframe
-    width="600"
-    height="350"
-    src="https://www.youtube.com/embed/F4SJJQF49b0"
-    frameborder="0"
-    allowfullscreen
-
-></iframe>
-</div></div>
+        <iframe
+            width="600"
+            height="350"
+            src="https://www.youtube.com/embed/F4SJJQF49b0"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
 </div>
 <p>Let’s start by examining the spaCy <em>Language</em> object in more detail.</p>
 <p>The <em>Language</em> object is a essentially pipeline that applies some language model to text by performing the tasks that the model has been trained to do.</p>
@@ -514,19 +599,19 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;tok2vec&#39;, &lt;spacy.pipeline.tok2vec.Tok2Vec at 0x170c5cc40&gt;),
- (&#39;tagger&#39;, &lt;spacy.pipeline.tagger.Tagger at 0x170c5cfa0&gt;),
- (&#39;parser&#39;, &lt;spacy.pipeline.dep_parser.DependencyParser at 0x1709e53c0&gt;),
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;tok2vec&#39;, &lt;spacy.pipeline.tok2vec.Tok2Vec at 0x291b3bf40&gt;),
+ (&#39;tagger&#39;, &lt;spacy.pipeline.tagger.Tagger at 0x291cc3d00&gt;),
+ (&#39;parser&#39;, &lt;spacy.pipeline.dep_parser.DependencyParser at 0x291b21c10&gt;),
  (&#39;attribute_ruler&#39;,
-  &lt;spacy.pipeline.attributeruler.AttributeRuler at 0x170cf0340&gt;),
- (&#39;lemmatizer&#39;, &lt;spacy.lang.en.lemmatizer.EnglishLemmatizer at 0x170c80c00&gt;),
- (&#39;ner&#39;, &lt;spacy.pipeline.ner.EntityRecognizer at 0x1709e5200&gt;)]
+  &lt;spacy.pipeline.attributeruler.AttributeRuler at 0x2920a08c0&gt;),
+ (&#39;lemmatizer&#39;, &lt;spacy.lang.en.lemmatizer.EnglishLemmatizer at 0x2920e9600&gt;),
+ (&#39;ner&#39;, &lt;spacy.pipeline.ner.EntityRecognizer at 0x291b21b30&gt;)]
 </pre></div>
 </div>
 </div>
 </div>
 <p>This returns a spaCy <em>SimpleFrozenList</em> object, which consists of Python <em>tuples</em> with two items:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>component names, e.g. <code class="docutils literal notranslate"><span class="pre">tagger</span></code>,</p></li>
 <li><p>the actual components that perform different tasks, e.g. <code class="docutils literal notranslate"><span class="pre">spacy.pipeline.tok2vec.Tok2Vec</span></code>.</p></li>
 </ol>
@@ -558,11 +643,11 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;tok2vec&#39;, &lt;spacy.pipeline.tok2vec.Tok2Vec at 0x171be5640&gt;),
- (&#39;tagger&#39;, &lt;spacy.pipeline.tagger.Tagger at 0x171befa60&gt;),
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;tok2vec&#39;, &lt;spacy.pipeline.tok2vec.Tok2Vec at 0x293982ca0&gt;),
+ (&#39;tagger&#39;, &lt;spacy.pipeline.tagger.Tagger at 0x293982a00&gt;),
  (&#39;attribute_ruler&#39;,
-  &lt;spacy.pipeline.attributeruler.AttributeRuler at 0x171dc7e40&gt;),
- (&#39;lemmatizer&#39;, &lt;spacy.lang.en.lemmatizer.EnglishLemmatizer at 0x171dc4380&gt;)]
+  &lt;spacy.pipeline.attributeruler.AttributeRuler at 0x293b96ec0&gt;),
+ (&#39;lemmatizer&#39;, &lt;spacy.lang.en.lemmatizer.EnglishLemmatizer at 0x293b8b980&gt;)]
 </pre></div>
 </div>
 </div>
@@ -635,21 +720,21 @@
 <p>Note that the quotation marks are preceded by the character <code class="docutils literal notranslate"><span class="pre">f</span></code>. By declaring that this string can be formatted, we can insert variables into the string!</p>
 <p>The variable names inserted into the string are surrounded by curly braces <code class="docutils literal notranslate"><span class="pre">{}</span></code>. If an error message is raised, these parts of the string will be populated using the values currently stored under the variables <code class="docutils literal notranslate"><span class="pre">component_name</span></code> and <code class="docutils literal notranslate"><span class="pre">problem_list</span></code>.</p>
 <p>If no problems are encountered, the loop will pass silently.</p>
-</div>
-<div class="section" id="processing-texts-efficiently">
-<h2>Processing texts efficiently<a class="headerlink" href="#processing-texts-efficiently" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="processing-texts-efficiently">
+<h2>Processing texts efficiently<a class="headerlink" href="#processing-texts-efficiently" title="Permalink to this headline">#</a></h2>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<iframe
-    width="600"
-    height="350"
-    src="https://www.youtube.com/embed/00yChd449uI"
-    frameborder="0"
-    allowfullscreen
-
-></iframe>
-</div></div>
+        <iframe
+            width="600"
+            height="350"
+            src="https://www.youtube.com/embed/00yChd449uI"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
 </div>
 <p>When working with high volumes of data, processing the data as efficiently as possible is highly desirable.</p>
 <p>To illustrate the best practices of processing texts efficiently using spaCy, let’s define a toy example that consists of a Python list with three example sentences from English Wikipedia.</p>
@@ -692,7 +777,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;generator object Language.pipe at 0x171eb9200&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;generator object Language.pipe at 0x293c9ba50&gt;
 </pre></div>
 </div>
 </div>
@@ -719,21 +804,21 @@
 </div>
 </div>
 <p>This gives us a list of spaCy <em>Doc</em> objects for further processing.</p>
-</div>
-<div class="section" id="adding-custom-attributes-to-spacy-objects">
-<h2>Adding custom attributes to spaCy objects<a class="headerlink" href="#adding-custom-attributes-to-spacy-objects" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="adding-custom-attributes-to-spacy-objects">
+<h2>Adding custom attributes to spaCy objects<a class="headerlink" href="#adding-custom-attributes-to-spacy-objects" title="Permalink to this headline">#</a></h2>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<iframe
-    width="600"
-    height="350"
-    src="https://www.youtube.com/embed/oWsuCwCW29g"
-    frameborder="0"
-    allowfullscreen
-
-></iframe>
-</div></div>
+        <iframe
+            width="600"
+            height="350"
+            src="https://www.youtube.com/embed/oWsuCwCW29g"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
 </div>
 <p>The <a class="reference internal" href="03_basic_nlp.html"><span class="doc std std-doc">previous section</span></a> showed how linguistic annotations produced by spaCy can be accessed through their attributes.</p>
 <p>In addition, spaCy allows setting custom attributes to <em>Doc</em>, <em>Span</em> and <em>Token</em> objects. These attributes can be used, for example, to store additional information about the texts that are being processed.</p>
@@ -866,21 +951,21 @@ Södermalm is interesting! 58 Stockholm
 </div>
 </div>
 <p>This returns a list with only two <em>Doc</em> objects that fill the designated criteria, that is, their <code class="docutils literal notranslate"><span class="pre">age</span></code> attribute has a value below 40.</p>
-</div>
-<div class="section" id="writing-processed-texts-to-disk">
-<h2>Writing processed texts to disk<a class="headerlink" href="#writing-processed-texts-to-disk" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="writing-processed-texts-to-disk">
+<h2>Writing processed texts to disk<a class="headerlink" href="#writing-processed-texts-to-disk" title="Permalink to this headline">#</a></h2>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<iframe
-    width="600"
-    height="350"
-    src="https://www.youtube.com/embed/zKvW8o-1wmk"
-    frameborder="0"
-    allowfullscreen
-
-></iframe>
-</div></div>
+        <iframe
+            width="600"
+            height="350"
+            src="https://www.youtube.com/embed/zKvW8o-1wmk"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
 </div>
 <p>When working with high volumes of texts, you should first ensure that the pipeline produces the desired results by using a smaller number of texts.</p>
 <p>Once everything works as desired, you can proceed to process all of the text and save the result, because processing large volumes of text takes time and resources.</p>
@@ -962,7 +1047,7 @@ Södermalm is interesting! 58 Stockholm
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;spacy.tokens._serialize.DocBin at 0x171d516d0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;spacy.tokens._serialize.DocBin at 0x293de7550&gt;
 </pre></div>
 </div>
 </div>
@@ -993,11 +1078,11 @@ Södermalm is interesting! 58 Stockholm
 </div>
 <p>This returns a list that contains the four <em>Doc</em> objects added to the <em>DocBin</em> above.</p>
 <p>To summarise, you should ideally process the texts once, write them to disk and load them for further analysis.</p>
-</div>
-<div class="section" id="simplifying-output-for-noun-phrases-and-named-entities">
-<h2>Simplifying output for noun phrases and named entities<a class="headerlink" href="#simplifying-output-for-noun-phrases-and-named-entities" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="merging-noun-phrases">
-<h3>Merging noun phrases<a class="headerlink" href="#merging-noun-phrases" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="simplifying-output-for-noun-phrases-and-named-entities">
+<h2>Simplifying output for noun phrases and named entities<a class="headerlink" href="#simplifying-output-for-noun-phrases-and-named-entities" title="Permalink to this headline">#</a></h2>
+<section id="merging-noun-phrases">
+<h3>Merging noun phrases<a class="headerlink" href="#merging-noun-phrases" title="Permalink to this headline">#</a></h3>
 <p>The <a class="reference internal" href="03_basic_nlp.html"><span class="doc std std-doc">previous section</span></a> described how tasks such as part-of-speech tagging and dependency parsing involve making predictions about individual <em>Tokens</em> and their properties, such as their part-of-speech tags or syntactic dependencies.</p>
 <p>Occasionally, however, it may be more beneficial to operate with larger linguistic units instead of individual <em>Tokens</em>, such as noun phrases that consist of multiple <em>Tokens</em>.</p>
 <p>spaCy provides access to noun phrases via the attribute <code class="docutils literal notranslate"><span class="pre">noun_chunks</span></code> of a <em>Doc</em> object.</p>
@@ -1051,13 +1136,13 @@ Södermalm
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;tok2vec&#39;, &lt;spacy.pipeline.tok2vec.Tok2Vec at 0x172cd73a0&gt;),
- (&#39;tagger&#39;, &lt;spacy.pipeline.tagger.Tagger at 0x172cd7d00&gt;),
- (&#39;parser&#39;, &lt;spacy.pipeline.dep_parser.DependencyParser at 0x172ccd350&gt;),
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;tok2vec&#39;, &lt;spacy.pipeline.tok2vec.Tok2Vec at 0x10a382880&gt;),
+ (&#39;tagger&#39;, &lt;spacy.pipeline.tagger.Tagger at 0x293978640&gt;),
+ (&#39;parser&#39;, &lt;spacy.pipeline.dep_parser.DependencyParser at 0x29398d350&gt;),
  (&#39;attribute_ruler&#39;,
-  &lt;spacy.pipeline.attributeruler.AttributeRuler at 0x172ec4240&gt;),
- (&#39;lemmatizer&#39;, &lt;spacy.lang.en.lemmatizer.EnglishLemmatizer at 0x172ecca40&gt;),
- (&#39;ner&#39;, &lt;spacy.pipeline.ner.EntityRecognizer at 0x172ccd3c0&gt;),
+  &lt;spacy.pipeline.attributeruler.AttributeRuler at 0x294c7e700&gt;),
+ (&#39;lemmatizer&#39;, &lt;spacy.lang.en.lemmatizer.EnglishLemmatizer at 0x294c86e80&gt;),
+ (&#39;ner&#39;, &lt;spacy.pipeline.ner.EntityRecognizer at 0x293e4c7b0&gt;),
  (&#39;merge_noun_chunks&#39;,
   &lt;function spacy.pipeline.functions.merge_noun_chunks(doc: spacy.tokens.doc.Doc) -&gt; spacy.tokens.doc.Doc&gt;)]
 </pre></div>
@@ -1127,7 +1212,7 @@ nuclear weapons production NOUN
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><span class="tex2jax_ignore"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:lang="en" id="3cae1622649d440cbb4680b0ead83a40-0" class="displacy" width="1975" height="487.0" direction="ltr" style="max-width: none; height: 487.0px; color: #000000; background: #ffffff; font-family: Arial; direction: ltr">
+<div class="output text_html"><span class="tex2jax_ignore"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:lang="en" id="067b18bcc38941d8b998029ca778b0fd-0" class="displacy" width="1975" height="487.0" direction="ltr" style="max-width: none; height: 487.0px; color: #000000; background: #ffffff; font-family: Arial; direction: ltr">
 <text class="displacy-token" fill="currentColor" text-anchor="middle" y="397.0">
     <tspan class="displacy-word" fill="currentColor" x="50">On</tspan>
     <tspan class="displacy-tag" dy="2em" fill="currentColor" x="50">ADP</tspan>
@@ -1184,81 +1269,81 @@ nuclear weapons production NOUN
 </text>
 
 <g class="displacy-arrow">
-    <path class="displacy-arc" id="arrow-3cae1622649d440cbb4680b0ead83a40-0-0" stroke-width="2px" d="M70,352.0 C70,2.0 925.0,2.0 925.0,352.0" fill="none" stroke="currentColor"/>
+    <path class="displacy-arc" id="arrow-067b18bcc38941d8b998029ca778b0fd-0-0" stroke-width="2px" d="M70,352.0 C70,2.0 925.0,2.0 925.0,352.0" fill="none" stroke="currentColor"/>
     <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
-        <textPath xlink:href="#arrow-3cae1622649d440cbb4680b0ead83a40-0-0" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">prep</textPath>
+        <textPath xlink:href="#arrow-067b18bcc38941d8b998029ca778b0fd-0-0" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">prep</textPath>
     </text>
     <path class="displacy-arrowhead" d="M70,354.0 L62,342.0 78,342.0" fill="currentColor"/>
 </g>
 
 <g class="displacy-arrow">
-    <path class="displacy-arc" id="arrow-3cae1622649d440cbb4680b0ead83a40-0-1" stroke-width="2px" d="M70,352.0 C70,264.5 210.0,264.5 210.0,352.0" fill="none" stroke="currentColor"/>
+    <path class="displacy-arc" id="arrow-067b18bcc38941d8b998029ca778b0fd-0-1" stroke-width="2px" d="M70,352.0 C70,264.5 210.0,264.5 210.0,352.0" fill="none" stroke="currentColor"/>
     <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
-        <textPath xlink:href="#arrow-3cae1622649d440cbb4680b0ead83a40-0-1" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">pobj</textPath>
+        <textPath xlink:href="#arrow-067b18bcc38941d8b998029ca778b0fd-0-1" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">pobj</textPath>
     </text>
     <path class="displacy-arrowhead" d="M210.0,354.0 L218.0,342.0 202.0,342.0" fill="currentColor"/>
 </g>
 
 <g class="displacy-arrow">
-    <path class="displacy-arc" id="arrow-3cae1622649d440cbb4680b0ead83a40-0-2" stroke-width="2px" d="M245,352.0 C245,264.5 385.0,264.5 385.0,352.0" fill="none" stroke="currentColor"/>
+    <path class="displacy-arc" id="arrow-067b18bcc38941d8b998029ca778b0fd-0-2" stroke-width="2px" d="M245,352.0 C245,264.5 385.0,264.5 385.0,352.0" fill="none" stroke="currentColor"/>
     <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
-        <textPath xlink:href="#arrow-3cae1622649d440cbb4680b0ead83a40-0-2" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nummod</textPath>
+        <textPath xlink:href="#arrow-067b18bcc38941d8b998029ca778b0fd-0-2" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nummod</textPath>
     </text>
     <path class="displacy-arrowhead" d="M385.0,354.0 L393.0,342.0 377.0,342.0" fill="currentColor"/>
 </g>
 
 <g class="displacy-arrow">
-    <path class="displacy-arc" id="arrow-3cae1622649d440cbb4680b0ead83a40-0-3" stroke-width="2px" d="M245,352.0 C245,177.0 565.0,177.0 565.0,352.0" fill="none" stroke="currentColor"/>
+    <path class="displacy-arc" id="arrow-067b18bcc38941d8b998029ca778b0fd-0-3" stroke-width="2px" d="M245,352.0 C245,177.0 565.0,177.0 565.0,352.0" fill="none" stroke="currentColor"/>
     <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
-        <textPath xlink:href="#arrow-3cae1622649d440cbb4680b0ead83a40-0-3" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nummod</textPath>
+        <textPath xlink:href="#arrow-067b18bcc38941d8b998029ca778b0fd-0-3" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nummod</textPath>
     </text>
     <path class="displacy-arrowhead" d="M565.0,354.0 L573.0,342.0 557.0,342.0" fill="currentColor"/>
 </g>
 
 <g class="displacy-arrow">
-    <path class="displacy-arc" id="arrow-3cae1622649d440cbb4680b0ead83a40-0-4" stroke-width="2px" d="M770,352.0 C770,264.5 910.0,264.5 910.0,352.0" fill="none" stroke="currentColor"/>
+    <path class="displacy-arc" id="arrow-067b18bcc38941d8b998029ca778b0fd-0-4" stroke-width="2px" d="M770,352.0 C770,264.5 910.0,264.5 910.0,352.0" fill="none" stroke="currentColor"/>
     <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
-        <textPath xlink:href="#arrow-3cae1622649d440cbb4680b0ead83a40-0-4" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nsubj</textPath>
+        <textPath xlink:href="#arrow-067b18bcc38941d8b998029ca778b0fd-0-4" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nsubj</textPath>
     </text>
     <path class="displacy-arrowhead" d="M770,354.0 L762,342.0 778,342.0" fill="currentColor"/>
 </g>
 
 <g class="displacy-arrow">
-    <path class="displacy-arc" id="arrow-3cae1622649d440cbb4680b0ead83a40-0-5" stroke-width="2px" d="M945,352.0 C945,264.5 1085.0,264.5 1085.0,352.0" fill="none" stroke="currentColor"/>
+    <path class="displacy-arc" id="arrow-067b18bcc38941d8b998029ca778b0fd-0-5" stroke-width="2px" d="M945,352.0 C945,264.5 1085.0,264.5 1085.0,352.0" fill="none" stroke="currentColor"/>
     <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
-        <textPath xlink:href="#arrow-3cae1622649d440cbb4680b0ead83a40-0-5" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">advmod</textPath>
+        <textPath xlink:href="#arrow-067b18bcc38941d8b998029ca778b0fd-0-5" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">advmod</textPath>
     </text>
     <path class="displacy-arrowhead" d="M1085.0,354.0 L1093.0,342.0 1077.0,342.0" fill="currentColor"/>
 </g>
 
 <g class="displacy-arrow">
-    <path class="displacy-arc" id="arrow-3cae1622649d440cbb4680b0ead83a40-0-6" stroke-width="2px" d="M945,352.0 C945,177.0 1265.0,177.0 1265.0,352.0" fill="none" stroke="currentColor"/>
+    <path class="displacy-arc" id="arrow-067b18bcc38941d8b998029ca778b0fd-0-6" stroke-width="2px" d="M945,352.0 C945,177.0 1265.0,177.0 1265.0,352.0" fill="none" stroke="currentColor"/>
     <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
-        <textPath xlink:href="#arrow-3cae1622649d440cbb4680b0ead83a40-0-6" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">prep</textPath>
+        <textPath xlink:href="#arrow-067b18bcc38941d8b998029ca778b0fd-0-6" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">prep</textPath>
     </text>
     <path class="displacy-arrowhead" d="M1265.0,354.0 L1273.0,342.0 1257.0,342.0" fill="currentColor"/>
 </g>
 
 <g class="displacy-arrow">
-    <path class="displacy-arc" id="arrow-3cae1622649d440cbb4680b0ead83a40-0-7" stroke-width="2px" d="M1295,352.0 C1295,264.5 1435.0,264.5 1435.0,352.0" fill="none" stroke="currentColor"/>
+    <path class="displacy-arc" id="arrow-067b18bcc38941d8b998029ca778b0fd-0-7" stroke-width="2px" d="M1295,352.0 C1295,264.5 1435.0,264.5 1435.0,352.0" fill="none" stroke="currentColor"/>
     <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
-        <textPath xlink:href="#arrow-3cae1622649d440cbb4680b0ead83a40-0-7" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">pobj</textPath>
+        <textPath xlink:href="#arrow-067b18bcc38941d8b998029ca778b0fd-0-7" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">pobj</textPath>
     </text>
     <path class="displacy-arrowhead" d="M1435.0,354.0 L1443.0,342.0 1427.0,342.0" fill="currentColor"/>
 </g>
 
 <g class="displacy-arrow">
-    <path class="displacy-arc" id="arrow-3cae1622649d440cbb4680b0ead83a40-0-8" stroke-width="2px" d="M945,352.0 C945,89.5 1620.0,89.5 1620.0,352.0" fill="none" stroke="currentColor"/>
+    <path class="displacy-arc" id="arrow-067b18bcc38941d8b998029ca778b0fd-0-8" stroke-width="2px" d="M945,352.0 C945,89.5 1620.0,89.5 1620.0,352.0" fill="none" stroke="currentColor"/>
     <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
-        <textPath xlink:href="#arrow-3cae1622649d440cbb4680b0ead83a40-0-8" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">advcl</textPath>
+        <textPath xlink:href="#arrow-067b18bcc38941d8b998029ca778b0fd-0-8" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">advcl</textPath>
     </text>
     <path class="displacy-arrowhead" d="M1620.0,354.0 L1628.0,342.0 1612.0,342.0" fill="currentColor"/>
 </g>
 
 <g class="displacy-arrow">
-    <path class="displacy-arc" id="arrow-3cae1622649d440cbb4680b0ead83a40-0-9" stroke-width="2px" d="M1645,352.0 C1645,264.5 1785.0,264.5 1785.0,352.0" fill="none" stroke="currentColor"/>
+    <path class="displacy-arc" id="arrow-067b18bcc38941d8b998029ca778b0fd-0-9" stroke-width="2px" d="M1645,352.0 C1645,264.5 1785.0,264.5 1785.0,352.0" fill="none" stroke="currentColor"/>
     <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
-        <textPath xlink:href="#arrow-3cae1622649d440cbb4680b0ead83a40-0-9" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">dobj</textPath>
+        <textPath xlink:href="#arrow-067b18bcc38941d8b998029ca778b0fd-0-9" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">dobj</textPath>
     </text>
     <path class="displacy-arrowhead" d="M1785.0,354.0 L1793.0,342.0 1777.0,342.0" fill="currentColor"/>
 </g>
@@ -1286,9 +1371,9 @@ nuclear weapons production &lt;class &#39;spacy.tokens.span.Span&#39;&gt; 13 14
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="merging-named-entities">
-<h3>Merging named entities<a class="headerlink" href="#merging-named-entities" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="merging-named-entities">
+<h3>Merging named entities<a class="headerlink" href="#merging-named-entities" title="Permalink to this headline">#</a></h3>
 <p>Named entities can be merged in the same way as noun phrases by providing <code class="docutils literal notranslate"><span class="pre">merge_entities</span></code> to the <code class="docutils literal notranslate"><span class="pre">add_pipe()</span></code> method of the <em>Language</em> object.</p>
 <p>Let’s start by removing the <code class="docutils literal notranslate"><span class="pre">merge_noun_chunks</span></code> function from the pipeline.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">remove_pipe()</span></code> method can be used to remove a pipeline component.</p>
@@ -1312,13 +1397,13 @@ nuclear weapons production &lt;class &#39;spacy.tokens.span.Span&#39;&gt; 13 14
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;tok2vec&#39;, &lt;spacy.pipeline.tok2vec.Tok2Vec at 0x172cd73a0&gt;),
- (&#39;tagger&#39;, &lt;spacy.pipeline.tagger.Tagger at 0x172cd7d00&gt;),
- (&#39;parser&#39;, &lt;spacy.pipeline.dep_parser.DependencyParser at 0x172ccd350&gt;),
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;tok2vec&#39;, &lt;spacy.pipeline.tok2vec.Tok2Vec at 0x10a382880&gt;),
+ (&#39;tagger&#39;, &lt;spacy.pipeline.tagger.Tagger at 0x293978640&gt;),
+ (&#39;parser&#39;, &lt;spacy.pipeline.dep_parser.DependencyParser at 0x29398d350&gt;),
  (&#39;attribute_ruler&#39;,
-  &lt;spacy.pipeline.attributeruler.AttributeRuler at 0x172ec4240&gt;),
- (&#39;lemmatizer&#39;, &lt;spacy.lang.en.lemmatizer.EnglishLemmatizer at 0x172ecca40&gt;),
- (&#39;ner&#39;, &lt;spacy.pipeline.ner.EntityRecognizer at 0x172ccd3c0&gt;)]
+  &lt;spacy.pipeline.attributeruler.AttributeRuler at 0x294c7e700&gt;),
+ (&#39;lemmatizer&#39;, &lt;spacy.lang.en.lemmatizer.EnglishLemmatizer at 0x294c86e80&gt;),
+ (&#39;ner&#39;, &lt;spacy.pipeline.ner.EntityRecognizer at 0x293e4c7b0&gt;)]
 </pre></div>
 </div>
 </div>
@@ -1380,16 +1465,18 @@ Tennessee PROPN
 <p>Named entities that consist of multiple <em>Tokens</em>, as exemplified by place names such as “Los Alamos” and “New Mexico”, have been merged into single <em>Tokens</em>.</p>
 <p>This section should have given you an idea of how to tailor spaCy to fit your needs, how to process texts efficiently and how to save the result to disk.</p>
 <p>The <a class="reference internal" href="05_evaluating_nlp.html"><span class="doc std std-doc">following section</span></a> introduces you to evaluating the performance of language models.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="03_basic_nlp.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -1405,21 +1492,25 @@ Tennessee PROPN
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+</p>
+        </footer>
+    </div>
     
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
    <div class="footer"><a href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0;padding:10px" src="https://mirrors.creativecommons.org/presskit/buttons/88x31/svg/by-nc.svg"/></a> © 2020– <a href="http://www.helsinki.fi/~thiippal">Tuomo Hiippala</a>
        in collaboration with <a href="https://mooc.fi/en" target="_blank">mooc.fi<img src="https://applied-language-technology.mooc.fi/html/_static/moocfi.svg" style="border-width:0;padding:2px" width=50></a></div>
