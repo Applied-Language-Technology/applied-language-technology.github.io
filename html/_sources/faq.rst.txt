@@ -1,0 +1,33 @@
+**************************
+Frequently Asked Questions
+**************************
+
+**Question:** When I attempt to test my exercises using :ref:`TMC <tmc_usage>` by entering the command :code:`tmc test`, I receive an error that says "Error in plugin". What should I do?
+
+**Answer:** This means that your code causes the Jupyter Notebook that contains the exercise to crash. Before running the command :code:`tmc test`, make sure you can run all the cells in the notebook without crashing the notebook. Note that this does not cover errors raised by your code.
+
+-----
+
+**Question:** When I submit my exercises to the :ref:`TMC <tmc_usage>` server, the submission takes a long time and finishes with an error. What should I do?
+
+**Answer:** This probably means that your code has an infinite :code:`for` loop or another problem, which causes the TMC server to terminate the submission. All exercises should run within a reasonable amount of time.
+
+-----
+
+**Question:** When I submit my exercises to the :ref:`TMC <tmc_usage>` server, the server raises the error :code:`413 Payload Too Large`.
+
+**Answer:** The size of submissions to the TMC server is limited to 30 megabytes. Make sure your Jupyter Notebook does not contain excessive output e.g. for debugging purposes, and that you have not placed big files (e.g. language models) into the exercise directory.
+
+-----
+
+**Question:** I've finished the exercises and the final examination. How do I get a completion on `mooc.fi <https://mooc.fi>`_?
+
+**Answer:** See the instructions on requesting a completion for your coursework  :ref:`here <completion>`.
+
+-----
+
+**Question:** I followed the instructions, created a list and stored it under a given variable, yet TMC gives me strange error messages about undefined variables.
+
+**Answer:** Did you use a list comprehension to create the list? If so, try a for loop instead. Unfortunately the TMC tests have problems with list comprehensions, and this issue has not been solved yet. 
+
+

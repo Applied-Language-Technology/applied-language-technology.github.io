@@ -1,0 +1,1214 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Evaluating language models &#8212; Applied Language Technology  documentation</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Managing textual data using pandas" href="managing_data.html" />
+    <link rel="prev" title="Basic natural language processing using spaCy" href="basic_nlp.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Applied Language Technology  documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../about.html">
+   About this Website
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../getting_started.html">
+   Getting Started
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../notebook_login.html">
+     1. Log in to CSC Notebooks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../launch_server.html">
+     2. Launch your personal server
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../github_pull.html">
+     3. Retrieve learning materials and exercises from GitHub
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../jupyter.html">
+     4. Interact with the learning materials on Jupyter Notebooks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../github_push.html">
+     5. Return completed exercises to GitHub for grading
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python_intro.html">
+   Part I: A Minimal Introduction to Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_i/working_with_jupyter_notebooks.html">
+     The elements of a Jupyter Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_i/getting_started_with_python.html">
+     Getting started with Python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../working_with_text.html">
+   Part II: Working with Text in Python
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="basic_text_processing.html">
+     Manipulating text using Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="basic_text_processing_continued.html">
+     Manipulating text at scale
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="basic_nlp.html">
+     Basic natural language processing using spaCy
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Evaluating language models
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="managing_data.html">
+     Managing textual data using
+     <em>
+      pandas
+     </em>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../nlp_for_linguists.html">
+   Part III: Natural Language Processing for Linguists
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="simple">
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/part_ii/evaluating_nlp.ipynb.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#What-is-a-gold-standard?">
+   What is a gold standard?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Measuring-reliability-manually">
+   Measuring reliability manually
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Step-1:-Annotate-data">
+     Step 1: Annotate data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Step-2:-Calculate-percentage-agreement">
+     Step 2: Calculate percentage agreement
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Step-3:-Calculate-probabilities-for-each-category">
+     Step 3: Calculate probabilities for each category
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Step-4:-Estimate-chance-agreement">
+     Step 4: Estimate chance agreement
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Cohen’s-\kappa-as-a-measure-of-agreement">
+   Cohen’s
+   <span class="math notranslate nohighlight">
+    \(\kappa\)
+   </span>
+   as a measure of agreement
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Evaluating-the-performance-of-language-models">
+   Evaluating the performance of language models
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Evaluating language models</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#What-is-a-gold-standard?">
+   What is a gold standard?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Measuring-reliability-manually">
+   Measuring reliability manually
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Step-1:-Annotate-data">
+     Step 1: Annotate data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Step-2:-Calculate-percentage-agreement">
+     Step 2: Calculate percentage agreement
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Step-3:-Calculate-probabilities-for-each-category">
+     Step 3: Calculate probabilities for each category
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Step-4:-Estimate-chance-agreement">
+     Step 4: Estimate chance agreement
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Cohen’s-\kappa-as-a-measure-of-agreement">
+   Cohen’s
+   <span class="math notranslate nohighlight">
+    \(\kappa\)
+   </span>
+   as a measure of agreement
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Evaluating-the-performance-of-language-models">
+   Evaluating the performance of language models
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt .copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<div class="section" id="Evaluating-language-models">
+<h1>Evaluating language models<a class="headerlink" href="#Evaluating-language-models" title="Permalink to this headline">¶</a></h1>
+<p>This section introduces you to some basic techniques for evaluating the results of natural language processing.</p>
+<p>After reading this section, you should:</p>
+<ul class="simple">
+<li><p>understand what is meant by a gold standard</p></li>
+<li><p>know how to evaluate agreement between human annotators</p></li>
+<li><p>understand simple metrics for evaluating the performance of natural language processing</p></li>
+</ul>
+<div class="section" id="What-is-a-gold-standard?">
+<h2>What is a gold standard?<a class="headerlink" href="#What-is-a-gold-standard?" title="Permalink to this headline">¶</a></h2>
+<p>A gold standard – also called a ground truth – refers to human-verified data that can used as a benchmark for evaluating the performance of algorithms.</p>
+<p>In natural language processing, gold standards are used to measure how well humans perform on some task.</p>
+<p>The goal of natural language processing is to allow computers to achieve or surpass human-level performance in some pre-defined task.</p>
+<p>Measuring whether they can do so requires a benchmark, which is provided by the gold standard.</p>
+<p>In reality, however, gold standards consist of <em>abstractions</em>.</p>
+<p>Consider, for instance, placing words into word classes: word classes are not given to us by nature, but represent an abstraction that imposes structure on natural language.</p>
+<p>Language, however, is naturally ambiguous and subjective, and the abstractions used can be underdeveloped – we cannot be sure if all users would describe or categorise phenomenona the same way.</p>
+<p>This is why we need also to measure the reliability of any gold standard.</p>
+</div>
+<div class="section" id="Measuring-reliability-manually">
+<h2>Measuring reliability manually<a class="headerlink" href="#Measuring-reliability-manually" title="Permalink to this headline">¶</a></h2>
+<p>This section introduces how reliability, often understood as agreement between multiple annotators, can be measured manually.</p>
+<div class="section" id="Step-1:-Annotate-data">
+<h3>Step 1: Annotate data<a class="headerlink" href="#Step-1:-Annotate-data" title="Permalink to this headline">¶</a></h3>
+<p>Sentiment analysis is a task that involves determining the sentiment of a text (for an useful overview that incorporates insights from both linguistics and natural language processing, see <a class="reference external" href="https://doi.org/10.1146/annurev-linguistics-011415-040518">Taboada</a> (2016).</p>
+<p>Training a sentiment analysis model requires collecting training data, that is, examples of texts associated with different sentiments.</p>
+<p>Classify the following tweets into three categories – <em>positive</em>, <em>neutral</em> or <em>negative</em> – based on their sentiment.</p>
+<p>Write down your decision – one per row – but <strong>do not discuss them or show them to the person next to you.</strong></p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>1. Updated: HSL GTFS (Helsinki, Finland) https://t.co/fWEpzmNQLz
+2. current weather in Helsinki: broken clouds, -8°C 100% humidity, wind 4kmh, pressure 1061mb
+3. &quot;&quot;suddenly became dark&quot;&quot;? The man is confused by daylight and we let him run national infrastructure?
+4. Baana bicycle counter. Today: 3 Same time last week: 1058 Trend: ↓99% This year: 819 518 Last year: 802 079 #Helsinki #pyöräily #cycling
+5. What a great start for 2018! My first title at the 48th Brunswick Ballmaster Open (first…
+6. A perfect Sunday walk in the woods just a few steps from home. This is what my beloved hometown,…
+7. Went to Drug Restaurant concert today👍 It was so amazing and I think I got damn good photos with…
+8. Choo Choo 🚂 train cake for little boys birthday party 🎉 - Junakakku 🚂 pikkupojan…
+9. Happy women&#39;s day ❤️💋 kisses to all you beautiful ladies out there. 😚 #awesometobeawoman
+10. Good morning #Helsinki! Sun will rise in 30 minutes (local time 07:32) #Sunrise #Photo #Photography [03.10.2016]
+</pre></div>
+</div>
+</div>
+<div class="section" id="Step-2:-Calculate-percentage-agreement">
+<h3>Step 2: Calculate percentage agreement<a class="headerlink" href="#Step-2:-Calculate-percentage-agreement" title="Permalink to this headline">¶</a></h3>
+<p>When creating datasets for training models, we typically want the training data to be reliable, that is, so that we agree on whatever we are describing – in this case, the sentiment of the tweets above.</p>
+<p>One way to measure this is simple <em>percentage agreement</em>, that is, how many times out of 10 you and the person next to you agreed on the sentiment of a tweet.</p>
+<p>Now compare your results calculate percentage agreement by dividing the number of times you agreed by the number of items (10).</p>
+<p>You can calculate percentage agreement by executing the cell below: just assign the number items you agree on to the variable <code class="docutils literal notranslate"><span class="pre">agreement</span></code>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Replace this number here with the number of items you agreed on</span>
+<span class="n">agreement</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># Divide the count by the number of tweets</span>
+<span class="n">agreement</span> <span class="o">=</span> <span class="n">agreement</span> <span class="o">/</span> <span class="mi">10</span>
+
+<span class="c1"># Print out the variable</span>
+<span class="n">agreement</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Step-3:-Calculate-probabilities-for-each-category">
+<h3>Step 3: Calculate probabilities for each category<a class="headerlink" href="#Step-3:-Calculate-probabilities-for-each-category" title="Permalink to this headline">¶</a></h3>
+<p>Percentage agreement is actually a very poor measure of agreement, as either of you may have made lucky guesses – or perhaps you considered the task boring and classified every tweet into a random category.</p>
+<p>If you did, we have no way of knowing this, as percentage agreement cannot tell us if the result occurred by chance!</p>
+<p>Luckily, we can estimate the possibility of <em>chance agreement</em> easily.</p>
+<p>The first step is to count <em>how many times</em><strong>you</strong><em>used each available category</em> (positive, neutral or negative).</p>
+<p>Assign these counts in the variables below.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Count how many items *you* placed in each category</span>
+<span class="n">positive</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">neutral</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">negative</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+<p>We can convert these counts into <em>probabilities</em> by dividing them with the total number of tweets classified.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">positive</span> <span class="o">=</span> <span class="n">positive</span> <span class="o">/</span> <span class="mi">10</span>
+<span class="n">neutral</span> <span class="o">=</span> <span class="n">neutral</span> <span class="o">/</span> <span class="mi">10</span>
+<span class="n">negative</span> <span class="o">=</span> <span class="n">negative</span> <span class="o">/</span> <span class="mi">10</span>
+
+<span class="c1"># Call each variable to examine the output</span>
+<span class="n">positive</span><span class="p">,</span> <span class="n">neutral</span><span class="p">,</span> <span class="n">negative</span>
+</pre></div>
+</div>
+</div>
+<p>These probabilities represent the chance of <em>you</em> choosing that particular category.</p>
+<p>Now ask the person sitting next to you for their corresponding probabilities and tell them yours as well.</p>
+<p>Add their probabilities to the variables below.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nb_positive</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">nb_neutral</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">nb_negative</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+<p>Now that we know the probabilities for each class for both annotators, we can calculate the probability that both annotators choose the same category by chance.</p>
+<p>This is easy: for each category, simply multiply your probability with the corresponding probability from the person next to you.</p>
+<p>If either annotator did not assign a single tweet into a category, e.g. negative, and the other annotator did, then this effectively rules out the possibility of agreeing by chance (multiplication by zero results in zero).</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">both_positive</span> <span class="o">=</span> <span class="n">positive</span> <span class="o">*</span> <span class="n">nb_positive</span>
+<span class="n">both_neutral</span> <span class="o">=</span> <span class="n">neutral</span> <span class="o">*</span> <span class="n">nb_neutral</span>
+<span class="n">both_negative</span> <span class="o">=</span> <span class="n">negative</span> <span class="o">*</span> <span class="n">nb_negative</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Step-4:-Estimate-chance-agreement">
+<h3>Step 4: Estimate chance agreement<a class="headerlink" href="#Step-4:-Estimate-chance-agreement" title="Permalink to this headline">¶</a></h3>
+<p>Now we are ready to calculate how likely you are to agree by chance.</p>
+<p>This is known as <em>expected agreement</em>, which is calculated by summing up your combined probabilities for each category.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">expected_agreement</span> <span class="o">=</span> <span class="n">both_positive</span> <span class="o">+</span> <span class="n">both_neutral</span> <span class="o">+</span> <span class="n">both_negative</span>
+
+<span class="n">expected_agreement</span>
+</pre></div>
+</div>
+</div>
+<p>Now that we know both observed percentage agreement (<code class="docutils literal notranslate"><span class="pre">agreement</span></code>) and the agreement expected by chance (<code class="docutils literal notranslate"><span class="pre">expected_agreement</span></code>), we can use this information for a more reliable measure of <em>agreement</em>.</p>
+<p>One such measure is <a class="reference external" href="https://en.wikipedia.org/wiki/Cohen%27s_kappa">Cohen’s kappa</a> (<span class="math notranslate nohighlight">\(\kappa\)</span>), which estimates agreement on the basis of both observed and expected agreement.</p>
+<p>The formula for Cohen’s <span class="math notranslate nohighlight">\(\kappa\)</span> is as follows:</p>
+<p><span class="math notranslate nohighlight">\(\kappa = \frac{P_{observed} - P_{expected}}{1 - P_{expected}}\)</span></p>
+<p>As all this information is stored in our variables <code class="docutils literal notranslate"><span class="pre">agreement</span></code> and <code class="docutils literal notranslate"><span class="pre">expected_agreement</span></code>, we can easily count the <span class="math notranslate nohighlight">\(\kappa\)</span> score using the code below.</p>
+<p>Note that we must wrap the subtractions into parentheses to perform them before division.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">kappa</span> <span class="o">=</span> <span class="p">(</span><span class="n">agreement</span> <span class="o">-</span> <span class="n">expected_agreement</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">expected_agreement</span><span class="p">)</span>
+
+<span class="n">kappa</span>
+</pre></div>
+</div>
+</div>
+<p>This gives us the result for Cohen’s <span class="math notranslate nohighlight">\(\kappa\)</span>.</p>
+<p>Let’s now consider how to interpret its value.</p>
+</div>
+</div>
+<div class="section" id="Cohen’s-\kappa-as-a-measure-of-agreement">
+<h2>Cohen’s <span class="math notranslate nohighlight">\(\kappa\)</span> as a measure of agreement<a class="headerlink" href="#Cohen’s-\kappa-as-a-measure-of-agreement" title="Permalink to this headline">¶</a></h2>
+<p>The theoretical value Cohen’s <span class="math notranslate nohighlight">\(\kappa\)</span> runs from <span class="math notranslate nohighlight">\(-1\)</span> indicating perfect disagreement to <span class="math notranslate nohighlight">\(+1\)</span> for perfect agreement, with <span class="math notranslate nohighlight">\(0\)</span> standing for completely random agreement.</p>
+<p>The <span class="math notranslate nohighlight">\(\kappa\)</span> score is often interpreted as a measure of the strength of agreement.</p>
+<p><a class="reference external" href="https://doi.org/10.2307/2529310">Landis and Koch</a> (1977) famously proposed the following benchmarks, which should nevertheless be taken with a pinch of salt as the divisions are completely arbitrary.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>| Cohen&#39;s K | Strength of agreement|
+|----------------------------------|
+| &lt;0.00     | Poor                 |
+| 0.00–0.20 | Slight               |
+| 0.21–0.40 | Fair                 |
+| 0.41–0.60 | Moderate             |
+| 0.61–0.80 | Substantial          |
+| 0.81–1.00 | Almost perfect       |
+|----------------------------------|
+</pre></div>
+</div>
+<p>Cohen’s <span class="math notranslate nohighlight">\(\kappa\)</span> can be used to measure agreement between <strong>two</strong> annotators and the categories available must be <strong>fixed</strong> in advance.</p>
+<p>For measuring agreement between more than two annotators, one must use a measure such as <cite>Fleiss’ :math:</cite>kappa` &lt;<a class="reference external" href="https://en.wikipedia.org/wiki/Fleiss%27_kappa">https://en.wikipedia.org/wiki/Fleiss%27_kappa</a>&gt;`__.</p>
+<p>Cohen’s <span class="math notranslate nohighlight">\(\kappa\)</span> and many more measures of agreement are implemented in various Python libraries, so one rarely needs to perform the calculations manually.</p>
+<p>The <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.cohen_kappa_score.html#sklearn.metrics.cohen_kappa_score">scikit-learn</a> library (<code class="docutils literal notranslate"><span class="pre">sklearn</span></code>), for instance, includes an implementation of Cohen’s <span class="math notranslate nohighlight">\(\kappa\)</span>.</p>
+<p>Let’s import the <code class="docutils literal notranslate"><span class="pre">cohen_kappa_score()</span></code> function for calculating Cohen’s <span class="math notranslate nohighlight">\(\kappa\)</span> from scikit-learn.</p>
+<p>This function takes two <em>lists</em> as input and calculates the <span class="math notranslate nohighlight">\(\kappa\)</span> score between them.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import the cohen_kappa_score function from the &#39;metrics&#39; module of the scikit-learn library</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">cohen_kappa_score</span>
+</pre></div>
+</div>
+</div>
+<p>We can then define two lists of part-of-speech tags, which make up our toy example for calculating Cohen’s <span class="math notranslate nohighlight">\(\kappa\)</span>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a1</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ADJ&#39;</span><span class="p">,</span> <span class="s1">&#39;AUX&#39;</span><span class="p">,</span> <span class="s1">&#39;NOUN&#39;</span><span class="p">,</span> <span class="s1">&#39;VERB&#39;</span><span class="p">,</span> <span class="s1">&#39;VERB&#39;</span><span class="p">]</span>
+<span class="n">a2</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ADJ&#39;</span><span class="p">,</span> <span class="s1">&#39;VERB&#39;</span><span class="p">,</span> <span class="s1">&#39;NOUN&#39;</span><span class="p">,</span> <span class="s1">&#39;NOUN&#39;</span><span class="p">,</span> <span class="s1">&#39;VERB&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>The next step is to feed the two lists, <code class="docutils literal notranslate"><span class="pre">a1</span></code> and <code class="docutils literal notranslate"><span class="pre">a2</span></code>, to the <code class="docutils literal notranslate"><span class="pre">cohen_kappa_score()</span></code> function.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cohen_kappa_score</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.44444444444444453
+</pre></div></div>
+</div>
+<p>According to the benchmark from Landis and Koch, this score would indicate moderate agreement.</p>
+<p>Generally, Cohen’s <span class="math notranslate nohighlight">\(\kappa\)</span> can be used for measuring agreement on all kinds of tasks that involve placing items into categories.</p>
+<p>It is rarely necessary to annotate the whole dataset when measuring agreement – a random sample is often enough.</p>
+<p>If Cohen’s <span class="math notranslate nohighlight">\(\kappa\)</span> suggests that the human annotators agree on whatever they are categorising, we can assume that the annotations are <em>reliable</em> in the sense that they are not random.</p>
+<p>However, all measures of inter-annotator agreement, Cohen’s <span class="math notranslate nohighlight">\(\kappa\)</span> included, are affected by their underlying assumptions about what agreement is and how it is calculated. In other words, these measures never represent the absolute truth (see e.g. Di Eugenio &amp; Glass <a class="reference external" href="https://dx.doi.org/10.1162/089120104773633402">2004</a>; Artstein &amp; Poesio <a class="reference external" href="https://doi.org/10.1162/coli.07-034-R2">2008</a>).</p>
+</div>
+<div class="section" id="Evaluating-the-performance-of-language-models">
+<h2>Evaluating the performance of language models<a class="headerlink" href="#Evaluating-the-performance-of-language-models" title="Permalink to this headline">¶</a></h2>
+<p>Once we have a sufficiently <em>reliable</em> gold standard, we can use the gold standard to measure the performance of language models.</p>
+<p>Let’s assume that we have a reliable gold standard consisting of 10 tokens annotated for their part-of-speech tags.</p>
+<p>These part-of-speech tags are given in the list <code class="docutils literal notranslate"><span class="pre">gold_standard</span></code>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gold_standard</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;ADJ&#39;</span><span class="p">,</span> <span class="s1">&#39;ADJ&#39;</span><span class="p">,</span> <span class="s1">&#39;AUX&#39;</span><span class="p">,</span> <span class="s1">&#39;VERB&#39;</span><span class="p">,</span> <span class="s1">&#39;AUX&#39;</span><span class="p">,</span> <span class="s1">&#39;NOUN&#39;</span><span class="p">,</span> <span class="s1">&#39;NOUN&#39;</span><span class="p">,</span> <span class="s1">&#39;ADJ&#39;</span><span class="p">,</span> <span class="s1">&#39;DET&#39;</span><span class="p">,</span> <span class="s1">&#39;PRON&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>We then retrieve the predictions for the same tokens from some language model and store them in a list named <code class="docutils literal notranslate"><span class="pre">predictions</span></code>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">predictions</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;NOUN&#39;</span><span class="p">,</span> <span class="s1">&#39;ADJ&#39;</span><span class="p">,</span> <span class="s1">&#39;AUX&#39;</span><span class="p">,</span> <span class="s1">&#39;VERB&#39;</span><span class="p">,</span> <span class="s1">&#39;AUX&#39;</span><span class="p">,</span> <span class="s1">&#39;NOUN&#39;</span><span class="p">,</span> <span class="s1">&#39;VERB&#39;</span><span class="p">,</span> <span class="s1">&#39;ADJ&#39;</span><span class="p">,</span> <span class="s1">&#39;DET&#39;</span><span class="p">,</span> <span class="s1">&#39;PROPN&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>Now that we have a toy data set with two sets of annotations to compare, let’s import the entire <em>metrics</em> module from the <em>scikit-learn</em> library and apply them to our data.</p>
+<p>This module contains implementations for <a class="reference external" href="https://scikit-learn.org/stable/modules/model_evaluation.html">various evaluation metrics</a>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn</span> <span class="kn">import</span> <span class="n">metrics</span>
+</pre></div>
+</div>
+</div>
+<p>First of all, we can calculate <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.accuracy_score.html#sklearn.metrics.accuracy_score">accuracy</a> using the <code class="docutils literal notranslate"><span class="pre">accuracy_score()</span></code> function, which is precisely the same as observed agreement that we calculated manually above.</p>
+<p>This function takes two lists as input.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">metrics</span><span class="o">.</span><span class="n">accuracy_score</span><span class="p">(</span><span class="n">gold_standard</span><span class="p">,</span> <span class="n">predictions</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.7
+</pre></div></div>
+</div>
+<p>Accuracy, however, suffers from the same shortcoming as observed agreement – the output of the language model in <code class="docutils literal notranslate"><span class="pre">predictions</span></code> may be the result of making a series of lucky guesses.</p>
+<p>However, given that we are working with a toy example, we can easily verify that 7 out of 10 part-of-speech tags match. This gives an accuracy of 0.7 or 70%.</p>
+<p>To better evaluate the performance of the language model against our gold standard, the results can be organised into what is called a <em>confusion matrix</em>.</p>
+<p>To do so, we need all part-of-speech tags that occur in <code class="docutils literal notranslate"><span class="pre">gold_standard</span></code> and <code class="docutils literal notranslate"><span class="pre">predictions</span></code>.</p>
+<p>We can easily collect unique part-of-speech tags using the <code class="docutils literal notranslate"><span class="pre">set()</span></code> function.</p>
+<p>The result is a <em>set</em>, a powerful data structure in Python, which consists of a collection of unique items.</p>
+<p>Essentially, we use a set to remove duplicates in the two lists <code class="docutils literal notranslate"><span class="pre">gold_standard</span></code> and <code class="docutils literal notranslate"><span class="pre">predictions</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Collect unique POS tags into a set by combining the two lists</span>
+<span class="n">pos_tags</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">gold_standard</span> <span class="o">+</span> <span class="n">predictions</span><span class="p">)</span>
+
+<span class="c1"># Sort the set alphabetically and cast the result into a list</span>
+<span class="n">pos_tags</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">pos_tags</span><span class="p">))</span>
+
+<span class="c1"># Print the resulting list</span>
+<span class="n">pos_tags</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&#39;ADJ&#39;, &#39;AUX&#39;, &#39;DET&#39;, &#39;NOUN&#39;, &#39;PRON&#39;, &#39;PROPN&#39;, &#39;VERB&#39;]
+</pre></div></div>
+</div>
+<p>We can use these unique categories to compile a table, in which the rows stand for the gold standard and the columns stand for predictions made by the language model. Having collected all unique part-of-speech tags at hand ensures that we can always find a place for each item.</p>
+<p>This kind of table is commonly called a <em>confusion matrix</em>.</p>
+<p>The table is populated by simply walking through each pair of items in the gold standard and model predictions, adding <span class="math notranslate nohighlight">\(+1\)</span> to the cell for this combination.</p>
+<p>For example, the first item in <code class="docutils literal notranslate"><span class="pre">gold_standard</span></code> is ADJ, whereas the first item in <code class="docutils literal notranslate"><span class="pre">predictions</span></code> is NOUN.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print out the first item in each list</span>
+<span class="n">gold_standard</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">predictions</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(&#39;ADJ&#39;, &#39;NOUN&#39;)
+</pre></div></div>
+</div>
+<p>We then find the row for ADJ and the column for NOUN and add one to this cell.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>                            PREDICTIONS
+
+           | ADJ | AUX | DET | NOUN | PRON | PROPN | VERB |
+   |-------|-----|-----|-----|------|------|-------|------|
+   | ADJ   | 2   | 0   | 0   | 1    | 0    | 0     | 0    |
+G  | AUX   | 0   | 2   | 0   | 0    | 0    | 0     | 0    |
+O  | DET   | 0   | 0   | 1   | 0    | 0    | 0     | 0    |
+L  | NOUN  | 0   | 0   | 0   | 1    | 0    | 0     | 1    |
+D  | PRON  | 0   | 0   | 0   | 0    | 0    | 1     | 0    |
+   | PROPN | 0   | 0   | 0   | 0    | 0    | 0     | 0    |
+   | VERB  | 0   | 0   | 0   | 0    | 0    | 0     | 1    |
+   |------------------------------------------------------|
+</pre></div>
+</div>
+<p>As you can see, the correct predictions form a roughly diagonal line across the table.</p>
+<p>We can use the table to derive two additional metrics for each class: <strong>precision</strong> and <strong>recall</strong>.</p>
+<p>Precision is the <strong>proportion of correct predictions per class</strong>. In plain words, precision tells you how many predictions were correct for each class, or part-of-speech tag.</p>
+<p>For example, the sum for column VERB is <span class="math notranslate nohighlight">\(2\)</span>, of which <span class="math notranslate nohighlight">\(1\)</span> prediction is correct (that which is located in the row VERB).</p>
+<p>Hence precision for VERB is <span class="math notranslate nohighlight">\(1 / 2 = 0.5\)</span> – half of the tokens predicted to be verbs were classified correctly. The same holds true for NOUN, as the column sums up two <span class="math notranslate nohighlight">\(2\)</span>, but only <span class="math notranslate nohighlight">\(1\)</span> prediction is in the correct row.</p>
+<p>Recall, in turn, gives the proportion of correct predictions for all examples of that class.</p>
+<p>Put differently, recall tells you <strong>how many actual instances of a given class the model was able to “find”</strong>.</p>
+<p>For example, the sum for row ADJ is <span class="math notranslate nohighlight">\(3\)</span>: there are three adjectives in the gold standard, but only two are located in the corresponding column for ADJ.</p>
+<p>This means that recall for ADJ is <span class="math notranslate nohighlight">\(2 / 3 = 0.66\)</span> – approximately 66% of the adjectives present in the gold standard were classified correctly. For NOUN, recall is <span class="math notranslate nohighlight">\(1 / 2 = 0.5\)</span>.</p>
+<p>The <em>scikit-learn</em> library provides a <code class="docutils literal notranslate"><span class="pre">confusion_matrix()</span></code> function for automatically generating confusion matrices.</p>
+<p>Run the cell below and compare the output to the manually created confusion matrix above.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate a confusion matrix for the two lists and print the result</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">gold_standard</span><span class="p">,</span> <span class="n">predictions</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[[2 0 0 1 0 0 0]
+ [0 2 0 0 0 0 0]
+ [0 0 1 0 0 0 0]
+ [0 0 0 1 0 0 1]
+ [0 0 0 0 0 1 0]
+ [0 0 0 0 0 0 0]
+ [0 0 0 0 0 0 1]]
+</pre></div></div>
+</div>
+<p>To evaluate the ability of the language model to predict the correct part-of-speech tag, we can use <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.precision_score.html#sklearn.metrics.precision_score">precision</a>, which is implemented in the <code class="docutils literal notranslate"><span class="pre">precision_score()</span></code> function in the <em>scikit-learn</em> library.</p>
+<p>Because we have more than two classes for part-of-speech tags instead of just two (binary) classes, we must define how the results for each class are processed.</p>
+<p>This option is set using the <code class="docutils literal notranslate"><span class="pre">average</span></code> argument of the <code class="docutils literal notranslate"><span class="pre">precision_score()</span></code> function.</p>
+<p>If we set <code class="docutils literal notranslate"><span class="pre">average</span></code> to <code class="docutils literal notranslate"><span class="pre">None</span></code>, the function returns precision for each class.</p>
+<p>The results are organised according to a sorted <em>set</em> of labels present in <code class="docutils literal notranslate"><span class="pre">gold_standard</span></code> and <code class="docutils literal notranslate"><span class="pre">predictions</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate precision between the two lists for each class (part-of-speech tag)</span>
+<span class="n">precision</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">precision_score</span><span class="p">(</span><span class="n">gold_standard</span><span class="p">,</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="c1"># Call the variable to examine the result</span>
+<span class="n">precision</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/Users/thiippal/appnlp/lib/python3.8/site-packages/sklearn/metrics/_classification.py:1221: UndefinedMetricWarning: Precision is ill-defined and being set to 0.0 in labels with no predicted samples. Use `zero_division` parameter to control this behavior.
+  _warn_prf(average, modifier, msg_start, len(result))
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+array([1. , 1. , 1. , 0.5, 0. , 0. , 0.5])
+</pre></div></div>
+</div>
+<p>Note that the <em>scikit-learn</em> library will raise a <em>warning</em>, since not all classes in <code class="docutils literal notranslate"><span class="pre">predictions</span></code> are present in <code class="docutils literal notranslate"><span class="pre">gold_standard</span></code>. Note, however, that this is a warning, not an error.</p>
+<p>The output is a <a class="reference external" href="https://www.numpy.org">NumPy</a> array. NumPy is a powerful library for working with numerical data which can be found under the hood of many Python libraries.</p>
+<p>If we want to combine our list of labels in <code class="docutils literal notranslate"><span class="pre">pos_tags</span></code> with the precision scores in <code class="docutils literal notranslate"><span class="pre">precision</span></code>, we can do this using Python’s <code class="docutils literal notranslate"><span class="pre">zip()</span></code> function, which joins together lists and/or arrays of the same size. To view the result, we must cast it into a dictionary using <code class="docutils literal notranslate"><span class="pre">dict()</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">pos_tags</span><span class="p">,</span> <span class="n">precision</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;ADJ&#39;: 1.0,
+ &#39;AUX&#39;: 1.0,
+ &#39;DET&#39;: 1.0,
+ &#39;NOUN&#39;: 0.5,
+ &#39;PRON&#39;: 0.0,
+ &#39;PROPN&#39;: 0.0,
+ &#39;VERB&#39;: 0.5}
+</pre></div></div>
+</div>
+<p>If we want to get single precision score for all classes, we can use the option given by the string <code class="docutils literal notranslate"><span class="pre">'macro'</span></code>, which means that each class is treated as equally important regardless of how many instances belonging to this class can be found in the data.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate precision between the two lists and take their average</span>
+<span class="n">macro_precision</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">precision_score</span><span class="p">(</span><span class="n">gold_standard</span><span class="p">,</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="s1">&#39;macro&#39;</span><span class="p">)</span>
+
+<span class="c1"># Call the variable to examine the result</span>
+<span class="n">macro_precision</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.5714285714285714
+</pre></div></div>
+</div>
+<p>The macro-averaged precision score is calculated by summing up the precision scores and dividing them by the number of classes.</p>
+<p>We can easily verify this manually.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">sum</span><span class="p">(</span><span class="n">precision</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">precision</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.5714285714285714
+</pre></div></div>
+</div>
+<p>Calculating recall is equally easy using the <code class="docutils literal notranslate"><span class="pre">recall_score()</span></code> function from the <em>scikit-learn</em> library.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">recall</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">recall_score</span><span class="p">(</span><span class="n">gold_standard</span><span class="p">,</span> <span class="n">predictions</span><span class="p">,</span> <span class="n">average</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+
+<span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">pos_tags</span><span class="p">,</span> <span class="n">recall</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;ADJ&#39;: 0.6666666666666666,
+ &#39;AUX&#39;: 1.0,
+ &#39;DET&#39;: 1.0,
+ &#39;NOUN&#39;: 0.5,
+ &#39;PRON&#39;: 0.0,
+ &#39;PROPN&#39;: 0.0,
+ &#39;VERB&#39;: 1.0}
+</pre></div></div>
+</div>
+<p>The <em>scikit-learn</em> library provides a very useful function for providing an overview of classification performance called <code class="docutils literal notranslate"><span class="pre">classification_report()</span></code>.</p>
+<p>This will give you the precision and recall scores for each class, together with the <a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.f1_score.html">F1-score</a>, which is a balanced average of precision and recall, that is, both precision and recall contribute equally to the F1-score. The values for the F1-score run from <span class="math notranslate nohighlight">\(0\)</span> to <span class="math notranslate nohighlight">\(1\)</span>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">classification_report</span><span class="p">(</span><span class="n">gold_standard</span><span class="p">,</span> <span class="n">predictions</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+              precision    recall  f1-score   support
+
+         ADJ       1.00      0.67      0.80         3
+         AUX       1.00      1.00      1.00         2
+         DET       1.00      1.00      1.00         1
+        NOUN       0.50      0.50      0.50         2
+        PRON       0.00      0.00      0.00         1
+       PROPN       0.00      0.00      0.00         0
+        VERB       0.50      1.00      0.67         1
+
+    accuracy                           0.70        10
+   macro avg       0.57      0.60      0.57        10
+weighted avg       0.75      0.70      0.71        10
+
+</pre></div></div>
+</div>
+<p>As you can see, the macro-averaged scores on the row <em>macro avg</em> correspond to those that we calculated above.</p>
+<p>Finally, the weighted averages account for the number of instances in each class when calculating the average. The column <em>support</em> counts the number of instances observed for each class.</p>
+<p>This section should have given you an idea how to assess the reliability of human annotations, and how reliable annotations can be used as a gold standard for benchmarking the performance of natural language processing.</p>
+<p>You should also understand certain basic metrics used for benchmarking performance, such as accuracy, precision, recall and F1-score.</p>
+<p>In the <a class="reference internal" href="managing_data.html"><span class="doc">following section</span></a>, you will learn about managing textual data.</p>
+</div>
+</div>
+
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="basic_nlp.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Basic natural language processing using spaCy</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="managing_data.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Managing textual data using <em>pandas</em></p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Tuomo Hiippala<br/>
+    
+        &copy; Copyright 2020- Tuomo Hiippala, CC BY-NC 4.0.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

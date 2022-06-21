@@ -1,0 +1,1728 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Basic natural language processing using spaCy &#8212; Applied Language Technology  documentation</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Evaluating language models" href="evaluating_nlp.html" />
+    <link rel="prev" title="Manipulating text at scale" href="basic_text_processing_continued.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Applied Language Technology  documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../about.html">
+   About this Website
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../getting_started.html">
+   Getting Started
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../notebook_login.html">
+     1. Log in to CSC Notebooks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../launch_server.html">
+     2. Launch your personal server
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../github_pull.html">
+     3. Retrieve learning materials and exercises from GitHub
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../jupyter.html">
+     4. Interact with the learning materials on Jupyter Notebooks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../github_push.html">
+     5. Return completed exercises to GitHub for grading
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python_intro.html">
+   Part I: A Minimal Introduction to Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_i/working_with_jupyter_notebooks.html">
+     The elements of a Jupyter Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_i/getting_started_with_python.html">
+     Getting started with Python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../working_with_text.html">
+   Part II: Working with Text in Python
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="basic_text_processing.html">
+     Manipulating text using Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="basic_text_processing_continued.html">
+     Manipulating text at scale
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Basic natural language processing using spaCy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="evaluating_nlp.html">
+     Evaluating language models
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="managing_data.html">
+     Managing textual data using
+     <em>
+      pandas
+     </em>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../nlp_for_linguists.html">
+   Part III: Natural Language Processing for Linguists
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="simple">
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/part_ii/basic_nlp.ipynb.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Getting-started">
+   Getting started
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#What-is-a-language-model?">
+     What is a language model?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#How-are-language-models-trained?">
+     How are language models trained?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Performing-basic-NLP-tasks-using-spaCy">
+   Performing basic NLP tasks using spaCy
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Tokenization">
+     Tokenization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Part-of-speech-tagging">
+     Part-of-speech tagging
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Syntactic-parsing">
+     Syntactic parsing
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Sentence-segmentation">
+     Sentence segmentation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Lemmatization">
+     Lemmatization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Named-entity-recognition-(NER)">
+     Named entity recognition (NER)
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Basic natural language processing using spaCy</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Getting-started">
+   Getting started
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#What-is-a-language-model?">
+     What is a language model?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#How-are-language-models-trained?">
+     How are language models trained?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Performing-basic-NLP-tasks-using-spaCy">
+   Performing basic NLP tasks using spaCy
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Tokenization">
+     Tokenization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Part-of-speech-tagging">
+     Part-of-speech tagging
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Syntactic-parsing">
+     Syntactic parsing
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Sentence-segmentation">
+     Sentence segmentation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Lemmatization">
+     Lemmatization
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Named-entity-recognition-(NER)">
+     Named entity recognition (NER)
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt .copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<div class="section" id="Basic-natural-language-processing-using-spaCy">
+<h1>Basic natural language processing using spaCy<a class="headerlink" href="#Basic-natural-language-processing-using-spaCy" title="Permalink to this headline">¶</a></h1>
+<p>This section introduces you to some basic tasks in natural language processing.</p>
+<p>After reading this section, you should:</p>
+<ul class="simple">
+<li><p>know some of the key concepts and tasks in natural language processing (NLP)</p></li>
+<li><p>learn how to perform simple NLP tasks in Python using the spaCy library</p></li>
+</ul>
+<div class="section" id="Getting-started">
+<h2>Getting started<a class="headerlink" href="#Getting-started" title="Permalink to this headline">¶</a></h2>
+<p>To get started, we import <a class="reference external" href="https://spacy.io/">spaCy</a>, one of the many libraries available for natural language processing in Python.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">spacy</span>
+</pre></div>
+</div>
+</div>
+<p>To perform natural language processing tasks for a given language, we must load a <em>language model</em> that has been trained to perform these tasks for the language in question.</p>
+<p>spaCy supports <a class="reference external" href="https://spacy.io/usage/models#languages">many languages</a>, but provides pre-trained <a class="reference external" href="https://spacy.io/models/">language models</a> for fewer languages.</p>
+<p>spaCy language models come in different sizes and flavours. We will explore these models and their differences later.</p>
+<p>To get acquainted with basic tasks in natural language processing, we will start with a small language model for the English language.</p>
+<p>Language models are loaded using spaCy’s <code class="docutils literal notranslate"><span class="pre">load()</span></code> function, which takes the name of the model as input.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the small language model for English and assign it to the variable &#39;nlp&#39;</span>
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;en_core_web_sm&#39;</span><span class="p">)</span>
+
+<span class="c1"># Call the variable to examine the object</span>
+<span class="n">nlp</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;spacy.lang.en.English at 0x11fbf8b80&gt;
+</pre></div></div>
+</div>
+<p>Calling the variable <code class="docutils literal notranslate"><span class="pre">nlp</span></code> returns a spaCy <a class="reference external" href="https://spacy.io/api/language">Language</a> object that contains a language model for the English language.</p>
+<p>Esentially, spaCy’s <em>Language</em> object is a pipeline that uses the language model to perform a number of natural language processing tasks. We will return to these tasks shortly below.</p>
+<div class="section" id="What-is-a-language-model?">
+<h3>What is a language model?<a class="headerlink" href="#What-is-a-language-model?" title="Permalink to this headline">¶</a></h3>
+<p>Most modern language models are based on <em>statistics</em> instead of human-defined rules.</p>
+<p>Statistical language models are based on calculating probabilities, e.g.:</p>
+<ul class="simple">
+<li><p>What is the probability of a given sentence occurring in a language?</p></li>
+<li><p>How likely does a given word occur next in a sequence of words?</p></li>
+</ul>
+<p>Consider the following sentences from the news articles from the previous sections:</p>
+<ul class="simple">
+<li><p>From financial exchanges in <code class="docutils literal notranslate"><span class="pre">HIDDEN</span></code> Manhattan to cloakrooms in Washington and homeless shelters in California, unfamiliar rituals were the order of the day.</p></li>
+<li><p>Security precautions were being taken around the <code class="docutils literal notranslate"><span class="pre">HIDDEN</span></code> as the deadline for Iraq to withdraw from Kuwait neared.</p></li>
+</ul>
+<p>You can probably make informed guesses on the <code class="docutils literal notranslate"><span class="pre">HIDDEN</span></code> words based on your knowledge of the English language and the world in general.</p>
+<p>Similarly, creating a statistical language model involves observing the occurrence of words in large corpora and calculating their probabilities of occurrence in a given context. The language model can then be trained by making predictions and adjusting the model based on the errors made during prediction.</p>
+</div>
+<div class="section" id="How-are-language-models-trained?">
+<h3>How are language models trained?<a class="headerlink" href="#How-are-language-models-trained?" title="Permalink to this headline">¶</a></h3>
+<p>The spaCy language model for English, for instance, is trained on a corpus called <a class="reference external" href="https://catalog.ldc.upenn.edu/LDC2013T19">OntoNotes 5.0</a>, which features texts from different <em>genres</em> such as newswire text, broadcast news, broadcast and telephone conversations and blogs.</p>
+<p>This allows the corpus to cover linguistic variation in both written and spoken English.</p>
+<p>The OntoNotes 5.0 corpus consists of more than just <em>plain text</em>: the annotations include <em>part-of-speech tags</em>, <em>syntactic dependencies</em> and <em>co-references</em> between words.</p>
+<p>This allows modelling not just the occurrence of particular words or their sequences, but their grammatical features as well.</p>
+</div>
+</div>
+<div class="section" id="Performing-basic-NLP-tasks-using-spaCy">
+<h2>Performing basic NLP tasks using spaCy<a class="headerlink" href="#Performing-basic-NLP-tasks-using-spaCy" title="Permalink to this headline">¶</a></h2>
+<p>To process text using the <em>Language</em> object containing the language model for English, we simply call the <em>Language</em> object <code class="docutils literal notranslate"><span class="pre">nlp</span></code> on some text.</p>
+<p>Let’s begin by defining a simple test sentence, a Python string object that is stored under the variable <code class="docutils literal notranslate"><span class="pre">text</span></code>.</p>
+<p>As usual, we can print out the contents by calling the variable.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Assign an example sentence to the variable &#39;text&#39;</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;The Federal Bureau of Investigation has been ordered to track down as many as 3,000 Iraqis in this country whose visas have expired, the Justice Department said yesterday.&quot;</span>
+
+<span class="c1"># Call the variable to examine the output</span>
+<span class="n">text</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;The Federal Bureau of Investigation has been ordered to track down as many as 3,000 Iraqis in this country whose visas have expired, the Justice Department said yesterday.&#39;
+</pre></div></div>
+</div>
+<p>Passing the variable <code class="docutils literal notranslate"><span class="pre">text</span></code> to the <em>Language</em> object <code class="docutils literal notranslate"><span class="pre">nlp</span></code> returns a spaCy <em>Doc</em> object, short for document.</p>
+<p>In natural language processing, longer pieces of text are commonly referred to as documents, although in this case our document consists of a single sentence.</p>
+<p>This object contains both the input text stored under <code class="docutils literal notranslate"><span class="pre">text</span></code> and the results of natural language processing using spaCy.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Feed the string object under &#39;text&#39; to the Language object under &#39;nlp&#39;</span>
+<span class="c1"># Store the result under the variable &#39;doc&#39;</span>
+<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>The <em>Doc</em> object is now stored under the variable <code class="docutils literal notranslate"><span class="pre">doc</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Call the variable to examine the object</span>
+<span class="n">doc</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+The Federal Bureau of Investigation has been ordered to track down as many as 3,000 Iraqis in this country whose visas have expired, the Justice Department said yesterday.
+</pre></div></div>
+</div>
+<p>Calling the variable <code class="docutils literal notranslate"><span class="pre">doc</span></code> returns the contents of the object.</p>
+<p>Although the output resembles that of a Python string, the <em>Doc</em> object contains a wealth of information about its linguistic structure, which was generated by passing the text through the spaCy NLP pipeline.</p>
+<p>We will now examine the tasks that were performed under the hood after we provided the input sentence to the language model.</p>
+<div class="section" id="Tokenization">
+<h3>Tokenization<a class="headerlink" href="#Tokenization" title="Permalink to this headline">¶</a></h3>
+<p>What takes place first is a task known as <em>tokenization</em>, which breaks the text down into analytical units in need of further processing.</p>
+<p>In most cases, a <em>token</em> corresponds to words separated by whitespace, but punctuation marks are also considered as independent tokens. Because computers treat words as sequences of characters, assigning punctuation marks to their own tokens prevents trailing punctuation from attaching to the words that precede them.</p>
+<p>The diagram below the outlines the tasks that spaCy can perform after a text has been tokenised, such as <em>part-of-speech tagging</em>, <em>syntactic parsing</em> and <em>named entity recognition</em>.</p>
+<img alt="The spaCy pipeline from https://spacy.io/usage/linguistic-features#section-tokenization" src="part_ii/img/spacy_pipeline.png" />
+<p>A spaCy <em>Doc</em> object is consists of a sequence of <em>Token</em> objects, which store the results of various natural language processing tasks.</p>
+<p>Let’s print out each <em>Token</em> object stored in the <em>Doc</em> object <code class="docutils literal notranslate"><span class="pre">doc</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loop over items in the Doc object, using the variable &#39;token&#39; to refer to items in the list</span>
+<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">:</span>
+
+    <span class="c1"># Print each token</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+The
+Federal
+Bureau
+of
+Investigation
+has
+been
+ordered
+to
+track
+down
+as
+many
+as
+3,000
+Iraqis
+in
+this
+country
+whose
+visas
+have
+expired
+,
+the
+Justice
+Department
+said
+yesterday
+.
+</pre></div></div>
+</div>
+<p>The output shows one <em>Token</em> per line. As expected, punctuation marks such as ‘.’ and ‘,’ constitute their own <em>Tokens</em>.</p>
+</div>
+<div class="section" id="Part-of-speech-tagging">
+<h3>Part-of-speech tagging<a class="headerlink" href="#Part-of-speech-tagging" title="Permalink to this headline">¶</a></h3>
+<p>Part-of-speech (POS) tagging is a task that involves determining the word class of a token. This is crucial for <em>disambiguation</em>, because different parts of speech may have similar forms.</p>
+<p>Consider the example: <em>The sailor dogs the hatch</em>.</p>
+<p>The present tense of the verb <em>dog</em> (to fasten something with something) is precisely the same as the plural form of the noun <em>dog</em>.</p>
+<p>To identify the correct word class, we must examine the context in which the word appears.</p>
+<p>To access the results of POS tagging, let’s loop over the <em>Doc</em> object <code class="docutils literal notranslate"><span class="pre">doc</span></code> and print each <em>Token</em> and its associated <em>part-of-speech tag</em>, which is stored under its attribute <code class="docutils literal notranslate"><span class="pre">pos_</span></code>.</p>
+<p>We can access the attributes of an object by inserting the <em>attribute</em> after the <em>object</em> and separating them with a full stop, e.g. <code class="docutils literal notranslate"><span class="pre">token.pos_</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loop over items in the Doc object, using the variable &#39;token&#39; to refer to items in the list</span>
+<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">:</span>
+
+    <span class="c1"># Print the token and its POS tag</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">pos_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+The DET
+Federal PROPN
+Bureau PROPN
+of ADP
+Investigation PROPN
+has AUX
+been AUX
+ordered VERB
+to PART
+track VERB
+down ADP
+as ADV
+many ADJ
+as SCONJ
+3,000 NUM
+Iraqis PROPN
+in ADP
+this DET
+country NOUN
+whose DET
+visas NOUN
+have AUX
+expired VERB
+, PUNCT
+the DET
+Justice PROPN
+Department PROPN
+said VERB
+yesterday NOUN
+. PUNCT
+</pre></div></div>
+</div>
+<p>There are many other <a class="reference external" href="https://spacy.io/api/token#attributes">attributes</a> available for each <em>Token</em> in the <em>Doc</em> object.</p>
+</div>
+<div class="section" id="Syntactic-parsing">
+<h3>Syntactic parsing<a class="headerlink" href="#Syntactic-parsing" title="Permalink to this headline">¶</a></h3>
+<p>Syntactic parsing (or <em>dependency parsing</em>) is the task of defining syntactic dependencies that hold between tokens. This task is closely aligned with traditional grammatical analyses, and consequently the results are often represented using tree diagrams.</p>
+<p>The syntactic dependencies identified during parsing are available under the <code class="docutils literal notranslate"><span class="pre">dep_</span></code> attribute of a <em>Token</em>.</p>
+<p>Let’s print out the syntactic dependencies for each <em>Token</em> in the <em>Doc</em> object.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loop over items in the Doc object, using the variable &#39;token&#39; to refer to items in the list</span>
+<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">:</span>
+
+    <span class="c1"># Print the token and its dependency tag</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">dep_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+The det
+Federal compound
+Bureau nsubjpass
+of prep
+Investigation pobj
+has aux
+been auxpass
+ordered ccomp
+to aux
+track xcomp
+down prt
+as advmod
+many amod
+as quantmod
+3,000 nummod
+Iraqis dobj
+in prep
+this det
+country pobj
+whose poss
+visas nsubj
+have aux
+expired relcl
+, punct
+the det
+Justice compound
+Department nsubj
+said ROOT
+yesterday npadvmod
+. punct
+</pre></div></div>
+</div>
+<p>Unlike part-of-speech tags that are associated with a single <em>Token</em>, dependency tags indicate a relation that holds between two <em>Tokens</em>.</p>
+<p>To better understand the syntactic relations captured by dependency parsing, let’s use some of the additional attributes available for each <em>Token</em>:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">i</span></code>: the position of the <em>Token</em> in the <em>Doc</em></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">token</span></code>: the <em>Token</em> itself</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dep_</span></code>: the dependency tag</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">head</span></code> and <code class="docutils literal notranslate"><span class="pre">i</span></code>: the <em>Token</em> that governs the current <em>Token</em> and its index</p></li>
+</ol>
+<p>This illustrates how Python attributes can be used in a flexible manner: the attribute <code class="docutils literal notranslate"><span class="pre">head</span></code> points to another <em>Token</em>, which naturally has the attribute <code class="docutils literal notranslate"><span class="pre">i</span></code> that contains its index or position in the <em>Doc</em>. We can combine these two attributes to retrieve this information for any token by referring to <code class="docutils literal notranslate"><span class="pre">.head.i</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loop over items in the Doc object, using the variable &#39;token&#39; to refer to items in the list</span>
+<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">:</span>
+
+    <span class="c1"># Print the index of current token, the token itself, the dependency, the head and its index</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">token</span><span class="o">.</span><span class="n">i</span><span class="p">,</span> <span class="n">token</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">dep_</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">head</span><span class="o">.</span><span class="n">i</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">head</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0 The det 2 Bureau
+1 Federal compound 2 Bureau
+2 Bureau nsubjpass 7 ordered
+3 of prep 2 Bureau
+4 Investigation pobj 3 of
+5 has aux 7 ordered
+6 been auxpass 7 ordered
+7 ordered ccomp 27 said
+8 to aux 9 track
+9 track xcomp 7 ordered
+10 down prt 9 track
+11 as advmod 14 3,000
+12 many amod 14 3,000
+13 as quantmod 14 3,000
+14 3,000 nummod 15 Iraqis
+15 Iraqis dobj 9 track
+16 in prep 9 track
+17 this det 18 country
+18 country pobj 16 in
+19 whose poss 20 visas
+20 visas nsubj 22 expired
+21 have aux 22 expired
+22 expired relcl 18 country
+23 , punct 27 said
+24 the det 26 Department
+25 Justice compound 26 Department
+26 Department nsubj 27 said
+27 said ROOT 27 said
+28 yesterday npadvmod 27 said
+29 . punct 27 said
+</pre></div></div>
+</div>
+<p>Although the output above helps to clarify the syntactic dependencies between tokens, they are generally much easier to perceive using diagrams.</p>
+<p>spaCy provides a <a class="reference external" href="https://spacy.io/usage/visualizers">visualisation tool</a> for visualising dependencies. This component of the spaCy library, <em>displacy</em>, can be imported using the following command.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">spacy</span> <span class="kn">import</span> <span class="n">displacy</span>
+</pre></div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">displacy</span></code> module has a method named <code class="docutils literal notranslate"><span class="pre">render()</span></code>, which takes a <em>Doc</em> object as input.</p>
+<p>To draw a dependency tree, we provide the <em>Doc</em> object <code class="docutils literal notranslate"><span class="pre">doc</span></code> to the <code class="docutils literal notranslate"><span class="pre">render()</span></code> method with two arguments:</p>
+<ol class="arabic simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">style</span></code>: The value <code class="docutils literal notranslate"><span class="pre">dep</span></code> instructs <em>displacy</em> to draw a visualisation for syntactic dependencies.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">options</span></code>: This argument takes a Python dictionary as input. We provide a dictionary with the key <code class="docutils literal notranslate"><span class="pre">compact</span></code> and Boolean value <code class="docutils literal notranslate"><span class="pre">True</span></code> to instruct <em>displacy</em> to draw a compact tree diagram. Additional options for formatting the visualisation can be found in spaCy <a class="reference external" href="https://spacy.io/api/top-level#displacy_options">documentation</a>.</p></li>
+</ol>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">displacy</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;dep&#39;</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;compact&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<span class="tex2jax_ignore"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:lang="en" id="59469630bf9e47debf71a5f8d4089814-0" class="displacy" width="4250" height="737.0" direction="ltr" style="max-width: none; height: 737.0px; color: #000000; background: #ffffff; font-family: Arial; direction: ltr">
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="647.0">
+    <tspan class="displacy-word" fill="currentColor" x="50">The</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="50">DET</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="647.0">
+    <tspan class="displacy-word" fill="currentColor" x="200">Federal</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="200">PROPN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="647.0">
+    <tspan class="displacy-word" fill="currentColor" x="350">Bureau</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="350">PROPN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="647.0">
+    <tspan class="displacy-word" fill="currentColor" x="500">of</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="500">ADP</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="647.0">
+    <tspan class="displacy-word" fill="currentColor" x="650">Investigation</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="650">PROPN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="647.0">
+    <tspan class="displacy-word" fill="currentColor" x="800">has</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="800">AUX</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="647.0">
+    <tspan class="displacy-word" fill="currentColor" x="950">been</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="950">AUX</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="647.0">
+    <tspan class="displacy-word" fill="currentColor" x="1100">ordered</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1100">VERB</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="647.0">
+    <tspan class="displacy-word" fill="currentColor" x="1250">to</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1250">PART</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="647.0">
+    <tspan class="displacy-word" fill="currentColor" x="1400">track</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1400">VERB</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="647.0">
+    <tspan class="displacy-word" fill="currentColor" x="1550">down</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1550">ADP</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="647.0">
+    <tspan class="displacy-word" fill="currentColor" x="1700">as</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1700">ADV</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="647.0">
+    <tspan class="displacy-word" fill="currentColor" x="1850">many</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="1850">ADJ</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="647.0">
+    <tspan class="displacy-word" fill="currentColor" x="2000">as</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="2000">SCONJ</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="647.0">
+    <tspan class="displacy-word" fill="currentColor" x="2150">3,000</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="2150">NUM</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="647.0">
+    <tspan class="displacy-word" fill="currentColor" x="2300">Iraqis</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="2300">PROPN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="647.0">
+    <tspan class="displacy-word" fill="currentColor" x="2450">in</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="2450">ADP</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="647.0">
+    <tspan class="displacy-word" fill="currentColor" x="2600">this</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="2600">DET</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="647.0">
+    <tspan class="displacy-word" fill="currentColor" x="2750">country</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="2750">NOUN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="647.0">
+    <tspan class="displacy-word" fill="currentColor" x="2900">whose</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="2900">DET</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="647.0">
+    <tspan class="displacy-word" fill="currentColor" x="3050">visas</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="3050">NOUN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="647.0">
+    <tspan class="displacy-word" fill="currentColor" x="3200">have</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="3200">AUX</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="647.0">
+    <tspan class="displacy-word" fill="currentColor" x="3350">expired,</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="3350">VERB</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="647.0">
+    <tspan class="displacy-word" fill="currentColor" x="3500">the</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="3500">DET</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="647.0">
+    <tspan class="displacy-word" fill="currentColor" x="3650">Justice</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="3650">PROPN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="647.0">
+    <tspan class="displacy-word" fill="currentColor" x="3800">Department</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="3800">PROPN</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="647.0">
+    <tspan class="displacy-word" fill="currentColor" x="3950">said</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="3950">VERB</tspan>
+</text>
+
+<text class="displacy-token" fill="currentColor" text-anchor="middle" y="647.0">
+    <tspan class="displacy-word" fill="currentColor" x="4100">yesterday.</tspan>
+    <tspan class="displacy-tag" dy="2em" fill="currentColor" x="4100">NOUN</tspan>
+</text>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-59469630bf9e47debf71a5f8d4089814-0-0" stroke-width="2px" d="M62,602.0 62,552.0 332.0,552.0 332.0,602.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-59469630bf9e47debf71a5f8d4089814-0-0" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">det</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M62,604.0 L58,596.0 66,596.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-59469630bf9e47debf71a5f8d4089814-0-1" stroke-width="2px" d="M212,602.0 212,577.0 329.0,577.0 329.0,602.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-59469630bf9e47debf71a5f8d4089814-0-1" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">compound</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M212,604.0 L208,596.0 216,596.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-59469630bf9e47debf71a5f8d4089814-0-2" stroke-width="2px" d="M362,602.0 362,477.0 1091.0,477.0 1091.0,602.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-59469630bf9e47debf71a5f8d4089814-0-2" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nsubjpass</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M362,604.0 L358,596.0 366,596.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-59469630bf9e47debf71a5f8d4089814-0-3" stroke-width="2px" d="M362,602.0 362,577.0 479.0,577.0 479.0,602.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-59469630bf9e47debf71a5f8d4089814-0-3" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">prep</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M479.0,604.0 L483.0,596.0 475.0,596.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-59469630bf9e47debf71a5f8d4089814-0-4" stroke-width="2px" d="M512,602.0 512,577.0 629.0,577.0 629.0,602.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-59469630bf9e47debf71a5f8d4089814-0-4" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">pobj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M629.0,604.0 L633.0,596.0 625.0,596.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-59469630bf9e47debf71a5f8d4089814-0-5" stroke-width="2px" d="M812,602.0 812,552.0 1082.0,552.0 1082.0,602.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-59469630bf9e47debf71a5f8d4089814-0-5" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">aux</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M812,604.0 L808,596.0 816,596.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-59469630bf9e47debf71a5f8d4089814-0-6" stroke-width="2px" d="M962,602.0 962,577.0 1079.0,577.0 1079.0,602.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-59469630bf9e47debf71a5f8d4089814-0-6" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">auxpass</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M962,604.0 L958,596.0 966,596.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-59469630bf9e47debf71a5f8d4089814-0-7" stroke-width="2px" d="M1112,602.0 1112,402.0 3950.0,402.0 3950.0,602.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-59469630bf9e47debf71a5f8d4089814-0-7" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">ccomp</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1112,604.0 L1108,596.0 1116,596.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-59469630bf9e47debf71a5f8d4089814-0-8" stroke-width="2px" d="M1262,602.0 1262,577.0 1379.0,577.0 1379.0,602.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-59469630bf9e47debf71a5f8d4089814-0-8" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">aux</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1262,604.0 L1258,596.0 1266,596.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-59469630bf9e47debf71a5f8d4089814-0-9" stroke-width="2px" d="M1112,602.0 1112,552.0 1382.0,552.0 1382.0,602.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-59469630bf9e47debf71a5f8d4089814-0-9" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">xcomp</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1382.0,604.0 L1386.0,596.0 1378.0,596.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-59469630bf9e47debf71a5f8d4089814-0-10" stroke-width="2px" d="M1412,602.0 1412,577.0 1529.0,577.0 1529.0,602.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-59469630bf9e47debf71a5f8d4089814-0-10" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">prt</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1529.0,604.0 L1533.0,596.0 1525.0,596.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-59469630bf9e47debf71a5f8d4089814-0-11" stroke-width="2px" d="M1712,602.0 1712,527.0 2135.0,527.0 2135.0,602.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-59469630bf9e47debf71a5f8d4089814-0-11" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">advmod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1712,604.0 L1708,596.0 1716,596.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-59469630bf9e47debf71a5f8d4089814-0-12" stroke-width="2px" d="M1862,602.0 1862,552.0 2132.0,552.0 2132.0,602.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-59469630bf9e47debf71a5f8d4089814-0-12" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">amod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M1862,604.0 L1858,596.0 1866,596.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-59469630bf9e47debf71a5f8d4089814-0-13" stroke-width="2px" d="M2012,602.0 2012,577.0 2129.0,577.0 2129.0,602.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-59469630bf9e47debf71a5f8d4089814-0-13" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">quantmod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M2012,604.0 L2008,596.0 2016,596.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-59469630bf9e47debf71a5f8d4089814-0-14" stroke-width="2px" d="M2162,602.0 2162,577.0 2279.0,577.0 2279.0,602.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-59469630bf9e47debf71a5f8d4089814-0-14" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nummod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M2162,604.0 L2158,596.0 2166,596.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-59469630bf9e47debf71a5f8d4089814-0-15" stroke-width="2px" d="M1412,602.0 1412,452.0 2294.0,452.0 2294.0,602.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-59469630bf9e47debf71a5f8d4089814-0-15" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">dobj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M2294.0,604.0 L2298.0,596.0 2290.0,596.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-59469630bf9e47debf71a5f8d4089814-0-16" stroke-width="2px" d="M1412,602.0 1412,427.0 2447.0,427.0 2447.0,602.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-59469630bf9e47debf71a5f8d4089814-0-16" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">prep</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M2447.0,604.0 L2451.0,596.0 2443.0,596.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-59469630bf9e47debf71a5f8d4089814-0-17" stroke-width="2px" d="M2612,602.0 2612,577.0 2729.0,577.0 2729.0,602.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-59469630bf9e47debf71a5f8d4089814-0-17" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">det</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M2612,604.0 L2608,596.0 2616,596.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-59469630bf9e47debf71a5f8d4089814-0-18" stroke-width="2px" d="M2462,602.0 2462,552.0 2732.0,552.0 2732.0,602.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-59469630bf9e47debf71a5f8d4089814-0-18" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">pobj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M2732.0,604.0 L2736.0,596.0 2728.0,596.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-59469630bf9e47debf71a5f8d4089814-0-19" stroke-width="2px" d="M2912,602.0 2912,577.0 3029.0,577.0 3029.0,602.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-59469630bf9e47debf71a5f8d4089814-0-19" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">poss</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M2912,604.0 L2908,596.0 2916,596.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-59469630bf9e47debf71a5f8d4089814-0-20" stroke-width="2px" d="M3062,602.0 3062,552.0 3332.0,552.0 3332.0,602.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-59469630bf9e47debf71a5f8d4089814-0-20" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nsubj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M3062,604.0 L3058,596.0 3066,596.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-59469630bf9e47debf71a5f8d4089814-0-21" stroke-width="2px" d="M3212,602.0 3212,577.0 3329.0,577.0 3329.0,602.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-59469630bf9e47debf71a5f8d4089814-0-21" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">aux</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M3212,604.0 L3208,596.0 3216,596.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-59469630bf9e47debf71a5f8d4089814-0-22" stroke-width="2px" d="M2762,602.0 2762,502.0 3338.0,502.0 3338.0,602.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-59469630bf9e47debf71a5f8d4089814-0-22" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">relcl</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M3338.0,604.0 L3342.0,596.0 3334.0,596.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-59469630bf9e47debf71a5f8d4089814-0-23" stroke-width="2px" d="M3512,602.0 3512,552.0 3782.0,552.0 3782.0,602.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-59469630bf9e47debf71a5f8d4089814-0-23" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">det</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M3512,604.0 L3508,596.0 3516,596.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-59469630bf9e47debf71a5f8d4089814-0-24" stroke-width="2px" d="M3662,602.0 3662,577.0 3779.0,577.0 3779.0,602.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-59469630bf9e47debf71a5f8d4089814-0-24" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">compound</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M3662,604.0 L3658,596.0 3666,596.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-59469630bf9e47debf71a5f8d4089814-0-25" stroke-width="2px" d="M3812,602.0 3812,577.0 3929.0,577.0 3929.0,602.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-59469630bf9e47debf71a5f8d4089814-0-25" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nsubj</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M3812,604.0 L3808,596.0 3816,596.0" fill="currentColor"/>
+</g>
+
+<g class="displacy-arrow">
+    <path class="displacy-arc" id="arrow-59469630bf9e47debf71a5f8d4089814-0-26" stroke-width="2px" d="M3962,602.0 3962,577.0 4079.0,577.0 4079.0,602.0" fill="none" stroke="currentColor"/>
+    <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
+        <textPath xlink:href="#arrow-59469630bf9e47debf71a5f8d4089814-0-26" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">npadvmod</textPath>
+    </text>
+    <path class="displacy-arrowhead" d="M4079.0,604.0 L4083.0,596.0 4075.0,596.0" fill="currentColor"/>
+</g>
+</svg></span></div>
+</div>
+<p>The syntactic dependencies are visualised using lines that lead from the <strong>head</strong> <em>Token</em> to the <em>Token</em> governed by that head.</p>
+<p>The dependency tags are based on <a class="reference external" href="https://universaldependencies.org/">universal dependencies</a>, a framework for describing grammatical features across languages.</p>
+<p>If you don’t know what a particular tag means, spaCy provides a function for explaining the tags, <code class="docutils literal notranslate"><span class="pre">explain()</span></code>, which takes a tag as input (note that the tags are case-sensitive).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spacy</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="s1">&#39;pobj&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;object of preposition&#39;
+</pre></div></div>
+</div>
+<p>Finally, if you wonder about the underscores <code class="docutils literal notranslate"><span class="pre">_</span></code> in the attribute names: spaCy encodes all strings by mapping them to hash values (a numerical representation) for computational efficiency.</p>
+<p>Let’s print out the first Token in the Doc <code class="docutils literal notranslate"><span class="pre">[0]</span></code> and its dependencies to examine how this works.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">doc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">doc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dep</span><span class="p">,</span> <span class="n">doc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dep_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+The 415 det
+</pre></div></div>
+</div>
+<p>As you can see, the hash value 415 is reserved for the tag corresponding to a determiner (<code class="docutils literal notranslate"><span class="pre">det</span></code>).</p>
+<p>If you want human-readable output for dependency parsing and spaCy returns sequences of numbers, then you most likely forgot to add the underscore to the attribute name.</p>
+</div>
+<div class="section" id="Sentence-segmentation">
+<h3>Sentence segmentation<a class="headerlink" href="#Sentence-segmentation" title="Permalink to this headline">¶</a></h3>
+<p>spaCy also segments <em>Doc</em> objects into sentences as a part of <a class="reference external" href="https://spacy.io/usage/linguistic-features#section-sbd">sentence segmentation</a>.</p>
+<p>Sentence segmentation imposes additional structure to larger texts. By determining the boundaries of a sentence, we can constrain tasks such as dependency parsing to individual sentences.</p>
+<p>spaCy provides access to the results of sentence segmentation via the attribute <code class="docutils literal notranslate"><span class="pre">sents</span></code> of a <em>Doc</em> object.</p>
+<p>Let’s loop over the sentences contained in the <em>Doc</em> object <code class="docutils literal notranslate"><span class="pre">doc</span></code> and count them using Python’s <code class="docutils literal notranslate"><span class="pre">enumerate()</span></code> function.</p>
+<p>Using the <code class="docutils literal notranslate"><span class="pre">enumerate()</span></code> function returns a count that increases with each item in the loop.</p>
+<p>We assign this count to the variable <code class="docutils literal notranslate"><span class="pre">number</span></code>, whereas each sentence is stored under <code class="docutils literal notranslate"><span class="pre">sent</span></code>. We then print out both at the same time using the <code class="docutils literal notranslate"><span class="pre">print()</span></code> function.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loop over sentences in the Doc object and count them using enumerate()</span>
+<span class="k">for</span> <span class="n">number</span><span class="p">,</span> <span class="n">sent</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">sents</span><span class="p">):</span>
+
+    <span class="c1"># Print the token and its dependency tag</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">number</span><span class="p">,</span> <span class="n">sent</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0 The Federal Bureau of Investigation has been ordered to track down as many as 3,000 Iraqis in this country whose visas have expired, the Justice Department said yesterday.
+</pre></div></div>
+</div>
+<p>This only returns a single sentence, but the <em>Doc</em> object could easily hold a longer text with multiple sentences, such as an entire newspaper article.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># TODO Add content related to NP chunking via Doc.noun_chunks</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Lemmatization">
+<h3>Lemmatization<a class="headerlink" href="#Lemmatization" title="Permalink to this headline">¶</a></h3>
+<p>A lemma is the base form of a word. One must keep in mind that unless explicitly instructed, computers cannot tell the difference between singular and plural forms of words, but treat them as distinct tokens.</p>
+<p>If one wants to count the occurrences of words, for instance, a process known as <em>lemmatization</em> is needed to group together the different forms of the same token.</p>
+<p>Lemmas are available for each <em>Token</em> under the attribute <code class="docutils literal notranslate"><span class="pre">lemma_</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loop over items in the Doc object, using the variable &#39;token&#39; to refer to items in the list</span>
+<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">:</span>
+
+    <span class="c1"># Print the token and its dependency tag</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="n">token</span><span class="o">.</span><span class="n">lemma_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+The the
+Federal Federal
+Bureau Bureau
+of of
+Investigation Investigation
+has have
+been be
+ordered order
+to to
+track track
+down down
+as as
+many many
+as as
+3,000 3,000
+Iraqis Iraqis
+in in
+this this
+country country
+whose whose
+visas visa
+have have
+expired expire
+, ,
+the the
+Justice Justice
+Department Department
+said say
+yesterday yesterday
+. .
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Named-entity-recognition-(NER)">
+<h3>Named entity recognition (NER)<a class="headerlink" href="#Named-entity-recognition-(NER)" title="Permalink to this headline">¶</a></h3>
+<p>Named entity recognition (NER) is the task of recognising and classifying entities named in a text.</p>
+<p>spaCy can recognise the <a class="reference external" href="https://spacy.io/api/annotation#named-entities">named entities annotated in the OntoNotes 5 corpus</a>, such as persons, geographic locations and products, to name but a few examples.</p>
+<p>Instead of looping over <em>Tokens</em> in the <em>Doc</em> object, we can use the <em>Doc</em> object’s <code class="docutils literal notranslate"><span class="pre">.ents</span></code> attribute to get the entities.</p>
+<p>This returns a <em>Span</em> object, which is a sequence of <em>Tokens</em>, as many named entities span multiple <em>Tokens</em>.</p>
+<p>The named entities and their types are stored under the attributes <code class="docutils literal notranslate"><span class="pre">.text</span></code> and <code class="docutils literal notranslate"><span class="pre">.label_</span></code>.</p>
+<p>Let’s print out the named entities in the <em>Doc</em> object <code class="docutils literal notranslate"><span class="pre">doc</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loop over the named entities in the Doc object</span>
+<span class="k">for</span> <span class="n">ent</span> <span class="ow">in</span> <span class="n">doc</span><span class="o">.</span><span class="n">ents</span><span class="p">:</span>
+
+    <span class="c1"># Print the named entity and its label</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">ent</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">ent</span><span class="o">.</span><span class="n">label_</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+The Federal Bureau of Investigation ORG
+as many as 3,000 CARDINAL
+Iraqis NORP
+the Justice Department ORG
+yesterday DATE
+</pre></div></div>
+</div>
+<p>The majority of named entities identified in the <em>Doc</em> consist of multiple <em>Tokens</em>, which is why they are represented as <em>Span</em> objects.</p>
+<p>We can verify this by accessing the first named entity under <code class="docutils literal notranslate"><span class="pre">doc.ents</span></code>, which can be found at position <code class="docutils literal notranslate"><span class="pre">0</span></code>, because Python starts counting from zero, and feeding this object to Python’s <code class="docutils literal notranslate"><span class="pre">type()</span></code> function.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Check the type of the object used to store named entities</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">ents</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+spacy.tokens.span.Span
+</pre></div></div>
+</div>
+<p>spaCy <a class="reference external" href="https://spacy.io/api/span">Span</a> objects contain several useful arguments.</p>
+<p>Most importantly, the attributes <code class="docutils literal notranslate"><span class="pre">start</span></code> and <code class="docutils literal notranslate"><span class="pre">end</span></code> return the indices of <em>Tokens</em>, which determine where the <em>Span</em> starts and ends.</p>
+<p>We can examine this in greater detail by printing out the <code class="docutils literal notranslate"><span class="pre">start</span></code> and <code class="docutils literal notranslate"><span class="pre">end</span></code> attributes for the first named entity in the document.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print the named entity and indices of its start and end Tokens</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">ents</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">doc</span><span class="o">.</span><span class="n">ents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="n">doc</span><span class="o">.</span><span class="n">ents</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">end</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+The Federal Bureau of Investigation 0 5
+</pre></div></div>
+</div>
+<p>The named entity starts at index 0 and ends at index 5.</p>
+<p>If we print out the fifth <em>Token</em> in the <em>Doc</em> object, we will see that this corresponds to the Token “has”.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">doc</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+has
+</pre></div></div>
+</div>
+<p>This means that the index returned by the <code class="docutils literal notranslate"><span class="pre">end</span></code> argument does <strong>not</strong> correspond to the <em>last Token</em> in a <em>Span</em>, but returns the index of the <em>first Token</em> following the <em>Span</em>.</p>
+<p>Put differently, the <code class="docutils literal notranslate"><span class="pre">start</span></code> means that the <em>Span</em> starts here, whereas the <code class="docutils literal notranslate"><span class="pre">end</span></code> attribute means that the <em>Span</em> has <em>ended</em> here.</p>
+<p>We can also render the named entities using <em>displacy</em>, the module used for visualising dependency parses above.</p>
+<p>Note that we must pass the string <code class="docutils literal notranslate"><span class="pre">ent</span></code> to the <code class="docutils literal notranslate"><span class="pre">style</span></code> argument to indicate that we wish to visualise named entities.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">displacy</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">doc</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s1">&#39;ent&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area rendered_html docutils container">
+<span class="tex2jax_ignore"><div class="entities" style="line-height: 2.5; direction: ltr">
+<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    The Federal Bureau of Investigation
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; text-transform: uppercase; vertical-align: middle; margin-left: 0.5rem">ORG</span>
+</mark>
+ has been ordered to track down
+<mark class="entity" style="background: #e4e7d2; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    as many as 3,000
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; text-transform: uppercase; vertical-align: middle; margin-left: 0.5rem">CARDINAL</span>
+</mark>
+
+<mark class="entity" style="background: #c887fb; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    Iraqis
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; text-transform: uppercase; vertical-align: middle; margin-left: 0.5rem">NORP</span>
+</mark>
+ in this country whose visas have expired,
+<mark class="entity" style="background: #7aecec; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    the Justice Department
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; text-transform: uppercase; vertical-align: middle; margin-left: 0.5rem">ORG</span>
+</mark>
+ said
+<mark class="entity" style="background: #bfe1d9; padding: 0.45em 0.6em; margin: 0 0.25em; line-height: 1; border-radius: 0.35em;">
+    yesterday
+    <span style="font-size: 0.8em; font-weight: bold; line-height: 1; border-radius: 0.35em; text-transform: uppercase; vertical-align: middle; margin-left: 0.5rem">DATE</span>
+</mark>
+.</div></span></div>
+</div>
+<p>If you don’t recognise a particular tag used for a named entity, you can always ask spaCy for an explanation.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spacy</span><span class="o">.</span><span class="n">explain</span><span class="p">(</span><span class="s1">&#39;NORP&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;Nationalities or religious or political groups&#39;
+</pre></div></div>
+</div>
+<p>This section should have given you an idea of some basic natural language processing tasks using spaCy and the kinds of linguistic annotations they produce.</p>
+<p>The <a class="reference internal" href="evaluating_nlp.html"><span class="doc">following section</span></a> introduces you to evaluating the performance of language models.</p>
+</div>
+</div>
+</div>
+
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="basic_text_processing_continued.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Manipulating text at scale</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="evaluating_nlp.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Evaluating language models</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Tuomo Hiippala<br/>
+    
+        &copy; Copyright 2020- Tuomo Hiippala, CC BY-NC 4.0.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>

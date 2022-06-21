@@ -1,0 +1,995 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Manipulating text using Python &#8212; Applied Language Technology  documentation</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet">
+  <link href="../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.be7d3bbb2ef33a8344ce.js">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Manipulating text at scale" href="basic_text_processing_continued.html" />
+    <link rel="prev" title="Part II: Working with Text in Python" href="../working_with_text.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      
+      <h1 class="site-logo" id="site-title">Applied Language Technology  documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../about.html">
+   About this Website
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../getting_started.html">
+   Getting Started
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../notebook_login.html">
+     1. Log in to CSC Notebooks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../launch_server.html">
+     2. Launch your personal server
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../github_pull.html">
+     3. Retrieve learning materials and exercises from GitHub
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../jupyter.html">
+     4. Interact with the learning materials on Jupyter Notebooks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../github_push.html">
+     5. Return completed exercises to GitHub for grading
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../python_intro.html">
+   Part I: A Minimal Introduction to Python
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_i/working_with_jupyter_notebooks.html">
+     The elements of a Jupyter Notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_i/getting_started_with_python.html">
+     Getting started with Python
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../working_with_text.html">
+   Part II: Working with Text in Python
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Manipulating text using Python
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="basic_text_processing_continued.html">
+     Manipulating text at scale
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="basic_nlp.html">
+     Basic natural language processing using spaCy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="evaluating_nlp.html">
+     Evaluating language models
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="managing_data.html">
+     Managing textual data using
+     <em>
+      pandas
+     </em>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../nlp_for_linguists.html">
+   Part III: Natural Language Processing for Linguists
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="simple">
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/part_ii/basic_text_processing.ipynb.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Computers-and-text">
+   Computers and text
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#What-is-rich-text?">
+     What is rich text?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#What-is-plain-text?">
+     What is plain text?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#What-is-structured-text?">
+     What is structured text?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Why-does-this-matter?">
+     Why does this matter?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Text-encoding">
+   Text encoding
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ASCII">
+     ASCII
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Unicode">
+     Unicode
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Loading-plain-text-files-into-Python">
+   Loading plain text files into Python
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Manipulating-text">
+   Manipulating text
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Manipulating text using Python</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Computers-and-text">
+   Computers and text
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#What-is-rich-text?">
+     What is rich text?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#What-is-plain-text?">
+     What is plain text?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#What-is-structured-text?">
+     What is structured text?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Why-does-this-matter?">
+     Why does this matter?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Text-encoding">
+   Text encoding
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ASCII">
+     ASCII
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#Unicode">
+     Unicode
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Loading-plain-text-files-into-Python">
+   Loading plain text files into Python
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Manipulating-text">
+   Manipulating text
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            
+              <div>
+                
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt .copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<div class="section" id="Manipulating-text-using-Python">
+<h1>Manipulating text using Python<a class="headerlink" href="#Manipulating-text-using-Python" title="Permalink to this headline">¶</a></h1>
+<p>This section introduces you to the very basics of manipulating text in Python.</p>
+<p>After reading this section, you should:</p>
+<ul class="simple">
+<li><p>understand the difference between rich text, structured text and plain text</p></li>
+<li><p>understand the concept of text encoding</p></li>
+<li><p>know how to load plain text files into Python</p></li>
+</ul>
+<div class="section" id="Computers-and-text">
+<h2>Computers and text<a class="headerlink" href="#Computers-and-text" title="Permalink to this headline">¶</a></h2>
+<p>Computers can store and represent text in different formats. Knowing the distinction between different types of text is crucial for processing them programmatically.</p>
+<div class="section" id="What-is-rich-text?">
+<h3>What is rich text?<a class="headerlink" href="#What-is-rich-text?" title="Permalink to this headline">¶</a></h3>
+<p>Word processors, such as Microsoft Word, produce <a class="reference external" href="https://en.wikipedia.org/wiki/Formatted_text">rich text</a>, that is, text whose appearance has been formatted or styled in a specific way.</p>
+<p>Rich text allows defining specific visual styles for document elements. Headers, for example, may use a different font than the body text, which may in turn feature <em>italic</em> or <strong>bold</strong> fonts for emphasis. Rich text can also include various types of images, tables and other document elements.</p>
+<p>Rich text is the default format for modern what-you-see-is-what-you-get word processors.</p>
+</div>
+<div class="section" id="What-is-plain-text?">
+<h3>What is plain text?<a class="headerlink" href="#What-is-plain-text?" title="Permalink to this headline">¶</a></h3>
+<p>Unlike rich text, <a class="reference external" href="https://en.wikipedia.org/wiki/Plain_text">plain text</a> does not contain any information about the visual appearance of text, but consists of <em>characters</em> only.</p>
+<p>Characters, in this context, refers to letters, numbers, punctuation marks, spaces and line breaks.</p>
+<p>The definition of plain text is fairly loose, but generally the term refers to text which lacks any formatting or style information.</p>
+</div>
+<div class="section" id="What-is-structured-text?">
+<h3>What is structured text?<a class="headerlink" href="#What-is-structured-text?" title="Permalink to this headline">¶</a></h3>
+<p>Structured text may be thought of as a special case of plain text, which includes character sequences that are used to format the text for display.</p>
+<p>Forms of structured text include text described using mark-up languages such as XML, Markdown or HTML.</p>
+<p>The example below shows a plain text sentence wrapped into HTML tags for paragraphs <code class="docutils literal notranslate"><span class="pre">&lt;p&gt;</span></code>.</p>
+<p>The opening tag <code class="docutils literal notranslate"><span class="pre">&lt;p&gt;</span></code> and the closing tag <code class="docutils literal notranslate"><span class="pre">&lt;/p&gt;</span></code> instruct the computer that any content placed between these tags form a paragraph.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;p&gt;This is an example sentence.&lt;/p&gt;
+</pre></div>
+</div>
+<p>This information is used for structuring plain text when <em>rendering</em> text for display, typically by styling its appearance.</p>
+</div>
+<div class="section" id="Why-does-this-matter?">
+<h3>Why does this matter?<a class="headerlink" href="#Why-does-this-matter?" title="Permalink to this headline">¶</a></h3>
+<p>If you collect a bunch of texts for a corpus, chances are that some originated in rich or structured format, depending on the medium these texts came from.</p>
+<p>If you collect printed documents that have been digitized using a technique such as <a class="reference external" href="https://en.wikipedia.org/wiki/Optical_character_recognition">optical character recognition</a> (OCR) and subsequently converted from rich into plain text, the removal of formatting information is likely to introduce errors into the resulting plain text. Working with this kind of “dirty” OCR can have an impact on the results of text analysis (Hill &amp; Hengchen <a class="reference external" href="https://doi.org/10.1093/llc/fqz024">2019</a>).</p>
+<p>If you collect digital documents by scraping discussion forums or websites, you are likely to encounter traces of structured text in the form of markup tags, which may be carried over to plain text during conversion.</p>
+<p>Plain text is by far the most interchangeable format for text, as it is easy to read for computers. This is why programming languages work with plain text, and if you plan to use programming languages to manipulate text, you need to know what plain text is.</p>
+<p>To summarise, when working with plain text, you may need to deal with traces left by conversion from rich or structured text.</p>
+</div>
+</div>
+<div class="section" id="Text-encoding">
+<h2>Text encoding<a class="headerlink" href="#Text-encoding" title="Permalink to this headline">¶</a></h2>
+<p>To be read by computers, plain text needs to be <em>encoded</em>. This is achieved using <em>character encoding</em>, which maps characters (letters, numbers, punctuation, whitespace …) to a numerical representation understood by the computer.</p>
+<p>Ideally, we should not have to deal with low-level operations such as character encoding, but practically we do, because there are multiple systems for encoding characters, and these codings are not compatible with each other. This is the source of endless misery and headache when working with plain text.</p>
+<p>There are two character encoding systems that you are likely to encounter: ASCII and Unicode.</p>
+<div class="section" id="ASCII">
+<h3>ASCII<a class="headerlink" href="#ASCII" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/ASCII">ASCII</a>, which stands for American Standard Code for Information Interchange, is a pioneering character encoding system that has provided a foundation for many modern character encoding systems.</p>
+<p>ASCII is still widely used, but is very limited in terms of its character range. If your language happens to include characters such as ä or ö, you are out of luck with ASCII.</p>
+</div>
+<div class="section" id="Unicode">
+<h3>Unicode<a class="headerlink" href="#Unicode" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Unicode">Unicode</a> is a standard for encoding text in most writing systems used across the world, covering nearly 140 000 characters in modern and historic scripts, symbols and emoji.</p>
+<p>For example, the pizza slice emoji 🍕 has the Unicode “code” <code class="docutils literal notranslate"><span class="pre">U+1F355</span></code>, whereas the corresponding code for a whitespace is <code class="docutils literal notranslate"><span class="pre">U+0020</span></code>.</p>
+<p>Unicode can be implemented by different character encodings, such as <a class="reference external" href="https://en.wikipedia.org/wiki/UTF-8">UTF-8</a>, which is defined by the Unicode standard.</p>
+<p>UTF-8 is backwards compatible with ASCII. In other words, the ASCII character encodings form a subset of UTF-8, which makes our life much easier.</p>
+<p>Even if a plain text file has been <em>encoded</em> in ASCII, we can <em>decode</em> it using UTF-8, but <strong>not vice versa</strong>.</p>
+</div>
+</div>
+<div class="section" id="Loading-plain-text-files-into-Python">
+<h2>Loading plain text files into Python<a class="headerlink" href="#Loading-plain-text-files-into-Python" title="Permalink to this headline">¶</a></h2>
+<p>Plain text files can be loaded into Python using the <code class="docutils literal notranslate"><span class="pre">open()</span></code> function.</p>
+<p>The first argument to the <code class="docutils literal notranslate"><span class="pre">open()</span></code> function must be a string, which contains a <em>path</em> to the file that is being opened.</p>
+<p>In this case, the directory <code class="docutils literal notranslate"><span class="pre">data</span></code> contains a file named <code class="docutils literal notranslate"><span class="pre">NYT_1991-01-16-A15.txt</span></code>. The directory and the filename are separated by the backslash <code class="docutils literal notranslate"><span class="pre">/</span></code>, as shown below.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Open a file and assign it to the variable &#39;file&#39;</span>
+<span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="s1">&#39;data/NYT_1991-01-16-A15.txt&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>By default, Python 3 assumes that the text is encoded using UTF-8, but we can make this explicit using the <code class="docutils literal notranslate"><span class="pre">encoding</span></code> argument.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">encoding</span></code> argument takes a string as its input: we pass <code class="docutils literal notranslate"><span class="pre">utf-8</span></code> to the argument to declare that the plain text is encoded in UTF-8.</p>
+<p>Moreover, we use the <code class="docutils literal notranslate"><span class="pre">mode</span></code> argument to define that we only want to open the file for <em>reading</em>, which is done by passing the string <code class="docutils literal notranslate"><span class="pre">r</span></code> to the argument.</p>
+<p>If we call the variable <code class="docutils literal notranslate"><span class="pre">file</span></code>, we see a Python object that contains three arguments: the path to the file under the argument <code class="docutils literal notranslate"><span class="pre">name</span></code> and the <code class="docutils literal notranslate"><span class="pre">mode</span></code> and <code class="docutils literal notranslate"><span class="pre">encoding</span></code> arguments that we specified above.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Call the variable to examine the object</span>
+<span class="n">file</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;_io.TextIOWrapper name=&#39;data/NYT_1991-01-16-A15.txt&#39; mode=&#39;r&#39; encoding=&#39;utf-8&#39;&gt;
+</pre></div></div>
+</div>
+<p>Calling the file, however, is not sufficient to inspect its contents. We must use the <code class="docutils literal notranslate"><span class="pre">read()</span></code> method provided by this object to read the contents of the file first.</p>
+<p>We assign the result to the variable <code class="docutils literal notranslate"><span class="pre">text</span></code>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Use the read() method to read the file context and assign the</span>
+<span class="c1"># result to the variable &#39;text&#39;</span>
+<span class="n">text</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>Let’s check the result of the <code class="docutils literal notranslate"><span class="pre">read()</span></code> method which is now stored under the variable <code class="docutils literal notranslate"><span class="pre">text</span></code>.</p>
+<p>The text is fairly long, so let’s just take a slice of the text containing the first 500 characters, which can be achieved using brackets <code class="docutils literal notranslate"><span class="pre">[:500]</span></code>.</p>
+<p>As we learned in <a class="reference internal" href="../part_i/getting_started_with_python.html"><span class="doc">Part I</span></a>, adding brackets directly after the name of a variable allows accessing parts of the object, if the object allows this. For example, the expression <code class="docutils literal notranslate"><span class="pre">text[1]</span></code> would retrieve the character at position 1 in the string object under the variable <code class="docutils literal notranslate"><span class="pre">text</span></code>.</p>
+<p>Adding the colon <code class="docutils literal notranslate"><span class="pre">:</span></code> as a prefix to the number instructs Python to retrieve all characters contained in the string up to the 500th one.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Call the first 500 characters under the variable &#39;text&#39;</span>
+<span class="n">text</span><span class="p">[:</span><span class="mi">500</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;\ufeffU.S. TAKING STEPS TO CURB TERRORISM: F.B.I. Is Ordered to Find Iraqis Whose Visas Have Expired\nBy JAMES BARRON\nNew York Times (1923-Current file); Jan 16, 1991;\nProQuest Historical Newspapers: The New York Times with Index pg. A15\nU.S. TAKING STEPS TO CURB TERRORISM\nF.B.I. Is Ordered to Find Iraqis Whose Visas Have Expired\nBy JAMES BARRON\n   The Federal Bureau of Investigation has been ordered to track down as many as 3,000 Iraqis in this country whose visas have expired, the Justice Department&#39;
+</pre></div></div>
+</div>
+<p>Most of the text is indeed legible, but there are some strange character sequences, such as <code class="docutils literal notranslate"><span class="pre">\ufeff</span></code> in the very beginning of the text, and the numerous <code class="docutils literal notranslate"><span class="pre">\n</span></code> sequences occurring throughout the text.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">\ufeff</span></code> sequence is simply an explicit declaration (“signature”) that the file has been encoded using UTF-8. Not all UTF-8 encoded files contain this sequence.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">\n</span></code> sequences, in turn, indicate a line change.</p>
+<p>This becomes evident if we use Python’s <code class="docutils literal notranslate"><span class="pre">print()</span></code> function to print the first 1000 characters stored in the <code class="docutils literal notranslate"><span class="pre">text</span></code> variable.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print the first 1000 characters under the variable &#39;text&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">[:</span><span class="mi">1000</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+﻿U.S. TAKING STEPS TO CURB TERRORISM: F.B.I. Is Ordered to Find Iraqis Whose Visas Have Expired
+By JAMES BARRON
+New York Times (1923-Current file); Jan 16, 1991;
+ProQuest Historical Newspapers: The New York Times with Index pg. A15
+U.S. TAKING STEPS TO CURB TERRORISM
+F.B.I. Is Ordered to Find Iraqis Whose Visas Have Expired
+By JAMES BARRON
+   The Federal Bureau of Investigation has been ordered to track down as many as 3,000 Iraqis in this country whose visas have expired, the Justice Department said yesterday.
+   The announcement came as security precautions were tightened throughout the United States. From financial exchanges in lower Manhattan to cloakrooms in Washington and homeless shelters in California, unfamiliar rituals were the order of the day. In many cities, identification badges were being given close scrutiny in office buildings that used to be open to anyone.
+   Concerns about terrorist attack disrupted other daily routines as well. No fast-food deliveries are being all
+</pre></div></div>
+</div>
+<p>As you can see, Python knows how to interpret <code class="docutils literal notranslate"><span class="pre">\n</span></code> character sequences and inserts a line break if it encounters this sequence.</p>
+</div>
+<div class="section" id="Manipulating-text">
+<h2>Manipulating text<a class="headerlink" href="#Manipulating-text" title="Permalink to this headline">¶</a></h2>
+<p>Because the entire text stored under the variable <code class="docutils literal notranslate"><span class="pre">text</span></code> is a Python string object, we can use all methods available for manipulating strings.</p>
+<p>Let’s use the <code class="docutils literal notranslate"><span class="pre">replace()</span></code> method to replace all line breaks <code class="docutils literal notranslate"><span class="pre">&quot;\n&quot;</span></code> with empty strings <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> and store the text under the variable <code class="docutils literal notranslate"><span class="pre">processed_text</span></code>.</p>
+<p>Finally, we use the <code class="docutils literal notranslate"><span class="pre">print()</span></code> function to print out a slice containing the first 1000 characters using the brackets <code class="docutils literal notranslate"><span class="pre">[:1000]</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Replace line breaks \n with empty strings and assign the result to</span>
+<span class="c1"># the variable &#39;processed_text&#39;</span>
+<span class="n">processed_text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+<span class="c1"># Print out the first 1000 characters under the variable &#39;processed_text&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">processed_text</span><span class="p">[:</span><span class="mi">1000</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+﻿U.S. TAKING STEPS TO CURB TERRORISM: F.B.I. Is Ordered to Find Iraqis Whose Visas Have ExpiredBy JAMES BARRONNew York Times (1923-Current file); Jan 16, 1991;ProQuest Historical Newspapers: The New York Times with Index pg. A15U.S. TAKING STEPS TO CURB TERRORISMF.B.I. Is Ordered to Find Iraqis Whose Visas Have ExpiredBy JAMES BARRON   The Federal Bureau of Investigation has been ordered to track down as many as 3,000 Iraqis in this country whose visas have expired, the Justice Department said yesterday.   The announcement came as security precautions were tightened throughout the United States. From financial exchanges in lower Manhattan to cloakrooms in Washington and homeless shelters in California, unfamiliar rituals were the order of the day. In many cities, identification badges were being given close scrutiny in office buildings that used to be open to anyone.   Concerns about terrorist attack disrupted other daily routines as well. No fast-food deliveries are being allowed at t
+</pre></div></div>
+</div>
+<p>This simple replacement operation allows us to remove erroneous line breaks within the text.</p>
+<p>We can still identify actual line breaks by the indentations at the beginning of each paragraph, which are marked by three whitespaces.</p>
+<p>We can use this information to insert actual line breaks back into the text by replacing sequences of three whitespaces with the line break sequence and three whitespaces.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Replace three whitespaces with a line break and three white spaces</span>
+<span class="c1"># Store the result under the same variable &#39;processed_text&#39;</span>
+<span class="n">processed_text</span> <span class="o">=</span> <span class="n">processed_text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;   &quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">    &quot;</span><span class="p">)</span>
+
+<span class="c1"># Print out the first 1000 characters under the variable &#39;processed_text&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">processed_text</span><span class="p">[:</span><span class="mi">1000</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+﻿U.S. TAKING STEPS TO CURB TERRORISM: F.B.I. Is Ordered to Find Iraqis Whose Visas Have ExpiredBy JAMES BARRONNew York Times (1923-Current file); Jan 16, 1991;ProQuest Historical Newspapers: The New York Times with Index pg. A15U.S. TAKING STEPS TO CURB TERRORISMF.B.I. Is Ordered to Find Iraqis Whose Visas Have ExpiredBy JAMES BARRON
+    The Federal Bureau of Investigation has been ordered to track down as many as 3,000 Iraqis in this country whose visas have expired, the Justice Department said yesterday.
+    The announcement came as security precautions were tightened throughout the United States. From financial exchanges in lower Manhattan to cloakrooms in Washington and homeless shelters in California, unfamiliar rituals were the order of the day. In many cities, identification badges were being given close scrutiny in office buildings that used to be open to anyone.
+    Concerns about terrorist attack disrupted other daily routines as well. No fast-food deliveries are being allowe
+</pre></div></div>
+</div>
+<p>This is an extremely tedious way of manipulating the text.</p>
+<p>To make the process more efficient, we can leverage two other Python data structures: <em>lists</em> and <em>tuples</em>.</p>
+<p>Let’s start by defining a list named <code class="docutils literal notranslate"><span class="pre">pipeline</span></code>. We can create and populate a list by simply placing objects within brackets <code class="docutils literal notranslate"><span class="pre">[]</span></code>. Each list item must be separated by a comma (<code class="docutils literal notranslate"><span class="pre">,</span></code>).</p>
+<p>As we saw above, the <code class="docutils literal notranslate"><span class="pre">replace()</span></code> method takes two strings as inputs.</p>
+<p>To combine two strings into a single Python object, the most obvious candidate is a data structure named <em>tuple</em>, which consist of finite, ordered lists of items.</p>
+<p>Tuples are marked by parentheses <code class="docutils literal notranslate"><span class="pre">(</span> <span class="pre">)</span></code>: items in a tuple are also separated by a comma.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define a list with two tuples, of which each consist of two strings</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;   &quot;</span><span class="p">,</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">   &quot;</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<p>This shows how different data structures are often nested in Python: the list consists of tuples, and the tuples consist of string objects.</p>
+<p>We can now perform a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop over each item in the list.</p>
+<p>Each item in the list consists of a tuple, which contains two strings.</p>
+<p>Note that to enter a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop, Python expects the next line to be indented. Press the Tab ↹ key on your keyboard to move the cursor.</p>
+<p>What happens next is exactly same that we did before with using the <code class="docutils literal notranslate"><span class="pre">replace()</span></code> method, but instead of manually defining the strings that we want to replace, we use the strings contained in the variables <code class="docutils literal notranslate"><span class="pre">old</span></code> and <code class="docutils literal notranslate"><span class="pre">new</span></code>!</p>
+<p>After each loop, we automatically store the result in to the variable <code class="docutils literal notranslate"><span class="pre">updated_text</span></code>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Let&#39;s first create a copy of the original text to manipulate during the loop</span>
+<span class="n">updated_text</span> <span class="o">=</span> <span class="n">text</span>
+
+<span class="c1"># Loop over tuples in the list &#39;pipeline&#39;. Each tuple has two values, which we</span>
+<span class="c1"># assign to variables &#39;old&#39; and &#39;new&#39; on the fly!</span>
+<span class="k">for</span> <span class="n">old</span><span class="p">,</span> <span class="n">new</span> <span class="ow">in</span> <span class="n">pipeline</span><span class="p">:</span>
+
+    <span class="c1"># Use the replace() method to replace the string under the variable &#39;old&#39;</span>
+    <span class="c1"># with the string under the variable new &#39;new&#39;</span>
+    <span class="n">updated_text</span> <span class="o">=</span> <span class="n">updated_text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="n">old</span><span class="p">,</span> <span class="n">new</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">updated_text</span><span class="p">[:</span><span class="mi">1000</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+﻿U.S. TAKING STEPS TO CURB TERRORISM: F.B.I. Is Ordered to Find Iraqis Whose Visas Have ExpiredBy JAMES BARRONNew York Times (1923-Current file); Jan 16, 1991;ProQuest Historical Newspapers: The New York Times with Index pg. A15U.S. TAKING STEPS TO CURB TERRORISMF.B.I. Is Ordered to Find Iraqis Whose Visas Have ExpiredBy JAMES BARRON
+   The Federal Bureau of Investigation has been ordered to track down as many as 3,000 Iraqis in this country whose visas have expired, the Justice Department said yesterday.
+   The announcement came as security precautions were tightened throughout the United States. From financial exchanges in lower Manhattan to cloakrooms in Washington and homeless shelters in California, unfamiliar rituals were the order of the day. In many cities, identification badges were being given close scrutiny in office buildings that used to be open to anyone.
+   Concerns about terrorist attack disrupted other daily routines as well. No fast-food deliveries are being allowed a
+</pre></div></div>
+</div>
+<p>The syntax for the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop is as follows: declare the beginning of a loop using <code class="docutils literal notranslate"><span class="pre">for</span></code>, followed by a <em>variable</em> assigned to the items retrieved from the list.</p>
+<p>The list that is being looped over is preceded by <code class="docutils literal notranslate"><span class="pre">in</span></code> and the name of the variable assigned to the entire <em>list</em>.</p>
+<p>To better understand how a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop works, let’s define only one variable, <code class="docutils literal notranslate"><span class="pre">our_tuple</span></code>, to refer to the items that we fetch from the list.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Loop over the items under the variable &#39;pipeline&#39;</span>
+<span class="k">for</span> <span class="n">our_tuple</span> <span class="ow">in</span> <span class="n">pipeline</span><span class="p">:</span>
+
+    <span class="c1"># Print the returned object</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">our_tuple</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(&#39;\n&#39;, &#39;&#39;)
+(&#39;   &#39;, &#39;\n   &#39;)
+</pre></div></div>
+</div>
+<p>This print outs the tuples!</p>
+<p>Python is smart enough to understand that a single variable refers to the single items, or <em>tuples</em> in the list, whereas for two items, it must proceed to the <em>strings</em> contained within the tuple.</p>
+<p>When writing <code class="docutils literal notranslate"><span class="pre">for</span></code> loops, pay close attention to the items contained in the list!</p>
+<p>This should have given you an idea of the basic issues involved in loading and manipulating text using Python.</p>
+<p>The <a class="reference internal" href="basic_text_processing_continued.html"><span class="doc">following section</span></a> builds on these techniques to manipulate texts more efficiently.</p>
+</div>
+</div>
+
+
+              </div>
+              
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
+    <a class='left-prev' id="prev-link" href="../working_with_text.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Part II: Working with Text in Python</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="basic_text_processing_continued.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Manipulating text at scale</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            
+        </div>
+    </div>
+    <footer class="footer">
+  <p>
+    
+      By Tuomo Hiippala<br/>
+    
+        &copy; Copyright 2020- Tuomo Hiippala, CC BY-NC 4.0.<br/>
+  </p>
+</footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+
+  </body>
+</html>
