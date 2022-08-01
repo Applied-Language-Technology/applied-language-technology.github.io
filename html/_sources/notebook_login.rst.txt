@@ -8,7 +8,7 @@ CSC Notebooks is a cloud service provided by `CSC – IT Centre for Science <htt
 
 The CSC Notebooks platform allows users to run their own virtual servers on CSC computers.
 
-To access the platform, open a web browser on your computer and navigate to `CSC Notebooks <https://notebooks-beta.rahtiapp.fi//>`_.
+To access the platform, open a web browser on your computer and navigate to `CSC Notebooks <https://notebooks.csc.fi>`_.
 
 Next, click the green **Login** button. You will be redirected to the login page.
 
