@@ -4,8 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y6ZQJ0S1M2"></script>
 <script>
@@ -19,9 +18,8 @@
     
     <title>Working with discourse-level annotations</title>
     
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -31,13 +29,16 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -47,8 +48,10 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../../_static/togglebutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -61,21 +64,7 @@
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
-
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
     
     <div class="container-fluid" id="banner"></div>
 
@@ -84,10 +73,9 @@
     <div class="container-xl">
       <div class="row">
           
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -265,13 +253,8 @@
 </ul>
 
     </div>
-</nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-        </div>
-    </div>
-    <div id="rtd-footer-container"></div>
+</nav> <!-- To handle the deprecated key -->
+
 </div>
 
 
@@ -279,159 +262,91 @@
 
 
           
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="header-article row sticky-top noprint">
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
         
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/Applied-Language-Technology/website/binder?urlpath=lab/tree/notebooks/part_iii/06_text_linguistics.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
-  
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../../_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-<a href="https://github.com/Applied-Language-Technology/website"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="bottom"
-title="Source repository"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-
-</a>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../../_sources/notebooks/part_iii/06_text_linguistics.ipynb.txt"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/part_iii/06_text_linguistics.ipynb.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/Applied-Language-Technology/website"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
     </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/Applied-Language-Technology/website/binder?urlpath=lab/tree/notebooks/part_iii/06_text_linguistics.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#introducing-the-conll-u-annotation-schema">
    Introducing the CoNLL-U annotation schema
@@ -481,11 +396,12 @@ title="Print to PDF"
  </li>
 </ul>
 
-    </nav>
-</div>
+            </nav>
+        </div>
     </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Working with discourse-level annotations</h1>
@@ -551,12 +467,11 @@ title="Print to PDF"
                     </div>
                 </div>
             </div>
-            <main id="main-content" role="main">
-                
+            
               <div>
                 
-  <section id="working-with-discourse-level-annotations">
-<h1>Working with discourse-level annotations<a class="headerlink" href="#working-with-discourse-level-annotations" title="Permalink to this headline">#</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="working-with-discourse-level-annotations">
+<h1>Working with discourse-level annotations<a class="headerlink" href="#working-with-discourse-level-annotations" title="Permalink to this headline">¶</a></h1>
 <p>In the previous sections, we have created linguistic annotations for plain text using various natural language processing techniques.</p>
 <p>In this section, we learn how to use pre-existing linguistic annotations, focusing especially on annotations that target phenomena above the level of a clause.</p>
 <p>After reading through this section, you should:</p>
@@ -566,26 +481,26 @@ title="Print to PDF"
 <li><p>know how to annotate <em>Spans</em> in a <em>Doc</em> object using <em>SpanGroups</em></p></li>
 <li><p>know how to load CoNLL-U annotated corpora into spaCy</p></li>
 </ul>
-<section id="introducing-the-conll-u-annotation-schema">
-<h2>Introducing the CoNLL-U annotation schema<a class="headerlink" href="#introducing-the-conll-u-annotation-schema" title="Permalink to this headline">#</a></h2>
+<div class="section" id="introducing-the-conll-u-annotation-schema">
+<h2>Introducing the CoNLL-U annotation schema<a class="headerlink" href="#introducing-the-conll-u-annotation-schema" title="Permalink to this headline">¶</a></h2>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html">
-        <iframe
-            width="600"
-            height="350"
-            src="https://www.youtube.com/embed/YU7MtTDu1g8"
-            frameborder="0"
-            allowfullscreen
-            
-        ></iframe>
-        </div></div>
+<iframe
+    width="600"
+    height="350"
+    src="https://www.youtube.com/embed/YU7MtTDu1g8"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</div></div>
 </div>
 <p>CoNLL-X is an annotation schema for describing linguistic features across diverse languages (Buchholz and Marsi <a class="reference external" href="https://www.aclweb.org/anthology/W06-2920">2006</a>), which was originally developed to facilitate collaboration on so-called shared tasks in research on natural language processing (see e.g. Nissim et al. <a class="reference external" href="https://doi.org/10.1162/COLI_a_00304">2017</a>).</p>
 <p><a class="reference external" href="https://universaldependencies.org/format.html">CoNLL-U</a> is a further development of this annotation schema for the Universal Dependencies formalism, which was introduced in <a class="reference internal" href="02_universal_dependencies.html"><span class="doc std std-doc">Part III</span></a>. This annotation schema is commonly used for distributing linguistic corpora in projects that build on this formalism, but it is not uncommon to see other projects use CoNLL-U as well.</p>
 <p>In addition to <a class="reference external" href="https://universaldependencies.org/">numerous modern languages</a>, one can find, for example, CoNLL-U annotated corpora for ancient languages such Akkadian (Luukko et al. <a class="reference external" href="https://www.aclweb.org/anthology/2020.tlt-1.11">2020</a>) and Coptic (Zeldes and Abrams <a class="reference external" href="https://www.aclweb.org/anthology/W18-6022">2018</a>).</p>
-<section id="the-components-of-the-conll-u-annotation-schema">
-<h3>The components of the CoNLL-U annotation schema<a class="headerlink" href="#the-components-of-the-conll-u-annotation-schema" title="Permalink to this headline">#</a></h3>
+<div class="section" id="the-components-of-the-conll-u-annotation-schema">
+<h3>The components of the CoNLL-U annotation schema<a class="headerlink" href="#the-components-of-the-conll-u-annotation-schema" title="Permalink to this headline">¶</a></h3>
 <p>CoNLL-U annotations are distributed as plain text files (see <a class="reference external" href="http://localhost:8888/notebooks/part_ii/01_basic_text_processing.ipynb">Part II</a>).</p>
 <p>The annotation files contain three types of lines: <strong>comment lines</strong>, <strong>word lines</strong> and <strong>blank lines</strong>.</p>
 <p><strong>Comment lines</strong> precede word lines and start with a hash character (#). These lines can be used to provide metadata about the word lines that follow.</p>
@@ -594,7 +509,7 @@ title="Print to PDF"
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">ID	FORM	LEMMA	UPOS	XPOS	FEATS	HEAD	DEPREL	DEPS	MISC</span>
 </pre></div>
 </div>
-<ol class="arabic simple">
+<ol class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">ID</span></code>: Index of the word in sequence</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">FORM</span></code>: The form of a word or punctuation symbol</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">LEMMA</span></code>: Lemma or the base form of a word</p></li>
@@ -607,21 +522,21 @@ title="Print to PDF"
 <li><p><code class="docutils literal notranslate"><span class="pre">MISC</span></code>: Any additional annotations</p></li>
 </ol>
 <p>Finally, a <strong>blank line</strong> after word lines is used to separate sentences.</p>
-</section>
-<section id="interacting-with-conll-u-annotations-in-python">
-<h3>Interacting with CoNLL-U annotations in Python<a class="headerlink" href="#interacting-with-conll-u-annotations-in-python" title="Permalink to this headline">#</a></h3>
+</div>
+<div class="section" id="interacting-with-conll-u-annotations-in-python">
+<h3>Interacting with CoNLL-U annotations in Python<a class="headerlink" href="#interacting-with-conll-u-annotations-in-python" title="Permalink to this headline">¶</a></h3>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html">
-        <iframe
-            width="600"
-            height="350"
-            src="https://www.youtube.com/embed/lvJRFMvWtFI"
-            frameborder="0"
-            allowfullscreen
-            
-        ></iframe>
-        </div></div>
+<iframe
+    width="600"
+    height="350"
+    src="https://www.youtube.com/embed/lvJRFMvWtFI"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</div></div>
 </div>
 <p>To explore CoNLL-U annotations using Python, let’s start by importing <a class="reference external" href="https://github.com/EmilStenstrom/conllu/">conllu</a>, a small library for parsing CoNLL-U annotations into various data structures native to Python.</p>
 <div class="cell docutils container">
@@ -707,7 +622,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TokenList&lt;How, to, Cope, With, a, Double, Parachute, Failure, metadata={newdoc id: &quot;GUM_whow_parachute&quot;, sent_id: &quot;GUM_whow_parachute-1&quot;, text: &quot;How to Cope With a Double Parachute Failure&quot;, s_type: &quot;inf&quot;}&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>TokenList&lt;How, to, Cope, With, a, Double, Parachute, Failure&gt;
 </pre></div>
 </div>
 </div>
@@ -778,10 +693,10 @@ title="Print to PDF"
 <p>These units and their identifiers do not correspond words or sentences in the document, but to <em>elementary discourse units</em>.</p>
 <p>These elementary discourse units define an additional level of <em>segmentation</em>, which seeks to define units of discourse that are placed in various relations to one another.</p>
 <p>In classical Rhetorical Structure Theory, these elementary discourse units (abbreviated EDU) often correspond to clauses, but this is not a requirement set by the theory.</p>
-</section>
-</section>
-<section id="adding-discourse-level-annotations-to-doc-objects">
-<h2>Adding discourse-level annotations to <em>Doc</em> objects<a class="headerlink" href="#adding-discourse-level-annotations-to-doc-objects" title="Permalink to this headline">#</a></h2>
+</div>
+</div>
+<div class="section" id="adding-discourse-level-annotations-to-doc-objects">
+<h2>Adding discourse-level annotations to <em>Doc</em> objects<a class="headerlink" href="#adding-discourse-level-annotations-to-doc-objects" title="Permalink to this headline">¶</a></h2>
 <p>As pointed out above, the GUM corpus uses the key <code class="docutils literal notranslate"><span class="pre">Discourse</span></code> in the <code class="docutils literal notranslate"><span class="pre">misc</span></code> field to indicate the <strong>beginning</strong> of an elementary discourse unit.</p>
 <p>By tracking <em>Token</em> objects with these properties, we can identify the boundaries of elementary discourse units, which are not necessarily aligned with sentences in the <em>TokenList</em> object.</p>
 <p>We can keep track of these boundaries by counting <em>Tokens</em> and noting down the indices of <em>Tokens</em> that contain the <code class="docutils literal notranslate"><span class="pre">Discourse</span></code> key under <code class="docutils literal notranslate"><span class="pre">misc</span></code>.</p>
@@ -926,15 +841,15 @@ title="Print to PDF"
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html">
-        <iframe
-            width="600"
-            height="350"
-            src="https://www.youtube.com/embed/zYXYK4KbgeI"
-            frameborder="0"
-            allowfullscreen
-            
-        ></iframe>
-        </div></div>
+<iframe
+    width="600"
+    height="350"
+    src="https://www.youtube.com/embed/zYXYK4KbgeI"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1123,8 +1038,8 @@ Now applying component ner ...
 </div>
 </div>
 <p>Now that we have a fully-annotated <em>Doc</em> object, we can proceed to enhance this object with discourse-level annotations collected from the CoNLL-U annotations, which are stored in the lists <code class="docutils literal notranslate"><span class="pre">discourse_units</span></code>, <code class="docutils literal notranslate"><span class="pre">sent_types</span></code> and <code class="docutils literal notranslate"><span class="pre">relations</span></code>.</p>
-<section id="adding-information-on-sentence-mood">
-<h3>Adding information on sentence mood<a class="headerlink" href="#adding-information-on-sentence-mood" title="Permalink to this headline">#</a></h3>
+<div class="section" id="adding-information-on-sentence-mood">
+<h3>Adding information on sentence mood<a class="headerlink" href="#adding-information-on-sentence-mood" title="Permalink to this headline">¶</a></h3>
 <p>Let’s start by adding information on sentence type to the <em>Doc</em> object, which we collected into the list <code class="docutils literal notranslate"><span class="pre">sent_types</span></code>.</p>
 <p>These annotations provide information on grammatical mood of the sentence, as exemplified by categories such as <em>infinitive</em>, <em>declarative</em> and <em>imperative</em>.</p>
 <p>Let’s check out the first ten items in the list <code class="docutils literal notranslate"><span class="pre">sent_types</span></code>.</p>
@@ -1162,15 +1077,15 @@ Now applying component ner ...
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html">
-        <iframe
-            width="600"
-            height="350"
-            src="https://www.youtube.com/embed/9S0MT4xISW0"
-            frameborder="0"
-            allowfullscreen
-            
-        ></iframe>
-        </div></div>
+<iframe
+    width="600"
+    height="350"
+    src="https://www.youtube.com/embed/9S0MT4xISW0"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1262,9 +1177,9 @@ Now applying component ner ...
 </div>
 </div>
 <p>As you can see, this returns a sentence with imperative mood, which suggests that this information has been successfully added to the <em>Doc</em> object.</p>
-</section>
-<section id="adding-information-on-discourse-relations">
-<h3>Adding information on discourse relations<a class="headerlink" href="#adding-information-on-discourse-relations" title="Permalink to this headline">#</a></h3>
+</div>
+<div class="section" id="adding-information-on-discourse-relations">
+<h3>Adding information on discourse relations<a class="headerlink" href="#adding-information-on-discourse-relations" title="Permalink to this headline">¶</a></h3>
 <p>For defining the boundaries of elementary discourse units, we need to use the information contained in the list <code class="docutils literal notranslate"><span class="pre">discourse_units</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1432,10 +1347,10 @@ Now applying component ner ...
 </div>
 </div>
 <p>This gives us the two elementary discourse units participating in the “circumstance” relation.</p>
-</section>
-</section>
-<section id="converting-conll-u-annotations-into-doc-objects">
-<h2>Converting CoNLL-U annotations into <em>Doc</em> objects<a class="headerlink" href="#converting-conll-u-annotations-into-doc-objects" title="Permalink to this headline">#</a></h2>
+</div>
+</div>
+<div class="section" id="converting-conll-u-annotations-into-doc-objects">
+<h2>Converting CoNLL-U annotations into <em>Doc</em> objects<a class="headerlink" href="#converting-conll-u-annotations-into-doc-objects" title="Permalink to this headline">¶</a></h2>
 <p>If you do not need to enrich spaCy objects with additional information, but simply wish to convert CoNLL-U annotations into <em>Doc</em> objects, spaCy provides a convenience function, <code class="docutils literal notranslate"><span class="pre">conllu_to_docs()</span></code>, for converting CoNLL-U annotated data into spacy <em>Doc</em> objects.</p>
 <p>Let’s start by importing the function from the <code class="docutils literal notranslate"><span class="pre">training</span></code> submodule, as this function is mainly used for loading CoNLL-U annotated data for training language models. We also import the class for the <em>Doc</em> object.</p>
 <div class="cell docutils container">
@@ -1531,7 +1446,7 @@ Failure NN NOUN Number=Sing obl Cope
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Get the noun chunks in the Doc</span>
 <span class="ne">----&gt; </span><span class="mi">2</span> <span class="nb">list</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">noun_chunks</span><span class="p">)</span>
 
-<span class="nn">File ~/alt-build/lib/python3.8/site-packages/spacy/tokens/doc.pyx:852,</span> in <span class="ni">noun_chunks</span><span class="nt">()</span>
+<span class="nn">File ~/alt/lib/python3.9/site-packages/spacy/tokens/doc.pyx:852,</span> in <span class="ni">noun_chunks</span><span class="nt">()</span>
 
 <span class="ne">NotImplementedError</span>: [E894] The &#39;noun_chunks&#39; syntax iterator is not implemented for language &#39;&#39;.
 </pre></div>
@@ -1576,17 +1491,15 @@ Failure NN NOUN Number=Sing obl Cope
 </div>
 </div>
 <p>This section should have given you a basic understanding of the CoNLL-U annotation schema and how corpora annotated using this schema can be added to spaCy objects.</p>
-</section>
-</section>
+</div>
+</div>
 
 
               </div>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="05_embeddings_continued.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -1602,25 +1515,21 @@ Failure NN NOUN Number=Sing obl Cope
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            </footer>
+            
         </div>
     </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-</p>
-        </footer>
-    </div>
+    <footer class="footer">
+  <p>
     
-</div>
+  </p>
+</footer>
+</main>
 
 
       </div>
     </div>
   
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
-
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
    <div class="footer"><a href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0;padding:10px" src="https://mirrors.creativecommons.org/presskit/buttons/88x31/svg/by-nc.svg"/></a> © 2020– <a href="http://www.helsinki.fi/~thiippal">Tuomo Hiippala</a>
        in collaboration with <a href="https://mooc.fi/en" target="_blank">mooc.fi<img src="https://applied-language-technology.mooc.fi/html/_static/moocfi.svg" style="border-width:0;padding:2px" width=50></a></div>

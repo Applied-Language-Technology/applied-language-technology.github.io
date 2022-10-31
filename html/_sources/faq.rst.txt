@@ -2,6 +2,12 @@
 Frequently Asked Questions
 **************************
 
+**Question:** I'm stuck with an exercise. Should I e-mail the instructor?
+
+**Answer:** After reading through this FAQ, please see the previous discussions on `Gitter <https://gitter.im/Applied-Language-Technology-MOOC/community>`_ first.
+
+-----
+
 **Question:** When I attempt to test my exercises using :ref:`TMC <tmc_usage>` by entering the command :code:`tmc test`, I receive an error that says "Error in plugin". What should I do?
 
 **Answer:** This means that your code causes the Jupyter Notebook that contains the exercise to crash. Before running the command :code:`tmc test`, make sure you can run all the cells in the notebook without crashing the notebook. Note that this does not cover errors raised by your code.
@@ -30,4 +36,9 @@ Frequently Asked Questions
 
 **Answer:** Did you use a list comprehension to create the list? If so, try a for loop instead. Unfortunately the TMC tests have problems with list comprehensions, and this issue has not been solved yet. 
 
+-----
+
+**Question:** When I try to download a Stanza language model and run tests on the TMC server, I get an error saying that a connection cannot be established to the server that hosts the language models.
+
+**Answer:** Read the assignment instructions again: there is no need to download a language model in any exercise. Outgoing connections from the TMC server are banned for security reasons.
 

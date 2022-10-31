@@ -4,8 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y6ZQJ0S1M2"></script>
 <script>
@@ -19,9 +18,8 @@
     
     <title>Managing textual data using pandas</title>
     
-  <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../../_static/css/theme.css" rel="stylesheet">
+  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -31,13 +29,16 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
     
-  <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+      
+
+    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
 
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -47,8 +48,10 @@
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
     <script src="../../_static/togglebutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -61,21 +64,7 @@
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
-
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
     
     <div class="container-fluid" id="banner"></div>
 
@@ -84,10 +73,9 @@
     <div class="container-xl">
       <div class="row">
           
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -265,13 +253,8 @@
 </ul>
 
     </div>
-</nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-        </div>
-    </div>
-    <div id="rtd-footer-container"></div>
+</nav> <!-- To handle the deprecated key -->
+
 </div>
 
 
@@ -279,159 +262,91 @@
 
 
           
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <div class="header-article row sticky-top noprint">
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
         
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/Applied-Language-Technology/website/binder?urlpath=lab/tree/notebooks/part_ii/06_managing_data.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
-  
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../../_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-expand"></i>
-  </span>
-
-</button>
-<a href="https://github.com/Applied-Language-Technology/website"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="bottom"
-title="Source repository"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-
-</a>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../../_sources/notebooks/part_ii/06_managing_data.ipynb.txt"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/notebooks/part_ii/06_managing_data.ipynb.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
     </div>
 </div>
 
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
+            <!-- Source interaction buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
+    <div class="dropdown-buttons sourcebuttons">
+        <a class="repository-button"
+            href="https://github.com/Applied-Language-Technology/website"><button type="button" class="btn btn-secondary topbarbtn"
+                data-toggle="tooltip" data-placement="left" title="Source repository"><i
+                    class="fab fa-github"></i>repository</button></a>
+        
+        
     </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
+</div>
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/Applied-Language-Technology/website/binder?urlpath=lab/tree/notebooks/part_ii/06_managing_data.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="../../_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#importing-data-to-pandas">
    Importing data to pandas
@@ -466,11 +381,12 @@ title="Print to PDF"
  </li>
 </ul>
 
-    </nav>
-</div>
+            </nav>
+        </div>
     </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Managing textual data using pandas</h1>
@@ -521,12 +437,11 @@ title="Print to PDF"
                     </div>
                 </div>
             </div>
-            <main id="main-content" role="main">
-                
+            
               <div>
                 
-  <section id="managing-textual-data-using-pandas">
-<h1>Managing textual data using pandas<a class="headerlink" href="#managing-textual-data-using-pandas" title="Permalink to this headline">#</a></h1>
+  <div class="tex2jax_ignore mathjax_ignore section" id="managing-textual-data-using-pandas">
+<h1>Managing textual data using pandas<a class="headerlink" href="#managing-textual-data-using-pandas" title="Permalink to this headline">¶</a></h1>
 <p>This section introduces how to prepare and manage textual data for analysis using <a class="reference external" href="http://pandas.pydata.org/">pandas</a>, a Python library for working with tabular data.</p>
 <p>After reading this section, you should know:</p>
 <ul class="simple">
@@ -535,20 +450,20 @@ title="Print to PDF"
 <li><p>how to append data to a pandas DataFrame</p></li>
 <li><p>how to save the data in a pandas DataFrame</p></li>
 </ul>
-<section id="importing-data-to-pandas">
-<h2>Importing data to pandas<a class="headerlink" href="#importing-data-to-pandas" title="Permalink to this headline">#</a></h2>
+<div class="section" id="importing-data-to-pandas">
+<h2>Importing data to pandas<a class="headerlink" href="#importing-data-to-pandas" title="Permalink to this headline">¶</a></h2>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html">
-        <iframe
-            width="600"
-            height="350"
-            src="https://www.youtube.com/embed/UQYyCVGZbvk"
-            frameborder="0"
-            allowfullscreen
-            
-        ></iframe>
-        </div></div>
+<iframe
+    width="600"
+    height="350"
+    src="https://www.youtube.com/embed/UQYyCVGZbvk"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</div></div>
 </div>
 <p>Let’s start by importing the pandas library.</p>
 <p>Note that we can control the name of the imported module using the <code class="docutils literal notranslate"><span class="pre">as</span></code> addition to the <code class="docutils literal notranslate"><span class="pre">import</span></code> command. pandas is commonly abbreviated <code class="docutils literal notranslate"><span class="pre">pd</span></code>.</p>
@@ -560,8 +475,8 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<section id="importing-data-from-a-single-file">
-<h3>Importing data from a single file<a class="headerlink" href="#importing-data-from-a-single-file" title="Permalink to this headline">#</a></h3>
+<div class="section" id="importing-data-from-a-single-file">
+<h3>Importing data from a single file<a class="headerlink" href="#importing-data-from-a-single-file" title="Permalink to this headline">¶</a></h3>
 <p>You must often load and prepare the data yourself, either from a single file or from multiple files.</p>
 <p>Typical formats for distributing corpora include CSV files, which stands for Comma-separated Values, and JSON, which stands for JavaScript Object Notation or simple plain text files.</p>
 <p>pandas provides plenty of functions for <a class="reference external" href="https://pandas.pydata.org/pandas-docs/stable/user_guide/io.html">reading data in various formats</a>. You can even try importing Excel sheets!</p>
@@ -704,9 +619,9 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-</section>
-<section id="importing-data-from-multiple-files">
-<h3>Importing data from multiple files<a class="headerlink" href="#importing-data-from-multiple-files" title="Permalink to this headline">#</a></h3>
+</div>
+<div class="section" id="importing-data-from-multiple-files">
+<h3>Importing data from multiple files<a class="headerlink" href="#importing-data-from-multiple-files" title="Permalink to this headline">¶</a></h3>
 <p>Another common scenario is that you have multiple files with text data, which you want to load into <em>pandas</em>.</p>
 <p>Let’s first collect the files that we want to load.</p>
 <div class="cell docutils container">
@@ -866,22 +781,22 @@ title="Print to PDF"
 </div>
 <p>As you can see, the DataFrame has been populated with filenames and text.</p>
 <p>Now that we know how to load data into DataFrames, we can turn towards accessing and manipulating the data that they store.</p>
-</section>
-</section>
-<section id="examining-dataframes">
-<h2>Examining DataFrames<a class="headerlink" href="#examining-dataframes" title="Permalink to this headline">#</a></h2>
+</div>
+</div>
+<div class="section" id="examining-dataframes">
+<h2>Examining DataFrames<a class="headerlink" href="#examining-dataframes" title="Permalink to this headline">¶</a></h2>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html">
-        <iframe
-            width="600"
-            height="350"
-            src="https://www.youtube.com/embed/-zhW3YjhuzI"
-            frameborder="0"
-            allowfullscreen
-            
-        ></iframe>
-        </div></div>
+<iframe
+    width="600"
+    height="350"
+    src="https://www.youtube.com/embed/-zhW3YjhuzI"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</div></div>
 </div>
 <p>pandas DataFrames can hold a lot of information, which is often organised into columns.</p>
 <p>The columns present in a DataFrame are accessible through the attribute <code class="docutils literal notranslate"><span class="pre">columns</span></code>.</p>
@@ -988,7 +903,7 @@ Name: author, Length: 1896, dtype: int64
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
 </pre></div>
 </div>
-<img alt="../../_images/1dfb53e275799f1a8468e434425b04857b9f8fec53350dbbbc4c66c67a578f17.png" src="../../_images/1dfb53e275799f1a8468e434425b04857b9f8fec53350dbbbc4c66c67a578f17.png" />
+<img alt="../../_images/06_managing_data_35_1.png" src="../../_images/06_managing_data_35_1.png" />
 </div>
 </div>
 <p>For columns with numerical values, we can also use the <code class="docutils literal notranslate"><span class="pre">describe()</span></code> method to get basic descriptive statistics on the data.</p>
@@ -1247,21 +1162,21 @@ Name: ntop_level_comments, dtype: float64
 </table>
 </div></div></div>
 </div>
-</section>
-<section id="extending-dataframes">
-<h2>Extending DataFrames<a class="headerlink" href="#extending-dataframes" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="extending-dataframes">
+<h2>Extending DataFrames<a class="headerlink" href="#extending-dataframes" title="Permalink to this headline">¶</a></h2>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html">
-        <iframe
-            width="600"
-            height="350"
-            src="https://www.youtube.com/embed/Yj87Gy28vqs"
-            frameborder="0"
-            allowfullscreen
-            
-        ></iframe>
-        </div></div>
+<iframe
+    width="600"
+    height="350"
+    src="https://www.youtube.com/embed/Yj87Gy28vqs"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</div></div>
 </div>
 <p>You can easily add information to pandas DataFrames.</p>
 <p>One common scenario could involve loading some data from an external file (such as a CSV or JSON file), performing some analyses and storing the results to the same DataFrame.</p>
@@ -1744,16 +1659,6 @@ Name: comments_ratio, dtype: float64
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a new column named &#39;processed_title&#39;</span>
 <span class="n">talk</span><span class="p">[</span><span class="s1">&#39;processed_title&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/var/folders/qw/3f1xq85n6vl73ksgmtslw2_mzhdr7p/T/ipykernel_73735/1354777276.py:2: SettingWithCopyWarning: 
-A value is trying to be set on a copy of a slice from a DataFrame.
-Try using .loc[row_indexer,col_indexer] = value instead
-
-See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-  talk[&#39;processed_title&#39;] = None
 </pre></div>
 </div>
 </div>
@@ -2439,24 +2344,24 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;AxesSubplot:&gt;
 </pre></div>
 </div>
-<img alt="../../_images/2a8978ec540c381f614c96fddd5510876a34299ee3c97463981e6940873fe7fc.png" src="../../_images/2a8978ec540c381f614c96fddd5510876a34299ee3c97463981e6940873fe7fc.png" />
+<img alt="../../_images/06_managing_data_88_1.png" src="../../_images/06_managing_data_88_1.png" />
 </div>
 </div>
-</section>
-<section id="saving-dataframes">
-<h2>Saving DataFrames<a class="headerlink" href="#saving-dataframes" title="Permalink to this headline">#</a></h2>
+</div>
+<div class="section" id="saving-dataframes">
+<h2>Saving DataFrames<a class="headerlink" href="#saving-dataframes" title="Permalink to this headline">¶</a></h2>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html">
-        <iframe
-            width="600"
-            height="350"
-            src="https://www.youtube.com/embed/yK_3QgOVXIo"
-            frameborder="0"
-            allowfullscreen
-            
-        ></iframe>
-        </div></div>
+<iframe
+    width="600"
+    height="350"
+    src="https://www.youtube.com/embed/yK_3QgOVXIo"
+    frameborder="0"
+    allowfullscreen
+
+></iframe>
+</div></div>
 </div>
 <p>pandas DataFrames can be easily saved as <em>pickled</em> objects using the <code class="docutils literal notranslate"><span class="pre">to_pickle()</span></code> method.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">to_pickle()</span></code> method takes a string as input, which defines a path to the file in which the DataFrame should be written.</p>
@@ -2576,17 +2481,15 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
 </div>
 <p>This section should have given you a basic idea of the <em>pandas</em> library and how DataFrames can be used to store and manipulate textual data.</p>
 <p>In <a class="reference internal" href="../part_iii/01_multilingual_nlp.html"><span class="doc std std-doc">Part III</span></a>, you will learn more about natural language processing techniques and their applications.</p>
-</section>
-</section>
+</div>
+</div>
 
 
               </div>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
+            
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'> 
     <a class='left-prev' id="prev-link" href="05_evaluating_nlp.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -2602,25 +2505,21 @@ See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stab
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            </footer>
+            
         </div>
     </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-</p>
-        </footer>
-    </div>
+    <footer class="footer">
+  <p>
     
-</div>
+  </p>
+</footer>
+</main>
 
 
       </div>
     </div>
   
-  <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
-
+  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
 
    <div class="footer"><a href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0;padding:10px" src="https://mirrors.creativecommons.org/presskit/buttons/88x31/svg/by-nc.svg"/></a> © 2020– <a href="http://www.helsinki.fi/~thiippal">Tuomo Hiippala</a>
        in collaboration with <a href="https://mooc.fi/en" target="_blank">mooc.fi<img src="https://applied-language-technology.mooc.fi/html/_static/moocfi.svg" style="border-width:0;padding:2px" width=50></a></div>

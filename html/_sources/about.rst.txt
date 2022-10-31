@@ -7,7 +7,7 @@ This website hosts the learning materials for a massive open online course (MOOC
 The MOOC is intended to provide an introduction to *applied language technology* for audiences who are unfamiliar with language technology and programming. The learning materials assume no previous knowledge of the Python programming language.
 
 .. warning::
-   This MOOC is currently only available to students at Finnish universities and universities of applied sciences. The MOOC will be opened to everyone in autumn 2022.
+   This MOOC is currently only available to students at Finnish higher education institutions (universities and universities of applied sciences). The MOOC will be hopefully opened to everyone in 2023.
 
 About the courses and their goals
 =================================
