@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y6ZQJ0S1M2"></script>
 <script>
@@ -18,8 +19,9 @@
     
     <title>Evaluating language models</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet">
-  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -29,29 +31,18 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script>let toggleHintShow = 'Click to show';</script>
-    <script>let toggleHintHide = 'Click to hide';</script>
-    <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="author" title="About these documents" href="../../about.html" />
@@ -66,7 +57,21 @@
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -75,9 +80,10 @@
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -255,100 +261,173 @@
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/part_ii/05_evaluating_nlp.ipynb.txt"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/Applied-Language-Technology/website"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        
-        
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/Applied-Language-Technology/website/binder?urlpath=lab/tree/notebooks/part_ii/05_evaluating_nlp.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
-    </div>
-</div>
-
         </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
 
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/Applied-Language-Technology/website/binder?urlpath=lab/tree/notebooks/part_ii/05_evaluating_nlp.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/Applied-Language-Technology/website"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/notebooks/part_ii/05_evaluating_nlp.ipynb.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#what-is-a-gold-standard">
    What is a gold standard?
@@ -393,12 +472,11 @@
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Evaluating language models</h1>
@@ -459,11 +537,12 @@
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="evaluating-language-models">
-<h1>Evaluating language models<a class="headerlink" href="#evaluating-language-models" title="Permalink to this headline">¶</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="evaluating-language-models">
+<h1>Evaluating language models<a class="headerlink" href="#evaluating-language-models" title="Permalink to this headline">#</a></h1>
 <p>This section introduces you to some basic techniques for evaluating the results of natural language processing.</p>
 <p>After reading this section, you should:</p>
 <ul class="simple">
@@ -471,20 +550,20 @@
 <li><p>know how to evaluate agreement between human annotators</p></li>
 <li><p>understand simple metrics for evaluating the performance of natural language processing</p></li>
 </ul>
-<div class="section" id="what-is-a-gold-standard">
-<h2>What is a gold standard?<a class="headerlink" href="#what-is-a-gold-standard" title="Permalink to this headline">¶</a></h2>
+<section id="what-is-a-gold-standard">
+<h2>What is a gold standard?<a class="headerlink" href="#what-is-a-gold-standard" title="Permalink to this headline">#</a></h2>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<iframe
-    width="600"
-    height="350"
-    src="https://www.youtube.com/embed/eBJDxHUxRwc"
-    frameborder="0"
-    allowfullscreen
-
-></iframe>
-</div></div>
+        <iframe
+            width="600"
+            height="350"
+            src="https://www.youtube.com/embed/eBJDxHUxRwc"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
 </div>
 <p>A gold standard – also called a ground truth – refers to human-verified data that can used as a benchmark for evaluating the performance of algorithms.</p>
 <p>In natural language processing, gold standards are used to measure how well humans perform on some task.</p>
@@ -494,12 +573,12 @@
 <p>Consider, for instance, the task of placing words into word classes: word classes are not given to us by nature, but represent an abstraction that imposes structure on natural language.</p>
 <p>Language, however, is naturally ambiguous and subjective, and the abstractions used can be underdeveloped – we cannot be sure if all users would categorise words in the same way.</p>
 <p>This is why we need to measure the reliability of any gold standard, that is, to what extent humans agree on the task.</p>
-</div>
-<div class="section" id="measuring-reliability-manually">
-<h2>Measuring reliability manually<a class="headerlink" href="#measuring-reliability-manually" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="measuring-reliability-manually">
+<h2>Measuring reliability manually<a class="headerlink" href="#measuring-reliability-manually" title="Permalink to this headline">#</a></h2>
 <p>This section introduces how reliability, often understood as agreement between multiple annotators, can be measured manually.</p>
-<div class="section" id="step-1-annotate-data">
-<h3>Step 1: Annotate data<a class="headerlink" href="#step-1-annotate-data" title="Permalink to this headline">¶</a></h3>
+<section id="step-1-annotate-data">
+<h3>Step 1: Annotate data<a class="headerlink" href="#step-1-annotate-data" title="Permalink to this headline">#</a></h3>
 <p>Sentiment analysis is a task that involves determining the sentiment of a text (for an useful overview that incorporates insights from both linguistics and natural language processing, see <a class="reference external" href="https://doi.org/10.1146/annurev-linguistics-011415-040518">Taboada</a> (2016).</p>
 <p>Training a sentiment analysis model requires collecting training data, that is, examples of texts associated with different sentiments.</p>
 <p>Classify the following tweets into three categories – <em>positive</em>, <em>neutral</em> or <em>negative</em> – based on their sentiment.</p>
@@ -529,9 +608,9 @@
 10.
 </pre></div>
 </div>
-</div>
-<div class="section" id="step-2-calculate-percentage-agreement">
-<h3>Step 2: Calculate percentage agreement<a class="headerlink" href="#step-2-calculate-percentage-agreement" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="step-2-calculate-percentage-agreement">
+<h3>Step 2: Calculate percentage agreement<a class="headerlink" href="#step-2-calculate-percentage-agreement" title="Permalink to this headline">#</a></h3>
 <p>When creating datasets for training models, we typically want the training data to be reliable, that is, so that we agree on whatever we are describing – in this case, the sentiment of the tweets above.</p>
 <p>One way to measure this is simple <em>percentage agreement</em>, that is, how many times out of 10 you and the person next to you agreed on the sentiment of a tweet.</p>
 <p>Now compare your results calculate percentage agreement by dividing the number of times you agreed by the number of items (10).</p>
@@ -555,9 +634,9 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="step-3-calculate-probabilities-for-each-category">
-<h3>Step 3: Calculate probabilities for each category<a class="headerlink" href="#step-3-calculate-probabilities-for-each-category" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="step-3-calculate-probabilities-for-each-category">
+<h3>Step 3: Calculate probabilities for each category<a class="headerlink" href="#step-3-calculate-probabilities-for-each-category" title="Permalink to this headline">#</a></h3>
 <p>Percentage agreement is actually a very poor measure of agreement, as either of you may have made lucky guesses – or perhaps you considered the task boring and classified every tweet into a random category.</p>
 <p>If you did, we have no way of knowing this, as percentage agreement cannot tell us if the result occurred by chance!</p>
 <p>Luckily, we can estimate the possibility of <em>chance agreement</em> easily.</p>
@@ -615,9 +694,9 @@
 </div>
 </div>
 </div>
-</div>
-<div class="section" id="step-4-estimate-chance-agreement">
-<h3>Step 4: Estimate chance agreement<a class="headerlink" href="#step-4-estimate-chance-agreement" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="step-4-estimate-chance-agreement">
+<h3>Step 4: Estimate chance agreement<a class="headerlink" href="#step-4-estimate-chance-agreement" title="Permalink to this headline">#</a></h3>
 <p>Now we are ready to calculate how likely you are to agree by chance.</p>
 <p>This is known as <em>expected agreement</em>, which is calculated by summing up your combined probabilities for each category.</p>
 <div class="cell docutils container">
@@ -656,10 +735,10 @@
 </div>
 <p>This gives us the result for Cohen’s <span class="math notranslate nohighlight">\(\kappa\)</span>.</p>
 <p>Let’s now consider how to interpret its value.</p>
-</div>
-</div>
-<div class="section" id="cohen-s-kappa-as-a-measure-of-agreement">
-<h2>Cohen’s kappa as a measure of agreement<a class="headerlink" href="#cohen-s-kappa-as-a-measure-of-agreement" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="cohen-s-kappa-as-a-measure-of-agreement">
+<h2>Cohen’s kappa as a measure of agreement<a class="headerlink" href="#cohen-s-kappa-as-a-measure-of-agreement" title="Permalink to this headline">#</a></h2>
 <p>The theoretical value Cohen’s <span class="math notranslate nohighlight">\(\kappa\)</span> runs from <span class="math notranslate nohighlight">\(-1\)</span> indicating perfect disagreement to <span class="math notranslate nohighlight">\(+1\)</span> for perfect agreement, with <span class="math notranslate nohighlight">\(0\)</span> standing for completely random agreement.</p>
 <p>The <span class="math notranslate nohighlight">\(\kappa\)</span> score is often interpreted as a measure of the strength of agreement.</p>
 <p><a class="reference external" href="https://doi.org/10.2307/2529310">Landis and Koch</a> (1977) famously proposed the following benchmarks, which should nevertheless be taken with a pinch of salt as the divisions are completely arbitrary.</p>
@@ -733,21 +812,21 @@
 <p>It is rarely necessary to annotate the whole dataset when measuring agreement – a random sample is often enough.</p>
 <p>If Cohen’s <span class="math notranslate nohighlight">\(\kappa\)</span> suggests that the human annotators agree on whatever they are categorising, we can assume that the annotations are <em>reliable</em> in the sense that they are not random.</p>
 <p>However, all measures of inter-annotator agreement, Cohen’s <span class="math notranslate nohighlight">\(\kappa\)</span> included, are affected by their underlying assumptions about what agreement is and how it is calculated. In other words, these measures never represent the absolute truth (see e.g. Di Eugenio &amp; Glass <a class="reference external" href="https://dx.doi.org/10.1162/089120104773633402">2004</a>; Artstein &amp; Poesio <a class="reference external" href="https://doi.org/10.1162/coli.07-034-R2">2008</a>).</p>
-</div>
-<div class="section" id="evaluating-the-performance-of-language-models">
-<h2>Evaluating the performance of language models<a class="headerlink" href="#evaluating-the-performance-of-language-models" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="evaluating-the-performance-of-language-models">
+<h2>Evaluating the performance of language models<a class="headerlink" href="#evaluating-the-performance-of-language-models" title="Permalink to this headline">#</a></h2>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<iframe
-    width="600"
-    height="350"
-    src="https://www.youtube.com/embed/WiN5JCueeFQ"
-    frameborder="0"
-    allowfullscreen
-
-></iframe>
-</div></div>
+        <iframe
+            width="600"
+            height="350"
+            src="https://www.youtube.com/embed/WiN5JCueeFQ"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
 </div>
 <p>Once we have a sufficiently <em>reliable</em> gold standard, we can use the gold standard to measure the performance of language models.</p>
 <p>Let’s assume that we have a reliable gold standard consisting of 10 tokens annotated for their part-of-speech tags.</p>
@@ -1078,15 +1157,17 @@ weighted avg       0.75      0.70      0.71        10
 <p>This section should have given you an idea how to assess the reliability of human annotations, and how reliable annotations can be used as a gold standard for benchmarking the performance of natural language processing.</p>
 <p>You should also understand certain basic metrics used for benchmarking performance, such as accuracy, precision, recall and F1-score.</p>
 <p>In the <a class="reference internal" href="06_managing_data.html"><span class="doc std std-doc">following section</span></a>, you will learn about managing textual data.</p>
-</div>
-</div>
+</section>
+</section>
 
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="04_basic_nlp_continued.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -1102,21 +1183,25 @@ weighted avg       0.75      0.70      0.71        10
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+</p>
+        </footer>
+    </div>
     
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
    <div class="footer"><a href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0;padding:10px" src="https://mirrors.creativecommons.org/presskit/buttons/88x31/svg/by-nc.svg"/></a> © 2020– <a href="http://www.helsinki.fi/~thiippal">Tuomo Hiippala</a>
        in collaboration with <a href="https://mooc.fi/en" target="_blank">mooc.fi<img src="https://applied-language-technology.mooc.fi/html/_static/moocfi.svg" style="border-width:0;padding:2px" width=50></a></div>

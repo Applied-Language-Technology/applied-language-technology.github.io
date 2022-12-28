@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y6ZQJ0S1M2"></script>
 <script>
@@ -18,8 +19,9 @@
     
     <title>Finding linguistic patterns using spaCy</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet">
-  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -29,29 +31,18 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script>let toggleHintShow = 'Click to show';</script>
-    <script>let toggleHintHide = 'Click to hide';</script>
-    <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <link rel="author" title="About these documents" href="../../about.html" />
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -64,7 +55,21 @@
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -73,9 +78,10 @@
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -253,100 +259,173 @@
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/part_iii/03_pattern_matching.ipynb.txt"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/Applied-Language-Technology/website"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        
-        
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/Applied-Language-Technology/website/binder?urlpath=lab/tree/notebooks/part_iii/03_pattern_matching.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
-    </div>
-</div>
-
         </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
 
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/Applied-Language-Technology/website/binder?urlpath=lab/tree/notebooks/part_iii/03_pattern_matching.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/Applied-Language-Technology/website"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/notebooks/part_iii/03_pattern_matching.ipynb.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#finding-patterns-using-spacy-matchers">
    Finding patterns using spaCy Matchers
@@ -376,12 +455,11 @@
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Finding linguistic patterns using spaCy</h1>
@@ -427,11 +505,12 @@
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="finding-linguistic-patterns-using-spacy">
-<h1>Finding linguistic patterns using spaCy<a class="headerlink" href="#finding-linguistic-patterns-using-spacy" title="Permalink to this headline">¶</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="finding-linguistic-patterns-using-spacy">
+<h1>Finding linguistic patterns using spaCy<a class="headerlink" href="#finding-linguistic-patterns-using-spacy" title="Permalink to this headline">#</a></h1>
 <p>This section teaches you to find linguistic patterns using spaCy, a natural language processing library for Python.</p>
 <p>If you are unfamiliar with the linguistic annotations produced by spaCy or need to refresh your memory, revisit <a class="reference internal" href="../part_ii/03_basic_nlp.html"><span class="doc std std-doc">Part II</span></a> before working through this section.</p>
 <p>After reading this section, you should:</p>
@@ -440,44 +519,44 @@
 <li><p>know how to search for patterns based on syntactic dependencies</p></li>
 <li><p>know how to examine the matching patterns in their context of occurrence</p></li>
 </ul>
-<div class="section" id="finding-patterns-using-spacy-matchers">
-<h2>Finding patterns using spaCy Matchers<a class="headerlink" href="#finding-patterns-using-spacy-matchers" title="Permalink to this headline">¶</a></h2>
+<section id="finding-patterns-using-spacy-matchers">
+<h2>Finding patterns using spaCy Matchers<a class="headerlink" href="#finding-patterns-using-spacy-matchers" title="Permalink to this headline">#</a></h2>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<iframe
-    width="600"
-    height="350"
-    src="https://www.youtube.com/embed/aVPMzk2rCP4"
-    frameborder="0"
-    allowfullscreen
-
-></iframe>
-</div></div>
+        <iframe
+            width="600"
+            height="350"
+            src="https://www.youtube.com/embed/aVPMzk2rCP4"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
 </div>
 <p>Linguistic annotations, such as part-of-speech tags, syntactic dependencies and morphological features, help impose structure on written language. Crucially, linguistic annotations allow searching for structural patterns instead of individual words or phrases. This allows defining search patterns in a flexible way.</p>
 <p>In the spaCy library, the capability for pattern search is provided by various components named <em>Matchers</em>.</p>
 <p>spaCy provides three types of <em>Matchers</em>:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>A <a class="reference external" href="https://spacy.io/api/matcher">Matcher</a>, which allows defining rules that search for particular <strong>words or phrases</strong> by examining <em>Token</em> attributes.</p></li>
 <li><p>A <a class="reference external" href="https://spacy.io/api/dependencymatcher">DependencyMatcher</a>, which allows searching parse trees for <strong>syntactic patterns</strong>.</p></li>
 <li><p>A <a class="reference external" href="https://spacy.io/api/phrasematcher">PhraseMatcher</a>, a fast method for matching spaCy <em>Doc</em> objects to <em>Doc</em> objects.</p></li>
 </ol>
 <p>The following sections show you how to use the <em>Matcher</em> for matching <em>Tokens</em> and their sequences based on their part-of-speech tags and morphological features, and how to use the <em>DependencyMatcher</em> for matching syntactic dependencies.</p>
-<div class="section" id="matching-words-or-phrases">
-<h3>Matching words or phrases<a class="headerlink" href="#matching-words-or-phrases" title="Permalink to this headline">¶</a></h3>
+<section id="matching-words-or-phrases">
+<h3>Matching words or phrases<a class="headerlink" href="#matching-words-or-phrases" title="Permalink to this headline">#</a></h3>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<iframe
-    width="600"
-    height="350"
-    src="https://www.youtube.com/embed/YT7GMDjPlrw"
-    frameborder="0"
-    allowfullscreen
-
-></iframe>
-</div></div>
+        <iframe
+            width="600"
+            height="350"
+            src="https://www.youtube.com/embed/YT7GMDjPlrw"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
 </div>
 <p>To get started with the <em>Matcher</em>, let’s import the spaCy library and load a small language model for English.</p>
 <div class="cell docutils container">
@@ -552,7 +631,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;spacy.matcher.matcher.Matcher at 0x1730d26c0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;spacy.matcher.matcher.Matcher at 0x15f6d9a40&gt;
 </pre></div>
 </div>
 </div>
@@ -580,7 +659,7 @@
 </div>
 <p>Now that we have defined the pattern using a list and dictionaries, we can add it to the <em>Matcher</em> object under the variable <code class="docutils literal notranslate"><span class="pre">matcher</span></code>.</p>
 <p>This can be achieved using <code class="docutils literal notranslate"><span class="pre">add()</span></code> method, which requires two inputs:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>A Python string object that defines a name for the pattern. This is required for purposes of identification.</p></li>
 <li><p>A list containing the pattern(s) to be searched for. Because a single rule for matching patterns can contain multiple patterns, the input must be a <em>list of lists</em>. We therefore wrap the input lists into brackets, e.g. <code class="docutils literal notranslate"><span class="pre">[pattern_1]</span></code>.</p></li>
 </ol>
@@ -1022,21 +1101,21 @@ pronoun+verb 	 that believe
 </div>
 </div>
 <p>The output shows that the pattern we added to the <em>Matcher</em> matches patterns that contain one (e.g. “we <em>can</em> build”) or more (e.g. “they <em>have been</em> protesting”) auxiliaries!</p>
-</div>
-<div class="section" id="matching-morphological-features">
-<h3>Matching morphological features<a class="headerlink" href="#matching-morphological-features" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="matching-morphological-features">
+<h3>Matching morphological features<a class="headerlink" href="#matching-morphological-features" title="Permalink to this headline">#</a></h3>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<iframe
-    width="600"
-    height="350"
-    src="https://www.youtube.com/embed/9WbONZ8iJlc"
-    frameborder="0"
-    allowfullscreen
-
-></iframe>
-</div></div>
+        <iframe
+            width="600"
+            height="350"
+            src="https://www.youtube.com/embed/9WbONZ8iJlc"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
 </div>
 <p>As introduced in <a class="reference internal" href="../part_ii/03_basic_nlp.html"><span class="doc std std-doc">Part II</span></a>, spaCy can also perform morphological analysis, whose results are stored under the attribute <code class="docutils literal notranslate"><span class="pre">morph</span></code> of a <em>Token</em> object.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">morph</span></code> attribute contains a string object, in which each morphological feature is separated by a vertical bar <code class="docutils literal notranslate"><span class="pre">|</span></code>, as illustrated below.</p>
@@ -1055,13 +1134,13 @@ pronoun+verb 	 that believe
 </div>
 </div>
 <p>We then define a new pattern with rules for two <em>Tokens</em>:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>Tokens that have a fine-grained part-of-speech tag <code class="docutils literal notranslate"><span class="pre">NNP</span></code> (proper noun), which can occur one or more times (operator: <code class="docutils literal notranslate"><span class="pre">+</span></code>).</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;TAG&#39;</span><span class="p">:</span> <span class="s1">&#39;NNP&#39;</span><span class="p">,</span> <span class="s1">&#39;OP&#39;</span><span class="p">:</span> <span class="s1">&#39;+&#39;</span><span class="p">}</span>
 </pre></div>
 </div>
-<ol class="simple">
+<ol class="arabic simple" start="2">
 <li><p>Tokens that have a coarse part-of-speech tag <code class="docutils literal notranslate"><span class="pre">VERB</span></code> and have <em>all</em> the following morphological features (<code class="docutils literal notranslate"><span class="pre">MORPH</span></code>): <code class="docutils literal notranslate"><span class="pre">Number=Sing|Person=Three|Tense=Pres|VerbForm=Fin</span></code>.</p></li>
 </ol>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;POS&#39;</span><span class="p">:</span> <span class="s1">&#39;VERB&#39;</span><span class="p">,</span> <span class="s1">&#39;MORPH&#39;</span><span class="p">:</span> <span class="s1">&#39;Number=Sing|Person=Three|Tense=Pres|VerbForm=Fin&#39;</span><span class="p">}</span>
@@ -1261,21 +1340,21 @@ past_tense 	 Shapiro filed 	 Tense=Past|VerbForm=Fin
 </div>
 </div>
 <p>As you can see, the <code class="docutils literal notranslate"><span class="pre">past_tense</span></code> pattern can match objects based on a single morphological feature, although most matches share another morphological feature, namely the finite form.</p>
-</div>
-<div class="section" id="matching-syntactic-dependencies">
-<h3>Matching syntactic dependencies<a class="headerlink" href="#matching-syntactic-dependencies" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="matching-syntactic-dependencies">
+<h3>Matching syntactic dependencies<a class="headerlink" href="#matching-syntactic-dependencies" title="Permalink to this headline">#</a></h3>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<iframe
-    width="600"
-    height="350"
-    src="https://www.youtube.com/embed/gUbMI52bIMY"
-    frameborder="0"
-    allowfullscreen
-
-></iframe>
-</div></div>
+        <iframe
+            width="600"
+            height="350"
+            src="https://www.youtube.com/embed/gUbMI52bIMY"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
 </div>
 <p>If you want to match patterns based on syntactic dependencies, you must use the <em>DependencyMatcher</em> class in spaCy.</p>
 <p>As we learned in <a class="reference internal" href="../part_ii/03_basic_nlp.html"><span class="doc std std-doc">Part II</span></a>, syntactic dependencies describe the relations that hold between <em>Token</em> objects.</p>
@@ -1309,7 +1388,7 @@ past_tense 	 Shapiro filed 	 Tense=Past|VerbForm=Fin
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><span class="tex2jax_ignore"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:lang="en" id="4875967b558744bd9fba2b182bf81a48-0" class="displacy" width="3725" height="574.5" direction="ltr" style="max-width: none; height: 574.5px; color: #000000; background: #ffffff; font-family: Arial; direction: ltr">
+<div class="output text_html"><span class="tex2jax_ignore"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:lang="en" id="9f76ad4f15d9496f9cf7225962a8ecc8-0" class="displacy" width="3725" height="574.5" direction="ltr" style="max-width: none; height: 574.5px; color: #000000; background: #ffffff; font-family: Arial; direction: ltr">
 <text class="displacy-token" fill="currentColor" text-anchor="middle" y="484.5">
     <tspan class="displacy-word" fill="currentColor" x="50">On</tspan>
     <tspan class="displacy-tag" dy="2em" fill="currentColor" x="50">ADP</tspan>
@@ -1416,161 +1495,161 @@ past_tense 	 Shapiro filed 	 Tense=Past|VerbForm=Fin
 </text>
 
 <g class="displacy-arrow">
-    <path class="displacy-arc" id="arrow-4875967b558744bd9fba2b182bf81a48-0-0" stroke-width="2px" d="M70,439.5 C70,2.0 925.0,2.0 925.0,439.5" fill="none" stroke="currentColor"/>
+    <path class="displacy-arc" id="arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-0" stroke-width="2px" d="M70,439.5 C70,2.0 925.0,2.0 925.0,439.5" fill="none" stroke="currentColor"/>
     <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
-        <textPath xlink:href="#arrow-4875967b558744bd9fba2b182bf81a48-0-0" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">prep</textPath>
+        <textPath xlink:href="#arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-0" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">prep</textPath>
     </text>
     <path class="displacy-arrowhead" d="M70,441.5 L62,429.5 78,429.5" fill="currentColor"/>
 </g>
 
 <g class="displacy-arrow">
-    <path class="displacy-arc" id="arrow-4875967b558744bd9fba2b182bf81a48-0-1" stroke-width="2px" d="M245,439.5 C245,352.0 380.0,352.0 380.0,439.5" fill="none" stroke="currentColor"/>
+    <path class="displacy-arc" id="arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-1" stroke-width="2px" d="M245,439.5 C245,352.0 380.0,352.0 380.0,439.5" fill="none" stroke="currentColor"/>
     <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
-        <textPath xlink:href="#arrow-4875967b558744bd9fba2b182bf81a48-0-1" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nummod</textPath>
+        <textPath xlink:href="#arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-1" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nummod</textPath>
     </text>
     <path class="displacy-arrowhead" d="M245,441.5 L237,429.5 253,429.5" fill="currentColor"/>
 </g>
 
 <g class="displacy-arrow">
-    <path class="displacy-arc" id="arrow-4875967b558744bd9fba2b182bf81a48-0-2" stroke-width="2px" d="M70,439.5 C70,264.5 385.0,264.5 385.0,439.5" fill="none" stroke="currentColor"/>
+    <path class="displacy-arc" id="arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-2" stroke-width="2px" d="M70,439.5 C70,264.5 385.0,264.5 385.0,439.5" fill="none" stroke="currentColor"/>
     <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
-        <textPath xlink:href="#arrow-4875967b558744bd9fba2b182bf81a48-0-2" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">pobj</textPath>
+        <textPath xlink:href="#arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-2" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">pobj</textPath>
     </text>
     <path class="displacy-arrowhead" d="M385.0,441.5 L393.0,429.5 377.0,429.5" fill="currentColor"/>
 </g>
 
 <g class="displacy-arrow">
-    <path class="displacy-arc" id="arrow-4875967b558744bd9fba2b182bf81a48-0-3" stroke-width="2px" d="M420,439.5 C420,352.0 555.0,352.0 555.0,439.5" fill="none" stroke="currentColor"/>
+    <path class="displacy-arc" id="arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-3" stroke-width="2px" d="M420,439.5 C420,352.0 555.0,352.0 555.0,439.5" fill="none" stroke="currentColor"/>
     <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
-        <textPath xlink:href="#arrow-4875967b558744bd9fba2b182bf81a48-0-3" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nummod</textPath>
+        <textPath xlink:href="#arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-3" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nummod</textPath>
     </text>
     <path class="displacy-arrowhead" d="M555.0,441.5 L563.0,429.5 547.0,429.5" fill="currentColor"/>
 </g>
 
 <g class="displacy-arrow">
-    <path class="displacy-arc" id="arrow-4875967b558744bd9fba2b182bf81a48-0-4" stroke-width="2px" d="M770,439.5 C770,352.0 905.0,352.0 905.0,439.5" fill="none" stroke="currentColor"/>
+    <path class="displacy-arc" id="arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-4" stroke-width="2px" d="M770,439.5 C770,352.0 905.0,352.0 905.0,439.5" fill="none" stroke="currentColor"/>
     <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
-        <textPath xlink:href="#arrow-4875967b558744bd9fba2b182bf81a48-0-4" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nsubj</textPath>
+        <textPath xlink:href="#arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-4" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nsubj</textPath>
     </text>
     <path class="displacy-arrowhead" d="M770,441.5 L762,429.5 778,429.5" fill="currentColor"/>
 </g>
 
 <g class="displacy-arrow">
-    <path class="displacy-arc" id="arrow-4875967b558744bd9fba2b182bf81a48-0-5" stroke-width="2px" d="M945,439.5 C945,352.0 1080.0,352.0 1080.0,439.5" fill="none" stroke="currentColor"/>
+    <path class="displacy-arc" id="arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-5" stroke-width="2px" d="M945,439.5 C945,352.0 1080.0,352.0 1080.0,439.5" fill="none" stroke="currentColor"/>
     <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
-        <textPath xlink:href="#arrow-4875967b558744bd9fba2b182bf81a48-0-5" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">prep</textPath>
+        <textPath xlink:href="#arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-5" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">prep</textPath>
     </text>
     <path class="displacy-arrowhead" d="M1080.0,441.5 L1088.0,429.5 1072.0,429.5" fill="currentColor"/>
 </g>
 
 <g class="displacy-arrow">
-    <path class="displacy-arc" id="arrow-4875967b558744bd9fba2b182bf81a48-0-6" stroke-width="2px" d="M1295,439.5 C1295,352.0 1430.0,352.0 1430.0,439.5" fill="none" stroke="currentColor"/>
+    <path class="displacy-arc" id="arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-6" stroke-width="2px" d="M1295,439.5 C1295,352.0 1430.0,352.0 1430.0,439.5" fill="none" stroke="currentColor"/>
     <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
-        <textPath xlink:href="#arrow-4875967b558744bd9fba2b182bf81a48-0-6" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">compound</textPath>
+        <textPath xlink:href="#arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-6" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">compound</textPath>
     </text>
     <path class="displacy-arrowhead" d="M1295,441.5 L1287,429.5 1303,429.5" fill="currentColor"/>
 </g>
 
 <g class="displacy-arrow">
-    <path class="displacy-arc" id="arrow-4875967b558744bd9fba2b182bf81a48-0-7" stroke-width="2px" d="M1120,439.5 C1120,264.5 1435.0,264.5 1435.0,439.5" fill="none" stroke="currentColor"/>
+    <path class="displacy-arc" id="arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-7" stroke-width="2px" d="M1120,439.5 C1120,264.5 1435.0,264.5 1435.0,439.5" fill="none" stroke="currentColor"/>
     <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
-        <textPath xlink:href="#arrow-4875967b558744bd9fba2b182bf81a48-0-7" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">pobj</textPath>
+        <textPath xlink:href="#arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-7" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">pobj</textPath>
     </text>
     <path class="displacy-arrowhead" d="M1435.0,441.5 L1443.0,429.5 1427.0,429.5" fill="currentColor"/>
 </g>
 
 <g class="displacy-arrow">
-    <path class="displacy-arc" id="arrow-4875967b558744bd9fba2b182bf81a48-0-8" stroke-width="2px" d="M1645,439.5 C1645,352.0 1780.0,352.0 1780.0,439.5" fill="none" stroke="currentColor"/>
+    <path class="displacy-arc" id="arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-8" stroke-width="2px" d="M1645,439.5 C1645,352.0 1780.0,352.0 1780.0,439.5" fill="none" stroke="currentColor"/>
     <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
-        <textPath xlink:href="#arrow-4875967b558744bd9fba2b182bf81a48-0-8" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">aux</textPath>
+        <textPath xlink:href="#arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-8" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">aux</textPath>
     </text>
     <path class="displacy-arrowhead" d="M1645,441.5 L1637,429.5 1653,429.5" fill="currentColor"/>
 </g>
 
 <g class="displacy-arrow">
-    <path class="displacy-arc" id="arrow-4875967b558744bd9fba2b182bf81a48-0-9" stroke-width="2px" d="M945,439.5 C945,2.0 1800.0,2.0 1800.0,439.5" fill="none" stroke="currentColor"/>
+    <path class="displacy-arc" id="arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-9" stroke-width="2px" d="M945,439.5 C945,2.0 1800.0,2.0 1800.0,439.5" fill="none" stroke="currentColor"/>
     <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
-        <textPath xlink:href="#arrow-4875967b558744bd9fba2b182bf81a48-0-9" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">advcl</textPath>
+        <textPath xlink:href="#arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-9" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">advcl</textPath>
     </text>
     <path class="displacy-arrowhead" d="M1800.0,441.5 L1808.0,429.5 1792.0,429.5" fill="currentColor"/>
 </g>
 
 <g class="displacy-arrow">
-    <path class="displacy-arc" id="arrow-4875967b558744bd9fba2b182bf81a48-0-10" stroke-width="2px" d="M1995,439.5 C1995,177.0 2490.0,177.0 2490.0,439.5" fill="none" stroke="currentColor"/>
+    <path class="displacy-arc" id="arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-10" stroke-width="2px" d="M1995,439.5 C1995,177.0 2490.0,177.0 2490.0,439.5" fill="none" stroke="currentColor"/>
     <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
-        <textPath xlink:href="#arrow-4875967b558744bd9fba2b182bf81a48-0-10" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">det</textPath>
+        <textPath xlink:href="#arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-10" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">det</textPath>
     </text>
     <path class="displacy-arrowhead" d="M1995,441.5 L1987,429.5 2003,429.5" fill="currentColor"/>
 </g>
 
 <g class="displacy-arrow">
-    <path class="displacy-arc" id="arrow-4875967b558744bd9fba2b182bf81a48-0-11" stroke-width="2px" d="M2170,439.5 C2170,352.0 2305.0,352.0 2305.0,439.5" fill="none" stroke="currentColor"/>
+    <path class="displacy-arc" id="arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-11" stroke-width="2px" d="M2170,439.5 C2170,352.0 2305.0,352.0 2305.0,439.5" fill="none" stroke="currentColor"/>
     <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
-        <textPath xlink:href="#arrow-4875967b558744bd9fba2b182bf81a48-0-11" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nummod</textPath>
+        <textPath xlink:href="#arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-11" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">nummod</textPath>
     </text>
     <path class="displacy-arrowhead" d="M2170,441.5 L2162,429.5 2178,429.5" fill="currentColor"/>
 </g>
 
 <g class="displacy-arrow">
-    <path class="displacy-arc" id="arrow-4875967b558744bd9fba2b182bf81a48-0-12" stroke-width="2px" d="M2345,439.5 C2345,352.0 2480.0,352.0 2480.0,439.5" fill="none" stroke="currentColor"/>
+    <path class="displacy-arc" id="arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-12" stroke-width="2px" d="M2345,439.5 C2345,352.0 2480.0,352.0 2480.0,439.5" fill="none" stroke="currentColor"/>
     <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
-        <textPath xlink:href="#arrow-4875967b558744bd9fba2b182bf81a48-0-12" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">compound</textPath>
+        <textPath xlink:href="#arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-12" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">compound</textPath>
     </text>
     <path class="displacy-arrowhead" d="M2345,441.5 L2337,429.5 2353,429.5" fill="currentColor"/>
 </g>
 
 <g class="displacy-arrow">
-    <path class="displacy-arc" id="arrow-4875967b558744bd9fba2b182bf81a48-0-13" stroke-width="2px" d="M1820,439.5 C1820,89.5 2495.0,89.5 2495.0,439.5" fill="none" stroke="currentColor"/>
+    <path class="displacy-arc" id="arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-13" stroke-width="2px" d="M1820,439.5 C1820,89.5 2495.0,89.5 2495.0,439.5" fill="none" stroke="currentColor"/>
     <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
-        <textPath xlink:href="#arrow-4875967b558744bd9fba2b182bf81a48-0-13" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">dobj</textPath>
+        <textPath xlink:href="#arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-13" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">dobj</textPath>
     </text>
     <path class="displacy-arrowhead" d="M2495.0,441.5 L2503.0,429.5 2487.0,429.5" fill="currentColor"/>
 </g>
 
 <g class="displacy-arrow">
-    <path class="displacy-arc" id="arrow-4875967b558744bd9fba2b182bf81a48-0-14" stroke-width="2px" d="M2520,439.5 C2520,352.0 2655.0,352.0 2655.0,439.5" fill="none" stroke="currentColor"/>
+    <path class="displacy-arc" id="arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-14" stroke-width="2px" d="M2520,439.5 C2520,352.0 2655.0,352.0 2655.0,439.5" fill="none" stroke="currentColor"/>
     <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
-        <textPath xlink:href="#arrow-4875967b558744bd9fba2b182bf81a48-0-14" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">prep</textPath>
+        <textPath xlink:href="#arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-14" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">prep</textPath>
     </text>
     <path class="displacy-arrowhead" d="M2655.0,441.5 L2663.0,429.5 2647.0,429.5" fill="currentColor"/>
 </g>
 
 <g class="displacy-arrow">
-    <path class="displacy-arc" id="arrow-4875967b558744bd9fba2b182bf81a48-0-15" stroke-width="2px" d="M2870,439.5 C2870,352.0 3005.0,352.0 3005.0,439.5" fill="none" stroke="currentColor"/>
+    <path class="displacy-arc" id="arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-15" stroke-width="2px" d="M2870,439.5 C2870,352.0 3005.0,352.0 3005.0,439.5" fill="none" stroke="currentColor"/>
     <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
-        <textPath xlink:href="#arrow-4875967b558744bd9fba2b182bf81a48-0-15" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">det</textPath>
+        <textPath xlink:href="#arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-15" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">det</textPath>
     </text>
     <path class="displacy-arrowhead" d="M2870,441.5 L2862,429.5 2878,429.5" fill="currentColor"/>
 </g>
 
 <g class="displacy-arrow">
-    <path class="displacy-arc" id="arrow-4875967b558744bd9fba2b182bf81a48-0-16" stroke-width="2px" d="M2695,439.5 C2695,264.5 3010.0,264.5 3010.0,439.5" fill="none" stroke="currentColor"/>
+    <path class="displacy-arc" id="arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-16" stroke-width="2px" d="M2695,439.5 C2695,264.5 3010.0,264.5 3010.0,439.5" fill="none" stroke="currentColor"/>
     <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
-        <textPath xlink:href="#arrow-4875967b558744bd9fba2b182bf81a48-0-16" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">pobj</textPath>
+        <textPath xlink:href="#arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-16" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">pobj</textPath>
     </text>
     <path class="displacy-arrowhead" d="M3010.0,441.5 L3018.0,429.5 3002.0,429.5" fill="currentColor"/>
 </g>
 
 <g class="displacy-arrow">
-    <path class="displacy-arc" id="arrow-4875967b558744bd9fba2b182bf81a48-0-17" stroke-width="2px" d="M3045,439.5 C3045,352.0 3180.0,352.0 3180.0,439.5" fill="none" stroke="currentColor"/>
+    <path class="displacy-arc" id="arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-17" stroke-width="2px" d="M3045,439.5 C3045,352.0 3180.0,352.0 3180.0,439.5" fill="none" stroke="currentColor"/>
     <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
-        <textPath xlink:href="#arrow-4875967b558744bd9fba2b182bf81a48-0-17" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">prep</textPath>
+        <textPath xlink:href="#arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-17" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">prep</textPath>
     </text>
     <path class="displacy-arrowhead" d="M3180.0,441.5 L3188.0,429.5 3172.0,429.5" fill="currentColor"/>
 </g>
 
 <g class="displacy-arrow">
-    <path class="displacy-arc" id="arrow-4875967b558744bd9fba2b182bf81a48-0-18" stroke-width="2px" d="M3395,439.5 C3395,352.0 3530.0,352.0 3530.0,439.5" fill="none" stroke="currentColor"/>
+    <path class="displacy-arc" id="arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-18" stroke-width="2px" d="M3395,439.5 C3395,352.0 3530.0,352.0 3530.0,439.5" fill="none" stroke="currentColor"/>
     <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
-        <textPath xlink:href="#arrow-4875967b558744bd9fba2b182bf81a48-0-18" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">det</textPath>
+        <textPath xlink:href="#arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-18" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">det</textPath>
     </text>
     <path class="displacy-arrowhead" d="M3395,441.5 L3387,429.5 3403,429.5" fill="currentColor"/>
 </g>
 
 <g class="displacy-arrow">
-    <path class="displacy-arc" id="arrow-4875967b558744bd9fba2b182bf81a48-0-19" stroke-width="2px" d="M3220,439.5 C3220,264.5 3535.0,264.5 3535.0,439.5" fill="none" stroke="currentColor"/>
+    <path class="displacy-arc" id="arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-19" stroke-width="2px" d="M3220,439.5 C3220,264.5 3535.0,264.5 3535.0,439.5" fill="none" stroke="currentColor"/>
     <text dy="1.25em" style="font-size: 0.8em; letter-spacing: 1px">
-        <textPath xlink:href="#arrow-4875967b558744bd9fba2b182bf81a48-0-19" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">pobj</textPath>
+        <textPath xlink:href="#arrow-9f76ad4f15d9496f9cf7225962a8ecc8-0-19" class="displacy-label" startOffset="50%" side="left" fill="currentColor" text-anchor="middle">pobj</textPath>
     </text>
     <path class="displacy-arrowhead" d="M3535.0,441.5 L3543.0,429.5 3527.0,429.5" fill="currentColor"/>
 </g>
@@ -2274,7 +2353,7 @@ past_tense 	 Shapiro filed 	 Tense=Past|VerbForm=Fin
 <p>Unlike the <em>Matcher</em>, the <em>DependencyMatcher</em> cannot return the matches as <em>Span</em> objects, because the matches do not necessarily form a continuous sequence of <em>Tokens</em> needed for a <em>Span</em> object.</p>
 <p>Thus the <em>DependencyMatcher</em> returns a list of tuples.</p>
 <p>Each tuple contains two items:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>A <em>Lexeme</em> object that gives the name of the pattern</p></li>
 <li><p>A list of indices for <em>Tokens</em> that match the search pattern in the <em>Doc</em> object</p></li>
 </ol>
@@ -2457,10 +2536,7 @@ nsubj_verb 	 West ... justified
 nsubj_verb 	 celebrities ... tweeted
 nsubj_verb 	 Moore ... tweeted
 nsubj_verb 	 Many ... hold
-nsubj_verb 	 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>success ... led
+nsubj_verb 	 success ... led
 nsubj_verb 	 Some ... believe
 nsubj_verb 	 people ... used
 nsubj_verb 	 WikiLeaks ... endorsed
@@ -2760,10 +2836,7 @@ nsubj_verb 	 protesters ... remained
 nsubj_verb 	 group ... says
 nsubj_verb 	 that ... challenge
 nsubj_verb 	 Belfast ... initiated
-nsubj_verb 	
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> Belfast ... took
+nsubj_verb 	 Belfast ... took
 nsubj_verb 	 It ... took
 nsubj_verb 	 Derry ... take
 nsubj_verb 	 Coleraine ... took
@@ -2863,10 +2936,7 @@ nsubj_verb 	 that ... burdens
 nsubj_verb 	 movement ... appears
 nsubj_verb 	 print ... mentioned
 nsubj_verb 	 occupation ... began
-nsubj_verb 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>	 interest ... waned
+nsubj_verb 	 interest ... waned
 nsubj_verb 	 movement ... raised
 nsubj_verb 	 organizers ... consider
 nsubj_verb 	 unions ... become
@@ -3136,9 +3206,7 @@ nsubj_verb 	 he ... said
 nsubj_verb 	 protesters ... have
 nsubj_verb 	 they ... achieve
 nsubj_verb 	 they ... think
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>nsubj_verb 	 they ... change
+nsubj_verb 	 they ... change
 nsubj_verb 	 Protest ... accomplishes
 nsubj_verb 	 Castells ... congratulated
 nsubj_verb 	 Castells ... said
@@ -3244,10 +3312,7 @@ nsubj_verb 	 Thousands ... gathered
 nsubj_verb 	 police ... cleared
 nsubj_verb 	 Jordan ... expressed
 nsubj_verb 	 police ... suffered
-nsubj_verb 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>	 who ... sought
+nsubj_verb 	 who ... sought
 nsubj_verb 	 Olsen ... suffered
 nsubj_verb 	 protesters ... shut
 nsubj_verb 	 Police ... estimated
@@ -3340,10 +3405,7 @@ nsubj_verb 	 staff ... citing
 nsubj_verb 	 Feds ... ordered
 nsubj_verb 	 officers ... moved
 nsubj_verb 	 Kalamazoo ... began
-nsubj_verb 	 efforts ...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> received
+nsubj_verb 	 efforts ... received
 nsubj_verb 	 who ... criticized
 nsubj_verb 	 protesters ... faced
 nsubj_verb 	 demonstrations ... continuing
@@ -3543,10 +3605,7 @@ nsubj_verb 	 Khamenei ... voiced
 nsubj_verb 	 it ... grow
 nsubj_verb 	 it ... bring
 nsubj_verb 	 Brown ... said
-nsubj_verb 	 who 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>... say
+nsubj_verb 	 who ... say
 nsubj_verb 	 we ... build
 nsubj_verb 	 people ... take
 nsubj_verb 	 they ... do
@@ -3646,10 +3705,7 @@ nsubj_verb 	 officials ... met
 nsubj_verb 	 officials ... met
 nsubj_verb 	 FBI ... used
 nsubj_verb 	 which ... gave
-nsubj_verb 	 DSAC
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> ... coordinated
+nsubj_verb 	 DSAC ... coordinated
 nsubj_verb 	 organizations ... filed
 nsubj_verb 	 FBI ... withheld
 nsubj_verb 	 Shapiro ... sent
@@ -3730,10 +3786,7 @@ nsubj_verb_dobj 	 they ... called ... what
 nsubj_verb_dobj 	 that ... took ... advantage
 nsubj_verb_dobj 	 This ... features ... use
 nsubj_verb_dobj 	 anyone ... join ... that
-nsubj_verb_dobj 	 protesters ... have 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>... objective
+nsubj_verb_dobj 	 protesters ... have ... objective
 nsubj_verb_dobj 	 protesters ... have ... something
 nsubj_verb_dobj 	 they ... change ... system
 nsubj_verb_dobj 	 Castells ... congratulated ... occupiers
@@ -3876,10 +3929,7 @@ nsubj_verb_dobj 	 groups ... adopted ... Occupy4FreeEducation
 nsubj_verb_dobj 	 Hundreds ... held ... rallies
 nsubj_verb_dobj 	 Korea ... overcame ... crisis
 nsubj_verb_dobj 	 series ... demands ... change
-nsubj_verb_dobj 	 media ...
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> related ... protests
+nsubj_verb_dobj 	 media ... related ... protests
 nsubj_verb_dobj 	 media ... related ... generation
 nsubj_verb_dobj 	 Movement ... drew ... inspiration
 nsubj_verb_dobj 	 protesters ... established ... occupation
@@ -3950,10 +4000,7 @@ nsubj_verb_dobj 	 many ... reported ... response
 nsubj_verb_dobj 	 who ... dislike ... it
 nsubj_verb_dobj 	 Australia ... reporting ... lowest
 nsubj_verb_dobj 	 impacts ... include ... following
-nsubj_verb_dobj 	 that ... burdens ... 
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>class
+nsubj_verb_dobj 	 that ... burdens ... class
 nsubj_verb_dobj 	 print ... mentioned ... inequality
 nsubj_verb_dobj 	 movement ... raised ... awareness
 nsubj_verb_dobj 	 organizers ... consider ... what
@@ -4009,10 +4056,10 @@ nsubj_verb_dobj 	 who ... running ... banks
 </div>
 <p>As the output shows, the pattern <code class="docutils literal notranslate"><span class="pre">nsubj_verb_dobj</span></code> returns both nominal subjects and direct objects of the verbs, which we defined using different “chains” of the pattern.</p>
 <p>We could easily add another chain to the anchor pattern, for example, to search for prepositional phrases, or add further links to either of the existing chains to search for some more fine-grained features.</p>
-</div>
-</div>
-<div class="section" id="examining-matches-in-context-using-concordances">
-<h2>Examining matches in context using concordances<a class="headerlink" href="#examining-matches-in-context-using-concordances" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="examining-matches-in-context-using-concordances">
+<h2>Examining matches in context using concordances<a class="headerlink" href="#examining-matches-in-context-using-concordances" title="Permalink to this headline">#</a></h2>
 <p>We can examine matches in their context of occurrence using <em>concordances</em>. In corpus linguistics, concordances are often understood as lines of text that show a match in its context of occurrence.</p>
 <p>These concordance lines can help understand why and how a particular token or structure is used in given context.</p>
 <p>To create concordance lines using spaCy, let’s start by importing the Printer class from wasabi, which is a small <a class="reference external" href="https://pypi.org/project/wasabi/">Python library</a> that spaCy uses for colouring and formatting messages. We will use wasabi to highlight the matches in the concordance lines.</p>
@@ -4040,7 +4087,7 @@ nsubj_verb_dobj 	 who ... running ... banks
 <p>We loop over items in this list and use the <code class="docutils literal notranslate"><span class="pre">enumerate()</span></code> function to keep track of their count. We also provide the argument <code class="docutils literal notranslate"><span class="pre">start</span></code> with the value 1 to the <code class="docutils literal notranslate"><span class="pre">enumerate()</span></code> function to start counting from the number 1.</p>
 <p>During the loop, we refer to this count using the variable <code class="docutils literal notranslate"><span class="pre">i</span></code> and to the <em>Span</em> object as <code class="docutils literal notranslate"><span class="pre">result</span></code>. The number under <code class="docutils literal notranslate"><span class="pre">i</span></code> is incremented with every <em>Span</em> object.</p>
 <p>We then print out the following output for each <em>Span</em> object in the list <code class="docutils literal notranslate"><span class="pre">morph_results</span></code>:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">i</span></code>: The number of the item in the list.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">doc[result.start</span> <span class="pre">-</span> <span class="pre">7:</span> <span class="pre">result.start]</span></code>: A slice of the <em>Doc</em> object stored under the variable <code class="docutils literal notranslate"><span class="pre">doc</span></code>, which we searched for matches. As usual, we define a slice using brackets and separate the start and end of a slice using a colon. We take a slice that begins 7 <em>Tokens</em> before the start of the match (<code class="docutils literal notranslate"><span class="pre">result.start</span> <span class="pre">-</span> <span class="pre">7</span></code>), and terminates at the start of the match <code class="docutils literal notranslate"><span class="pre">result.start</span></code>.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">match.text(result,</span> <span class="pre">color=&quot;red&quot;,</span> <span class="pre">no_print=True)</span></code>: The matching <em>Span</em> object, rendered using the wasabi <em>Printer</em> object <code class="docutils literal notranslate"><span class="pre">match</span></code> in red colour. We also set the argument <code class="docutils literal notranslate"><span class="pre">no_print</span></code> to <code class="docutils literal notranslate"><span class="pre">True</span></code> to prevent wasabi from printing the output on a new line.</p></li>
@@ -4196,15 +4243,17 @@ the end of police brutality,
 <p>Note that in some cases, the preceding or following <em>Tokens</em> consist of line breaks indicating a paragraph break, which causes the output to jump a row or two.</p>
 <p>This section should have given you an idea of how to search linguistic annotations for matching structures using spaCy.</p>
 <p>In the <a class="reference internal" href="04_embeddings.html"><span class="doc std std-doc">following section</span></a>, you will be introduced to word embeddings, a technique for approximating the meaning of words.</p>
-</div>
-</div>
+</section>
+</section>
 
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="02_universal_dependencies.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -4220,21 +4269,25 @@ the end of police brutality,
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+</p>
+        </footer>
+    </div>
     
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
    <div class="footer"><a href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0;padding:10px" src="https://mirrors.creativecommons.org/presskit/buttons/88x31/svg/by-nc.svg"/></a> © 2020– <a href="http://www.helsinki.fi/~thiippal">Tuomo Hiippala</a>
        in collaboration with <a href="https://mooc.fi/en" target="_blank">mooc.fi<img src="https://applied-language-technology.mooc.fi/html/_static/moocfi.svg" style="border-width:0;padding:2px" width=50></a></div>

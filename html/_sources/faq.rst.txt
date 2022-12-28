@@ -42,3 +42,15 @@ Frequently Asked Questions
 
 **Answer:** Read the assignment instructions again: there is no need to download a language model in any exercise. Outgoing connections from the TMC server are banned for security reasons.
 
+-----
+
+**Question:** I have completed all the exercises and mooc.fi shows "Total progress" to be 100%, but the "Exercises completed" is less than 100%.
+
+**Answer:** Don't worry, mooc.fi also tracks upcoming exercises that will be published in the next iteration of these courses. You've done all the work needed for completing the course!
+
+-----
+
+**Question:** I'm thinking of sharing my coursework with my friend for easy credits. Will I get caught?
+
+**Answer:** Very likely – the logs are monitored for unusual activity, which is followed up by cross-checking solutions. Any attempt to cheat will be reported to the higher education institution the student is currently enrolled in, and may have serious repercussions. 
+
