@@ -32,12 +32,6 @@ Frequently Asked Questions
 
 -----
 
-**Question:** I followed the instructions, created a list and stored it under a given variable, yet TMC gives me strange error messages about undefined variables.
-
-**Answer:** Did you use a list comprehension to create the list? If so, try a for loop instead. Unfortunately the TMC tests have problems with list comprehensions, and this issue has not been solved yet. 
-
------
-
 **Question:** When I try to download a Stanza language model and run tests on the TMC server, I get an error saying that a connection cannot be established to the server that hosts the language models.
 
 **Answer:** Read the assignment instructions again: there is no need to download a language model in any exercise. Outgoing connections from the TMC server are banned for security reasons.
@@ -52,5 +46,4 @@ Frequently Asked Questions
 
 **Question:** I'm thinking of sharing my coursework with my friend for easy credits. Will I get caught?
 
-**Answer:** Very likely – the logs are monitored for unusual activity, which is followed up by cross-checking solutions. Any attempt to cheat will be reported to the higher education institution the student is currently enrolled in, and may have serious repercussions. 
-
+**Answer:** Very likely – the logs are monitored for unusual activity, which is followed up by cross-checking solutions. Any attempt to cheat will be reported to the higher education institution the student is currently enrolled in, and may have serious repercussions.
