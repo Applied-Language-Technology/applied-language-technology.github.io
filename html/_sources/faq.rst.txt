@@ -8,6 +8,12 @@ Frequently Asked Questions
 
 -----
 
+**Question:** How can I contact the instructor?
+
+**Answer:** You can reach the instructor via e-mail at applied-language-technology@helsinki.fi.
+
+-----
+
 **Question:** When I attempt to test my exercises using :ref:`TMC <tmc_usage>` by entering the command :code:`tmc test`, I receive an error that says "Error in plugin". What should I do?
 
 **Answer:** This means that your code causes the Jupyter Notebook that contains the exercise to crash. Before running the command :code:`tmc test`, make sure you can run all the cells in the notebook without crashing the notebook. Note that this does not cover errors raised by your code.

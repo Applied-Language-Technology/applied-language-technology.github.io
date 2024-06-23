@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y6ZQJ0S1M2"></script>
 <script>
@@ -18,8 +19,9 @@
     
     <title>Check your exercises using TestMyCode</title>
     
-  <link href="_static/css/theme.css" rel="stylesheet">
-  <link href="_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -29,29 +31,18 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
-    <script>let toggleHintShow = 'Click to show';</script>
-    <script>let toggleHintHide = 'Click to hide';</script>
-    <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -64,7 +55,21 @@
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -73,9 +78,10 @@
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -253,83 +259,144 @@
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/tmc.rst.txt"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.rst</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/Applied-Language-Technology/website"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        
-        
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
         </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
 
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/Applied-Language-Technology/website"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="_sources/tmc.rst.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.rst</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#what-is-testmycode-tmc">
    What is TestMyCode (TMC)?
@@ -367,12 +434,11 @@
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Check your exercises using TestMyCode</h1>
@@ -426,19 +492,20 @@
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
-  <div class="section" id="check-your-exercises-using-testmycode">
-<span id="tmc-usage"></span><h1>Check your exercises using TestMyCode<a class="headerlink" href="#check-your-exercises-using-testmycode" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="what-is-testmycode-tmc">
-<h2>What is TestMyCode (TMC)?<a class="headerlink" href="#what-is-testmycode-tmc" title="Permalink to this headline">¶</a></h2>
+  <section id="check-your-exercises-using-testmycode">
+<span id="tmc-usage"></span><h1>Check your exercises using TestMyCode<a class="headerlink" href="#check-your-exercises-using-testmycode" title="Permalink to this headline">#</a></h1>
+<section id="what-is-testmycode-tmc">
+<h2>What is TestMyCode (TMC)?<a class="headerlink" href="#what-is-testmycode-tmc" title="Permalink to this headline">#</a></h2>
 <p><a class="reference external" href="https://testmycode.github.io/">TestMyCode</a> (or TMC for short) is a tool that enables you to submit your Python code for automatic grading.</p>
 <p>TMC has a command line interface, which may be accessed through the Terminal application in JupyterLab.</p>
 <p>To get started with TMC, follow the instructions below.</p>
-</div>
-<div class="section" id="logging-in-to-tmc">
-<h2>Logging in to TMC<a class="headerlink" href="#logging-in-to-tmc" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="logging-in-to-tmc">
+<h2>Logging in to TMC<a class="headerlink" href="#logging-in-to-tmc" title="Permalink to this headline">#</a></h2>
 <p>To use TMC, you need to first register as a user on the <a class="reference external" href="https://mooc.fi">mooc.fi</a> website.</p>
 <p>Next, open a new Terminal from the <a class="reference internal" href="jupyter.html#jupyterlab"><span class="std std-ref">JupyterLab Launcher</span></a> to access the command line interface.</p>
 <a class="reference internal image-reference" href="_images/jl_launch_terminal.gif"><img alt="A view of JupyterLab." src="_images/jl_launch_terminal.gif" style="width: 50%;" /></a>
@@ -464,9 +531,9 @@
 <p>Next, TMC will prompt you to select a course.</p>
 <p>Again, use the arrow keys ↑↓ to navigate the list and choose <code class="code docutils literal notranslate"><span class="pre">Working</span> <span class="pre">with</span> <span class="pre">Text</span> <span class="pre">in</span> <span class="pre">Python</span></code> or <code class="code docutils literal notranslate"><span class="pre">Natural</span> <span class="pre">Language</span> <span class="pre">Processing</span> <span class="pre">for</span> <span class="pre">Beginners</span></code> depending on the course that you wish to take. Press ⏎ to confirm your selection.</p>
 <p>This downloads the exercises into a directory named <code class="code docutils literal notranslate"><span class="pre">mooc-wtp</span></code> (Working with Text in Python) or <code class="code docutils literal notranslate"><span class="pre">mooc-nlp</span></code> (Natural Language Processing for Linguists), depending on the course that you chose above. The directory should be visible in the <a class="reference internal" href="jupyter.html#jupyterlab"><span class="std std-ref">JupyterLab File Browser</span></a>.</p>
-</div>
-<div class="section" id="downloading-and-updating-exercises">
-<span id="tmc-dl"></span><h2>Downloading and updating exercises<a class="headerlink" href="#downloading-and-updating-exercises" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="downloading-and-updating-exercises">
+<span id="tmc-dl"></span><h2>Downloading and updating exercises<a class="headerlink" href="#downloading-and-updating-exercises" title="Permalink to this headline">#</a></h2>
 <p>TMC will automatically download any missing exercises on your server when you log into the system.</p>
 <p>To download exercises manually, open a Terminal and type the command <code class="code docutils literal notranslate"><span class="pre">tmc</span> <span class="pre">download</span></code> and press ⏎.</p>
 <p>TMC will prompt you to select a course.</p>
@@ -478,16 +545,16 @@
 <a class="reference internal image-reference" href="_images/tmc_update.gif"><img alt="A view of the TMC command line interface." src="_images/tmc_update.gif" style="width: 75%;" /></a>
 <br><img alt="_images/empty.png" src="_images/empty.png" />
 <p>This will update all exercises available to you.</p>
-</div>
-<div class="section" id="completing-the-exercises">
-<h2>Completing the exercises<a class="headerlink" href="#completing-the-exercises" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="completing-the-exercises">
+<h2>Completing the exercises<a class="headerlink" href="#completing-the-exercises" title="Permalink to this headline">#</a></h2>
 <p>To complete the course exercises, use the <a class="reference internal" href="jupyter.html#jupyterlab"><span class="std std-ref">JupyterLab File Browser</span></a> to enter the directory that contains the exercises.</p>
 <p>Each directory contains subdirectories, which hold the individual exercises. A new exercise will become available for download via TMC when you have received 80% of the points available for the previous exercise.</p>
 <p>Open the Jupyter Notebook in the subdirectory and follow the instructions provided in the notebook.</p>
 <p>When you want to check your solutions to the exercises, see the instructions below.</p>
-</div>
-<div class="section" id="testing-your-code-locally">
-<span id="tmc-test"></span><h2>Testing your code locally<a class="headerlink" href="#testing-your-code-locally" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="testing-your-code-locally">
+<span id="tmc-test"></span><h2>Testing your code locally<a class="headerlink" href="#testing-your-code-locally" title="Permalink to this headline">#</a></h2>
 <p>After completing an exercise in a Jupyter Notebook, you can test your code by following the steps below.</p>
 <p>In this context, <em>testing</em> refers to evaluating whether the Python code you wrote produces the expected output.</p>
 <p>To get started, save the Jupyter Notebook by entering the <em>File</em> menu and selecting <em>Save Notebook</em>, or click the save icon at the top of the Notebook.</p>
@@ -508,9 +575,9 @@
 <p>Unfortunately, JupyterLab does not automatically refresh Notebooks that have been modified. This also applies to TMC, which modifies the Notebook when adding feedback.</p>
 </div>
 <p>Remember to <a class="reference internal" href="#tmc-submit"><span class="std std-ref">submit your code to the TMC server</span></a> when you are done with an exercise to register any points.</p>
-</div>
-<div class="section" id="submitting-your-code-to-the-server">
-<span id="tmc-submit"></span><h2>Submitting your code to the server<a class="headerlink" href="#submitting-your-code-to-the-server" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="submitting-your-code-to-the-server">
+<span id="tmc-submit"></span><h2>Submitting your code to the server<a class="headerlink" href="#submitting-your-code-to-the-server" title="Permalink to this headline">#</a></h2>
 <p>When you are finished with an exercise, you must submit your code to the TMC server for grading and registering the points.</p>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
@@ -529,20 +596,22 @@
 </div>
 <p>You can monitor your overall progress by visiting <a class="reference external" href="https://mooc.fi">mooc.fi</a> and viewing your profile information.</p>
 <p>To view your profile, click your e-mail address / username in the top right-hand corner.</p>
-</div>
-<div class="section" id="requesting-a-completion-for-your-coursework">
-<span id="completion"></span><h2>Requesting a completion for your coursework<a class="headerlink" href="#requesting-a-completion-for-your-coursework" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="requesting-a-completion-for-your-coursework">
+<span id="completion"></span><h2>Requesting a completion for your coursework<a class="headerlink" href="#requesting-a-completion-for-your-coursework" title="Permalink to this headline">#</a></h2>
 <p>To request your work to be graded and marked as complete on <a class="reference external" href="https://mooc.fi">mooc.fi</a>, open the exercise named <code class="code docutils literal notranslate"><span class="pre">grade_my_work</span></code> on your server, follow the instructions in the Jupyter Notebook and return the exercise to TMC.</p>
 <p>The instructor will then check your coursework and mark it as complete on <a class="reference external" href="https://mooc.fi">mooc.fi</a>.</p>
-</div>
-</div>
+</section>
+</section>
 
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="jupyter.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -558,21 +627,25 @@
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+</p>
+        </footer>
+    </div>
     
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
    <div class="footer"><a href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0;padding:10px" src="https://mirrors.creativecommons.org/presskit/buttons/88x31/svg/by-nc.svg"/></a> © 2020– <a href="http://www.helsinki.fi/~thiippal">Tuomo Hiippala</a>
        in collaboration with <a href="https://mooc.fi/en" target="_blank">mooc.fi<img src="https://applied-language-technology.mooc.fi/html/_static/moocfi.svg" style="border-width:0;padding:2px" width=50></a></div>

@@ -22,6 +22,8 @@ Next, click the green **Login** button. You will be redirected to the login page
 
 .. image:: _static/empty.png
 
+If you are not currently enrolled in a Finnish higher education institution, choose *MOOC.fi* as your login method. Make sure you have `registered for a user account <https://www.mooc.fi/en/sign-up>`_ on MOOC.fi first.
+
 If you are currently enrolled in a Finnish higher education institution, choose **Haka** as your login method.
 
 .. image:: ../img/csc_nb_login_method.gif

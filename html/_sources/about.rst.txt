@@ -2,12 +2,9 @@
 About this MOOC
 ***************
 
-This website hosts the learning materials for a massive open online course (MOOC), which consists of two courses taught at the University of Helsinki: `Working with Text in Python <https://studies.helsinki.fi/courses/cu/hy-CU-134758601-2020-08-01>`_ and `Natural Language Processing for Linguists <https://studies.helsinki.fi/courses/cu/hy-CU-134758616-2020-08-01>`_.
+This website hosts the learning materials for a massive open online course (MOOC), which consists of two courses taught at the University of Helsinki: `Working with Text in Python <https://studies.helsinki.fi/courses/course-unit/otm-6f9ae6c1-32c3-4e42-93a5-c3e0f570446f/ENG-Opt333>`_ and `Natural Language Processing for Linguists <https://studies.helsinki.fi/courses/course-unit/otm-7a2e4d23-a88b-46e4-9fe5-ff594162a742>`_.
 
 The MOOC is intended to provide an introduction to *applied language technology* for audiences who are unfamiliar with language technology and programming. The learning materials assume no previous knowledge of the Python programming language.
-
-.. warning::
-   This MOOC is currently only available to students at Finnish higher education institutions (universities and universities of applied sciences). The MOOC will be hopefully opened to everyone in 2023.
 
 About the courses and their goals
 =================================

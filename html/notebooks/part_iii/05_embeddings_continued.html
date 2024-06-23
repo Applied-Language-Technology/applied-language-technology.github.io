@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y6ZQJ0S1M2"></script>
 <script>
@@ -18,8 +19,9 @@
     
     <title>Word embeddings in spaCy</title>
     
-  <link href="../../_static/css/theme.css" rel="stylesheet">
-  <link href="../../_static/css/index.ff1ffe594081f20da1ef19478df9384b.css" rel="stylesheet">
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -29,29 +31,18 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.be7d3bbb2ef33a8344ce.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
     <script src="../../_static/underscore.js"></script>
     <script src="../../_static/doctools.js"></script>
-    <script>let toggleHintShow = 'Click to show';</script>
-    <script>let toggleHintHide = 'Click to hide';</script>
-    <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/sphinx-book-theme.d59cb220de22ca1c485ebbdc042f0030.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.0/dist/embed-amd.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="author" title="About these documents" href="../../about.html" />
@@ -66,7 +57,21 @@
     <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -75,9 +80,10 @@
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../../index.html">
       
         <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
@@ -255,100 +261,173 @@
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
-                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../../_sources/notebooks/part_iii/05_embeddings_continued.ipynb.txt"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
-                onclick="printPdf(this)" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/Applied-Language-Technology/website"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="Source repository"><i
-                    class="fab fa-github"></i>repository</button></a>
-        
-        
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
-        title="Fullscreen mode"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/Applied-Language-Technology/website/binder?urlpath=lab/tree/notebooks/part_iii/05_embeddings_continued.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
-    </div>
-</div>
-
         </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
 
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show noprint">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/Applied-Language-Technology/website/binder?urlpath=lab/tree/notebooks/part_iii/05_embeddings_continued.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/Applied-Language-Technology/website"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/notebooks/part_iii/05_embeddings_continued.ipynb.txt"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#using-word-embeddings-in-spacy">
    Using word embeddings in spaCy
@@ -366,12 +445,11 @@
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
                 <h1>Word embeddings in spaCy</h1>
@@ -405,11 +483,12 @@
                     </div>
                 </div>
             </div>
-            
+            <main id="main-content" role="main">
+                
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="word-embeddings-in-spacy">
-<h1>Word embeddings in spaCy<a class="headerlink" href="#word-embeddings-in-spacy" title="Permalink to this headline">¶</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="word-embeddings-in-spacy">
+<h1>Word embeddings in spaCy<a class="headerlink" href="#word-embeddings-in-spacy" title="Permalink to this headline">#</a></h1>
 <p>The previous <a class="reference internal" href="04_embeddings.html"><span class="doc std std-doc">section</span></a> introduced the distributional hypothesis, which underlies modern approaches to <em>distributional semantics</em> (Boleda <a class="reference external" href="https://doi.org/10.1146/annurev-linguistics-011619-030303">2020</a>) and the technique of word embeddings, that is, learning numerical representations for words that approximate their meaning.</p>
 <p>We started by exploring the distributional hypothesis by quantifying word occurrences, essentially using word counts as an abstraction mechanism that enabled us to represent linguistic information numerically.</p>
 <p>We then moved to explore the use of a neural network as the abstraction mechanism, learning numerical representations from the data through a proxy task that involved predicting the neighbouring words.</p>
@@ -422,20 +501,20 @@
 <li><p>know how to use contextual word embeddings in spaCy</p></li>
 <li><p>know how to add a custom component to the spaCy pipeline</p></li>
 </ul>
-<div class="section" id="using-word-embeddings-in-spacy">
-<h2>Using word embeddings in spaCy<a class="headerlink" href="#using-word-embeddings-in-spacy" title="Permalink to this headline">¶</a></h2>
+<section id="using-word-embeddings-in-spacy">
+<h2>Using word embeddings in spaCy<a class="headerlink" href="#using-word-embeddings-in-spacy" title="Permalink to this headline">#</a></h2>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<iframe
-    width="600"
-    height="350"
-    src="https://www.youtube.com/embed/CHRzdvZX_mw"
-    frameborder="0"
-    allowfullscreen
-
-></iframe>
-</div></div>
+        <iframe
+            width="600"
+            height="350"
+            src="https://www.youtube.com/embed/CHRzdvZX_mw"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
 </div>
 <p>spaCy provides 300-dimensional word embeddings for several languages, which have been learned from large corpora.</p>
 <p>In other words, each word in the model’s vocabulary is represented by a list of 300 floating point numbers – a vector – and these vectors are embedded into a 300-dimensional space.</p>
@@ -635,21 +714,21 @@
 <p>Turns out that the embeddings for the noun phrases “The Shiba Inu” and “a dog” are about as similar as those of “dog” and “snake” above!</p>
 <p>To understand why the vectors for these noun phrases are dissimilar, we must dive deeper into the word embeddings and the effects of averaging vectors for linguistic units beyond a single <em>Token</em>.</p>
 <p>This effort can be supported using visualisations.</p>
-</div>
-<div class="section" id="visualising-word-embeddings">
-<h2>Visualising word embeddings<a class="headerlink" href="#visualising-word-embeddings" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="visualising-word-embeddings">
+<h2>Visualising word embeddings<a class="headerlink" href="#visualising-word-embeddings" title="Permalink to this headline">#</a></h2>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<iframe
-    width="600"
-    height="350"
-    src="https://www.youtube.com/embed/l66QaVT68W8"
-    frameborder="0"
-    allowfullscreen
-
-></iframe>
-</div></div>
+        <iframe
+            width="600"
+            height="350"
+            src="https://www.youtube.com/embed/l66QaVT68W8"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
 </div>
 <p>whatlies is an open source library for visualising “what lies” in word embeddings, that is, what kinds of information they encode (Warmerdam et al. <a class="reference external" href="https://www.aclweb.org/anthology/2020.nlposs-1.8.pdf">2020</a>).</p>
 <p>The whatlies library is intended to support the interpretation of high-dimensional word embeddings. In this context, high-dimensional refers to the number of dimensions in the embedding space.</p>
@@ -675,10 +754,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>SpacyLanguage(nlp=&lt;spacy.lang.en.English object at 0x10cd29070&gt;)
-</pre></div>
-</div>
-</div>
+<div class="output text_html"><style>#sk-container-id-1 {color: black;background-color: white;}#sk-container-id-1 pre{padding: 0;}#sk-container-id-1 div.sk-toggleable {background-color: white;}#sk-container-id-1 label.sk-toggleable__label {cursor: pointer;display: block;width: 100%;margin-bottom: 0;padding: 0.3em;box-sizing: border-box;text-align: center;}#sk-container-id-1 label.sk-toggleable__label-arrow:before {content: "▸";float: left;margin-right: 0.25em;color: #696969;}#sk-container-id-1 label.sk-toggleable__label-arrow:hover:before {color: black;}#sk-container-id-1 div.sk-estimator:hover label.sk-toggleable__label-arrow:before {color: black;}#sk-container-id-1 div.sk-toggleable__content {max-height: 0;max-width: 0;overflow: hidden;text-align: left;background-color: #f0f8ff;}#sk-container-id-1 div.sk-toggleable__content pre {margin: 0.2em;color: black;border-radius: 0.25em;background-color: #f0f8ff;}#sk-container-id-1 input.sk-toggleable__control:checked~div.sk-toggleable__content {max-height: 200px;max-width: 100%;overflow: auto;}#sk-container-id-1 input.sk-toggleable__control:checked~label.sk-toggleable__label-arrow:before {content: "▾";}#sk-container-id-1 div.sk-estimator input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-label input.sk-toggleable__control:checked~label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 input.sk-hidden--visually {border: 0;clip: rect(1px 1px 1px 1px);clip: rect(1px, 1px, 1px, 1px);height: 1px;margin: -1px;overflow: hidden;padding: 0;position: absolute;width: 1px;}#sk-container-id-1 div.sk-estimator {font-family: monospace;background-color: #f0f8ff;border: 1px dotted black;border-radius: 0.25em;box-sizing: border-box;margin-bottom: 0.5em;}#sk-container-id-1 div.sk-estimator:hover {background-color: #d4ebff;}#sk-container-id-1 div.sk-parallel-item::after {content: "";width: 100%;border-bottom: 1px solid gray;flex-grow: 1;}#sk-container-id-1 div.sk-label:hover label.sk-toggleable__label {background-color: #d4ebff;}#sk-container-id-1 div.sk-serial::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: 0;}#sk-container-id-1 div.sk-serial {display: flex;flex-direction: column;align-items: center;background-color: white;padding-right: 0.2em;padding-left: 0.2em;position: relative;}#sk-container-id-1 div.sk-item {position: relative;z-index: 1;}#sk-container-id-1 div.sk-parallel {display: flex;align-items: stretch;justify-content: center;background-color: white;position: relative;}#sk-container-id-1 div.sk-item::before, #sk-container-id-1 div.sk-parallel-item::before {content: "";position: absolute;border-left: 1px solid gray;box-sizing: border-box;top: 0;bottom: 0;left: 50%;z-index: -1;}#sk-container-id-1 div.sk-parallel-item {display: flex;flex-direction: column;z-index: 1;position: relative;background-color: white;}#sk-container-id-1 div.sk-parallel-item:first-child::after {align-self: flex-end;width: 50%;}#sk-container-id-1 div.sk-parallel-item:last-child::after {align-self: flex-start;width: 50%;}#sk-container-id-1 div.sk-parallel-item:only-child::after {width: 0;}#sk-container-id-1 div.sk-dashed-wrapped {border: 1px dashed gray;margin: 0 0.4em 0.5em 0.4em;box-sizing: border-box;padding-bottom: 0.4em;background-color: white;}#sk-container-id-1 div.sk-label label {font-family: monospace;font-weight: bold;display: inline-block;line-height: 1.2em;}#sk-container-id-1 div.sk-label-container {text-align: center;}#sk-container-id-1 div.sk-container {/* jupyter's `normalize.less` sets `[hidden] { display: none; }` but bootstrap.min.css set `[hidden] { display: none !important; }` so we also need the `!important` here to be able to override the default hidden behavior on the sphinx rendered scikit-learn.org. See: https://github.com/scikit-learn/scikit-learn/issues/21755 */display: inline-block !important;position: relative;}#sk-container-id-1 div.sk-text-repr-fallback {display: none;}</style><div id="sk-container-id-1" class="sk-top-container"><div class="sk-text-repr-fallback"><pre>SpacyLanguage(nlp=&lt;spacy.lang.en.English object at 0x29272d910&gt;)</pre><b>In a Jupyter environment, please rerun this cell to show the HTML representation or trust the notebook. <br />On GitHub, the HTML representation is unable to render, please try loading this page with nbviewer.org.</b></div><div class="sk-container" hidden><div class="sk-item"><div class="sk-estimator sk-toggleable"><input class="sk-toggleable__control sk-hidden--visually" id="sk-estimator-id-1" type="checkbox" checked><label for="sk-estimator-id-1" class="sk-toggleable__label sk-toggleable__label-arrow">SpacyLanguage</label><div class="sk-toggleable__content"><pre>SpacyLanguage(nlp=&lt;spacy.lang.en.English object at 0x29272d910&gt;)</pre></div></div></div></div></div></div></div>
 </div>
 <p>The result is a <em>SpacyLanguage</em> object that wraps a spaCy <em>Language</em> object.</p>
 <p>Before we proceed any further, let’s take a closer look at the list of noun phrases stored under <code class="docutils literal notranslate"><span class="pre">n_chunks</span></code>.</p>
@@ -803,7 +879,7 @@ cat 	 False 	 [-0.15067  -0.024468 -0.23368 ]
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>EmbSet
 </pre></div>
 </div>
-<img alt="../../_images/05_embeddings_continued_44_1.png" src="../../_images/05_embeddings_continued_44_1.png" />
+<img alt="../../_images/936c8ff39828e9c92e351ad0ea7884dec8b1a207bc1e73d18f88b3eb94399c13.png" src="../../_images/936c8ff39828e9c92e351ad0ea7884dec8b1a207bc1e73d18f88b3eb94399c13.png" />
 </div>
 </div>
 <p>Each vector originates at the point <span class="math notranslate nohighlight">\((0, 0)\)</span>. We can see that along dimensions <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(1\)</span>, the directions and magnitudes (or: length) of the vectors differ considerably.</p>
@@ -825,7 +901,7 @@ cat 	 False 	 [-0.15067  -0.024468 -0.23368 ]
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>EmbSet
 </pre></div>
 </div>
-<img alt="../../_images/05_embeddings_continued_46_1.png" src="../../_images/05_embeddings_continued_46_1.png" />
+<img alt="../../_images/c2010c777dc7e990e4504156c6443cb5fd287afb117d9120d7f2d11280764987.png" src="../../_images/c2010c777dc7e990e4504156c6443cb5fd287afb117d9120d7f2d11280764987.png" />
 </div>
 </div>
 <p>Along dimensions <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(1\)</span>, the vector for “a dog” is positioned right in the middle between the vectors for “a” and “dog”, because the vector for “a dog” is an average of the vectors for “a” and “dog”.</p>
@@ -874,21 +950,21 @@ cat 	 False 	 [-0.15067  -0.024468 -0.23368 ]
 <p><img alt="" src="../../_images/type_token.svg" /></p>
 <p>This limitation has been addressed by <strong>contextual word embeddings</strong>, which often use a neural network architecture named a <a class="reference external" href="https://en.wikipedia.org/wiki/Transformer_(machine_learning_model)">Transformer</a>. This architecture can encode information about the context in which a given token occurs into the vector representation.</p>
 <p>Some models that build on this architecture include BERT (Devlin et al. <a class="reference external" href="https://www.aclweb.org/anthology/N19-1423/">2019</a>) and GPT-3 (Brown et al. <a class="reference external" href="https://papers.nips.cc/paper/2020/hash/1457c0d6bfcb4967418bfb8ac142f64a-Abstract.html">2020</a>). Both models are massive, featuring billions of parameters, and thus slow and expensive to train.</p>
-</div>
-<div class="section" id="contextual-word-embeddings-from-transformers">
-<h2>Contextual word embeddings from Transformers<a class="headerlink" href="#contextual-word-embeddings-from-transformers" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="contextual-word-embeddings-from-transformers">
+<h2>Contextual word embeddings from Transformers<a class="headerlink" href="#contextual-word-embeddings-from-transformers" title="Permalink to this headline">#</a></h2>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <div class="output text_html">
-<iframe
-    width="600"
-    height="350"
-    src="https://www.youtube.com/embed/fAeW1D37h90"
-    frameborder="0"
-    allowfullscreen
-
-></iframe>
-</div></div>
+        <iframe
+            width="600"
+            height="350"
+            src="https://www.youtube.com/embed/fAeW1D37h90"
+            frameborder="0"
+            allowfullscreen
+            
+        ></iframe>
+        </div></div>
 </div>
 <p>Given the time and resources needed to train a language model using the Transformer architecture from scratch, they are often trained once and then fine-tuned to specific tasks. In this context, fine-tuning refers to training only a part of the network, adapting what the model has already learned to more specific tasks.</p>
 <p>These tasks include, for example, part-of-speech tagging, dependency parsing and the other tasks introduced in <a class="reference internal" href="../part_ii/03_basic_nlp.html"><span class="doc std std-doc">Part II</span></a>.</p>
@@ -913,13 +989,13 @@ cat 	 False 	 [-0.15067  -0.024468 -0.23368 ]
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;transformer&#39;,
-  &lt;spacy_transformers.pipeline_component.Transformer at 0x15a341be0&gt;),
- (&#39;tagger&#39;, &lt;spacy.pipeline.tagger.Tagger at 0x159fc4700&gt;),
- (&#39;parser&#39;, &lt;spacy.pipeline.dep_parser.DependencyParser at 0x15a36c970&gt;),
+  &lt;spacy_transformers.pipeline_component.Transformer at 0x2fabb3340&gt;),
+ (&#39;tagger&#39;, &lt;spacy.pipeline.tagger.Tagger at 0x2faba5a60&gt;),
+ (&#39;parser&#39;, &lt;spacy.pipeline.dep_parser.DependencyParser at 0x2fab31eb0&gt;),
  (&#39;attribute_ruler&#39;,
-  &lt;spacy.pipeline.attributeruler.AttributeRuler at 0x15a1c1fc0&gt;),
- (&#39;lemmatizer&#39;, &lt;spacy.lang.en.lemmatizer.EnglishLemmatizer at 0x15a340900&gt;),
- (&#39;ner&#39;, &lt;spacy.pipeline.ner.EntityRecognizer at 0x15a36c0b0&gt;)]
+  &lt;spacy.pipeline.attributeruler.AttributeRuler at 0x2fae292c0&gt;),
+ (&#39;lemmatizer&#39;, &lt;spacy.lang.en.lemmatizer.EnglishLemmatizer at 0x2fae36840&gt;),
+ (&#39;ner&#39;, &lt;spacy.pipeline.ner.EntityRecognizer at 0x2faddf190&gt;)]
 </pre></div>
 </div>
 </div>
@@ -1001,19 +1077,19 @@ cat 	 False 	 [-0.15067  -0.024468 -0.23368 ]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.06317595, -0.45016322, -1.9720955 , ...,  0.9009348 ,
-         0.9433715 ,  0.50246936],
-       [-1.3124545 , -0.32761547,  0.25198457, ...,  0.37672296,
-        -0.94906336, -0.77757967],
-       [-1.0791602 , -0.35033298,  0.18751651, ...,  0.15352832,
-        -0.96492046, -0.8286147 ],
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 0.06317549, -0.45016307, -1.9720962 , ...,  0.900933  ,
+         0.943373  ,  0.50246966],
+       [-1.3124561 , -0.32761568,  0.25198612, ...,  0.37672338,
+        -0.94906366, -0.7775768 ],
+       [-1.0791589 , -0.35033497,  0.1875165 , ...,  0.1535295 ,
+        -0.96492106, -0.8286122 ],
        ...,
-       [ 0.2070587 , -0.0727585 ,  0.15218212, ...,  2.182534  ,
-         0.6778069 , -0.6606095 ],
-       [-0.13149412, -0.70871484, -0.4170686 , ...,  0.99535394,
-         0.7209947 , -0.24264467],
-       [ 0.04118425, -0.4245168 , -1.9951186 , ...,  0.86954635,
-         0.9296634 ,  0.51898813]], dtype=float32)
+       [ 0.20705925, -0.07275805,  0.15218118, ...,  2.182533  ,
+         0.6778067 , -0.66060674],
+       [-0.13149536, -0.70871276, -0.41707042, ...,  0.9953518 ,
+         0.72099614, -0.24264106],
+       [ 0.04118434, -0.4245172 , -1.9951184 , ...,  0.8695455 ,
+         0.929664  ,  0.5189885 ]], dtype=float32)
 </pre></div>
 </div>
 </div>
@@ -1231,14 +1307,14 @@ cat 	 False 	 [-0.15067  -0.024468 -0.23368 ]
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;transformer&#39;,
-  &lt;spacy_transformers.pipeline_component.Transformer at 0x15a341be0&gt;),
- (&#39;tagger&#39;, &lt;spacy.pipeline.tagger.Tagger at 0x159fc4700&gt;),
- (&#39;parser&#39;, &lt;spacy.pipeline.dep_parser.DependencyParser at 0x15a36c970&gt;),
+  &lt;spacy_transformers.pipeline_component.Transformer at 0x2fabb3340&gt;),
+ (&#39;tagger&#39;, &lt;spacy.pipeline.tagger.Tagger at 0x2faba5a60&gt;),
+ (&#39;parser&#39;, &lt;spacy.pipeline.dep_parser.DependencyParser at 0x2fab31eb0&gt;),
  (&#39;attribute_ruler&#39;,
-  &lt;spacy.pipeline.attributeruler.AttributeRuler at 0x15a1c1fc0&gt;),
- (&#39;lemmatizer&#39;, &lt;spacy.lang.en.lemmatizer.EnglishLemmatizer at 0x15a340900&gt;),
- (&#39;ner&#39;, &lt;spacy.pipeline.ner.EntityRecognizer at 0x15a36c0b0&gt;),
- (&#39;tensor2attr&#39;, &lt;__main__.Tensor2Attr at 0x15b60a4c0&gt;)]
+  &lt;spacy.pipeline.attributeruler.AttributeRuler at 0x2fae292c0&gt;),
+ (&#39;lemmatizer&#39;, &lt;spacy.lang.en.lemmatizer.EnglishLemmatizer at 0x2fae36840&gt;),
+ (&#39;ner&#39;, &lt;spacy.pipeline.ner.EntityRecognizer at 0x2faddf190&gt;),
+ (&#39;tensor2attr&#39;, &lt;__main__.Tensor2Attr at 0x2fbee7970&gt;)]
 </pre></div>
 </div>
 </div>
@@ -1272,7 +1348,7 @@ cat 	 False 	 [-0.15067  -0.024468 -0.23368 ]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.60846937
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6084694
 </pre></div>
 </div>
 </div>
@@ -1305,15 +1381,17 @@ cat 	 False 	 [-0.15067  -0.024468 -0.23368 ]
 <p>As you can see, the vectors for the word “capital” are identical, because the word embeddings do not encode information about the context in which the word occurs.</p>
 <p>This section should have given you a basic understanding of word embeddings and their use in spaCy, and introduced you to the difference between word embeddings and contextual word embeddings.</p>
 <p>In the next <a class="reference internal" href="06_text_linguistics.html"><span class="doc std std-doc">section</span></a>, we proceed to examine the processing of discourse-level annotations.</p>
-</div>
-</div>
+</section>
+</section>
 
 
               </div>
               
-            
-                <!-- Previous / next buttons -->
-<div class='prev-next-area'> 
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
     <a class='left-prev' id="prev-link" href="04_embeddings.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
@@ -1329,21 +1407,25 @@ cat 	 False 	 [-0.15067  -0.024468 -0.23368 ]
     <i class="fas fa-angle-right"></i>
     </a>
 </div>
-            
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-  <p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+</p>
+        </footer>
+    </div>
     
-  </p>
-</footer>
-</main>
+</div>
 
 
       </div>
     </div>
   
-  <script src="../../_static/js/index.be7d3bbb2ef33a8344ce.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
    <div class="footer"><a href="http://creativecommons.org/licenses/by-nc/4.0/"><img alt="Creative Commons License" style="border-width:0;padding:10px" src="https://mirrors.creativecommons.org/presskit/buttons/88x31/svg/by-nc.svg"/></a> © 2020– <a href="http://www.helsinki.fi/~thiippal">Tuomo Hiippala</a>
        in collaboration with <a href="https://mooc.fi/en" target="_blank">mooc.fi<img src="https://applied-language-technology.mooc.fi/html/_static/moocfi.svg" style="border-width:0;padding:2px" width=50></a></div>
